@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
@@ -11,7 +11,7 @@ interface HeroBannerProps {
   onOpenInquiry?: (defaultMsg?: string) => void;
 }
 
-const defaultSlides = [
+const DEFAULT_SLIDES = [
   {
     tag: 'ĐÔNG HÒA PROPERTY • PHÂN PHỐI CHIẾN LƯỢC',
     title: 'Kiến Tạo Chuẩn Sống — Tuyển Chọn Bất Động Sản Độc Bản',
@@ -44,10 +44,47 @@ const defaultSlides = [
   },
 ];
 
+function sanitizeSlide(s: any, idx: number) {
+  let tag = s.tag || DEFAULT_SLIDES[idx]?.tag || 'ĐÔNG HÒA PROPERTY';
+  let title = s.title || '';
+  if (!title) {
+    const rawLine = (s.monogram || '') + (s.line1 || '') + (s.line2 ? ' ' + s.line2 : '');
+    if (rawLine.toLowerCase().includes('hiết kế') || !rawLine.trim()) {
+      title = DEFAULT_SLIDES[idx]?.title || 'Kiến Tạo Chuẩn Sống — Tuyển Chọn Bất Động Sản Độc Bản';
+    } else {
+      title = rawLine.trim();
+    }
+  }
+
+  let subtitle = s.subtitle || s.description || DEFAULT_SLIDES[idx]?.subtitle || '';
+  let backgroundImage = s.backgroundImage || DEFAULT_SLIDES[idx]?.backgroundImage || '/uploads/clean_project_thegio.png';
+  let primaryButton = s.primaryButton || s.buttonText || DEFAULT_SLIDES[idx]?.primaryButton || 'Khám phá dự án';
+  let primaryTarget = s.primaryTarget || s.buttonTarget || DEFAULT_SLIDES[idx]?.primaryTarget || '#projects';
+  let secondaryButton = s.secondaryButton || s.secondaryText || DEFAULT_SLIDES[idx]?.secondaryButton || 'Liên hệ tư vấn';
+  let secondaryTarget = s.secondaryTarget || DEFAULT_SLIDES[idx]?.secondaryTarget || '#contact';
+
+  return {
+    tag,
+    title,
+    subtitle,
+    backgroundImage,
+    primaryButton,
+    primaryTarget,
+    secondaryButton,
+    secondaryTarget,
+  };
+}
+
 export default function HeroBanner({ data, onOpenInquiry }: HeroBannerProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const slides = data?.slides && data.slides.length > 0 ? (data.slides as any) : defaultSlides;
+
+  const slides = useMemo(() => {
+    if (data?.slides && Array.isArray(data.slides) && data.slides.length > 0) {
+      return data.slides.map((s, idx) => sanitizeSlide(s, idx));
+    }
+    return DEFAULT_SLIDES;
+  }, [data]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -79,10 +116,10 @@ export default function HeroBanner({ data, onOpenInquiry }: HeroBannerProps) {
   };
 
   return (
-    <section className="relative w-full min-h-[620px] sm:min-h-[700px] lg:h-[820px] bg-warm-100 overflow-hidden flex items-center select-none pt-16 sm:pt-20">
-      {/* Background Architectural Visuals with Soft Warm Vignette */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        {slides.map((s: any, idx: number) => {
+    <section className="relative w-full min-h-[640px] sm:min-h-[720px] lg:h-[840px] bg-warm-100 overflow-hidden flex items-center select-none pt-16 sm:pt-20">
+      {/* Background Architectural Visuals with Soft Warm Depth */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {slides.map((s, idx) => {
           const isActive = currentSlide === idx;
           const bgUrl = s.backgroundImage || '/uploads/clean_project_thegio.png';
           return (
@@ -91,7 +128,7 @@ export default function HeroBanner({ data, onOpenInquiry }: HeroBannerProps) {
               initial={false}
               animate={{
                 opacity: isActive ? 1 : 0,
-                scale: isActive ? 1.02 : 1.06,
+                scale: isActive ? 1.02 : 1.05,
               }}
               transition={{
                 opacity: { duration: 1.2, ease: [0.25, 1, 0.5, 1] },
@@ -101,7 +138,7 @@ export default function HeroBanner({ data, onOpenInquiry }: HeroBannerProps) {
             >
               <Image
                 src={bgUrl}
-                alt={`Đông Hòa Property - Slide ${idx + 1}`}
+                alt={`Đông Hòa Property - ${s.title}`}
                 fill
                 className="object-cover object-center"
                 priority={idx === 0}
@@ -110,50 +147,50 @@ export default function HeroBanner({ data, onOpenInquiry }: HeroBannerProps) {
           );
         })}
 
-        {/* Soft, Warm Architectural Gradient Overlays (Never pitch black) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/30 pointer-events-none z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-warm-50 via-transparent to-white/40 pointer-events-none z-10" />
+        {/* Soft, Warm Architectural Gradient Overlays (Rich Warm Shading) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-warm-50/95 via-warm-50/80 to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-warm-100 via-transparent to-warm-50/30 pointer-events-none z-10" />
       </div>
 
-      {/* Hero Content Container */}
+      {/* Hero Content Container - Asymmetric Fluid Proportions */}
       <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className="relative z-20 max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 w-full flex flex-col justify-center h-full py-12"
       >
-        <div className="max-w-2xl space-y-6">
+        <div className="max-w-2xl lg:max-w-3xl space-y-6">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-5"
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-5 overflow-visible"
             >
               {/* Eyebrow Label */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-warm-300 shadow-warm-sm text-gold text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase font-sans">
-                <span>{currentItem.tag || 'ĐÔNG HÒA PROPERTY'}</span>
+                <span>{currentItem.tag}</span>
               </div>
 
-              {/* Headline */}
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-normal text-charcoal leading-[1.14] tracking-tight">
-                {currentItem.title || currentItem.line1 || 'Kiến Tạo Chuẩn Sống — Tuyển Chọn Bất Động Sản Độc Bản'}
+              {/* Headline - Full character safety */}
+              <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-serif font-normal text-charcoal leading-[1.15] tracking-tight overflow-visible">
+                {currentItem.title}
               </h1>
 
               {/* Subtitle */}
               <p className="text-base sm:text-[17px] text-charcoal-600 font-normal leading-relaxed max-w-xl">
-                {currentItem.subtitle || currentItem.description}
+                {currentItem.subtitle}
               </p>
 
               {/* Action Buttons */}
               <div className="pt-3 flex flex-wrap items-center gap-3.5">
                 <button
                   type="button"
-                  onClick={() => handleNav(currentItem.primaryTarget || '#projects')}
+                  onClick={() => handleNav(currentItem.primaryTarget)}
                   className="px-7 py-3.5 rounded-full bg-charcoal hover:bg-gold text-white font-medium text-xs tracking-[0.12em] uppercase transition-all duration-300 shadow-warm-sm flex items-center gap-2.5 group cursor-pointer active:scale-95"
                 >
-                  <span>{currentItem.primaryButton || 'Khám phá dự án'}</span>
+                  <span>{currentItem.primaryButton}</span>
                   <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
                 </button>
 
@@ -163,12 +200,12 @@ export default function HeroBanner({ data, onOpenInquiry }: HeroBannerProps) {
                     if (onOpenInquiry) {
                       onOpenInquiry();
                     } else {
-                      handleNav(currentItem.secondaryTarget || '#contact');
+                      handleNav(currentItem.secondaryTarget);
                     }
                   }}
                   className="px-7 py-3.5 rounded-full bg-white/90 hover:bg-white border border-warm-300 hover:border-gold text-charcoal hover:text-gold font-medium text-xs tracking-[0.12em] uppercase transition-all duration-300 shadow-warm-sm backdrop-blur-sm cursor-pointer"
                 >
-                  <span>{currentItem.secondaryButton || 'Liên hệ tư vấn'}</span>
+                  <span>{currentItem.secondaryButton}</span>
                 </button>
               </div>
             </motion.div>
@@ -176,9 +213,9 @@ export default function HeroBanner({ data, onOpenInquiry }: HeroBannerProps) {
         </div>
 
         {/* Slide Indicator Bar */}
-        <div className="mt-10 sm:mt-14 flex items-center justify-between pt-6 border-t border-warm-300/80 max-w-2xl">
+        <div className="mt-10 sm:mt-14 flex items-center justify-between pt-6 border-t border-warm-300/80 max-w-2xl lg:max-w-3xl">
           <div className="flex items-center gap-2">
-            {slides.map((_: any, idx: number) => (
+            {slides.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentSlide(idx)}

@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
-import { MapPin, Eye, ArrowRight, Building, Sparkles } from 'lucide-react';
+import { MapPin, Eye, ArrowRight, Building } from 'lucide-react';
 import { ProjectsBlock, ProjectItem } from '@/lib/types';
 import ProjectQuickViewModal from '../ProjectQuickViewModal';
 
@@ -104,7 +104,6 @@ export default function ProjectsSection({
   const [activeFilter, setActiveFilter] = useState<string>(initialCategory || 'all');
   const [modalProject, setModalProject] = useState<ProjectItem | null>(null);
 
-  // Sync with prop when selected from category section
   React.useEffect(() => {
     if (initialCategory) {
       setActiveFilter(initialCategory);
@@ -125,7 +124,6 @@ export default function ProjectsSection({
     return rawProjects.filter((p) => p.category === activeFilter);
   }, [rawProjects, activeFilter]);
 
-  // Visual Hierarchy: 1 Featured Lead + Supporting Projects
   const featuredProject = filteredProjects.find((p) => p.featured) || filteredProjects[0];
   const supportingProjects = filteredProjects.filter((p) => p.id !== featuredProject?.id);
 
@@ -138,21 +136,21 @@ export default function ProjectsSection({
             <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
               DANH MỤC DỰ ÁN
             </span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-[1.2]">
+            <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-[1.2] tracking-tight">
               Dự Án Trọng Điểm Đang Phân Phối
             </h2>
           </div>
 
-          {/* Interactive Filter Bar */}
-          <div className="flex flex-wrap items-center gap-2 p-1.5 bg-warm-100 rounded-full border border-warm-200">
+          {/* Interactive Filter Tabs */}
+          <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-warm-100 rounded-full border border-warm-300">
             {filterTabs.map((tab) => (
               <button
                 key={tab.value}
                 onClick={() => setActiveFilter(tab.value)}
-                className={`px-4 py-2 rounded-full text-xs font-medium transition-all duration-200 ${
+                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
                   activeFilter === tab.value
                     ? 'bg-charcoal text-white shadow-warm-sm'
-                    : 'text-charcoal-700 hover:text-charcoal hover:bg-white/60'
+                    : 'text-charcoal-700 hover:text-charcoal hover:bg-white/80'
                 }`}
               >
                 {tab.label}
@@ -161,31 +159,32 @@ export default function ProjectsSection({
           </div>
         </div>
 
-        {/* 1. HERO FEATURED PROJECT (Full Width Showcase with Hierarchy) */}
+        {/* 1. HERO FEATURED PROJECT (Dominant 65/35 Asymmetric Split) */}
         {featuredProject && (
-          <div className="mb-12 bg-warm-50 rounded-3xl border border-warm-200 overflow-hidden shadow-warm-sm hover:shadow-warm-md transition-all duration-300">
+          <div className="mb-12 bg-gradient-to-br from-warm-50 to-warm-100 rounded-3xl border border-warm-300 overflow-hidden shadow-warm-md hover:shadow-warm-lg transition-all duration-300">
             <div className="grid grid-cols-1 lg:grid-cols-12">
-              <div className="lg:col-span-7 relative h-72 sm:h-96 lg:h-[460px] overflow-hidden group">
+              <div className="lg:col-span-7 relative h-72 sm:h-96 lg:h-[480px] overflow-hidden group bg-warm-200">
                 <Image
                   src={featuredProject.imageUrl || featuredProject.image || '/uploads/clean_project_thegio.png'}
                   alt={featuredProject.title || featuredProject.name || 'Dự án'}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute top-4 left-4 px-3.5 py-1.5 bg-white/95 backdrop-blur-md rounded-full text-[11px] font-semibold uppercase tracking-wider text-gold shadow-warm-sm border border-warm-200">
                   Dự Án Tâm Điểm
                 </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/40 via-transparent to-transparent pointer-events-none" />
               </div>
 
               <div className="lg:col-span-5 p-8 sm:p-10 flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-xs text-charcoal-muted">
                     <Building className="w-3.5 h-3.5 text-gold" />
-                    <span>Chủ đầu tư: {featuredProject.investor}</span>
+                    <span>Chủ đầu tư: {featuredProject.investor || featuredProject.developer}</span>
                   </div>
 
                   <h3 className="text-2xl sm:text-3xl font-serif font-medium text-charcoal leading-snug">
-                    {featuredProject.title}
+                    {featuredProject.title || featuredProject.name}
                   </h3>
 
                   <div className="flex items-center gap-2 text-[13.5px] text-charcoal-600">
@@ -200,7 +199,7 @@ export default function ProjectsSection({
                   <div className="pt-2 grid grid-cols-2 gap-4 border-t border-warm-200 text-xs">
                     <div>
                       <span className="text-charcoal-muted block">Mức giá tham khảo</span>
-                      <span className="font-semibold text-charcoal text-sm mt-0.5 block">{featuredProject.priceRange}</span>
+                      <span className="font-semibold text-charcoal text-sm mt-0.5 block">{featuredProject.priceRange || featuredProject.price}</span>
                     </div>
                     <div>
                       <span className="text-charcoal-muted block">Quy mô / Diện tích</span>
@@ -209,11 +208,11 @@ export default function ProjectsSection({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 pt-4">
+                <div className="flex items-center gap-3 pt-2">
                   <button
                     type="button"
                     onClick={() => setModalProject(featuredProject)}
-                    className="flex-1 py-3 rounded-full bg-white hover:bg-warm-100 border border-warm-300 text-charcoal text-xs font-medium uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-warm-sm"
+                    className="flex-1 py-3.5 rounded-full bg-white hover:bg-warm-100 border border-warm-300 text-charcoal text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-warm-sm"
                   >
                     <Eye className="w-4 h-4 text-gold" />
                     <span>Xem chi tiết</span>
@@ -223,13 +222,13 @@ export default function ProjectsSection({
                     type="button"
                     onClick={() => {
                       if (onOpenInquiry) {
-                        onOpenInquiry(featuredProject.title);
+                        onOpenInquiry(featuredProject.title || featuredProject.name);
                       } else {
                         const el = document.getElementById('contact');
                         if (el) el.scrollIntoView({ behavior: 'smooth' });
                       }
                     }}
-                    className="flex-1 py-3 rounded-full bg-charcoal hover:bg-gold text-white text-xs font-medium uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-warm-sm"
+                    className="flex-1 py-3.5 rounded-full bg-charcoal hover:bg-gold text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-warm-sm"
                   >
                     <span>Nhận thông tin</span>
                     <ArrowRight className="w-4 h-4" />
@@ -246,16 +245,16 @@ export default function ProjectsSection({
             {supportingProjects.map((project) => (
               <div
                 key={project.id}
-                className="group bg-warm-50 rounded-2xl border border-warm-200 hover:border-gold/60 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-warm-sm hover:shadow-warm-md"
+                className="group bg-warm-50/70 hover:bg-warm-50 rounded-3xl border border-warm-300 hover:border-gold/60 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-warm-sm hover:shadow-warm-md"
               >
-                <div className="relative h-60 w-full overflow-hidden bg-warm-100">
+                <div className="relative h-60 w-full overflow-hidden bg-warm-200">
                   <Image
                     src={project.imageUrl || project.image || '/uploads/clean_project_thegio.png'}
                     alt={project.title || project.name || 'Dự án'}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-3 right-3 px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[11px] font-medium text-charcoal-700 border border-warm-200">
+                  <div className="absolute top-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-md rounded-full text-[11px] font-medium text-charcoal border border-warm-200 shadow-warm-sm">
                     {project.investor || project.developer || 'Chủ đầu tư uy tín'}
                   </div>
                 </div>
@@ -263,7 +262,7 @@ export default function ProjectsSection({
                 <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
                   <div className="space-y-2">
                     <h4 className="text-xl font-serif font-medium text-charcoal group-hover:text-gold transition-colors">
-                      {project.title}
+                      {project.title || project.name}
                     </h4>
 
                     <div className="flex items-center gap-1.5 text-xs text-charcoal-600">
@@ -279,13 +278,13 @@ export default function ProjectsSection({
                   <div className="pt-4 border-t border-warm-200 flex items-center justify-between">
                     <div>
                       <span className="text-[11px] text-charcoal-muted block">Mức giá dự kiến</span>
-                      <span className="text-xs font-semibold text-charcoal">{project.priceRange}</span>
+                      <span className="text-xs font-semibold text-charcoal">{project.priceRange || project.price}</span>
                     </div>
 
                     <button
                       type="button"
                       onClick={() => setModalProject(project)}
-                      className="px-4 py-2 rounded-full bg-white hover:bg-charcoal hover:text-white text-charcoal text-xs font-medium transition-colors border border-warm-300 shadow-warm-sm"
+                      className="px-4 py-2 rounded-full bg-white hover:bg-charcoal hover:text-white text-charcoal text-xs font-semibold transition-colors border border-warm-300 shadow-warm-sm"
                     >
                       Chi tiết →
                     </button>

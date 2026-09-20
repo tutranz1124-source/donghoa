@@ -29,55 +29,58 @@ export default function PhilosophySection({ data }: PhilosophySectionProps) {
   ];
 
   return (
-    <section id="philosophy" className="py-20 sm:py-28 lg:py-32 bg-white border-b border-warm-200">
+    <section id="philosophy" className="py-20 sm:py-28 lg:py-32 bg-gradient-to-b from-warm-50 via-warm-100/60 to-white border-b border-warm-200">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
+        {/* Asymmetric 45/55 Proportions */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Editorial Brand Introduction */}
-          <div className="lg:col-span-6 space-y-8">
-            <div className="space-y-4">
+          {/* Left Column: 5 Cols Text with Optimal Reading Measure */}
+          <div className="lg:col-span-5 space-y-8">
+            <div className="space-y-3.5">
               <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
                 {data?.tag || 'VỀ ĐÔNG HÒA PROPERTY'}
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-serif font-normal text-charcoal leading-[1.2]">
+              <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-serif font-normal text-charcoal leading-[1.2] tracking-tight">
                 {data?.heading || 'Chuẩn Mực Tư Vấn Bất Động Sản Bền Vững'}
               </h2>
             </div>
 
-            <p className="text-base sm:text-[16.5px] text-charcoal-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-[16.5px] text-charcoal-600 leading-relaxed font-normal max-w-xl">
               {data?.description ||
                 'Đông Hòa Property định vị là đơn vị tư vấn và phân phối bất động sản chọn lọc. Chúng tôi không đại diện cho số lượng mà tập trung vào chiều sâu giá trị: từ không gian sống chuẩn mực của gia chủ đến giải pháp đầu tư an toàn, minh bạch cho khách hàng.'}
             </p>
 
             {/* Core Advisory Pillars */}
-            <div className="space-y-6 pt-2">
+            <div className="space-y-5 pt-2">
               {pillars.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-warm-100 border border-warm-200 flex items-center justify-center shrink-0 mt-1">
-                    <item.icon className="w-5 h-5 text-gold" />
+                  <div className="w-10 h-10 rounded-full bg-white border border-warm-300 shadow-warm-sm flex items-center justify-center shrink-0 mt-0.5">
+                    <item.icon className="w-4.5 h-4.5 text-gold" />
                   </div>
-                  <div>
-                    <h3 className="text-[16px] font-semibold text-charcoal mb-1">{item.title}</h3>
-                    <p className="text-[14px] text-charcoal-600 leading-relaxed">{item.desc}</p>
+                  <div className="space-y-1">
+                    <h3 className="text-[15.5px] font-semibold text-charcoal">{item.title}</h3>
+                    <p className="text-[13.5px] text-charcoal-600 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right Column: Curated Architectural Photography Showcase */}
-          <div className="lg:col-span-6">
+          {/* Right Column: 7 Cols Visual Showcase (Dominant Image Weight) */}
+          <div className="lg:col-span-7">
             <div className="relative">
-              <div className="relative h-[440px] sm:h-[520px] rounded-2xl overflow-hidden shadow-warm-lg border border-warm-200">
+              <div className="relative h-[420px] sm:h-[500px] lg:h-[560px] rounded-3xl overflow-hidden shadow-warm-md border border-warm-300 bg-warm-200">
                 <Image
                   src="/uploads/clean_project_thegio.png"
                   alt="Đông Hòa Property Architecture"
                   fill
                   className="object-cover"
                 />
+                {/* Subtle soft architectural vignette for depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/40 via-transparent to-transparent pointer-events-none" />
               </div>
 
-              {/* Discreet Quote Overlay Box */}
-              <div className="absolute -bottom-6 -left-4 sm:-bottom-8 sm:-left-8 bg-warm-50/95 backdrop-blur-md p-6 sm:p-7 rounded-xl border border-warm-300 shadow-warm-md max-w-xs sm:max-w-sm">
+              {/* Discreet Quote Box */}
+              <div className="absolute -bottom-6 -left-4 sm:-bottom-8 sm:-left-8 bg-white/95 backdrop-blur-md p-6 sm:p-7 rounded-2xl border border-warm-300 shadow-warm-md max-w-xs sm:max-w-sm">
                 <p className="text-xs sm:text-[13px] font-serif italic text-charcoal-700 leading-relaxed mb-2">
                   &ldquo;Chất lượng của một bất động sản không chỉ đo bằng quy mô, mà bằng giá trị sống và sự an tâm tạo dựng theo năm tháng.&rdquo;
                 </p>

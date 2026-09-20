@@ -40,9 +40,9 @@ export default function PrivateAccessSection({ onOpenInquiry }: PrivateAccessSec
   };
 
   return (
-    <section id="private-access" className="py-20 sm:py-28 bg-warm-100 border-b border-warm-200">
+    <section id="private-access" className="py-20 sm:py-28 bg-gradient-to-b from-warm-100 via-warm-200/40 to-warm-100 border-b border-warm-300">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
-        <div className="max-w-4xl mx-auto bg-white rounded-3xl border border-warm-200 p-8 sm:p-12 lg:p-16 shadow-warm-md">
+        <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-md rounded-3xl border border-warm-300 p-8 sm:p-12 lg:p-16 shadow-warm-md">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Left Column: Understated Editorial Pitch */}
             <div className="lg:col-span-6 space-y-4">

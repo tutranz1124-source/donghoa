@@ -160,42 +160,42 @@ const DEFAULT_SITE_CONTENT: SiteContentData = {
     copyright: '© 2026 Đông Hòa Property - Dong Hoa Group. All rights reserved.'
   },
   hero: {
-    backgroundImage: '/uploads/hero_slide_1.png',
+    backgroundImage: '/uploads/clean_project_thegio.png',
     slides: [
       {
-        tag: 'ĐÔNG HÒA PROPERTY',
-        monogram: 'T',
-        line1: 'hiết kế không gian',
-        line2: 'ruyền cảm hứng sống',
-        description: 'Bất động sản cao cấp và nội thất sang trọng được kiến tạo với sự sáng tạo, công năng và vẻ đẹp vượt thời gian.',
-        backgroundImage: '/uploads/hero_slide_1.png',
+        tag: 'ĐÔNG HÒA PROPERTY • PHÂN PHỐI CHIẾN LƯỢC',
+        monogram: '',
+        line1: 'Kiến Tạo Chuẩn Sống — Tuyển Chọn Bất Động Sản Độc Bản',
+        line2: '',
+        description: 'Đồng hành tư vấn chuyên sâu các dự án sở hữu vị trí chiến lược, quy hoạch chuẩn mực và thẩm định pháp lý minh bạch.',
+        backgroundImage: '/uploads/clean_project_thegio.png',
         buttonText: 'Khám phá dự án',
         buttonTarget: '#projects',
-        secondaryText: 'Tìm hiểu về chúng tôi →',
-        secondaryTarget: '#philosophy'
+        secondaryText: 'Liên hệ tư vấn',
+        secondaryTarget: '#contact'
       },
       {
-        tag: 'ĐÔNG HÒA PROPERTY',
-        monogram: 'K',
-        line1: 'hác biệt',
+        tag: 'QUỸ CĂN CHỌN LỌC • TP. HỒ CHÍ MINH & KHU VỰC TRỌNG ĐIỂM',
+        monogram: '',
+        line1: 'Danh Mục Căn Hộ & Biệt Thự Cao Cấp',
         line2: '',
-        description: '100% dự án chuẩn pháp lý & thực tế. Tư vấn chuyên sâu, đồng hành trọn đời cùng khách hàng và nhà đầu tư.',
-        backgroundImage: '/uploads/hero_slide_2.png',
-        buttonText: 'Xem danh mục',
-        buttonTarget: '#projects',
-        secondaryText: 'Khám phá phong cách →',
-        secondaryTarget: '#styles'
+        description: 'Hợp tác phân phối chính thức từ các chủ đầu tư uy tín hàng đầu: Masterise Homes, Gamuda Land, Vingroup, Khang Điền.',
+        backgroundImage: '/uploads/clean_project_vingroup.png',
+        buttonText: 'Xem các phân khúc',
+        buttonTarget: '#categories',
+        secondaryText: 'Khám phá giỏ hàng',
+        secondaryTarget: '#projects'
       },
       {
-        tag: 'ĐÔNG HÒA PROPERTY',
-        monogram: 'L',
-        line1: 'iên hệ ngay',
+        tag: 'TƯ VẤN GIẢI PHÁP ĐẦU TƯ BỀN VỮNG',
+        monogram: '',
+        line1: 'Tận Tâm Đồng Hành — Bảo Mật Tuyệt Đối',
         line2: '',
-        description: 'Hotline: 0906.499.279 | Email: info@donghoagroup.vn | Trụ sở: 113-115 Ung Văn Khiêm, Thạnh Mỹ Tây, TP.HCM',
-        backgroundImage: '/uploads/hero_slide_3.png',
-        buttonText: 'Nhận tư vấn',
+        description: 'Cung cấp góc nhìn thị trường chuẩn xác, phân tích tiềm năng thực tế và hỗ trợ xuyên suốt quá trình giao dịch.',
+        backgroundImage: '/uploads/clean_project_alora.png',
+        buttonText: 'Đăng ký tư vấn',
         buttonTarget: '#contact',
-        secondaryText: 'Xem tin tức thị trường →',
+        secondaryText: 'Tin tức thị trường',
         secondaryTarget: '/blog'
       }
     ]

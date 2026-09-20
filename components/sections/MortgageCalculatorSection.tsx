@@ -50,7 +50,7 @@ export default function MortgageCalculatorSection({ onOpenInquiry }: MortgageCal
   };
 
   return (
-    <section id="mortgage-calculator" className="py-20 sm:py-28 bg-white border-b border-warm-200">
+    <section id="mortgage-calculator" className="py-20 sm:py-28 bg-gradient-to-b from-white via-warm-50/80 to-warm-100/50 border-b border-warm-200">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
