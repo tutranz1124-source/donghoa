@@ -3,64 +3,62 @@
 @tailwind utilities;
 
 :root {
-  --navy: #04092b;
-  --gold: #c5a26c;
-  --ivory: #f4f1ea;
-  --dark: #2d302e;
-  --charcoal: #2d302e;
-  --muted: #5f6361;
-  --ruby: #a70c0c;
+  --navy: #060913;
+  --gold: #C5A880;
+  --gold-light: #D4B37F;
+  --gold-dark: #B38F57;
+  --dark: #060913;
+  --charcoal: #060913;
+  --muted: #9CA3AF;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    color: var(--dark);
-    background-color: var(--ivory);
+    color: #FFFFFF;
+    background-color: #060913;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   
   body {
-    background-color: var(--ivory);
+    background-color: #060913;
+    color: #FFFFFF;
     overflow-x: hidden;
+    font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  h1, h2, h3, .font-serif, .font-display {
+    font-family: var(--font-playfair), Georgia, serif;
   }
 }
 
 /* Custom scrollbar for luxury feel */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #f4f1ea;
+  background: #060913;
 }
 ::-webkit-scrollbar-thumb {
-  background: #c5a26c;
+  background: #C5A880;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #b38f57;
-}
-
-/* Typography styles */
-.font-display {
-  font-family: var(--font-montserrat), sans-serif;
-}
-
-.font-accent {
-  font-family: var(--font-manrope), sans-serif;
+  background: #D4B37F;
 }
 
 .luxury-gradient {
-  background: linear-gradient(135deg, rgba(4,9,43,0.95) 0%, rgba(11,25,89,0.9) 100%);
+  background: linear-gradient(135deg, rgba(6,9,19,0.95) 0%, rgba(10,14,26,0.9) 100%);
 }
 
 .gold-gradient {
-  background: linear-gradient(135deg, #c5a26c 0%, #dfc79b 50%, #b38f57 100%);
+  background: linear-gradient(135deg, #C5A880 0%, #E2D2BC 50%, #B38F57 100%);
 }
 
 .gold-text-gradient {
-  background: linear-gradient(135deg, #c5a26c 0%, #edd8b4 50%, #c5a26c 100%);
+  background: linear-gradient(135deg, #C5A880 0%, #FFFFFF 50%, #C5A880 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+

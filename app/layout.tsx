@@ -1,40 +1,41 @@
 import type { Metadata, Viewport } from 'next';
-import { Montserrat, Manrope, Alex_Brush } from 'next/font/google';
+import { Playfair_Display, Be_Vietnam_Pro, Montserrat } from 'next/font/google';
 import './globals.css';
+
+const playfair = Playfair_Display({
+  subsets: ['latin', 'vietnamese'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-playfair',
+  display: 'swap',
+});
+
+const beVietnam = Be_Vietnam_Pro({
+  subsets: ['latin', 'vietnamese'],
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-be-vietnam',
+  display: 'swap',
+});
 
 const montserrat = Montserrat({
   subsets: ['latin', 'vietnamese'],
   weight: ['300', '400', '500', '600', '700'],
-  style: ['normal', 'italic'],
   variable: '--font-montserrat',
   display: 'swap',
 });
 
-const manrope = Manrope({
-  subsets: ['latin', 'vietnamese'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-manrope',
-  display: 'swap',
-});
-
-const alexBrush = Alex_Brush({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-script',
-  display: 'swap',
-});
-
 export const viewport: Viewport = {
-  themeColor: '#04092b',
+  themeColor: '#060913',
   width: 'device-width',
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://donghoa-property.vercel.app'),
+  metadataBase: new URL('https://donghoa-property-one.vercel.app'),
   title: 'Đông Hòa Property | Bất Động Sản Cao Cấp & Kiến Tạo Không Gian Sống',
   description: 'Đông Hòa Property - Đơn vị tư vấn bất động sản cao cấp chọn lọc và cung cấp giải pháp thiết kế, thi công không gian sống chuẩn mực, độc bản.',
-  keywords: ['Đông Hòa Property', 'Bất động sản cao cấp', 'Dự án căn hộ hạng sang', 'Biệt thự nghỉ dưỡng', 'Thiết kế thi công trọn gói'],
+  keywords: ['Đông Hòa Property', 'Bất động sản cao cấp', 'Dự án căn hộ hạng sang', 'Biệt thự nghỉ dưỡng', 'Phân phối bất động sản'],
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Đông Hòa Property | Bất Động Sản Cao Cấp & Kiến Tạo Không Gian Sống',
     description: 'Đông Hòa Property - Đơn vị tư vấn bất động sản cao cấp chọn lọc và cung cấp giải pháp thiết kế, thi công không gian sống chuẩn mực, độc bản.',
-    url: 'https://donghoa-property.vercel.app',
+    url: 'https://donghoa-property-one.vercel.app',
     siteName: 'Đông Hòa Property',
     images: [
       {
@@ -59,9 +60,13 @@ export const metadata: Metadata = {
     locale: 'vi_VN',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Đông Hòa Property | Bất Động Sản Cao Cấp',
+    description: 'Tư vấn bất động sản cao cấp và đầu tư bền vững.',
+    images: ['/uploads/hero_slide_1.png'],
+  },
 };
-
-import FloatingContact from '@/components/FloatingContact';
 
 export default function RootLayout({
   children,
@@ -69,10 +74,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="vi" className={`${montserrat.variable} ${manrope.variable} ${alexBrush.variable} scroll-smooth overflow-x-hidden`}>
-      <body className="font-sans antialiased bg-[#f4f1ea] text-[#2d302e] min-h-screen flex flex-col selection:bg-[#c5a26c] selection:text-white overflow-x-hidden w-full relative">
+    <html
+      lang="vi"
+      className={`${playfair.variable} ${beVietnam.variable} ${montserrat.variable} scroll-smooth overflow-x-hidden`}
+    >
+      <body className="font-sans antialiased bg-[#060913] text-white min-h-screen flex flex-col selection:bg-[#C5A880] selection:text-[#060913] overflow-x-hidden w-full relative">
         {children}
-        <FloatingContact />
       </body>
     </html>
   );
