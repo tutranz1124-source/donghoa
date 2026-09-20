@@ -47,8 +47,8 @@ async function sendViaFormSubmit(data: {
     const resJson = await response.json();
     return { success: true, resJson };
   } catch (err: any) {
-    console.warn('FormSubmit dispatch warning:', err.message);
-    return { success: false, error: err.message };
+    console.warn('FormSubmit dispatch warning:', err?.message || err);
+    return { success: false, error: err?.message };
   }
 }
 
@@ -76,42 +76,42 @@ async function sendViaSmtp(data: {
 
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2ddd3; border-radius: 8px; overflow: hidden;">
-        <div style="background-color: #04092b; color: #ffffff; padding: 24px; text-align: center;">
-          <h2 style="margin: 0; font-size: 20px; letter-spacing: 1px; color: #c5a26c;">ĐÔNG HÒA PROPERTY</h2>
+        <div style="background-color: #060913; color: #ffffff; padding: 24px; text-align: center;">
+          <h2 style="margin: 0; font-size: 20px; letter-spacing: 1px; color: #C5A880;">ĐÔNG HÒA PROPERTY</h2>
           <p style="margin: 6px 0 0; font-size: 14px; color: #e2ddd3;">THÔNG BÁO YÊU CẦU TƯ VẤN KHÁCH HÀNG</p>
         </div>
         <div style="padding: 24px; background-color: #faf8f5;">
           <p style="font-size: 14px; color: #333; line-height: 1.6;">Website vừa ghi nhận yêu cầu tư vấn mới từ khách hàng:</p>
           <table style="width: 100%; border-collapse: collapse; margin-top: 16px; background-color: #ffffff; border-radius: 6px; overflow: hidden;">
             <tr style="border-bottom: 1px solid #eee;">
-              <td style="padding: 12px 16px; font-weight: bold; color: #04092b; width: 35%;">Họ và tên:</td>
+              <td style="padding: 12px 16px; font-weight: bold; color: #060913; width: 35%;">Họ và tên:</td>
               <td style="padding: 12px 16px; color: #333;">${data.fullName}</td>
             </tr>
             <tr style="border-bottom: 1px solid #eee;">
-              <td style="padding: 12px 16px; font-weight: bold; color: #04092b;">Số điện thoại:</td>
-              <td style="padding: 12px 16px; color: #a70c0c; font-weight: bold;"><a href="tel:${data.phone}" style="color: #a70c0c; text-decoration: none;">${data.phone}</a></td>
+              <td style="padding: 12px 16px; font-weight: bold; color: #060913;">Số điện thoại:</td>
+              <td style="padding: 12px 16px; color: #C5A880; font-weight: bold;"><a href="tel:${data.phone}" style="color: #C5A880; text-decoration: none;">${data.phone}</a></td>
             </tr>
-            ${data.email ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 16px; font-weight: bold; color: #04092b;">Email:</td><td style="padding: 12px 16px; color: #333;">${data.email}</td></tr>` : ''}
-            ${data.projectName ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 16px; font-weight: bold; color: #04092b;">Dự án quan tâm:</td><td style="padding: 12px 16px; color: #04092b; font-weight: bold;">${data.projectName}</td></tr>` : ''}
+            ${data.email ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 16px; font-weight: bold; color: #060913;">Email:</td><td style="padding: 12px 16px; color: #333;">${data.email}</td></tr>` : ''}
+            ${data.projectName ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 16px; font-weight: bold; color: #060913;">Dự án quan tâm:</td><td style="padding: 12px 16px; color: #060913; font-weight: bold;">${data.projectName}</td></tr>` : ''}
             <tr style="border-bottom: 1px solid #eee;">
-              <td style="padding: 12px 16px; font-weight: bold; color: #04092b;">Loại hình BĐS:</td>
+              <td style="padding: 12px 16px; font-weight: bold; color: #060913;">Loại hình BĐS:</td>
               <td style="padding: 12px 16px; color: #333;">${data.propertyType || 'Chưa ghi'}</td>
             </tr>
             <tr style="border-bottom: 1px solid #eee;">
-              <td style="padding: 12px 16px; font-weight: bold; color: #04092b;">Diện tích (m²):</td>
+              <td style="padding: 12px 16px; font-weight: bold; color: #060913;">Diện tích (m²):</td>
               <td style="padding: 12px 16px; color: #333;">${data.area ? `${data.area} m²` : 'Chưa ghi'}</td>
             </tr>
             <tr style="border-bottom: 1px solid #eee;">
-              <td style="padding: 12px 16px; font-weight: bold; color: #04092b;">Nhu cầu:</td>
+              <td style="padding: 12px 16px; font-weight: bold; color: #060913;">Nhu cầu:</td>
               <td style="padding: 12px 16px; color: #333;">${data.need || 'Chưa ghi'}</td>
             </tr>
             <tr>
-              <td style="padding: 12px 16px; font-weight: bold; color: #04092b;">Thời gian nhận:</td>
+              <td style="padding: 12px 16px; font-weight: bold; color: #060913;">Thời gian nhận:</td>
               <td style="padding: 12px 16px; color: #666; font-size: 13px;">${new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })}</td>
             </tr>
           </table>
           <div style="margin-top: 24px; text-align: center;">
-            <a href="tel:${data.phone}" style="display: inline-block; background-color: #04092b; color: #ffffff; padding: 12px 28px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 13px; letter-spacing: 0.5px;">GỌI NGAY CHO KHÁCH HÀNG</a>
+            <a href="tel:${data.phone}" style="display: inline-block; background-color: #060913; color: #ffffff; padding: 12px 28px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 13px; letter-spacing: 0.5px;">GỌI NGAY CHO KHÁCH HÀNG</a>
           </div>
         </div>
         <div style="background-color: #f0ebe1; padding: 14px; text-align: center; font-size: 12px; color: #777;">
@@ -130,7 +130,7 @@ async function sendViaSmtp(data: {
     return { success: true };
   } catch (err: any) {
     console.error('SMTP send error:', err);
-    return { success: false, error: err.message };
+    return { success: false, error: err?.message };
   }
 }
 
@@ -149,7 +149,7 @@ export async function GET(request: Request) {
 
   let list = getInquiries();
 
-  if (status && ['new', 'contacted', 'appointment', 'closed'].includes(status)) {
+  if (status && status !== ('all' as any)) {
     list = list.filter((item) => item.status === status);
   }
 
@@ -159,14 +159,21 @@ export async function GET(request: Request) {
         item.fullName.toLowerCase().includes(search) ||
         item.phone.includes(search) ||
         (item.email && item.email.toLowerCase().includes(search)) ||
-        (item.projectName && item.projectName.toLowerCase().includes(search)) ||
-        (item.need && item.need.toLowerCase().includes(search))
+        (item.propertyType && item.propertyType.toLowerCase().includes(search)) ||
+        (item.projectName && item.projectName.toLowerCase().includes(search))
     );
   }
 
+  const counts = {
+    all: getInquiries().length,
+    new: getInquiries().filter((i) => i.status === 'new').length,
+    contacted: getInquiries().filter((i) => i.status === 'contacted').length,
+    appointment: getInquiries().filter((i) => i.status === 'appointment').length,
+    closed: getInquiries().filter((i) => i.status === 'closed').length,
+  };
+
   return NextResponse.json({
-    success: true,
-    total: list.length,
+    counts,
     inquiries: list
   });
 }
@@ -176,7 +183,16 @@ export async function GET(request: Request) {
 // ----------------------------------------------------
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    let body: any = {};
+    try {
+      body = await request.json();
+    } catch (e) {
+      return NextResponse.json(
+        { error: 'Dữ liệu không hợp lệ. Vui lòng kiểm tra lại.' },
+        { status: 400 }
+      );
+    }
+
     const { fullName, phone, email, propertyType, area, need, projectName } = body;
 
     if (!fullName || !phone) {
@@ -186,17 +202,36 @@ export async function POST(request: Request) {
       );
     }
 
-    const newRecord = saveInquiry({
-      fullName,
-      phone,
-      email,
-      propertyType,
-      area,
-      need,
-      projectName,
-      targetEmail: TARGET_EMAIL,
-      status: 'new'
-    });
+    let newRecord;
+    try {
+      newRecord = saveInquiry({
+        fullName,
+        phone,
+        email,
+        propertyType,
+        area,
+        need,
+        projectName,
+        targetEmail: TARGET_EMAIL,
+        status: 'new'
+      });
+    } catch (err: any) {
+      console.warn('saveInquiry fallback warning:', err);
+      newRecord = {
+        id: `inq-${Date.now()}`,
+        fullName,
+        phone,
+        email: email || '',
+        propertyType: propertyType || '',
+        area: area || '',
+        need: need || '',
+        projectName: projectName || '',
+        targetEmail: TARGET_EMAIL,
+        status: 'new' as InquiryStatus,
+        notes: [],
+        createdAt: new Date().toISOString()
+      };
+    }
 
     // Dispatch background notifications asynchronously without blocking user response
     sendViaFormSubmit({
@@ -259,40 +294,51 @@ export async function PATCH(request: Request) {
       updated = updateInquiryStatus(id, status);
     }
 
-    if (note && typeof note === 'string' && note.trim()) {
+    if (note && note.trim()) {
       updated = addInquiryNote(id, note.trim(), authorName);
     }
 
     if (!updated) {
-      return NextResponse.json({ error: 'Không tìm thấy yêu cầu tư vấn.' }, { status: 404 });
+      return NextResponse.json({ error: 'Không tìm thấy yêu cầu tư vấn với ID tương ứng.' }, { status: 404 });
     }
 
-    return NextResponse.json({ success: true, inquiry: updated });
+    return NextResponse.json({
+      success: true,
+      message: 'Cập nhật trạng thái thành công.',
+      data: updated
+    });
   } catch (err: any) {
-    return NextResponse.json({ error: err?.message || 'Failed to update inquiry' }, { status: 500 });
+    return NextResponse.json({ error: 'Lỗi máy chủ khi cập nhật.' }, { status: 500 });
   }
 }
 
 // ----------------------------------------------------
-// 4. DELETE: Remove inquiry (Admin only)
+// 4. DELETE: Delete inquiry (Admin only)
 // ----------------------------------------------------
 export async function DELETE(request: Request) {
   const isAuth = verifyAdminSession();
   if (!isAuth) {
-    return NextResponse.json({ error: 'Chỉ Quản Trị Viên mới có quyền xóa yêu cầu tư vấn.' }, { status: 403 });
+    return NextResponse.json({ error: 'Forbidden. Chỉ quản trị viên cấp cao mới có quyền xóa yêu cầu.' }, { status: 403 });
   }
 
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get('id');
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
 
-  if (!id) {
-    return NextResponse.json({ error: 'Thiếu mã yêu cầu (id).' }, { status: 400 });
+    if (!id) {
+      return NextResponse.json({ error: 'Thiếu tham số ID.' }, { status: 400 });
+    }
+
+    const success = deleteInquiry(id);
+    if (!success) {
+      return NextResponse.json({ error: 'Không thể xóa hoặc không tìm thấy mục yêu cầu.' }, { status: 404 });
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: 'Đã xóa yêu cầu tư vấn khỏi hệ thống.'
+    });
+  } catch (err: any) {
+    return NextResponse.json({ error: 'Lỗi máy chủ khi xóa.' }, { status: 500 });
   }
-
-  const deleted = deleteInquiry(id);
-  if (!deleted) {
-    return NextResponse.json({ error: 'Không tìm thấy yêu cầu để xóa.' }, { status: 404 });
-  }
-
-  return NextResponse.json({ success: true, message: 'Đã xóa yêu cầu thành công.' });
 }
