@@ -80,11 +80,11 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
   const navLinks = settings?.navLinks?.length
     ? settings.navLinks
     : [
-        { label: 'Dự án', url: '#projects' },
-        { label: 'Phong cách thiết kế', url: '#styles' },
-        { label: 'Không gian văn phòng', url: '#office' },
         { label: 'Về chúng tôi', url: '#philosophy' },
-        { label: 'Tin tức', url: '/blog' },
+        { label: 'Phân khúc', url: '#categories' },
+        { label: 'Dự án trọng điểm', url: '#projects' },
+        { label: 'Bảng giá VIP', url: '#contact' },
+        { label: 'Tin tức thị trường', url: '/blog' },
         { label: 'Liên hệ', url: '#contact' },
       ];
 

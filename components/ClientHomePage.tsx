@@ -4,16 +4,13 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroBanner from '@/components/sections/HeroBanner';
-import ProjectsSection from '@/components/sections/ProjectsSection';
 import PhilosophySection from '@/components/sections/PhilosophySection';
-import QuoteContactSection from '@/components/sections/QuoteContactSection';
-import StylesOverviewSection from '@/components/sections/StylesOverviewSection';
-import ModernMinimalistSection from '@/components/sections/ModernMinimalistSection';
-import CozyWarmSection from '@/components/sections/CozyWarmSection';
-import LuxuryClassicSection from '@/components/sections/LuxuryClassicSection';
-import HeritageRetroSection from '@/components/sections/HeritageRetroSection';
-import OfficeSection from '@/components/sections/OfficeSection';
+import CategoriesSection from '@/components/sections/CategoriesSection';
+import ProjectsSection from '@/components/sections/ProjectsSection';
+import PrivateAccessSection from '@/components/sections/PrivateAccessSection';
+import MilestonesSection from '@/components/sections/MilestonesSection';
 import BlogFeedSection from '@/components/sections/BlogFeedSection';
+import QuoteContactSection from '@/components/sections/QuoteContactSection';
 import InquiryModal from '@/components/InquiryModal';
 import { SiteContentData, BlogPost } from '@/lib/types';
 
@@ -22,6 +19,7 @@ export default function ClientHomePage({ initialContent }: { initialContent: Sit
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<string | undefined>(undefined);
+  const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined);
 
   const handleOpenInquiry = (projectName?: string) => {
     setSelectedProject(projectName);
@@ -108,53 +106,36 @@ export default function ClientHomePage({ initialContent }: { initialContent: Sit
         {/* 2. HERO BANNER */}
         <HeroBanner data={content.hero} />
 
-        {/* 3. DANH MỤC DỰ ÁN TIÊU BIỂU */}
-        <ProjectsSection
-          block={content.projects}
+        {/* 3. VỀ CHÚNG TÔI & TẦM NHÌN SỨ MỆNH */}
+        <PhilosophySection data={content.philosophy} />
+
+        {/* 4. GIỎ HÀNG PHÂN KHÚC TRỌNG ĐIỂM */}
+        <CategoriesSection
+          onSelectCategory={(cat) => setSelectedCategory(cat)}
           onOpenInquiry={handleOpenInquiry}
         />
 
-        {/* 4. TẦM NHÌN VÀ SỨ MỆNH */}
-        <PhilosophySection data={content.philosophy} />
-
-        {/* 5. PHONG CÁCH THIẾT KẾ (4 CARDS OVERVIEW) */}
-        <StylesOverviewSection data={content.stylesOverview} />
-
-        {/* 6. MODERN & MINIMALIST STAGE */}
-        <ModernMinimalistSection
-          data={content.stylesOverview?.styles?.[0]}
-          stageConfig={content.stages?.modern}
+        {/* 5. DANH MỤC DỰ ÁN NỔI BẬT */}
+        <ProjectsSection
+          block={content.projects}
+          selectedCategory={selectedCategory}
+          onOpenInquiry={handleOpenInquiry}
         />
 
-        {/* 7. COZY & WARM STAGE */}
-        <CozyWarmSection
-          data={content.stylesOverview?.styles?.[1]}
-          stageConfig={content.stages?.cozy}
-        />
+        {/* 6. ĐẶC QUYỀN GIỎ HÀNG NỘI BỘ & BẢNG GIÁ */}
+        <PrivateAccessSection onOpenInquiry={handleOpenInquiry} />
 
-        {/* 8. LUXURY & CLASSIC STAGE */}
-        <LuxuryClassicSection
-          data={content.stylesOverview?.styles?.[2]}
-          stageConfig={content.stages?.luxury}
-        />
+        {/* 7. DẤU ẤN & NĂNG LỰC DOANH NGHIỆP */}
+        <MilestonesSection />
 
-        {/* 9. HERITAGE & RETRO STAGE */}
-        <HeritageRetroSection
-          data={content.stylesOverview?.styles?.[3]}
-          stageConfig={content.stages?.heritage}
-        />
-
-        {/* 10. NỘI THẤT VĂN PHÒNG & SHOWROOM */}
-        <OfficeSection data={content.office} />
-
-        {/* 11. TIN TỨC & GÓC NHÌN BẤT ĐỘNG SẢN */}
+        {/* 8. TIN TỨC & GÓC NHÌN THỊ TRƯỜNG */}
         <BlogFeedSection block={content.blogFeed} posts={posts} />
 
-        {/* 12. KẾT NỐI & TƯ VẤN TRỰC TIẾP */}
+        {/* 9. KẾT NỐI & TƯ VẤN TRỰC TIẾP */}
         <QuoteContactSection data={content.contact} />
       </main>
 
-      {/* 13. FOOTER */}
+      {/* 10. FOOTER */}
       <Footer settings={settings} />
 
       {/* GLOBAL INQUIRY MODAL */}

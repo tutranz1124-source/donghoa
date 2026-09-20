@@ -13,41 +13,41 @@ interface HeroBannerProps {
 const defaultSlides = [
   {
     tag: 'ĐÔNG HÒA PROPERTY',
-    monogram: 'T',
-    line1: 'hiết kế không gian',
-    line2: 'ruyền cảm hứng sống',
+    monogram: 'Đ',
+    line1: 'ông Hòa Property',
+    line2: 'Kiến tạo giá trị — Nâng tầm chuẩn sống',
     description:
-      'Bất động sản cao cấp và nội thất sang trọng được kiến tạo với sự sáng tạo, công năng và vẻ đẹp vượt thời gian.',
-    backgroundImage: '/uploads/hero_slide_1.png',
+      'Thương hiệu tư vấn & phân phối bất động sản cao cấp hàng đầu, đồng hành cùng quý khách hàng và nhà đầu tư trên hành trình kiến tạo danh mục tài sản truyền đời vững bền.',
+    backgroundImage: '/uploads/clean_project_vingroup.png',
     buttonText: 'Khám phá dự án',
     buttonTarget: '#projects',
-    secondaryText: 'Tìm hiểu về chúng tôi →',
+    secondaryText: 'Về chúng tôi →',
     secondaryTarget: '#philosophy'
   },
   {
     tag: 'ĐÔNG HÒA PROPERTY',
-    monogram: 'K',
-    line1: 'hác biệt',
-    line2: '',
+    monogram: 'P',
+    line1: 'hân phối chiến lược',
+    line2: 'Quỹ căn vị trí kim cương',
     description:
-      '100% dự án chuẩn pháp lý & thực tế. Tư vấn chuyên sâu, đồng hành trọn đời cùng khách hàng và nhà đầu tư.',
-    backgroundImage: '/uploads/hero_slide_2.png',
-    buttonText: 'Xem danh mục',
-    buttonTarget: '#projects',
-    secondaryText: 'Khám phá phong cách →',
-    secondaryTarget: '#styles'
+      '100% dự án thẩm định pháp lý minh bạch, bảng giá gốc trực tiếp từ các tập đoàn hàng đầu: Vingroup, Phát Đạt, KDI Holdings, Kita Group, An Gia...',
+    backgroundImage: '/uploads/clean_project_thegio.png',
+    buttonText: 'Xem giỏ hàng',
+    buttonTarget: '#categories',
+    secondaryText: 'Bảng giá nội bộ →',
+    secondaryTarget: '#contact'
   },
   {
     tag: 'ĐÔNG HÒA PROPERTY',
-    monogram: 'L',
-    line1: 'iên hệ ngay',
-    line2: '',
+    monogram: 'T',
+    line1: 'ư vấn chuyên sâu',
+    line2: 'Đồng hành trọn vẹn',
     description:
-      'Hotline: 0906.499.279 | Email: info@donghoagroup.vn | Trụ sở: 113-115 Ung Văn Khiêm, Thạnh Mỹ Tây, TP.HCM',
-    backgroundImage: '/uploads/hero_slide_3.png',
-    buttonText: 'Nhận tư vấn',
+      'Hotline 24/7: 0906.499.279 | Email: info@donghoagroup.vn | Trụ sở: 113-115 Ung Văn Khiêm, Phường Thạnh Mỹ Tây, TP.HCM',
+    backgroundImage: '/uploads/clean_project_alora.png',
+    buttonText: 'Nhận tư vấn ngay',
     buttonTarget: '#contact',
-    secondaryText: 'Xem tin tức thị trường →',
+    secondaryText: 'Tin tức thị trường →',
     secondaryTarget: '/blog'
   }
 ];
@@ -82,7 +82,7 @@ export default function HeroBanner({ data }: HeroBannerProps) {
       <div className="absolute inset-0 z-0 pointer-events-none">
         {slides.map((s, idx) => {
           const isActive = currentSlide === idx;
-          const bgUrl = s.backgroundImage || '/uploads/hero_slide_1.png';
+          const bgUrl = s.backgroundImage || '/uploads/clean_project_vingroup.png';
           return (
             <motion.div
               key={idx}
@@ -99,7 +99,7 @@ export default function HeroBanner({ data }: HeroBannerProps) {
             >
               <Image
                 src={bgUrl}
-                alt={`Đông Hòa Design - Slide ${idx + 1}`}
+                alt={`Đông Hòa Property - Slide ${idx + 1}`}
                 fill
                 className="object-cover object-center"
                 priority={idx === 0}

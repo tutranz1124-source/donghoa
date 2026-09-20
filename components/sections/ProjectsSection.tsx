@@ -8,13 +8,23 @@ import { ArrowRight, MapPin, Building, Sparkles, Star, PhoneCall } from 'lucide-
 
 interface ProjectsSectionProps {
   block?: ProjectsBlock;
+  selectedCategory?: string;
   onOpenInquiry?: (projectName?: string) => void;
 }
 
-export default function ProjectsSection({ block, onOpenInquiry }: ProjectsSectionProps) {
+export default function ProjectsSection({ block, selectedCategory, onOpenInquiry }: ProjectsSectionProps) {
   const items = block?.items || [];
   const [filter, setFilter] = useState<'all' | 'featured' | 'hcm' | 'coastal'>('all');
-  const [selectedPreviewProject, setSelectedPreviewProject] = useState<ProjectItem | null>(null);
+
+  // Sync external category filter if passed
+  React.useEffect(() => {
+    if (selectedCategory) {
+      const lower = selectedCategory.toLowerCase();
+      if (lower.includes('căn hộ')) setFilter('all');
+      else if (lower.includes('nhà phố')) setFilter('hcm');
+      else if (lower.includes('biệt thự') || lower.includes('dinh thự')) setFilter('coastal');
+    }
+  }, [selectedCategory]);
 
   const filteredItems = items.filter((item) => {
     if (filter === 'featured') return item.featured;
