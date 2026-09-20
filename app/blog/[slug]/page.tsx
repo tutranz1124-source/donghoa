@@ -10,10 +10,10 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = getBlogPostBySlug(params.slug);
-  if (!post) return { title: 'Bài viết không tìm thấy | Đông Hòa Design' };
+  if (!post) return { title: 'Bài viết không tìm thấy | Đông Hòa Property' };
 
   return {
-    title: `${post.seoTitle || post.title} | Đông Hòa Design`,
+    title: `${post.seoTitle || post.title} | Đông Hòa Property`,
     description: post.seoDescription || post.excerpt,
     openGraph: {
       title: post.title,
@@ -37,7 +37,7 @@ export default function BlogPostDetailPage({ params }: { params: { slug: string 
   return (
     <>
       <Navbar settings={content.settings} />
-      <main className="flex-1 pt-32 pb-24 px-4 sm:px-8 lg:px-20 bg-[#f4f1ea]">
+      <main className="flex-1 pt-32 pb-24 px-6 sm:px-12 lg:px-24 bg-[#060913] text-white">
         <BlogPostClient post={post} relatedPosts={relatedPosts} />
       </main>
       <Footer settings={content.settings} />

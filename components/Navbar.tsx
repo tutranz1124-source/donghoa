@@ -83,7 +83,7 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
         { label: 'Về chúng tôi', url: '#philosophy' },
         { label: 'Phân khúc', url: '#categories' },
         { label: 'Dự án trọng điểm', url: '#projects' },
-        { label: 'Bảng giá VIP', url: '#contact' },
+        { label: 'Bảng giá VIP', url: '#private-access' },
         { label: 'Tin tức thị trường', url: '/blog' },
         { label: 'Liên hệ', url: '#contact' },
       ];

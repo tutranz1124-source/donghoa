@@ -18,8 +18,8 @@ export default function BlogListingPage() {
   return (
     <>
       <Navbar settings={content.settings} />
-      <main className="min-h-screen bg-[#f4f1ea] pt-28 sm:pt-32 pb-24 px-4 sm:px-8 lg:px-20">
-        <Suspense fallback={<div className="text-center py-20 text-[#6e706a]">Đang tải danh sách bài viết...</div>}>
+      <main className="min-h-screen bg-[#060913] text-white pt-28 sm:pt-32 pb-24 px-6 sm:px-12 lg:px-24">
+        <Suspense fallback={<div className="text-center py-20 text-white/50">Đang tải danh sách bài viết...</div>}>
           <BlogListingClient initialPosts={posts} />
         </Suspense>
       </main>
