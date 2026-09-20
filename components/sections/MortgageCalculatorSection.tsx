@@ -175,3 +175,4 @@ export default function MortgageCalculatorSection({ onOpenInquiry }: MortgageCal
     </section>
   );
 }
+
