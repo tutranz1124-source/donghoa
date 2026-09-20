@@ -37,7 +37,7 @@ export default function ProjectQuickViewModal({
           {/* Project Image */}
           <div className="relative h-64 sm:h-80 w-full bg-warm-100">
             <Image
-              src={project.imageUrl || project.image || '/uploads/clean_project_thegio.png'}
+              src={project.imageUrl || project.image || '/uploads/the-gio-riverside.png'}
               alt={project.title || project.name || 'Dự án'}
               fill
               className="object-cover"

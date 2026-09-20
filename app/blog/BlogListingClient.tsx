@@ -171,7 +171,7 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
         >
           <div className="relative lg:col-span-7 h-[280px] sm:h-[380px] lg:h-auto min-h-[340px] overflow-hidden bg-warm-100">
             <Image
-              src={featuredPost.featuredImage || '/uploads/clean_project_thegio.png'}
+              src={featuredPost.featuredImage || '/uploads/the-gio-riverside.png'}
               alt={featuredPost.title}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -238,7 +238,7 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
               <div>
                 <div className="relative w-full aspect-[16/10] overflow-hidden bg-warm-100">
                   <Image
-                    src={post.featuredImage || '/uploads/clean_project_thegio.png'}
+                    src={post.featuredImage || '/uploads/the-gio-riverside.png'}
                     alt={post.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"

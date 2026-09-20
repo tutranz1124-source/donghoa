@@ -16,7 +16,7 @@ const DEFAULT_SLIDES = [
     tag: 'ĐÔNG HÒA PROPERTY • PHÂN PHỐI CHIẾN LƯỢC',
     title: 'Kiến Tạo Chuẩn Sống — Tuyển Chọn Bất Động Sản Độc Bản',
     subtitle: 'Đồng hành tư vấn chuyên sâu các dự án sở hữu vị trí chiến lược, quy hoạch chuẩn mực và thẩm định pháp lý minh bạch.',
-    backgroundImage: '/uploads/clean_project_thegio.png',
+    backgroundImage: '/uploads/hero_slide_1.png',
     primaryButton: 'Khám phá dự án',
     primaryTarget: '#projects',
     secondaryButton: 'Liên hệ tư vấn',
@@ -26,7 +26,7 @@ const DEFAULT_SLIDES = [
     tag: 'QUỸ CĂN CHỌN LỌC • TP. HỒ CHÍ MINH & KHU VỰC TRỌNG ĐIỂM',
     title: 'Danh Mục Căn Hộ & Biệt Thự Cao Cấp',
     subtitle: 'Hợp tác phân phối chính thức từ các chủ đầu tư uy tín hàng đầu: Masterise Homes, Gamuda Land, Vingroup, Khang Điền.',
-    backgroundImage: '/uploads/clean_project_vingroup.png',
+    backgroundImage: '/uploads/hero_slide_2.png',
     primaryButton: 'Xem các phân khúc',
     primaryTarget: '#categories',
     secondaryButton: 'Khám phá giỏ hàng',
@@ -36,7 +36,7 @@ const DEFAULT_SLIDES = [
     tag: 'TƯ VẤN GIẢI PHÁP ĐẦU TƯ BỀN VỮNG',
     title: 'Tận Tâm Đồng Hành — Bảo Mật Tuyệt Đối',
     subtitle: 'Cung cấp góc nhìn thị trường chuẩn xác, phân tích tiềm năng thực tế và hỗ trợ xuyên suốt quá trình giao dịch.',
-    backgroundImage: '/uploads/clean_project_alora.png',
+    backgroundImage: '/uploads/hero_slide_3.png',
     primaryButton: 'Đăng ký tư vấn',
     primaryTarget: '#contact',
     secondaryButton: 'Tin tức thị trường',
@@ -57,7 +57,7 @@ function sanitizeSlide(s: any, idx: number) {
   }
 
   let subtitle = s.subtitle || s.description || DEFAULT_SLIDES[idx]?.subtitle || '';
-  let backgroundImage = s.backgroundImage || DEFAULT_SLIDES[idx]?.backgroundImage || '/uploads/clean_project_thegio.png';
+  let backgroundImage = s.backgroundImage || DEFAULT_SLIDES[idx]?.backgroundImage || '/uploads/hero_slide_1.png';
   let primaryButton = s.primaryButton || s.buttonText || DEFAULT_SLIDES[idx]?.primaryButton || 'Khám phá dự án';
   let primaryTarget = s.primaryTarget || s.buttonTarget || DEFAULT_SLIDES[idx]?.primaryTarget || '#projects';
   let secondaryButton = s.secondaryButton || s.secondaryText || DEFAULT_SLIDES[idx]?.secondaryButton || 'Liên hệ tư vấn';
@@ -121,7 +121,7 @@ export default function HeroBanner({ data, onOpenInquiry }: HeroBannerProps) {
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {slides.map((s, idx) => {
           const isActive = currentSlide === idx;
-          const bgUrl = s.backgroundImage || '/uploads/clean_project_thegio.png';
+          const bgUrl = s.backgroundImage || '/uploads/hero_slide_1.png';
           return (
             <motion.div
               key={idx}

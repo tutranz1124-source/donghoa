@@ -87,14 +87,14 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#FAF8F5]/95 backdrop-blur-md py-3 shadow-warm-sm border-b border-[#E8E3DA]'
-          : 'bg-[#FAF8F5]/80 backdrop-blur-sm border-b border-[#E8E3DA]/80 py-4 lg:py-4.5'
+          ? 'bg-[#0B0F19]/95 backdrop-blur-md py-3 shadow-2xl border-b border-[#C5A880]/20'
+          : 'bg-[#0B0F19]/85 backdrop-blur-sm border-b border-white/10 py-4 lg:py-4.5'
       }`}
     >
       <div className="w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between">
-        {/* Brand Logo */}
+        {/* Brand Logo - Crisp on Dark Luxury Header */}
         <Link href="/" className="relative flex items-center group shrink-0">
-          <div className="relative h-[38px] w-[150px] sm:h-[44px] sm:w-[175px] lg:h-[46px] lg:w-[190px] transition-transform duration-300 group-hover:scale-105">
+          <div className="relative h-[40px] w-[160px] sm:h-[46px] sm:w-[185px] lg:h-[48px] lg:w-[200px] transition-transform duration-300 group-hover:scale-105">
             <Image
               src={settings?.logo || '/uploads/logo-dong-hoa-property.png'}
               alt={settings?.siteName || 'Đông Hòa Property'}
@@ -106,7 +106,7 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
         </Link>
 
         {/* Quiet Minimalist Navigation Menu */}
-        <nav className="hidden lg:flex items-center gap-8 xl:gap-11 text-[13.5px] uppercase tracking-wider font-medium text-charcoal-700">
+        <nav className="hidden lg:flex items-center gap-8 xl:gap-11 text-[13.5px] uppercase tracking-wider font-medium text-white/80">
           {navLinks.map((item, idx) => {
             const isInternalPage = item.url.startsWith('/') && !item.url.startsWith('/#');
             if (isInternalPage) {
@@ -114,7 +114,7 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
                 <Link
                   key={idx}
                   href={item.url}
-                  className="relative py-1 cursor-pointer hover:text-charcoal transition-colors duration-200 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-gold hover:after:w-full after:transition-all after:duration-300"
+                  className="relative py-1 cursor-pointer hover:text-[#C5A880] transition-colors duration-200 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-[#C5A880] hover:after:w-full after:transition-all after:duration-300"
                 >
                   {item.label}
                 </Link>
@@ -125,7 +125,7 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
                 key={idx}
                 href={item.url}
                 onClick={(e) => handleNavClick(e, item.url)}
-                className="relative py-1 cursor-pointer hover:text-charcoal transition-colors duration-200 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-gold hover:after:w-full after:transition-all after:duration-300"
+                className="relative py-1 cursor-pointer hover:text-[#C5A880] transition-colors duration-200 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-[#C5A880] hover:after:w-full after:transition-all after:duration-300"
               >
                 {item.label}
               </a>
@@ -139,9 +139,9 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
 
           <a
             href={`tel:${(settings?.hotline || '0906.499.279').replace(/\D/g, '')}`}
-            className="flex items-center gap-2 text-[13px] font-medium text-charcoal-700 hover:text-gold transition-colors whitespace-nowrap group px-2 py-1"
+            className="flex items-center gap-2 text-[13px] font-medium text-[#C5A880] hover:text-white transition-colors whitespace-nowrap group px-2 py-1"
           >
-            <PhoneCall className="w-3.5 h-3.5 text-gold transition-transform group-hover:scale-110" />
+            <PhoneCall className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
             <span className="font-mono tracking-wide">{settings?.hotline || '0906.499.279'}</span>
           </a>
 
@@ -154,9 +154,9 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
                 handleNavClick(e as any, '#contact');
               }
             }}
-            className="bg-charcoal hover:bg-gold text-white px-5 xl:px-6 py-2.5 transition-all duration-300 flex items-center justify-center gap-2 shadow-warm-sm rounded-full whitespace-nowrap cursor-pointer active:scale-95"
+            className="bg-[#C5A880] hover:bg-white text-[#0B0F19] px-5 xl:px-6 py-2.5 transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(197,168,128,0.25)] rounded-full whitespace-nowrap cursor-pointer active:scale-95"
           >
-            <span className="font-semibold text-[12px] tracking-wider uppercase font-sans">
+            <span className="font-bold text-[12px] tracking-wider uppercase font-sans">
               Liên Hệ Tư Vấn
             </span>
           </button>
@@ -168,16 +168,16 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
 
           <a
             href={`tel:${(settings?.hotline || '0906.499.279').replace(/\D/g, '')}`}
-            className="w-9 h-9 flex items-center justify-center text-charcoal rounded-full bg-warm-100 border border-warm-200 transition-colors"
+            className="w-9 h-9 flex items-center justify-center text-[#C5A880] rounded-full bg-white/5 border border-white/10 transition-colors"
             title={`Gọi Hotline ${settings?.hotline || '0906.499.279'}`}
           >
-            <PhoneCall className="w-4 h-4 text-gold" />
+            <PhoneCall className="w-4 h-4 text-[#C5A880]" />
           </a>
 
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="w-9 h-9 flex items-center justify-center text-charcoal bg-warm-100 border border-warm-200 rounded-full transition-colors"
+            className="w-9 h-9 flex items-center justify-center text-white hover:text-[#C5A880] bg-white/5 border border-white/10 rounded-full transition-colors"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -187,10 +187,10 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-warm-200 px-6 py-6 space-y-5 animate-in slide-in-from-top-4 duration-300 shadow-warm-md">
+        <div className="lg:hidden bg-[#0B0F19] border-b border-[#C5A880]/20 px-6 py-6 space-y-5 animate-in slide-in-from-top-4 duration-300 shadow-2xl">
           <HeaderSearchBar isMobileDrawer={true} />
 
-          <nav className="flex flex-col space-y-1 font-medium text-charcoal text-[15px]">
+          <nav className="flex flex-col space-y-1 font-medium text-white text-[15px]">
             {navLinks.map((item, idx) => {
               const isInternalPage = item.url.startsWith('/') && !item.url.startsWith('/#');
               if (isInternalPage) {
@@ -199,10 +199,10 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
                     key={idx}
                     href={item.url}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="py-3 border-b border-warm-100 hover:text-gold transition-colors flex items-center justify-between"
+                    className="py-3 border-b border-white/10 hover:text-[#C5A880] transition-colors flex items-center justify-between"
                   >
                     <span>{item.label}</span>
-                    <span className="text-charcoal-muted text-xs">→</span>
+                    <span className="text-white/30 text-xs">→</span>
                   </Link>
                 );
               }
@@ -211,10 +211,10 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
                   key={idx}
                   href={item.url}
                   onClick={(e) => handleNavClick(e, item.url)}
-                  className="py-3 border-b border-warm-100 hover:text-gold transition-colors flex items-center justify-between"
+                  className="py-3 border-b border-white/10 hover:text-[#C5A880] transition-colors flex items-center justify-between"
                 >
                   <span>{item.label}</span>
-                  <span className="text-charcoal-muted text-xs">→</span>
+                  <span className="text-white/30 text-xs">→</span>
                 </a>
               );
             })}
@@ -232,15 +232,15 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="w-full text-center bg-charcoal py-3 font-semibold text-[13px] text-white uppercase tracking-wider hover:bg-gold transition-all shadow-warm-sm rounded-lg"
+              className="w-full text-center bg-[#C5A880] py-3 font-bold text-[13px] text-[#0B0F19] uppercase tracking-wider hover:bg-white transition-all shadow rounded-lg"
             >
               Liên Hệ Tư Vấn Trực Tiếp
             </button>
             <a
               href={`tel:${(settings.hotline || '0906.499.279').replace(/\D/g, '')}`}
-              className="w-full text-center border border-warm-300 py-2.5 font-medium text-[13px] text-charcoal flex items-center justify-center gap-2 hover:bg-warm-50 rounded-lg"
+              className="w-full text-center border border-[#C5A880]/40 py-2.5 font-medium text-[13px] text-[#C5A880] flex items-center justify-center gap-2 hover:bg-[#C5A880]/10 rounded-lg"
             >
-              <PhoneCall className="w-4 h-4 text-gold" />
+              <PhoneCall className="w-4 h-4" />
               <span>Hotline: {settings.hotline || '0906.499.279'}</span>
             </a>
           </div>

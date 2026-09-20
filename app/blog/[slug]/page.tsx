@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      images: [{ url: post.featuredImage || '/uploads/clean_project_thegio.png' }]
+      images: [{ url: post.featuredImage || '/uploads/the-gio-riverside.png' }]
     }
   };
 }

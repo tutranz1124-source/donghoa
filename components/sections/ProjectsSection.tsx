@@ -27,8 +27,8 @@ const DEFAULT_PROJECTS: ProjectItem[] = [
     featured: true,
     scale: '2 Tháp • 40 Tầng • 3.000 Căn Hộ & Penthouse',
     description: 'Tổ hợp căn hộ ven sông với tầm nhìn ôm trọn sông Đồng Nai. Thiết kế kiến trúc tối ưu không gian mở cùng hơn 30 tiện ích nội khu chuẩn nghỉ dưỡng.',
-    image: '/uploads/clean_project_thegio.png',
-    imageUrl: '/uploads/clean_project_thegio.png',
+    image: '/uploads/the-gio-riverside.png',
+    imageUrl: '/uploads/the-gio-riverside.png',
   },
   {
     id: 'p-grand-marina',
@@ -43,8 +43,8 @@ const DEFAULT_PROJECTS: ProjectItem[] = [
     area: '52m² - 250m²',
     scale: '8 Tháp căn hộ hàng hiệu Marriott & JW Marriott',
     description: 'Dự án bất động sản hàng hiệu quy mô bậc nhất thế giới mang thương hiệu Marriott International bên bờ sông Sài Gòn lịch sử.',
-    image: '/uploads/clean_project_vingroup.png',
-    imageUrl: '/uploads/clean_project_vingroup.png',
+    image: '/uploads/vinhomes-can-gio.png',
+    imageUrl: '/uploads/vinhomes-can-gio.png',
   },
   {
     id: 'p-alora-villas',
@@ -59,8 +59,8 @@ const DEFAULT_PROJECTS: ProjectItem[] = [
     area: '95m² - 220m²',
     scale: '117.4 ha • Nhà phố SOHO & Biệt thự',
     description: 'Khu đô thị phức hợp chuẩn quốc tế được quy hoạch bởi Foster + Partners, biểu tượng trung tâm mới của TP. Hồ Chí Minh.',
-    image: '/uploads/clean_project_alora.png',
-    imageUrl: '/uploads/clean_project_alora.png',
+    image: '/uploads/lusso-saigon.png',
+    imageUrl: '/uploads/lusso-saigon.png',
   },
   {
     id: 'p-gamuda-celadon',
@@ -75,8 +75,8 @@ const DEFAULT_PROJECTS: ProjectItem[] = [
     area: '48m² - 105m²',
     scale: '4 Block • 1.398 Căn Hộ Xanh Biophilic',
     description: 'Dự án căn hộ áp dụng triết lý thiết kế Biophilic đưa thiên nhiên vào từng không gian sống với 40+ tiện ích sinh thái.',
-    image: '/uploads/clean_project_gamuda.png',
-    imageUrl: '/uploads/clean_project_gamuda.png',
+    image: '/uploads/happy-one-central.png',
+    imageUrl: '/uploads/happy-one-central.png',
   },
   {
     id: 'p-vega-city',
@@ -91,8 +91,8 @@ const DEFAULT_PROJECTS: ProjectItem[] = [
     area: '350m² - 900m²',
     scale: 'Dinh thự biển siêu sang vận hành bởi Gran Meliá',
     description: 'Bộ sưu tập dinh thự biển thượng lưu đầu tiên tại Đông Nam Á mang thương hiệu xa xỉ nhất của tập đoàn khách sạn Meliá.',
-    image: '/uploads/clean_project_thegio.png',
-    imageUrl: '/uploads/clean_project_thegio.png',
+    image: '/uploads/la-tien-villa.png',
+    imageUrl: '/uploads/la-tien-villa.png',
   },
 ];
 
@@ -165,7 +165,7 @@ export default function ProjectsSection({
             <div className="grid grid-cols-1 lg:grid-cols-12">
               <div className="lg:col-span-7 relative h-72 sm:h-96 lg:h-[480px] overflow-hidden group bg-warm-200">
                 <Image
-                  src={featuredProject.imageUrl || featuredProject.image || '/uploads/clean_project_thegio.png'}
+                  src={featuredProject.imageUrl || featuredProject.image || '/uploads/the-gio-riverside.png'}
                   alt={featuredProject.title || featuredProject.name || 'Dự án'}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -249,7 +249,7 @@ export default function ProjectsSection({
               >
                 <div className="relative h-60 w-full overflow-hidden bg-warm-200">
                   <Image
-                    src={project.imageUrl || project.image || '/uploads/clean_project_thegio.png'}
+                    src={project.imageUrl || project.image || '/uploads/the-gio-riverside.png'}
                     alt={project.title || project.name || 'Dự án'}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"

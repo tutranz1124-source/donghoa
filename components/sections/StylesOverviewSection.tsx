@@ -16,8 +16,8 @@ const defaultStyles = [
     subtitle: 'LESS IS MORE',
     description:
       'Phương châm "Less is more". Đẩy cao sự tinh giản trong nội thất, chỉ giữ lại những gì thực sự cần thiết. Màu sắc dịu nhẹ (trắng, kem, xám), không gian mở và ngập tràn ánh sáng tự nhiên.',
-    cardImage: '/uploads/clean_style_modern.png',
-    showcaseImage: '/uploads/clean_style_modern.png',
+    cardImage: '/uploads/figma_modern_minimalist.png',
+    showcaseImage: '/uploads/figma_modern_minimalist.png',
     anchor: '#modern-section'
   },
   {
@@ -26,8 +26,8 @@ const defaultStyles = [
     subtitle: 'JAPANDI & NORDIC',
     description:
       'Sự kết hợp hoàn hảo giữa nét tinh tế, gọn gàng của Nhật Bản và sự ấm áp, mộc mạc của Bắc Âu. Dùng nhiều chất liệu gỗ sáng màu, mây, tre, vải thô và gam màu earthy (màu đất, kem, xanh lá nhạt).',
-    cardImage: '/uploads/clean_style_cozy.png',
-    showcaseImage: '/uploads/clean_cozy_armchair.png',
+    cardImage: '/uploads/the-gio-riverside.png',
+    showcaseImage: '/uploads/the-gio-riverside.png',
     anchor: '#cozy-section'
   },
   {
@@ -36,8 +36,8 @@ const defaultStyles = [
     subtitle: 'ĐẲNG CẤP THƯỢNG LƯU',
     description:
       'Đẩy tính xa hoa và sang trọng lên mức tối đa. Sử dụng các vật liệu siêu cao cấp (gỗ tự nhiên quý, đá xuyên sáng, kim loại mạ vàng, đồ thửa riêng - bespoke) với mức độ hoàn thiện tỉ mỉ.',
-    cardImage: '/uploads/clean_style_luxury.png',
-    showcaseImage: '/uploads/clean_luxury_bed.png',
+    cardImage: '/uploads/figma_luxury_classic.png',
+    showcaseImage: '/uploads/figma_luxury_classic.png',
     anchor: '#luxury-section'
   },
   {
@@ -46,8 +46,8 @@ const defaultStyles = [
     subtitle: 'HOÀI NIỆM & CÔNG NGHIỆP',
     description:
       'Gợi nhớ về thập niên 50 – 80. Kết hợp giữa những món đồ cũ kỹ/kỷ niệm với những gam màu vui tươi, phá cách (vàng mustard, xanh teal, cam đất). Mô phỏng lại các nhà xưởng cũ. Điểm nhấn là tường gạch trần, sàn bê tông mài, trần để lộ ống kỹ thuật, kết hợp khung sắt đen và gỗ thô tối màu.',
-    cardImage: '/uploads/clean_style_heritage.png',
-    showcaseImage: '/uploads/clean_heritage_furniture.png',
+    cardImage: '/uploads/figma_heritage_vignette.png',
+    showcaseImage: '/uploads/figma_heritage_vignette.png',
     anchor: '#heritage-section'
   }
 ];
@@ -125,7 +125,7 @@ export default function StylesOverviewSection({ data }: StylesOverviewSectionPro
                   {/* Full-width flush image with exact Figma 302:220 aspect ratio */}
                   <div className="relative w-full aspect-[302/220] min-h-[190px] sm:min-h-[210px] lg:min-h-[220px] overflow-hidden bg-[#e2ddd3]/20">
                     <Image
-                      src={style.cardImage || '/uploads/clean_style_modern.png'}
+                      src={style.cardImage || '/uploads/figma_modern_minimalist.png'}
                       alt={style.name}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"

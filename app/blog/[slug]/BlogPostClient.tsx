@@ -139,7 +139,7 @@ export default function BlogPostClient({ post, relatedPosts }: BlogPostClientPro
         className="relative w-full aspect-[16/9] max-h-[520px] rounded-3xl overflow-hidden bg-warm-100 border border-warm-200 shadow-warm-md"
       >
         <Image
-          src={post.featuredImage || '/uploads/clean_project_thegio.png'}
+          src={post.featuredImage || '/uploads/the-gio-riverside.png'}
           alt={post.title}
           fill
           priority
@@ -236,7 +236,7 @@ export default function BlogPostClient({ post, relatedPosts }: BlogPostClientPro
               >
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-warm-100">
                   <Image
-                    src={rPost.featuredImage || '/uploads/clean_project_thegio.png'}
+                    src={rPost.featuredImage || '/uploads/the-gio-riverside.png'}
                     alt={rPost.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"

@@ -16,7 +16,7 @@ const categories = [
     title: 'Căn Hộ Hạng Sang & Penthouse',
     subtitle: 'APARTMENTS & PENTHOUSES',
     desc: 'Không gian sống trên cao tại các vị trí trung tâm, tầm nhìn toàn cảnh ôm trọn thành phố cùng hệ tiện ích đặc quyền chuẩn mực quốc tế.',
-    image: '/uploads/clean_project_thegio.png',
+    image: '/uploads/the-gio-riverside.png',
     featured: true,
   },
   {
@@ -25,7 +25,7 @@ const categories = [
     title: 'Biệt Thự & Nhà Phố Đô Thị',
     subtitle: 'VILLAS & TOWNHOMES',
     desc: 'Khu compound khép kín, an ninh đa lớp, cảnh quan sinh thái và cộng đồng cư dân tinh hoa.',
-    image: '/uploads/clean_project_vingroup.png',
+    image: '/uploads/vinhomes-can-gio.png',
     featured: false,
   },
   {
@@ -34,7 +34,7 @@ const categories = [
     title: 'Bất Động Sản Nghỉ Dưỡng',
     subtitle: 'COASTAL RETREATS',
     desc: 'Biệt thự ven biển và quần thể nghỉ dưỡng tiêu chuẩn 5 sao, kết hợp tối ưu vận hành.',
-    image: '/uploads/clean_project_alora.png',
+    image: '/uploads/alora-nhatrang.png',
     featured: false,
   },
   {
@@ -43,7 +43,7 @@ const categories = [
     title: 'Shophouse & Thương Mại',
     subtitle: 'COMMERCIAL',
     desc: 'Vị trí mặt tiền các trục đại lộ huyết mạch, đón đầu lưu lượng kinh doanh sầm uất.',
-    image: '/uploads/clean_project_gamuda.png',
+    image: '/uploads/happy-one-central.png',
     featured: false,
   },
 ];

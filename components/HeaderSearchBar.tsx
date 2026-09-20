@@ -170,7 +170,7 @@ export default function HeaderSearchBar({ className = '', isMobileDrawer = false
                   className="py-2 flex items-center gap-2.5 cursor-pointer hover:bg-warm-50 px-2 rounded transition-colors"
                 >
                   <div className="relative w-10 h-10 rounded overflow-hidden bg-warm-100 shrink-0">
-                    <Image src={post.featuredImage || '/uploads/clean_project_vingroup.png'} alt="" fill className="object-cover" />
+                    <Image src={post.featuredImage || '/uploads/vinhomes-can-gio.png'} alt="" fill className="object-cover" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-[10px] font-semibold text-gold uppercase block">{post.category}</span>
@@ -299,7 +299,7 @@ export default function HeaderSearchBar({ className = '', isMobileDrawer = false
                       >
                         <div className="relative w-16 h-14 rounded-lg overflow-hidden bg-warm-100 shrink-0 border border-warm-200">
                           <Image
-                            src={post.featuredImage || '/uploads/clean_project_vingroup.png'}
+                            src={post.featuredImage || '/uploads/vinhomes-can-gio.png'}
                             alt=""
                             fill
                             className="object-cover group-hover:scale-105 transition-transform duration-300"

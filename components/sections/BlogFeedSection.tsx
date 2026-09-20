@@ -21,7 +21,7 @@ const DEFAULT_POSTS: BlogPost[] = [
     content: 'Đánh giá chi tiết về xu hướng bất động sản ven sông...',
     author: 'Đông Hòa Research',
     tags: ['Thị trường 2026', 'Ven sông', 'Quy hoạch'],
-    featuredImage: '/uploads/clean_project_thegio.png',
+    featuredImage: '/uploads/the-gio-riverside.png',
     publishedAt: '2026-03-15',
     readingTime: '5 phút đọc',
     status: 'published',
@@ -35,7 +35,7 @@ const DEFAULT_POSTS: BlogPost[] = [
     content: 'Hướng dẫn các bước rà soát pháp lý dự án...',
     author: 'Chuyên Viên Pháp Lý',
     tags: ['Pháp lý', 'Căn hộ', 'Thủ tục'],
-    featuredImage: '/uploads/clean_project_vingroup.png',
+    featuredImage: '/uploads/vinhomes-can-gio.png',
     publishedAt: '2026-03-10',
     readingTime: '6 phút đọc',
     status: 'published',
@@ -49,7 +49,7 @@ const DEFAULT_POSTS: BlogPost[] = [
     content: 'Phân tích dòng tiền và đòn bẩy tài chính...',
     author: 'Ban Tư Vấn Đầu Tư',
     tags: ['Đầu tư', 'Tài chính', 'Shophouse'],
-    featuredImage: '/uploads/clean_project_alora.png',
+    featuredImage: '/uploads/lusso-saigon.png',
     publishedAt: '2026-03-05',
     readingTime: '4 phút đọc',
     status: 'published',
@@ -92,7 +92,7 @@ export default function BlogFeedSection({ block, posts }: BlogFeedSectionProps) 
             >
               <div className="relative h-56 w-full overflow-hidden bg-warm-100">
                 <Image
-                  src={post.featuredImage || '/uploads/clean_project_thegio.png'}
+                  src={post.featuredImage || '/uploads/the-gio-riverside.png'}
                   alt={post.title}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"

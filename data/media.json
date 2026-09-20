@@ -141,43 +141,43 @@
   },
   {
     "id": "med-phil",
-    "fileName": "clean_philosophy_photo.png",
-    "url": "/uploads/clean_philosophy_photo.png",
+    "fileName": "figma_philosophy_photo.png",
+    "url": "/uploads/figma_philosophy_photo.png",
     "altText": "Tầm nhìn & Sứ mệnh - Không gian sống tinh tế",
     "category": "Philosophy"
   },
   {
     "id": "med-cont",
-    "fileName": "clean_contact_photo.png",
-    "url": "/uploads/clean_contact_photo.png",
+    "fileName": "the-gio-riverside.png",
+    "url": "/uploads/the-gio-riverside.png",
     "altText": "Liên hệ tư vấn - Khu tiếp khách view sông",
     "category": "Contact"
   },
   {
     "id": "med-sm-mod",
-    "fileName": "clean_style_modern.png",
-    "url": "/uploads/clean_style_modern.png",
+    "fileName": "figma_modern_minimalist.png",
+    "url": "/uploads/figma_modern_minimalist.png",
     "altText": "Phong cách 01 - Modern Card",
     "category": "Styles"
   },
   {
     "id": "med-sm-coz",
-    "fileName": "clean_style_cozy.png",
-    "url": "/uploads/clean_style_cozy.png",
+    "fileName": "the-gio-riverside.png",
+    "url": "/uploads/the-gio-riverside.png",
     "altText": "Phong cách 02 - Cozy & Warm Card",
     "category": "Styles"
   },
   {
     "id": "med-sm-lux",
-    "fileName": "clean_style_luxury.png",
-    "url": "/uploads/clean_style_luxury.png",
+    "fileName": "figma_luxury_classic.png",
+    "url": "/uploads/figma_luxury_classic.png",
     "altText": "Phong cách 03 - Luxury & Classic Card",
     "category": "Styles"
   },
   {
     "id": "med-sm-her",
-    "fileName": "clean_style_heritage.png",
-    "url": "/uploads/clean_style_heritage.png",
+    "fileName": "figma_heritage_vignette.png",
+    "url": "/uploads/figma_heritage_vignette.png",
     "altText": "Phong cách 04 - Heritage & Retro Card",
     "category": "Styles"
   },

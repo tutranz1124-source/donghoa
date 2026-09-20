@@ -160,7 +160,7 @@ const DEFAULT_SITE_CONTENT: SiteContentData = {
     copyright: '© 2026 Đông Hòa Property - Dong Hoa Group. All rights reserved.'
   },
   hero: {
-    backgroundImage: '/uploads/clean_project_thegio.png',
+    backgroundImage: '/uploads/hero_slide_1.png',
     slides: [
       {
         tag: 'ĐÔNG HÒA PROPERTY • PHÂN PHỐI CHIẾN LƯỢC',
@@ -168,7 +168,7 @@ const DEFAULT_SITE_CONTENT: SiteContentData = {
         line1: 'Kiến Tạo Chuẩn Sống — Tuyển Chọn Bất Động Sản Độc Bản',
         line2: '',
         description: 'Đồng hành tư vấn chuyên sâu các dự án sở hữu vị trí chiến lược, quy hoạch chuẩn mực và thẩm định pháp lý minh bạch.',
-        backgroundImage: '/uploads/clean_project_thegio.png',
+        backgroundImage: '/uploads/hero_slide_1.png',
         buttonText: 'Khám phá dự án',
         buttonTarget: '#projects',
         secondaryText: 'Liên hệ tư vấn',
@@ -180,7 +180,7 @@ const DEFAULT_SITE_CONTENT: SiteContentData = {
         line1: 'Danh Mục Căn Hộ & Biệt Thự Cao Cấp',
         line2: '',
         description: 'Hợp tác phân phối chính thức từ các chủ đầu tư uy tín hàng đầu: Masterise Homes, Gamuda Land, Vingroup, Khang Điền.',
-        backgroundImage: '/uploads/clean_project_vingroup.png',
+        backgroundImage: '/uploads/hero_slide_2.png',
         buttonText: 'Xem các phân khúc',
         buttonTarget: '#categories',
         secondaryText: 'Khám phá giỏ hàng',
@@ -192,7 +192,7 @@ const DEFAULT_SITE_CONTENT: SiteContentData = {
         line1: 'Tận Tâm Đồng Hành — Bảo Mật Tuyệt Đối',
         line2: '',
         description: 'Cung cấp góc nhìn thị trường chuẩn xác, phân tích tiềm năng thực tế và hỗ trợ xuyên suốt quá trình giao dịch.',
-        backgroundImage: '/uploads/clean_project_alora.png',
+        backgroundImage: '/uploads/hero_slide_3.png',
         buttonText: 'Đăng ký tư vấn',
         buttonTarget: '#contact',
         secondaryText: 'Tin tức thị trường',
@@ -204,7 +204,7 @@ const DEFAULT_SITE_CONTENT: SiteContentData = {
     tag: 'VỀ CHÚNG TÔI',
     heading: 'TẦM NHÌN VÀ SỨ MỆNH',
     description: 'Với những dự án đã bàn giao và hợp tác cùng các chủ đầu tư danh tiếng, Đông Hòa Property tự hào mang đến trải nghiệm sống tinh tế, tiện nghi và gia tăng giá trị bền vững cho từng quý khách hàng.',
-    image: '/uploads/clean_philosophy_photo.png',
+    image: '/uploads/figma_philosophy_photo.png',
     features: [
       {
         title: 'Bất động sản chọn lọc',
@@ -226,7 +226,7 @@ const DEFAULT_SITE_CONTENT: SiteContentData = {
     tag: 'LIÊN HỆ NGAY VỚI CHÚNG TÔI',
     heading: 'KẾT NỐI CÙNG\nĐÔNG HÒA PROPERTY',
     quote: 'Để lại thông tin, đội ngũ Chuyên viên Đông Hòa Property sẽ liên hệ tư vấn trực tiếp và gửi thông tin chi tiết trong vòng 15 phút.',
-    image: '/uploads/clean_contact_photo.png'
+    image: '/uploads/the-gio-riverside.png'
   },
   stylesOverview: {
     tag: 'CÁC SẢN PHẨM ĐẶC BIỆT',
@@ -238,7 +238,7 @@ const DEFAULT_SITE_CONTENT: SiteContentData = {
         name: 'Modern & Minimalist',
         subtitle: 'LESS IS MORE',
         description: 'Phương châm "Less is more". Đẩy cao sự tinh giản trong nội thất, chỉ giữ lại những gì thực sự cần thiết. Màu sắc dịu nhẹ (trắng, kem, xám), không gian mở và ngập tràn ánh sáng tự nhiên.',
-        cardImage: '/uploads/clean_style_modern.png',
+        cardImage: '/uploads/figma_modern_minimalist.png',
         showcaseImage: '/uploads/figma_modern_minimalist.png',
         anchor: '#modern-section'
       },
@@ -247,8 +247,8 @@ const DEFAULT_SITE_CONTENT: SiteContentData = {
         name: 'Cozy & Warm',
         subtitle: 'JAPANDI & NORDIC',
         description: 'Sự kết hợp hoàn hảo giữa nét tinh tế, gọn gàng của Nhật Bản và sự ấm áp, mộc mạc của Bắc Âu. Dùng nhiều chất liệu gỗ sáng màu, mây, tre, vải thô và gam màu earthy (màu đất, kem, xanh lá nhạt).',
-        cardImage: '/uploads/clean_style_cozy.png',
-        showcaseImage: '/uploads/figma_cozy_warm.png',
+        cardImage: '/uploads/the-gio-riverside.png',
+        showcaseImage: '/uploads/the-gio-riverside.png',
         anchor: '#cozy-section'
       },
       {
@@ -256,7 +256,7 @@ const DEFAULT_SITE_CONTENT: SiteContentData = {
         name: 'Luxury & Classic',
         subtitle: 'ĐẲNG CẤP THƯỢNG LƯU',
         description: 'Đẩy tính xa hoa và sang trọng lên mức tối đa. Sử dụng các vật liệu siêu cao cấp (gỗ tự nhiên quý, đá xuyên sáng, kim loại mạ vàng, đồ thửa riêng - bespoke) với mức độ hoàn thiện tỉ mỉ.',
-        cardImage: '/uploads/clean_style_luxury.png',
+        cardImage: '/uploads/figma_luxury_classic.png',
         showcaseImage: '/uploads/figma_luxury_classic.png',
         anchor: '#luxury-section'
       },
@@ -265,8 +265,8 @@ const DEFAULT_SITE_CONTENT: SiteContentData = {
         name: 'Heritage & Retro',
         subtitle: 'HOÀI NIỆM & CÔNG NGHIỆP',
         description: 'Gợi nhớ về thập niên 50 – 80. Kết hợp giữa những món đồ cũ kỹ/kỷ niệm với những gam màu vui tươi, phá cách (vàng mustard, xanh teal, cam đất). Mô phỏng lại các nhà xưởng cũ. Điểm nhấn là tường gạch trần, sàn bê tông mài, trần để lộ ống kỹ thuật, kết hợp khung sắt đen và gỗ thô tối màu.',
-        cardImage: '/uploads/clean_style_heritage.png',
-        showcaseImage: '/uploads/figma_heritage_retro.png',
+        cardImage: '/uploads/figma_heritage_vignette.png',
+        showcaseImage: '/uploads/figma_heritage_vignette.png',
         anchor: '#heritage-section'
       }
     ]

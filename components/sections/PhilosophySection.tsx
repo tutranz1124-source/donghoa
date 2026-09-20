@@ -70,7 +70,7 @@ export default function PhilosophySection({ data }: PhilosophySectionProps) {
             <div className="relative">
               <div className="relative h-[420px] sm:h-[500px] lg:h-[560px] rounded-3xl overflow-hidden shadow-warm-md border border-warm-300 bg-warm-200">
                 <Image
-                  src="/uploads/clean_project_thegio.png"
+                  src="/uploads/figma_philosophy_photo.png"
                   alt="Đông Hòa Property Architecture"
                   fill
                   className="object-cover"

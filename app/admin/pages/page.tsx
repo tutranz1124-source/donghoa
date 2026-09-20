@@ -2728,7 +2728,7 @@ export default function AdminPageEditor() {
               <div className="flex items-center gap-3">
                 <div className="relative w-20 h-20 rounded-xl overflow-hidden border border-[#e2ddd3] bg-black/10 shrink-0">
                   <Image
-                    src={philosophy?.image || '/uploads/clean_philosophy_photo.png'}
+                    src={philosophy?.image || '/uploads/figma_philosophy_photo.png'}
                     alt="Philosophy Preview"
                     fill
                     className="object-cover"
@@ -2937,7 +2937,7 @@ export default function AdminPageEditor() {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                   <div className="md:col-span-5 relative h-[360px] rounded-2xl overflow-hidden border border-[#e2ddd3] shadow-md">
                     <Image
-                      src={philosophy?.image || '/uploads/clean_philosophy_photo.png'}
+                      src={philosophy?.image || '/uploads/figma_philosophy_photo.png'}
                       alt="Philosophy Live Preview"
                       fill
                       className="object-cover"
@@ -2990,7 +2990,7 @@ export default function AdminPageEditor() {
                   <div className="space-y-4">
                     <div className="relative w-full h-[240px] rounded-2xl overflow-hidden shadow-sm border border-[#e2ddd3]">
                       <Image
-                        src={philosophy?.image || '/uploads/clean_philosophy_photo.png'}
+                        src={philosophy?.image || '/uploads/figma_philosophy_photo.png'}
                         alt="Philosophy Preview Mobile"
                         fill
                         className="object-cover"
@@ -4428,7 +4428,7 @@ export default function AdminPageEditor() {
                   <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                     <div className="md:col-span-5 relative h-[320px] rounded-2xl overflow-hidden shadow-lg border border-[#e2ddd3]">
                       <Image
-                        src={philosophy?.image || '/uploads/clean_philosophy_photo.png'}
+                        src={philosophy?.image || '/uploads/figma_philosophy_photo.png'}
                         alt="Philosophy Fullscreen"
                         fill
                         className="object-cover"
