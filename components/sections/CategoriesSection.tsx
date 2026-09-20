@@ -184,3 +184,4 @@ export default function CategoriesSection({ onSelectCategory, onOpenInquiry }: C
     </section>
   );
 }
+

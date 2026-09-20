@@ -9,6 +9,7 @@ import CategoriesSection from '@/components/sections/CategoriesSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import PrivateAccessSection from '@/components/sections/PrivateAccessSection';
 import MilestonesSection from '@/components/sections/MilestonesSection';
+import MortgageCalculatorSection from '@/components/sections/MortgageCalculatorSection';
 import BlogFeedSection from '@/components/sections/BlogFeedSection';
 import QuoteContactSection from '@/components/sections/QuoteContactSection';
 import InquiryModal from '@/components/InquiryModal';
@@ -125,17 +126,20 @@ export default function ClientHomePage({ initialContent }: { initialContent: Sit
         {/* 6. ĐẶC QUYỀN GIỎ HÀNG NỘI BỘ & BẢNG GIÁ */}
         <PrivateAccessSection onOpenInquiry={handleOpenInquiry} />
 
-        {/* 7. DẤU ẤN & NĂNG LỰC DOANH NGHIỆP */}
+        {/* 7. CÔNG CỤ TÍNH TOÁN DÒNG TIỀN VÀ ĐẦU TƯ */}
+        <MortgageCalculatorSection onOpenInquiry={handleOpenInquiry} />
+
+        {/* 8. DẤU ẤN & NĂNG LỰC DOANH NGHIỆP */}
         <MilestonesSection />
 
-        {/* 8. TIN TỨC & GÓC NHÌN THỊ TRƯỜNG */}
+        {/* 9. TIN TỨC & GÓC NHÌN THỊ TRƯỜNG */}
         <BlogFeedSection block={content.blogFeed} posts={posts} />
 
-        {/* 9. KẾT NỐI & TƯ VẤN TRỰC TIẾP */}
+        {/* 10. KẾT NỐI & TƯ VẤN TRỰC TIẾP */}
         <QuoteContactSection data={content.contact} />
       </main>
 
-      {/* 10. FOOTER */}
+      {/* 11. FOOTER */}
       <Footer settings={settings} />
 
       {/* GLOBAL INQUIRY MODAL */}

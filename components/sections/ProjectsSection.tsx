@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ProjectsBlock, ProjectItem } from '@/lib/types';
-import { ArrowRight, MapPin, Building, Sparkles, Star, PhoneCall } from 'lucide-react';
+import { ArrowRight, MapPin, Building, Sparkles, Star, Eye } from 'lucide-react';
+import ProjectQuickViewModal from '@/components/ProjectQuickViewModal';
 
 interface ProjectsSectionProps {
   block?: ProjectsBlock;
@@ -15,6 +16,7 @@ interface ProjectsSectionProps {
 export default function ProjectsSection({ block, selectedCategory, onOpenInquiry }: ProjectsSectionProps) {
   const items = block?.items || [];
   const [filter, setFilter] = useState<'all' | 'featured' | 'hcm' | 'coastal'>('all');
+  const [selectedPreviewProject, setSelectedPreviewProject] = useState<ProjectItem | null>(null);
 
   // Sync external category filter if passed
   React.useEffect(() => {
@@ -88,7 +90,8 @@ export default function ProjectsSection({ block, selectedCategory, onOpenInquiry
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="bg-white border border-[#e2ddd3] hover:border-[#c5a26c] shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+              className="bg-white border border-[#e2ddd3] hover:border-[#c5a26c] shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden group cursor-pointer"
+              onClick={() => setSelectedPreviewProject(project)}
             >
               <div>
                 {/* Image Showcase */}
@@ -114,6 +117,13 @@ export default function ProjectsSection({ block, selectedCategory, onOpenInquiry
                         {project.developer}
                       </span>
                     )}
+                  </div>
+
+                  {/* Quick Preview Hover Overlay */}
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="px-4 py-2 bg-white/90 backdrop-blur-md text-[#04092b] text-[11.5px] font-bold uppercase tracking-wider rounded-full shadow-lg flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                      <Eye className="w-3.5 h-3.5 text-[#c5a26c]" /> Xem Chi Tiết
+                    </span>
                   </div>
                 </div>
 
@@ -149,8 +159,11 @@ export default function ProjectsSection({ block, selectedCategory, onOpenInquiry
               <div className="p-5 sm:p-6 pt-0 border-t border-[#e2ddd3]/60 mt-2 flex items-center justify-between">
                 <button
                   type="button"
-                  onClick={() => onOpenInquiry?.(project.name)}
-                  className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-wider text-[#04092b] group-hover:text-[#c5a26c] transition-colors"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onOpenInquiry?.(project.name);
+                  }}
+                  className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-wider text-[#04092b] group-hover:text-[#c5a26c] transition-colors cursor-pointer"
                 >
                   <span>Nhận Báo Giá & Mặt Bằng</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
@@ -160,6 +173,14 @@ export default function ProjectsSection({ block, selectedCategory, onOpenInquiry
           ))}
         </div>
       </div>
+
+      {/* Project Quick View Modal */}
+      <ProjectQuickViewModal
+        project={selectedPreviewProject}
+        isOpen={!!selectedPreviewProject}
+        onClose={() => setSelectedPreviewProject(null)}
+        onOpenInquiry={(pName) => onOpenInquiry?.(pName)}
+      />
     </section>
   );
 }
