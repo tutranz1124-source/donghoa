@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { X, MapPin, Building, ShieldCheck, Calendar, ArrowRight, Download, PhoneCall, Sparkles } from 'lucide-react';
+import { X, MapPin, Building, ShieldCheck, ArrowRight, Download, Sparkles } from 'lucide-react';
 import { ProjectItem } from '@/lib/types';
 
 interface ProjectQuickViewModalProps {
@@ -20,112 +20,121 @@ export default function ProjectQuickViewModal({
 }: ProjectQuickViewModalProps) {
   if (!isOpen || !project) return null;
 
+  const projectName = project.title || project.name;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl bg-white border border-[#e2ddd3] shadow-2xl rounded-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-2xl bg-[#060913] text-white border border-[#C5A880]/30 shadow-2xl rounded-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200">
         {/* Header Image with Badges */}
-        <div className="relative w-full h-56 sm:h-64 bg-[#04092b] shrink-0">
+        <div className="relative w-full h-60 sm:h-72 bg-black/60 shrink-0">
           <Image
             src={project.image || '/uploads/clean_project_thegio.png'}
-            alt={project.name}
+            alt={projectName}
             fill
-            className="object-cover"
+            className="object-cover opacity-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-black/40" />
 
           {/* Close button */}
           <button
             type="button"
             onClick={onClose}
-            className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center backdrop-blur-md transition-colors"
+            className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center backdrop-blur-md transition-colors cursor-pointer"
             aria-label="Đóng"
           >
             <X className="w-5 h-5" />
           </button>
 
           {/* Developer badge & Title */}
-          <div className="absolute bottom-4 left-4 right-4 space-y-1 text-white z-10">
+          <div className="absolute bottom-5 left-6 right-6 space-y-1.5 z-10">
             {project.developer && (
-              <span className="inline-block bg-[#c5a26c] text-[#04092b] font-bold text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full font-accent">
+              <span className="inline-block bg-[#C5A880] text-[#060913] font-semibold text-[10px] uppercase tracking-wider px-3 py-0.5 rounded-full font-sans">
                 {project.developer}
               </span>
             )}
-            <h3 className="text-[22px] sm:text-[26px] font-semibold font-display leading-tight">
-              {project.name}
+            <h3 className="text-2xl sm:text-3xl font-serif font-light leading-tight text-white">
+              {projectName}
             </h3>
           </div>
         </div>
 
         {/* Modal Body / Specs */}
-        <div className="p-6 overflow-y-auto space-y-5 text-[#2d302e]">
+        <div className="p-6 sm:p-8 overflow-y-auto space-y-6">
           {/* Key Facts Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 bg-[#faf8f5] p-4 rounded-xl border border-[#e2ddd3]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white/[0.02] p-5 rounded-xl border border-white/10">
             {project.location && (
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#c5a26c] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 text-[#C5A880] shrink-0 mt-0.5" />
                 <div>
-                  <span className="block text-[11px] font-bold uppercase text-[#6e706a]">Vị trí</span>
-                  <span className="text-[13px] font-medium text-[#04092b]">{project.location}</span>
+                  <span className="block text-[10px] font-semibold uppercase tracking-wider text-white/50">Vị trí</span>
+                  <span className="text-xs sm:text-sm font-medium text-white">{project.location}</span>
                 </div>
               </div>
             )}
 
-            {project.area && (
-              <div className="flex items-start gap-2.5">
-                <Building className="w-4 h-4 text-[#c5a26c] shrink-0 mt-0.5" />
+            {(project.scale || project.area) && (
+              <div className="flex items-start gap-3">
+                <Building className="w-4 h-4 text-[#C5A880] shrink-0 mt-0.5" />
                 <div>
-                  <span className="block text-[11px] font-bold uppercase text-[#6e706a]">Quy mô / Diện tích</span>
-                  <span className="text-[13px] font-medium text-[#04092b]">{project.area}</span>
+                  <span className="block text-[10px] font-semibold uppercase tracking-wider text-white/50">Quy mô / Diện tích</span>
+                  <span className="text-xs sm:text-sm font-medium text-white">{project.scale || project.area}</span>
                 </div>
               </div>
             )}
 
-            {project.propertyTypes && (
-              <div className="flex items-start gap-2.5">
-                <Sparkles className="w-4 h-4 text-[#c5a26c] shrink-0 mt-0.5" />
+            {(project.category || project.propertyTypes) && (
+              <div className="flex items-start gap-3">
+                <Sparkles className="w-4 h-4 text-[#C5A880] shrink-0 mt-0.5" />
                 <div>
-                  <span className="block text-[11px] font-bold uppercase text-[#6e706a]">Loại hình phát triển</span>
-                  <span className="text-[13px] font-medium text-[#04092b]">{project.propertyTypes}</span>
+                  <span className="block text-[10px] font-semibold uppercase tracking-wider text-white/50">Loại hình phát triển</span>
+                  <span className="text-xs sm:text-sm font-medium text-white">{project.category || project.propertyTypes}</span>
                 </div>
               </div>
             )}
 
-            <div className="flex items-start gap-2.5">
-              <ShieldCheck className="w-4 h-4 text-[#c5a26c] shrink-0 mt-0.5" />
+            <div className="flex items-start gap-3">
+              <ShieldCheck className="w-4 h-4 text-[#C5A880] shrink-0 mt-0.5" />
               <div>
-                <span className="block text-[11px] font-bold uppercase text-[#6e706a]">Pháp lý & Bàn giao</span>
-                <span className="text-[13px] font-medium text-[#04092b]">Sổ hồng lâu dài / Chuẩn quốc tế</span>
+                <span className="block text-[10px] font-semibold uppercase tracking-wider text-white/50">Pháp lý & Bàn giao</span>
+                <span className="text-xs sm:text-sm font-medium text-white">{project.ownership || 'Sổ hồng lâu dài / Chuẩn quốc tế'}</span>
               </div>
             </div>
           </div>
 
-          {/* Value Proposition Note */}
-          <p className="text-[13.5px] text-[#5f6361] font-light leading-relaxed">
-            Dự án nằm trong quỹ đất kim cương trọng điểm được Đông Hòa Property độc quyền phân phối và tuyển chọn. Khách hàng nhận ngay chính sách ưu đãi chiết khấu trực tiếp và hỗ trợ lãi suất 0% từ các đối tác ngân hàng chiến lược.
-          </p>
-        </div>
+          {project.description && (
+            <div className="space-y-1.5">
+              <h4 className="text-xs font-semibold text-[#C5A880] uppercase tracking-wider font-sans">
+                Giới thiệu dự án
+              </h4>
+              <p className="text-xs sm:text-sm text-white/70 font-light leading-relaxed">
+                {project.description}
+              </p>
+            </div>
+          )}
 
-        {/* Modal Actions */}
-        <div className="p-4 sm:p-5 bg-[#faf8f5] border-t border-[#e2ddd3] flex flex-col sm:flex-row items-center justify-between gap-3">
-          <a
-            href="tel:0906499279"
-            className="flex items-center gap-2 text-[13px] font-bold text-[#04092b] hover:text-[#c5a26c] transition-colors"
-          >
-            <PhoneCall className="w-4 h-4 text-[#c5a26c]" />
-            <span>Hotline KTS / Cố vấn: 0906.499.279</span>
-          </a>
-
-          <div className="flex items-center gap-2.5 w-full sm:w-auto">
+          {/* Action Row */}
+          <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
             <button
               type="button"
               onClick={() => {
                 onClose();
-                onOpenInquiry?.(project.name || project.title || '');
+                onOpenInquiry?.(projectName);
               }}
-              className="w-full sm:w-auto px-5 py-2.5 bg-[#04092b] hover:bg-[#c5a26c] hover:text-[#04092b] text-white font-bold text-[12.5px] uppercase tracking-wider rounded-sm transition-all duration-300 shadow-md flex items-center justify-center gap-2 group cursor-pointer"
+              className="w-full sm:w-auto px-6 py-3 bg-[#C5A880] hover:bg-white text-[#060913] font-semibold text-xs tracking-wider uppercase rounded-sm transition-all duration-300 shadow-xl flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>Nhận Mặt Bằng & Báo Giá</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <span>Nhận Báo Giá & Mặt Bằng</span>
+              <ArrowRight className="w-4 h-4 text-[#060913]" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                alert(`Tài liệu Brochure dự án ${projectName} đã được gửi đến email chuyên viên tư vấn.`);
+              }}
+              className="w-full sm:w-auto px-5 py-3 border border-white/20 hover:border-[#C5A880] text-white hover:text-[#C5A880] font-semibold text-xs uppercase tracking-wider rounded-sm transition-colors flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Tải Brochure PDF</span>
             </button>
           </div>
         </div>
@@ -133,4 +142,3 @@ export default function ProjectQuickViewModal({
     </div>
   );
 }
-

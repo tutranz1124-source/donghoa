@@ -195,13 +195,13 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
 
       {/* Mobile dropdown menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#04092b] border-b border-[#c5a26c]/30 px-6 py-6 space-y-4 animate-in slide-in-from-top-4 duration-300">
+        <div className="lg:hidden bg-[#060913] border-b border-[#C5A880]/20 px-6 py-6 space-y-4 animate-in slide-in-from-top-4 duration-300">
           {/* Mobile Search inside Drawer */}
           <div className="pb-1">
             <HeaderSearchBar isMobileDrawer={true} />
           </div>
 
-          <nav className="flex flex-col space-y-3 font-medium text-white text-[16px]">
+          <nav className="flex flex-col space-y-3 font-medium text-white text-[15px]">
             {navLinks.map((item, idx) => {
               const isInternalPage = item.url.startsWith('/') && !item.url.startsWith('/#');
               if (isInternalPage) {
@@ -210,7 +210,7 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
                     key={idx}
                     href={item.url}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="py-2 border-b border-white/10 hover:text-[#c5a26c] transition-colors cursor-pointer"
+                    className="py-2 border-b border-white/10 hover:text-[#C5A880] transition-colors cursor-pointer"
                   >
                     {item.label}
                   </Link>
@@ -221,7 +221,7 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
                   key={idx}
                   href={item.url}
                   onClick={(e) => handleNavClick(e, item.url)}
-                  className="py-2 border-b border-white/10 hover:text-[#c5a26c] transition-colors cursor-pointer"
+                  className="py-2 border-b border-white/10 hover:text-[#C5A880] transition-colors cursor-pointer"
                 >
                   {item.label}
                 </a>
@@ -240,13 +240,13 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="w-full text-center bg-[#c5a26c] py-3 font-semibold text-[13px] text-[#04092b] uppercase tracking-wider hover:bg-white transition-all shadow rounded-sm cursor-pointer"
+              className="w-full text-center bg-[#C5A880] py-3 font-semibold text-[13px] text-[#060913] uppercase tracking-wider hover:bg-white transition-all shadow rounded-sm cursor-pointer"
             >
               Nhận Tư Vấn Bất Động Sản
             </button>
             <a
               href={`tel:${(settings.hotline || '0906.499.279').replace(/\D/g, '')}`}
-              className="w-full text-center border border-[#c5a26c] py-2.5 font-semibold text-[13px] text-[#c5a26c] flex items-center justify-center gap-2 hover:bg-[#c5a26c]/10 rounded-sm"
+              className="w-full text-center border border-[#C5A880]/40 py-2.5 font-semibold text-[13px] text-[#C5A880] flex items-center justify-center gap-2 hover:bg-[#C5A880]/10 rounded-sm"
             >
               <PhoneCall className="w-4 h-4" />
               <span>Hotline: {settings.hotline || '0906.499.279'}</span>
