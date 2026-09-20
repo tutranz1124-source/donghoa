@@ -1,0 +1,247 @@
+[
+  {
+    "id": "med-fg-mod-sofa",
+    "fileName": "figma_modern_sofa.png",
+    "url": "/uploads/figma_modern_sofa.png",
+    "altText": "Sofa Bouclé Trắng Dài (Curved Sofa)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-mod-bed",
+    "fileName": "figma_modern_bed.png",
+    "url": "/uploads/figma_modern_bed.png",
+    "altText": "Giường ngủ Master Hiện đại (Modern Bed)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-mod-pendant",
+    "fileName": "figma_modern_pendant.png",
+    "url": "/uploads/figma_modern_pendant.png",
+    "altText": "Đèn thả trần Hiện đại (Pendant Lamp)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-mod-lamp",
+    "fileName": "figma_modern_arc_lamp.png",
+    "url": "/uploads/figma_modern_arc_lamp.png",
+    "altText": "Đèn cây uốn cong (Arc Floor Lamp)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-mod-armchair",
+    "fileName": "figma_modern_armchair.png",
+    "url": "/uploads/figma_modern_armchair.png",
+    "altText": "Ghế đơn Gỗ Tự nhiên (Wood Armchair)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-coz-armchair",
+    "fileName": "figma_cozy_armchair.png",
+    "url": "/uploads/figma_cozy_armchair.png",
+    "altText": "Ghế thư giãn Bouclé Tròn (Plush Armchair)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-coz-lamp",
+    "fileName": "figma_cozy_slat_lamp.png",
+    "url": "/uploads/figma_cozy_slat_lamp.png",
+    "altText": "Vách nan gỗ & Đèn sàn (Slat Wall & Lamp)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-coz-tables",
+    "fileName": "figma_cozy_tables.png",
+    "url": "/uploads/figma_cozy_tables.png",
+    "altText": "Bàn trà đôi gỗ trụ tròn (Nesting Tables)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-lux-bed",
+    "fileName": "figma_luxury_bed.png",
+    "url": "/uploads/figma_luxury_bed.png",
+    "altText": "Giường ngủ Bọc nệm Sang trọng (Luxury Bed)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-lux-lamp",
+    "fileName": "figma_luxury_palm_lamp.png",
+    "url": "/uploads/figma_luxury_palm_lamp.png",
+    "altText": "Đèn cây Lá cọ Mạ vàng (Golden Palm Lamp)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-lux-swatch1",
+    "fileName": "figma_luxury_swatch_1.png",
+    "url": "/uploads/figma_luxury_swatch_1.png",
+    "altText": "Mẫu vật liệu Gỗ lượn sóng (Fluted Wood)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-lux-swatch2",
+    "fileName": "figma_luxury_swatch_2.png",
+    "url": "/uploads/figma_luxury_swatch_2.png",
+    "altText": "Mẫu vật liệu Gỗ xương cá (Chevron Wood)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-lux-vases",
+    "fileName": "figma_luxury_vases.png",
+    "url": "/uploads/figma_luxury_vases.png",
+    "altText": "Bộ bình gốm & thủy tinh nghệ thuật (Luxury Vases)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-her-chandelier",
+    "fileName": "figma_heritage_chandelier.png",
+    "url": "/uploads/figma_heritage_chandelier.png",
+    "altText": "Đèn chùm Cổ điển Đồng (Chandelier)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-her-vignette",
+    "fileName": "figma_heritage_vignette.png",
+    "url": "/uploads/figma_heritage_vignette.png",
+    "altText": "Góc tranh ảnh & Đèn bàn Retro (Vintage Vignette)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-her-table",
+    "fileName": "figma_heritage_table.png",
+    "url": "/uploads/figma_heritage_table.png",
+    "altText": "Bàn tròn Gỗ chạm khắc Cổ (Antique Table)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-fg-her-armchair",
+    "fileName": "figma_heritage_armchair.png",
+    "url": "/uploads/figma_heritage_armchair.png",
+    "altText": "Ghế bành Bọc nỉ Retro (Vintage Armchair)",
+    "category": "Asset"
+  },
+  {
+    "id": "med-h1",
+    "fileName": "hero_slide_1.png",
+    "url": "/uploads/hero_slide_1.png",
+    "altText": "Hero Slide 1 - Phòng khách ấm cúng (Monogram T)",
+    "category": "Hero"
+  },
+  {
+    "id": "med-h2",
+    "fileName": "hero_slide_2.png",
+    "url": "/uploads/hero_slide_2.png",
+    "altText": "Hero Slide 2 - Phòng ngủ Master (Monogram K)",
+    "category": "Hero"
+  },
+  {
+    "id": "med-h3",
+    "fileName": "hero_slide_3.png",
+    "url": "/uploads/hero_slide_3.png",
+    "altText": "Hero Slide 3 - Văn phòng Giám đốc (Monogram L)",
+    "category": "Hero"
+  },
+  {
+    "id": "med-phil",
+    "fileName": "clean_philosophy_photo.png",
+    "url": "/uploads/clean_philosophy_photo.png",
+    "altText": "Tầm nhìn & Sứ mệnh - Không gian sống tinh tế",
+    "category": "Philosophy"
+  },
+  {
+    "id": "med-cont",
+    "fileName": "clean_contact_photo.png",
+    "url": "/uploads/clean_contact_photo.png",
+    "altText": "Liên hệ tư vấn - Khu tiếp khách view sông",
+    "category": "Contact"
+  },
+  {
+    "id": "med-sm-mod",
+    "fileName": "clean_style_modern.png",
+    "url": "/uploads/clean_style_modern.png",
+    "altText": "Phong cách 01 - Modern Card",
+    "category": "Styles"
+  },
+  {
+    "id": "med-sm-coz",
+    "fileName": "clean_style_cozy.png",
+    "url": "/uploads/clean_style_cozy.png",
+    "altText": "Phong cách 02 - Cozy & Warm Card",
+    "category": "Styles"
+  },
+  {
+    "id": "med-sm-lux",
+    "fileName": "clean_style_luxury.png",
+    "url": "/uploads/clean_style_luxury.png",
+    "altText": "Phong cách 03 - Luxury & Classic Card",
+    "category": "Styles"
+  },
+  {
+    "id": "med-sm-her",
+    "fileName": "clean_style_heritage.png",
+    "url": "/uploads/clean_style_heritage.png",
+    "altText": "Phong cách 04 - Heritage & Retro Card",
+    "category": "Styles"
+  },
+  {
+    "id": "med-fg-mod",
+    "fileName": "figma_modern_minimalist.png",
+    "url": "/uploads/figma_modern_minimalist.png",
+    "altText": "Moodboard 01 - Modern & Minimalist",
+    "category": "Styles"
+  },
+  {
+    "id": "med-fg-coz",
+    "fileName": "figma_cozy_warm.png",
+    "url": "/uploads/figma_cozy_warm.png",
+    "altText": "Moodboard 02 - Cozy & Warm (Japandi)",
+    "category": "Styles"
+  },
+  {
+    "id": "med-fg-lux",
+    "fileName": "figma_luxury_classic.png",
+    "url": "/uploads/figma_luxury_classic.png",
+    "altText": "Moodboard 03 - Luxury & Classic",
+    "category": "Styles"
+  },
+  {
+    "id": "med-fg-her",
+    "fileName": "figma_heritage_retro.png",
+    "url": "/uploads/figma_heritage_retro.png",
+    "altText": "Moodboard 04 - Heritage & Retro",
+    "category": "Styles"
+  },
+  {
+    "id": "med-off-hero",
+    "fileName": "office_hero_main.png",
+    "url": "/uploads/office_hero_main.png",
+    "altText": "Văn phòng Hero - Bàn làm việc giám đốc",
+    "category": "Office"
+  },
+  {
+    "id": "med-off-1",
+    "fileName": "office_card_1.png",
+    "url": "/uploads/office_card_1.png",
+    "altText": "Văn phòng Thẻ 1 - Không gian mở",
+    "category": "Office"
+  },
+  {
+    "id": "med-off-2",
+    "fileName": "office_card_2.png",
+    "url": "/uploads/office_card_2.png",
+    "altText": "Văn phòng Thẻ 2 - Khu tiếp khách riêng",
+    "category": "Office"
+  },
+  {
+    "id": "med-off-3",
+    "fileName": "office_card_3.png",
+    "url": "/uploads/office_card_3.png",
+    "altText": "Văn phòng Thẻ 3 - Module bàn làm việc",
+    "category": "Office"
+  },
+  {
+    "id": "med-logo",
+    "fileName": "logo-dong-hoa-property.png",
+    "url": "/uploads/logo-dong-hoa-property.png",
+    "altText": "Logo Đông Hòa Design",
+    "category": "Branding"
+  }
+]

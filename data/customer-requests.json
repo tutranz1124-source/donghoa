@@ -1,0 +1,52 @@
+[
+  {
+    "id": "inq-1789892913740",
+    "fullName": "Nguyễn Văn Minh",
+    "phone": "0912345678",
+    "email": "minh.nguyen@test.vn",
+    "propertyType": "Căn hộ cao cấp",
+    "area": "",
+    "need": "",
+    "projectName": "",
+    "targetEmail": "info@donghoagroup.vn",
+    "status": "appointment",
+    "notes": [
+      {
+        "id": "note-1789892913758",
+        "content": "Đã hẹn gặp khách hàng lúc 10h sáng thứ Bảy tại nhà mẫu.",
+        "author": "Đông Hòa Admin",
+        "createdAt": "2026-09-20T08:28:33.758Z"
+      }
+    ],
+    "createdAt": "2026-09-20T08:28:33.740Z",
+    "updatedAt": "2026-09-20T08:28:33.758Z"
+  },
+  {
+    "id": "inq-1789892904669",
+    "fullName": "Nguyễn Văn Minh",
+    "phone": "0912345678",
+    "email": "minh.nguyen@test.vn",
+    "propertyType": "Căn hộ cao cấp",
+    "area": "",
+    "need": "",
+    "projectName": "",
+    "targetEmail": "info@donghoagroup.vn",
+    "status": "new",
+    "notes": [],
+    "createdAt": "2026-09-20T08:28:24.669Z"
+  },
+  {
+    "id": "inq-1789892894659",
+    "fullName": "Nguyễn Văn Minh",
+    "phone": "0912345678",
+    "email": "minh.nguyen@test.vn",
+    "propertyType": "Căn hộ cao cấp",
+    "area": "",
+    "need": "",
+    "projectName": "",
+    "targetEmail": "info@donghoagroup.vn",
+    "status": "new",
+    "notes": [],
+    "createdAt": "2026-09-20T08:28:14.659Z"
+  }
+]

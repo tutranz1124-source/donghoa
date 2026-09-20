@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #04092b;
+  --gold: #c5a26c;
+  --ivory: #f4f1ea;
+  --dark: #2d302e;
+  --charcoal: #2d302e;
+  --muted: #5f6361;
+  --ruby: #a70c0c;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color: var(--dark);
+    background-color: var(--ivory);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  
+  body {
+    background-color: var(--ivory);
+    overflow-x: hidden;
+  }
+}
+
+/* Custom scrollbar for luxury feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f4f1ea;
+}
+::-webkit-scrollbar-thumb {
+  background: #c5a26c;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b38f57;
+}
+
+/* Typography styles */
+.font-display {
+  font-family: var(--font-montserrat), sans-serif;
+}
+
+.font-accent {
+  font-family: var(--font-manrope), sans-serif;
+}
+
+.luxury-gradient {
+  background: linear-gradient(135deg, rgba(4,9,43,0.95) 0%, rgba(11,25,89,0.9) 100%);
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #c5a26c 0%, #dfc79b 50%, #b38f57 100%);
+}
+
+.gold-text-gradient {
+  background: linear-gradient(135deg, #c5a26c 0%, #edd8b4 50%, #c5a26c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

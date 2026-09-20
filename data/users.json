@@ -1,0 +1,20 @@
+[
+  {
+    "id": "usr-admin-1",
+    "name": "Đông Hòa Admin",
+    "email": "admin@donghoaproperty.vn",
+    "password": "donghoa2026",
+    "role": "admin",
+    "createdAt": "2026-08-30",
+    "lastLogin": "2026-09-20"
+  },
+  {
+    "id": "usr-editor-1",
+    "name": "Biên Tập Viên Blog",
+    "email": "editor@donghoaproperty.vn",
+    "password": "editor2026",
+    "role": "editor",
+    "createdAt": "2026-08-30",
+    "lastLogin": "2026-09-01"
+  }
+]
