@@ -92,11 +92,11 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#04092b]/95 backdrop-blur-md py-3 shadow-xl border-b border-[#c5a26c]/30'
-          : 'bg-[#04092b] border-b border-white/10 py-4 lg:py-5'
+          ? 'bg-[#060913]/95 backdrop-blur-md py-3.5 shadow-2xl border-b border-[#C5A880]/20'
+          : 'bg-[#060913]/80 backdrop-blur-sm border-b border-white/10 py-4 lg:py-5'
       }`}
     >
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-20 flex items-center justify-between">
+      <div className="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="relative flex items-center group">
           <div className="relative h-[42px] w-[170px] sm:h-[48px] sm:w-[195px] lg:h-[52px] lg:w-[215px] transition-transform duration-300 group-hover:scale-105">

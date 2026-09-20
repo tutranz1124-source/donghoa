@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ProjectsBlock, ProjectItem } from '@/lib/types';
-import { ArrowRight, MapPin, Building, Sparkles, Star, Eye } from 'lucide-react';
+import { ArrowRight, MapPin, Building, Star, Eye } from 'lucide-react';
 import ProjectQuickViewModal from '@/components/ProjectQuickViewModal';
 
 interface ProjectsSectionProps {
@@ -38,40 +38,38 @@ export default function ProjectsSection({ block, selectedCategory, onOpenInquiry
   const displayList = filteredItems.length > 0 ? filteredItems : items;
 
   return (
-    <section id="projects" className="w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-8 lg:px-20 bg-white border-b border-[#e2ddd3]">
-      <div className="max-w-[1440px] mx-auto space-y-10 sm:space-y-12">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#e2ddd3] pb-6">
-          <div className="space-y-2.5 max-w-2xl">
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-[1.5px] bg-[#c5a26c]" />
-              <span className="text-[11.5px] sm:text-[12px] font-bold text-[#6e706a] uppercase tracking-widest font-accent">
-                {block?.badge || 'DANH MỤC DỰ ÁN TIÊU BIỂU'}
-              </span>
-            </div>
-            <h2 className="text-[28px] sm:text-[34px] lg:text-[40px] font-semibold text-[#04092b] font-display uppercase tracking-tight leading-tight">
-              {block?.title || 'DỰ ÁN BẤT ĐỘNG SẢN & KHÔNG GIAN NỔI BẬT'}
+    <section id="projects" className="w-full py-24 sm:py-28 lg:py-36 px-6 sm:px-12 lg:px-24 bg-[#0A0E1A] text-white border-t border-white/5 relative">
+      <div className="max-w-[1440px] mx-auto space-y-16 lg:space-y-20">
+        {/* Section Header with Spacious Filter */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-10">
+          <div className="space-y-4 max-w-2xl">
+            <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-[0.25em] font-sans block">
+              {block?.badge || 'DANH MỤC DỰ ÁN TIÊU BIỂU'}
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-light text-white leading-tight tracking-tight">
+              {block?.title || 'Dự Án Bất Động Sản Nổi Bật'}
             </h2>
-            <p className="text-[14px] sm:text-[15px] text-[#6e706a] font-light leading-relaxed">
+            <div className="w-12 h-0.5 bg-[#C5A880]" />
+            <p className="text-sm sm:text-base text-white/65 font-light leading-relaxed pt-1">
               Tuyển tập những dự án bất động sản cao cấp hàng đầu với vị trí chiến lược, kiến trúc ấn tượng và giá trị gia tăng bền vững.
             </p>
           </div>
 
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-1.5 bg-[#faf8f5] p-1 rounded-lg border border-[#e2ddd3] self-start md:self-auto">
+          {/* Minimalist Filter Pills */}
+          <div className="flex flex-wrap items-center gap-2 bg-white/[0.03] p-1.5 rounded-xl border border-white/10 self-start md:self-auto">
             {[
               { key: 'all', label: 'Tất cả dự án' },
               { key: 'featured', label: 'Nổi bật' },
               { key: 'hcm', label: 'TP. Hồ Chí Minh' },
-              { key: 'coastal', label: 'Nghỉ dưỡng biển' }
+              { key: 'coastal', label: 'Nghỉ dưỡng biển' },
             ].map((tab) => {
               const active = filter === tab.key;
               return (
                 <button
                   key={tab.key}
                   onClick={() => setFilter(tab.key as any)}
-                  className={`px-3 py-1.5 rounded-md text-[11.5px] font-bold transition-all ${
-                    active ? 'bg-[#04092b] text-white shadow-xs' : 'text-[#6e706a] hover:text-[#04092b]'
+                  className={`px-4 py-2 rounded-lg text-xs font-medium transition-all ${
+                    active ? 'bg-[#C5A880] text-[#060913] font-semibold shadow-md' : 'text-white/60 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   {tab.label}
@@ -81,106 +79,101 @@ export default function ProjectsSection({ block, selectedCategory, onOpenInquiry
           </div>
         </div>
 
-        {/* 3-Column Architectural Project Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+        {/* 3-Column Architectural Project Cards Grid with Large Breathing Space */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {displayList.map((project, idx) => (
             <motion.div
               key={project.id || idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="bg-white border border-[#e2ddd3] hover:border-[#c5a26c] shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden group cursor-pointer"
+              className="bg-white/[0.02] border border-white/10 hover:border-[#C5A880]/50 transition-all duration-300 rounded-2xl flex flex-col justify-between overflow-hidden group cursor-pointer shadow-xl hover:shadow-2xl backdrop-blur-sm"
               onClick={() => setSelectedPreviewProject(project)}
             >
               <div>
                 {/* Image Showcase */}
-                <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#04092b]">
+                <div className="relative w-full aspect-[16/10] overflow-hidden bg-black/50">
                   <Image
                     src={project.image || '/uploads/vinhomes-can-gio.png'}
-                    alt={project.name}
+                    alt={project.title || project.name || 'Dự án Đông Hòa Property'}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E1A] via-transparent to-transparent opacity-80" />
 
-                  {/* Badges Overlay */}
-                  <div className="absolute top-3 left-3 flex items-center gap-1.5 z-10">
+                  <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
                     {project.featured && (
-                      <span className="bg-[#c5a26c] text-[#04092b] font-bold text-[9.5px] px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-sm font-accent uppercase tracking-wider">
-                        <Star className="w-2.5 h-2.5 fill-[#04092b]" /> Nổi bật
+                      <span className="bg-[#C5A880] text-[#060913] font-bold text-[10px] px-3 py-1 rounded-full flex items-center gap-1 shadow-md uppercase tracking-wider">
+                        <Star className="w-3 h-3 fill-[#060913]" /> Nổi bật
                       </span>
                     )}
-                    {project.developer && (
-                      <span className="bg-[#04092b]/80 backdrop-blur-xs text-white text-[10px] px-2.5 py-0.5 rounded-full border border-white/20">
-                        {project.developer}
+                    {(project.category || project.propertyTypes) && (
+                      <span className="bg-black/60 backdrop-blur-md text-white/90 text-[10px] px-3 py-1 rounded-full border border-white/15">
+                        {project.category || project.propertyTypes}
                       </span>
                     )}
                   </div>
 
-                  {/* Quick Preview Hover Overlay */}
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span className="px-4 py-2 bg-white/90 backdrop-blur-md text-[#04092b] text-[11.5px] font-bold uppercase tracking-wider rounded-full shadow-lg flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                      <Eye className="w-3.5 h-3.5 text-[#c5a26c]" /> Xem Chi Tiết
-                    </span>
+                  {/* Quick View Button */}
+                  <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button
+                      type="button"
+                      className="px-3.5 py-1.5 rounded-full bg-white/90 text-black text-xs font-semibold flex items-center gap-1.5 shadow-lg"
+                    >
+                      <Eye className="w-3.5 h-3.5" /> Xem nhanh
+                    </button>
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-5 sm:p-6 space-y-3">
-                  <h3 className="text-[19px] sm:text-[21px] font-semibold text-[#04092b] font-display group-hover:text-[#c5a26c] transition-colors leading-snug">
-                    {project.name}
+                {/* Card Information */}
+                <div className="p-7 space-y-4">
+                  <h3 className="text-2xl font-serif text-white group-hover:text-[#C5A880] transition-colors leading-snug">
+                    {project.title || project.name}
                   </h3>
 
-                  <div className="space-y-1.5 text-[12.5px] text-[#5f6361] font-light">
+                  <div className="space-y-2 text-xs text-white/60 font-light">
                     {project.location && (
-                      <div className="flex items-start gap-2">
-                        <MapPin className="w-3.5 h-3.5 text-[#c5a26c] shrink-0 mt-0.5" />
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-3.5 h-3.5 text-[#C5A880] shrink-0" />
                         <span className="line-clamp-1">{project.location}</span>
                       </div>
                     )}
-                    {project.area && (
-                      <div className="flex items-start gap-2">
-                        <Building className="w-3.5 h-3.5 text-[#c5a26c] shrink-0 mt-0.5" />
-                        <span className="line-clamp-1">{project.area}</span>
-                      </div>
-                    )}
-                    {project.propertyTypes && (
-                      <div className="text-[12px] text-[#04092b] font-medium pt-1 line-clamp-1">
-                        Sản phẩm: {project.propertyTypes}
+                    {project.scale && (
+                      <div className="flex items-center gap-2">
+                        <Building className="w-3.5 h-3.5 text-[#C5A880] shrink-0" />
+                        <span className="line-clamp-1">{project.scale}</span>
                       </div>
                     )}
                   </div>
+
+                  {project.description && (
+                    <p className="text-xs text-white/50 line-clamp-2 leading-relaxed font-light pt-1">
+                      {project.description}
+                    </p>
+                  )}
                 </div>
               </div>
 
-              {/* Card Footer Action */}
-              <div className="p-5 sm:p-6 pt-0 border-t border-[#e2ddd3]/60 mt-2 flex items-center justify-between">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onOpenInquiry?.(project.name);
-                  }}
-                  className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-wider text-[#04092b] group-hover:text-[#c5a26c] transition-colors cursor-pointer"
-                >
-                  <span>Nhận Báo Giá & Mặt Bằng</span>
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                </button>
+              {/* Action Bar */}
+              <div className="px-7 py-5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-white/80 group-hover:text-[#C5A880] transition-colors uppercase tracking-wider">
+                <span>Nhận Tài Liệu Dự Án</span>
+                <ArrowRight className="w-4 h-4 text-[#C5A880] group-hover:translate-x-1 transition-transform" />
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Project Quick View Modal */}
-      <ProjectQuickViewModal
-        project={selectedPreviewProject}
-        isOpen={!!selectedPreviewProject}
-        onClose={() => setSelectedPreviewProject(null)}
-        onOpenInquiry={(pName) => onOpenInquiry?.(pName)}
-      />
+      {/* Interactive Quick View Modal */}
+      {selectedPreviewProject && (
+        <ProjectQuickViewModal
+          project={selectedPreviewProject}
+          isOpen={!!selectedPreviewProject}
+          onClose={() => setSelectedPreviewProject(null)}
+          onOpenInquiry={onOpenInquiry}
+        />
+      )}
     </section>
   );
 }

@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, Send, AlertCircle, Phone, Mail, MapPin } from 'lucide-react';
-import FlowReveal, { FlowStaggerGroup, FlowItem } from '@/components/animations/FlowReveal';
 import { ContactData } from '@/lib/types';
 
 interface QuoteContactSectionProps {
@@ -18,23 +17,23 @@ export default function QuoteContactSection({ data }: QuoteContactSectionProps) 
     email: '',
     propertyType: '',
     area: '',
-    need: ''
+    need: '',
   });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   const image = data?.image || '/uploads/clean_contact_photo.png';
-  const tag = data?.tag || 'LIÊN HỆ NGAY VỚI CHÚNG TÔI';
-  const heading = data?.heading || 'KẾT NỐI CÙNG\nĐÔNG HÒA PROPERTY';
+  const tag = data?.tag || 'KẾT NỐI TRỰC TIẾP';
+  const heading = data?.heading || 'Đăng Ký Tư Vấn & Nhận Thông Tin Dự Án';
   const quote =
     data?.quote ||
-    'Để lại thông tin, đội ngũ Chuyên viên Đông Hòa Property sẽ liên hệ tư vấn trực tiếp và gửi thông tin chi tiết trong vòng 15 phút.';
+    'Để lại thông tin, đội ngũ Chuyên viên Tư vấn Cấp cao của Đông Hòa Property sẽ phản hồi bảo mật và cung cấp tài liệu chi tiết trong vòng 15 phút.';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.fullName.trim() || !formData.phone.trim()) {
-      setErrorMessage('Vui lòng điền họ và tên cùng số điện thoại liên hệ.');
+      setErrorMessage('Vui lòng điền họ tên và số điện thoại liên hệ.');
       return;
     }
 
@@ -60,7 +59,7 @@ export default function QuoteContactSection({ data }: QuoteContactSectionProps) 
     } catch (err: any) {
       console.error('Contact submission error:', err);
       setErrorMessage(
-        err.message || 'Đã có lỗi xảy ra khi gửi yêu cầu. Quý khách vui lòng thử lại hoặc gọi trực tiếp hotline.'
+        err.message || 'Đã có lỗi xảy ra. Quý khách vui lòng thử lại hoặc gọi trực tiếp hotline.'
       );
     } finally {
       setIsSubmitting(false);
@@ -74,213 +73,201 @@ export default function QuoteContactSection({ data }: QuoteContactSectionProps) 
       email: '',
       propertyType: '',
       area: '',
-      need: ''
+      need: '',
     });
     setSubmitted(false);
     setErrorMessage('');
   };
 
   return (
-    <section id="contact" className="w-full py-16 sm:py-20 lg:py-24 bg-[#f4f1ea] border-b border-[#e2ddd3] overflow-hidden">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-20">
-        <div className="max-w-[1280px] mx-auto flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-14 xl:gap-16 items-center">
-          
-          {/* LEFT SIDE: Rounded Rectangle Image */}
-          <div className="w-full lg:col-span-5 flex justify-center lg:justify-start">
-            <FlowReveal direction="up" distance={45} duration={0.9} className="w-full max-w-[515px]">
-              <div className="relative w-full aspect-[515/560] max-h-[560px] rounded-2xl overflow-hidden bg-[#e2ddd3]/30 border border-[#e2ddd3] shadow-xl group">
-                <Image
-                  src={image}
-                  alt="Đông Hòa Property - Liên hệ tư vấn & báo giá"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 515px"
-                  className="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-105"
-                  priority
-                />
-                <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-2xl pointer-events-none" />
-              </div>
-            </FlowReveal>
-          </div>
+    <section id="contact" className="w-full py-24 sm:py-28 lg:py-36 bg-[#060913] text-white border-t border-white/5 relative overflow-hidden">
+      {/* Background Subtle Ambience */}
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#C5A880]/5 rounded-full blur-[140px] pointer-events-none" />
 
-          {/* RIGHT SIDE: Section Header & Contact Form */}
-          <div className="w-full lg:col-span-7 flex flex-col justify-center">
-            {/* Header Area */}
-            <FlowReveal direction="up" distance={30} delay={0.1} className="mb-6 sm:mb-8">
-              <div className="flex items-center gap-2.5 mb-2.5">
-                <div className="w-5 h-[1.5px] bg-[#c5a26c]" />
-                <span className="text-[12px] sm:text-[13px] font-semibold text-[#6e706a] uppercase tracking-widest font-accent">
-                  {tag}
-                </span>
-              </div>
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 relative z-10">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+          {/* LEFT SIDE: Architectural Visual + Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="w-full lg:col-span-5 space-y-8"
+          >
+            <div className="relative w-full aspect-[4/5] max-w-[500px] rounded-2xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl group mx-auto lg:mx-0">
+              <Image
+                src={image}
+                alt="Đông Hòa Property - Liên hệ tư vấn"
+                fill
+                className="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-transparent opacity-80" />
+            </div>
 
-              <h2 className="text-[28px] sm:text-[34px] lg:text-[38px] xl:text-[42px] font-semibold text-[#2d302e] font-display uppercase leading-[1.18] tracking-tight mb-3 whitespace-pre-line">
+            {/* Direct Contact Cards */}
+            <div className="space-y-3 pt-2">
+              <a
+                href="tel:0906499279"
+                className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-[#C5A880]/40 transition-all group"
+              >
+                <div className="w-10 h-10 rounded-lg bg-[#C5A880]/10 flex items-center justify-center text-[#C5A880] group-hover:bg-[#C5A880] group-hover:text-black transition-colors">
+                  <Phone className="w-4 h-4" />
+                </div>
+                <div>
+                  <p className="text-xs text-white/50">Hotline 24/7</p>
+                  <p className="text-sm font-semibold text-white group-hover:text-[#C5A880] transition-colors">0906.499.279</p>
+                </div>
+              </a>
+
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                <div className="w-10 h-10 rounded-lg bg-[#C5A880]/10 flex items-center justify-center text-[#C5A880]">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <div>
+                  <p className="text-xs text-white/50">Trụ sở chính</p>
+                  <p className="text-xs text-white/80 font-light">113-115 Ung Văn Khiêm, Phường Thạnh Mỹ Tây, TP.HCM</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* RIGHT SIDE: Elegant Form Container */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="w-full lg:col-span-7 bg-white/[0.02] border border-white/10 rounded-2xl p-8 sm:p-12 backdrop-blur-md shadow-2xl"
+          >
+            <div className="space-y-4 mb-8">
+              <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-[0.25em] font-sans block">
+                {tag}
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-light text-white leading-tight tracking-tight">
                 {heading}
               </h2>
-
-              <p className="text-[14px] sm:text-[15.5px] text-[#5f6361] italic leading-relaxed max-w-[600px]">
-                &ldquo;{quote}&rdquo;
+              <div className="w-12 h-0.5 bg-[#C5A880]" />
+              <p className="text-xs sm:text-sm text-white/65 font-light leading-relaxed">
+                {quote}
               </p>
-            </FlowReveal>
+            </div>
 
-            {/* FORM CONTAINER */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full max-w-[500px] mx-auto lg:mx-0"
-            >
-              <AnimatePresence mode="wait">
-                {submitted ? (
-                  /* SUBMITTED SUCCESS CARD */
-                  <motion.div
-                    key="submitted-card"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    className="w-full p-6 sm:p-8 bg-white border border-[#e2ddd3] rounded-xl shadow-sm space-y-4 text-center"
+            <AnimatePresence mode="wait">
+              {submitted ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="p-8 text-center space-y-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30"
+                >
+                  <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
+                  <h3 className="text-xl font-serif text-white">Gửi Yêu Cầu Thành Công!</h3>
+                  <p className="text-xs text-white/70 max-w-md mx-auto font-light leading-relaxed">
+                    Cảm ơn quý khách. Chuyên viên tư vấn của Đông Hòa Property sẽ liên hệ lại qua số điện thoại <strong>{formData.phone}</strong> trong vòng 15 phút.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleReset}
+                    className="mt-4 px-6 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-semibold uppercase tracking-wider transition-all"
                   >
-                    <CheckCircle2 className="w-12 h-12 text-[#c5a26c] mx-auto" />
-                    <h3 className="text-[18px] sm:text-[20px] font-semibold text-[#2d302e] font-display uppercase">
-                      Gửi yêu cầu thành công!
-                    </h3>
-                    <p className="text-[13.5px] text-[#5f6361] font-light leading-relaxed">
-                      Thông tin đã được ghi nhận. Đội ngũ chuyên viên <strong>Đông Hòa Property</strong> sẽ liên hệ trực tiếp với quý khách trong vòng 15 phút.
-                    </p>
-                    <button
-                      type="button"
-                      onClick={handleReset}
-                      className="mt-2 text-[12px] uppercase tracking-wider font-semibold text-[#2d302e] hover:text-[#c5a26c] underline transition-colors"
-                    >
-                      Gửi yêu cầu khác
-                    </button>
-                  </motion.div>
-                ) : (
-                  /* ACTIVE FORM CARD */
-                  <div className="w-full bg-transparent">
-                    {/* Error Banner */}
-                    {errorMessage && (
-                      <div className="mb-3.5 p-3 bg-red-50 border border-red-200 rounded-lg text-[12.5px] text-red-700 flex items-start gap-2">
-                        <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
-                        <span>{errorMessage}</span>
-                      </div>
-                    )}
+                    Gửi yêu cầu khác
+                  </button>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {errorMessage && (
+                    <div className="p-3.5 rounded-lg bg-red-500/10 border border-red-500/30 flex items-center gap-2 text-xs text-red-300">
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                      <span>{errorMessage}</span>
+                    </div>
+                  )}
 
-                    <form onSubmit={handleSubmit} className="w-full">
-                      <FlowStaggerGroup staggerDelay={0.06} className="space-y-3.5 sm:space-y-4">
-                        {/* Field 1: Họ và tên */}
-                        <FlowItem distance={20} className="space-y-1">
-                          <label className="block text-[12px] font-medium tracking-wide text-[#2d302e] font-sans">
-                            Họ và tên: <span className="text-[#a70c0c]">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="Nhập họ và tên của bạn"
-                            value={formData.fullName}
-                            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                            className="w-full h-[42px] px-3.5 bg-white border border-[#e2ddd3] rounded-lg text-[13px] text-[#2d302e] placeholder:text-[#5f6361]/60 focus:outline-none focus:border-[#c5a26c] focus:ring-1 focus:ring-[#c5a26c] transition-all"
-                          />
-                        </FlowItem>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-white/80">Họ và tên *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="Nguyễn Văn A"
+                        value={formData.fullName}
+                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                        className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-[#C5A880] focus:bg-white/10 text-white placeholder-white/30 text-sm transition-all outline-none"
+                      />
+                    </div>
 
-                        {/* Field 2 & 3: Số điện thoại & Email */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          <FlowItem distance={20} className="space-y-1">
-                            <label className="block text-[12px] font-medium tracking-wide text-[#2d302e] font-sans">
-                              Số điện thoại: <span className="text-[#a70c0c]">*</span>
-                            </label>
-                            <input
-                              type="tel"
-                              required
-                              placeholder="090x xxx xxx"
-                              value={formData.phone}
-                              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                              className="w-full h-[42px] px-3.5 bg-white border border-[#e2ddd3] rounded-lg text-[13px] text-[#2d302e] placeholder:text-[#5f6361]/60 focus:outline-none focus:border-[#c5a26c] focus:ring-1 focus:ring-[#c5a26c] transition-all"
-                            />
-                          </FlowItem>
-
-                          <FlowItem distance={20} className="space-y-1">
-                            <label className="block text-[12px] font-medium tracking-wide text-[#2d302e] font-sans">
-                              Email:
-                            </label>
-                            <input
-                              type="email"
-                              placeholder="email@example.com"
-                              value={formData.email}
-                              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                              className="w-full h-[42px] px-3.5 bg-white border border-[#e2ddd3] rounded-lg text-[13px] text-[#2d302e] placeholder:text-[#5f6361]/60 focus:outline-none focus:border-[#c5a26c] focus:ring-1 focus:ring-[#c5a26c] transition-all"
-                            />
-                          </FlowItem>
-                        </div>
-
-                        {/* Field 4 & 5: Loại hình nhà & Diện tích */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          <FlowItem distance={20} className="space-y-1">
-                            <label className="block text-[12px] font-medium tracking-wide text-[#2d302e] font-sans">
-                              Loại hình quan tâm:
-                            </label>
-                            <input
-                              type="text"
-                              placeholder="Căn hộ / Biệt thự / Shophouse"
-                              value={formData.propertyType}
-                              onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
-                              className="w-full h-[42px] px-3.5 bg-white border border-[#e2ddd3] rounded-lg text-[13px] text-[#2d302e] placeholder:text-[#5f6361]/60 focus:outline-none focus:border-[#c5a26c] focus:ring-1 focus:ring-[#c5a26c] transition-all"
-                            />
-                          </FlowItem>
-
-                          <FlowItem distance={20} className="space-y-1">
-                            <label className="block text-[12px] font-medium tracking-wide text-[#2d302e] font-sans">
-                              Diện tích dự kiến:
-                            </label>
-                            <input
-                              type="text"
-                              placeholder="VD: 85m², 150m², 300m²..."
-                              value={formData.area}
-                              onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-                              className="w-full h-[42px] px-3.5 bg-white border border-[#e2ddd3] rounded-lg text-[13px] text-[#2d302e] placeholder:text-[#5f6361]/60 focus:outline-none focus:border-[#c5a26c] focus:ring-1 focus:ring-[#c5a26c] transition-all"
-                            />
-                          </FlowItem>
-                        </div>
-
-                        {/* Field 6: Nhu cầu */}
-                        <FlowItem distance={20} className="space-y-1">
-                          <label className="block text-[12px] font-medium tracking-wide text-[#2d302e] font-sans">
-                            Nhu cầu cụ thể:
-                          </label>
-                          <input
-                            type="text"
-                            placeholder="Tư vấn đầu tư / Bảng giá / Thiết kế nội thất trọn gói"
-                            value={formData.need}
-                            onChange={(e) => setFormData({ ...formData, need: e.target.value })}
-                            className="w-full h-[42px] px-3.5 bg-white border border-[#e2ddd3] rounded-lg text-[13px] text-[#2d302e] placeholder:text-[#5f6361]/60 focus:outline-none focus:border-[#c5a26c] focus:ring-1 focus:ring-[#c5a26c] transition-all"
-                          />
-                        </FlowItem>
-
-                        {/* Submit Button */}
-                        <FlowItem distance={20} className="pt-2">
-                          <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="w-full sm:w-auto px-8 h-[44px] bg-[#04092b] hover:bg-[#c5a26c] text-white hover:text-[#04092b] text-[12.5px] font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center justify-center gap-2 group shadow-sm disabled:opacity-70"
-                          >
-                            {isSubmitting ? (
-                              <span>Đang gửi thông tin...</span>
-                            ) : (
-                              <>
-                                <span>GỬI YÊU CẦU TƯ VẤN</span>
-                                <Send className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                              </>
-                            )}
-                          </button>
-                        </FlowItem>
-                      </FlowStaggerGroup>
-                    </form>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-white/80">Số điện thoại *</label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="0901 234 567"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-[#C5A880] focus:bg-white/10 text-white placeholder-white/30 text-sm transition-all outline-none"
+                      />
+                    </div>
                   </div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          </div>
 
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-white/80">Email liên hệ</label>
+                      <input
+                        type="email"
+                        placeholder="example@gmail.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-[#C5A880] focus:bg-white/10 text-white placeholder-white/30 text-sm transition-all outline-none"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-white/80">Phân khúc quan tâm</label>
+                      <select
+                        value={formData.propertyType}
+                        onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
+                        className="w-full px-4 py-3 rounded-lg bg-[#0E1322] border border-white/10 focus:border-[#C5A880] text-white text-sm transition-all outline-none"
+                      >
+                        <option value="">-- Chọn phân khúc --</option>
+                        <option value="Căn hộ hạng sang">Căn hộ hạng sang</option>
+                        <option value="Nhà phố thương mại">Nhà phố thương mại / Shophouse</option>
+                        <option value="Biệt thự nghỉ dưỡng">Biệt thự nghỉ dưỡng biển</option>
+                        <option value="Dinh thự độc bản">Dinh thự ven sông độc bản</option>
+                        <option value="Suất ngoại giao">Suất ngoại giao nội bộ</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-white/80">Nhu cầu tư vấn cụ thể</label>
+                    <textarea
+                      rows={3}
+                      placeholder="Quý khách vui lòng để lại yêu cầu cụ thể (ngân sách dự kiến, vị trí mong muốn, kế hoạch đầu tư...)"
+                      value={formData.need}
+                      onChange={(e) => setFormData({ ...formData, need: e.target.value })}
+                      className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-[#C5A880] focus:bg-white/10 text-white placeholder-white/30 text-sm transition-all outline-none resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-4 rounded-lg bg-[#C5A880] hover:bg-white text-[#060913] font-semibold text-xs tracking-[0.15em] uppercase transition-all duration-300 shadow-xl flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  >
+                    {isSubmitting ? (
+                      <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>GỬI YÊU CẦU TƯ VẤN NGAY</span>
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
     </section>

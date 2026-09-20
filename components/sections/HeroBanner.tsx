@@ -3,60 +3,51 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, ShieldCheck } from 'lucide-react';
 import { HeroData } from '@/lib/types';
 
 interface HeroBannerProps {
   data?: HeroData;
+  onOpenInquiry?: (defaultMsg?: string) => void;
 }
 
 const defaultSlides = [
   {
-    tag: 'ĐÔNG HÒA PROPERTY',
-    monogram: 'Đ',
-    line1: 'ông Hòa Property',
-    line2: 'Kiến tạo giá trị — Nâng tầm chuẩn sống',
-    description:
-      'Thương hiệu tư vấn & phân phối bất động sản cao cấp hàng đầu, đồng hành cùng quý khách hàng và nhà đầu tư trên hành trình kiến tạo danh mục tài sản truyền đời vững bền.',
+    tag: 'ĐÔNG HÒA PROPERTY • PHÂN PHỐI CHIẾN LƯỢC',
+    title: 'Kiến Tạo Giá Trị — Nâng Tầm Chuẩn Sống',
+    subtitle: 'Đồng hành cùng quý khách hàng trên hành trình sở hữu bất động sản vị trí kim cương, pháp lý minh bạch và tiềm năng sinh lời bền vững.',
     backgroundImage: '/uploads/clean_project_vingroup.png',
-    buttonText: 'Khám phá dự án',
-    buttonTarget: '#projects',
-    secondaryText: 'Về chúng tôi →',
-    secondaryTarget: '#philosophy'
+    primaryButton: 'Khám phá giỏ hàng',
+    primaryTarget: '#projects',
+    secondaryButton: 'Nhận bảng giá VIP',
+    secondaryTarget: '#private-access',
   },
   {
-    tag: 'ĐÔNG HÒA PROPERTY',
-    monogram: 'P',
-    line1: 'hân phối chiến lược',
-    line2: 'Quỹ căn vị trí kim cương',
-    description:
-      '100% dự án thẩm định pháp lý minh bạch, bảng giá gốc trực tiếp từ các tập đoàn hàng đầu: Vingroup, Phát Đạt, KDI Holdings, Kita Group, An Gia...',
+    tag: 'QUỸ CĂN BIỂU TƯỢNG • TP. HỒ CHÍ MINH',
+    title: 'Tuyển Chọn Dự Án Hạng Sang Độc Bản',
+    subtitle: '100% dự án được thẩm định pháp lý chặt chẽ từ các chủ đầu tư danh tiếng: Vingroup, Gamuda Land, An Gia, Kita Group, KDI Holdings.',
     backgroundImage: '/uploads/clean_project_thegio.png',
-    buttonText: 'Xem giỏ hàng',
-    buttonTarget: '#categories',
-    secondaryText: 'Bảng giá nội bộ →',
-    secondaryTarget: '#contact'
+    primaryButton: 'Xem các phân khúc',
+    primaryTarget: '#categories',
+    secondaryButton: 'Tính toán tài chính',
+    secondaryTarget: '#mortgage-calculator',
   },
   {
-    tag: 'ĐÔNG HÒA PROPERTY',
-    monogram: 'T',
-    line1: 'ư vấn chuyên sâu',
-    line2: 'Đồng hành trọn vẹn',
-    description:
-      'Hotline 24/7: 0906.499.279 | Email: info@donghoagroup.vn | Trụ sở: 113-115 Ung Văn Khiêm, Phường Thạnh Mỹ Tây, TP.HCM',
+    tag: 'TƯ VẤN ĐẦU TƯ & TÀI CHÍNH BẤT ĐỘNG SẢN',
+    title: 'Dịch Vụ Tư Vấn Tận Tâm — Bảo Mật Tuyệt Đối',
+    subtitle: 'Hỗ trợ giải ngân ngân hàng linh hoạt, cập nhật tiến độ xây dựng liên tục và đồng hành bàn giao chuẩn mực.',
     backgroundImage: '/uploads/clean_project_alora.png',
-    buttonText: 'Nhận tư vấn ngay',
-    buttonTarget: '#contact',
-    secondaryText: 'Tin tức thị trường →',
-    secondaryTarget: '/blog'
-  }
+    primaryButton: 'Đăng ký tư vấn 1-1',
+    primaryTarget: '#contact',
+    secondaryButton: 'Góc nhìn thị trường',
+    secondaryTarget: '/blog',
+  },
 ];
 
-export default function HeroBanner({ data }: HeroBannerProps) {
+export default function HeroBanner({ data, onOpenInquiry }: HeroBannerProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const slides = data?.slides && data.slides.length > 0 ? data.slides : defaultSlides;
+  const slides = data?.slides && data.slides.length > 0 ? (data.slides as any) : defaultSlides;
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -67,20 +58,31 @@ export default function HeroBanner({ data }: HeroBannerProps) {
   };
 
   useEffect(() => {
-    if (isHovered || isDragging) return;
+    if (isHovered) return;
     const timer = setInterval(() => {
       nextSlide();
-    }, 6500);
+    }, 7000);
     return () => clearInterval(timer);
-  }, [slides.length, isHovered, isDragging]);
+  }, [slides.length, isHovered]);
 
   const currentItem = slides[currentSlide] || slides[0];
 
+  const handleNav = (target: string) => {
+    if (target.startsWith('#')) {
+      const el = document.querySelector(target);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      window.location.href = target;
+    }
+  };
+
   return (
-    <section className="relative w-full min-h-[540px] sm:min-h-[660px] lg:h-[780px] bg-[#04092b] overflow-hidden flex items-center pt-24 sm:pt-28 pb-8 sm:pb-12 select-none touch-pan-y">
-      {/* Seamless Multi-Layer Crossfade Backgrounds (Zero Black Flash) */}
+    <section className="relative w-full min-h-[640px] sm:min-h-[720px] lg:h-[840px] bg-[#060913] overflow-hidden flex items-center select-none pt-20">
+      {/* Background Images with Cinematic Slow Scale */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {slides.map((s, idx) => {
+        {slides.map((s: any, idx: number) => {
           const isActive = currentSlide === idx;
           const bgUrl = s.backgroundImage || '/uploads/clean_project_vingroup.png';
           return (
@@ -89,11 +91,11 @@ export default function HeroBanner({ data }: HeroBannerProps) {
               initial={false}
               animate={{
                 opacity: isActive ? 1 : 0,
-                scale: isActive ? 1 : 1.05,
+                scale: isActive ? 1.03 : 1.08,
               }}
               transition={{
-                opacity: { duration: 1.2, ease: [0.25, 1, 0.5, 1] },
-                scale: { duration: 6.5, ease: 'linear' },
+                opacity: { duration: 1.4, ease: [0.25, 1, 0.5, 1] },
+                scale: { duration: 8, ease: 'easeOut' },
               }}
               className="absolute inset-0 will-change-transform"
             >
@@ -108,116 +110,102 @@ export default function HeroBanner({ data }: HeroBannerProps) {
           );
         })}
 
-        {/* Ambient Dark-to-Gold Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/25 md:to-transparent lg:w-[70%] pointer-events-none z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:hidden pointer-events-none z-10" />
+        {/* Deep Architectural Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#060913]/90 via-[#060913]/65 to-[#060913]/30 pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-black/30 pointer-events-none z-10" />
       </div>
 
-      {/* Swipeable / Draggable Foreground Container */}
-      <motion.div
-        drag="x"
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={0.15}
-        onDragStart={() => setIsDragging(true)}
-        onDragEnd={(_, info) => {
-          setIsDragging(false);
-          const swipeThreshold = 45;
-          const velocityThreshold = 180;
-          if (info.offset.x < -swipeThreshold || info.velocity.x < -velocityThreshold) {
-            nextSlide();
-          } else if (info.offset.x > swipeThreshold || info.velocity.x > velocityThreshold) {
-            prevSlide();
-          }
-        }}
+      {/* Main Content Container with Generous Breathing Room */}
+      <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="relative z-20 max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-20 w-full flex flex-col justify-between h-full cursor-grab active:cursor-grabbing"
+        className="relative z-20 max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 w-full flex flex-col justify-center h-full py-16"
       >
-        <div className="max-w-[700px] space-y-4 sm:space-y-5 pt-4 sm:pt-12 min-h-[260px] sm:min-h-[320px] flex flex-col justify-center">
-          {/* Animated Hero Monogram & Text with Silky Smooth Easing */}
+        <div className="max-w-3xl space-y-6 sm:space-y-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, y: 16, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: -12, filter: 'blur(2px)' }}
-              transition={{
-                duration: 0.65,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="space-y-3 sm:space-y-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-6"
             >
-              {/* Calligraphic Monogram + Line 1 & Line 2 */}
-              <div className="flex items-start gap-1 sm:gap-2">
-                <span className="font-script text-white text-[95px] sm:text-[150px] lg:text-[190px] font-normal leading-[0.75] select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.7)] pointer-events-none">
-                  {currentItem.monogram}
-                </span>
-                <div className="space-y-0.5 pt-2 sm:pt-4">
-                  <h1 className="text-[22px] sm:text-[34px] lg:text-[42px] font-sans font-light text-white tracking-wide leading-tight drop-shadow-md pointer-events-none">
-                    {currentItem.line1}
-                  </h1>
-                  {currentItem.line2 && (
-                    <h2 className="text-[20px] sm:text-[32px] lg:text-[40px] font-sans font-light italic text-white/95 tracking-wide leading-tight drop-shadow-md pointer-events-none">
-                      {currentItem.line2}
-                    </h2>
-                  )}
-                </div>
+              {/* Tag / Eyebrow */}
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#C5A880]/30 text-[#C5A880] text-xs font-semibold tracking-[0.2em] uppercase font-sans">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880]" />
+                <span>{currentItem.tag || 'ĐÔNG HÒA PROPERTY'}</span>
               </div>
 
-              {/* Subtitle / Description */}
-              <p className="text-[13px] sm:text-[16px] text-white/90 font-light leading-relaxed max-w-xl drop-shadow pointer-events-none">
-                {currentItem.description}
+              {/* Headline */}
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-light text-white leading-[1.15] tracking-tight">
+                {currentItem.title || currentItem.line1 || 'Kiến Tạo Giá Trị — Nâng Tầm Chuẩn Sống'}
+              </h1>
+
+              {/* Subtitle */}
+              <p className="text-base sm:text-lg text-white/80 font-light leading-relaxed max-w-2xl">
+                {currentItem.subtitle || currentItem.description}
               </p>
+
+              {/* Action Buttons */}
+              <div className="pt-4 flex flex-wrap items-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => handleNav(currentItem.primaryTarget || '#projects')}
+                  className="px-7 py-3.5 rounded-sm bg-[#C5A880] hover:bg-white text-[#060913] font-semibold text-xs tracking-[0.15em] uppercase transition-all duration-300 shadow-xl flex items-center gap-2.5 group cursor-pointer"
+                >
+                  <span>{currentItem.primaryButton || 'Khám phá dự án'}</span>
+                  <ArrowRight className="w-4 h-4 text-[#060913] group-hover:translate-x-1 transition-transform" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleNav(currentItem.secondaryTarget || '#private-access')}
+                  className="px-7 py-3.5 rounded-sm border border-white/30 hover:border-[#C5A880] text-white hover:text-[#C5A880] font-semibold text-xs tracking-[0.15em] uppercase transition-all duration-300 backdrop-blur-sm cursor-pointer"
+                >
+                  <span>{currentItem.secondaryButton || 'Nhận bảng giá VIP'}</span>
+                </button>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Bottom Bar: Pagination Pill Control */}
-        <div className="pt-6 sm:pt-8 flex justify-end">
-          <div
-            onPointerDown={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-black/50 backdrop-blur-md border border-white/20 shadow-lg text-white cursor-default"
-          >
+        {/* Slide Indicators & Navigation Bar */}
+        <div className="mt-12 sm:mt-16 flex items-center justify-between pt-8 border-t border-white/10 max-w-3xl">
+          <div className="flex items-center gap-2.5">
+            {slides.map((_: any, idx: number) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                aria-label={`Slide ${idx + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  currentSlide === idx ? 'w-10 bg-[#C5A880]' : 'w-2 bg-white/30 hover:bg-white/60'
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3">
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                prevSlide();
-              }}
-              className="p-1 hover:text-[#c5a26c] transition-colors"
+              onClick={prevSlide}
               aria-label="Previous slide"
+              className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:text-white hover:border-[#C5A880] hover:bg-white/5 transition-all"
             >
-              <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <ChevronLeft className="w-4 h-4" />
             </button>
-
-            <div className="flex items-center gap-1.5 sm:gap-2 px-1">
-              {slides.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setCurrentSlide(idx);
-                  }}
-                  aria-label={`Go to slide ${idx + 1}`}
-                  className={`h-1.5 rounded-full transition-all duration-500 ease-out ${
-                    currentSlide === idx ? 'w-5 sm:w-6 bg-white shadow-sm' : 'w-1.5 bg-white/40 hover:bg-white/70'
-                  }`}
-                />
-              ))}
-            </div>
-
+            <span className="text-xs font-mono text-white/50">
+              0{currentSlide + 1} / 0{slides.length}
+            </span>
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                nextSlide();
-              }}
-              className="p-1 hover:text-[#c5a26c] transition-colors"
+              onClick={nextSlide}
               aria-label="Next slide"
+              className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:text-white hover:border-[#C5A880] hover:bg-white/5 transition-all"
             >
-              <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

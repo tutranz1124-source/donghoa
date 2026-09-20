@@ -16,11 +16,11 @@ export default function Footer({ settings }: FooterProps) {
   };
 
   return (
-    <footer className="bg-[#04092b] text-white border-t border-[#c5a26c]/30">
+    <footer className="bg-[#050811] text-white border-t border-white/10">
       {/* Top Footer Section */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-20 py-16 lg:py-20 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 py-16 lg:py-20 grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-16">
         {/* Brand Column */}
-        <div className="col-span-1 md:col-span-5 space-y-4 sm:space-y-6">
+        <div className="col-span-1 md:col-span-5 space-y-6">
           <div className="relative h-[48px] w-[190px] sm:h-[56px] sm:w-[220px]">
             <Image
               src={settings?.logo || '/uploads/logo-dong-hoa-property.png'}
@@ -30,42 +30,42 @@ export default function Footer({ settings }: FooterProps) {
             />
           </div>
 
-          <p className="text-[14px] text-white/80 leading-relaxed font-light max-w-md">
+          <p className="text-sm text-white/70 leading-relaxed font-light max-w-md">
             {settings?.siteDescription ||
-              'Đông Hòa Property cung cấp danh mục bất động sản chọn lọc cùng giải pháp thiết kế - thi công không gian sống chuẩn mực và nâng tầm giá trị cho từng công trình.'}
+              'Đông Hòa Property là đơn vị tư vấn và phân phối bất động sản cao cấp, mang đến những quỹ căn độc bản với tiềm năng gia tăng giá trị bền vững qua nhiều thế hệ.'}
           </p>
         </div>
 
         {/* Contact Info Column */}
-        <div className="col-span-1 md:col-span-4 space-y-3 sm:space-y-4">
-          <h4 className="text-[13px] font-bold uppercase tracking-widest text-[#c5a26c] font-accent">
+        <div className="col-span-1 md:col-span-4 space-y-4">
+          <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#C5A880] font-sans">
             THÔNG TIN LIÊN HỆ
           </h4>
-          <ul className="space-y-3 text-[13.5px] text-white/85 font-light">
+          <ul className="space-y-3 text-xs sm:text-sm text-white/80 font-light">
             <li className="flex items-start gap-3">
-              <MapPin className="w-4 h-4 text-[#c5a26c] shrink-0 mt-0.5" />
+              <MapPin className="w-4 h-4 text-[#C5A880] shrink-0 mt-0.5" />
               <span>{settings?.address || '113-115 Ung Văn Khiêm, Phường Thạnh Mỹ Tây, TP Hồ Chí Minh, Việt Nam'}</span>
             </li>
             <li className="flex items-center gap-3">
-              <Phone className="w-4 h-4 text-[#c5a26c] shrink-0" />
+              <Phone className="w-4 h-4 text-[#C5A880] shrink-0" />
               <a
                 href={`tel:${(settings?.hotline || '0906.499.279').replace(/\D/g, '')}`}
-                className="hover:text-[#c5a26c] transition-colors font-medium"
+                className="hover:text-[#C5A880] transition-colors font-medium text-white"
               >
                 Hotline: {settings?.hotline || '0906.499.279'}
               </a>
             </li>
             <li className="flex items-center gap-3">
-              <Mail className="w-4 h-4 text-[#c5a26c] shrink-0" />
+              <Mail className="w-4 h-4 text-[#C5A880] shrink-0" />
               <a
                 href={`mailto:${settings?.email || 'info@donghoagroup.vn'}`}
-                className="hover:text-[#c5a26c] transition-colors"
+                className="hover:text-[#C5A880] transition-colors"
               >
                 Email: {settings?.email || 'info@donghoagroup.vn'}
               </a>
             </li>
             <li className="flex items-center gap-3">
-              <Globe className="w-4 h-4 text-[#c5a26c] shrink-0" />
+              <Globe className="w-4 h-4 text-[#C5A880] shrink-0" />
               <a
                 href={
                   settings?.website?.startsWith('http')
@@ -74,7 +74,7 @@ export default function Footer({ settings }: FooterProps) {
                 }
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#c5a26c] transition-colors"
+                className="hover:text-[#C5A880] transition-colors"
               >
                 Website: {settings?.website || 'www.DongHoaGroup.vn'}
               </a>
@@ -83,52 +83,47 @@ export default function Footer({ settings }: FooterProps) {
         </div>
 
         {/* Quick Links Column */}
-        <div className="col-span-1 md:col-span-3 space-y-3 sm:space-y-4">
-          <h4 className="text-[13px] font-bold uppercase tracking-widest text-[#c5a26c] font-accent">
-            DANH MỤC
+        <div className="col-span-1 md:col-span-3 space-y-4">
+          <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#C5A880] font-sans">
+            DANH MỤC TRỌNG TÂM
           </h4>
-          <ul className="space-y-2.5 text-[13.5px] text-white/80 font-light">
+          <ul className="space-y-2.5 text-xs sm:text-sm text-white/70 font-light">
             <li>
-              <Link href="#projects" className="hover:text-[#c5a26c] transition-colors">
-                Danh mục dự án
-              </Link>
-            </li>
-            <li>
-              <Link href="#styles" className="hover:text-[#c5a26c] transition-colors">
-                Phong cách thiết kế
-              </Link>
-            </li>
-            <li>
-              <Link href="#office" className="hover:text-[#c5a26c] transition-colors">
-                Không gian văn phòng
-              </Link>
-            </li>
-            <li>
-              <Link href="#philosophy" className="hover:text-[#c5a26c] transition-colors">
-                Về chúng tôi
-              </Link>
-            </li>
-            <li>
-              <Link href="/blog" className="hover:text-[#c5a26c] transition-colors">
-                Tin tức & Cẩm nang
-              </Link>
-            </li>
-            <li>
-              <a href="#contact" className="text-[#c5a26c] hover:underline font-medium">
-                Đăng ký nhận tư vấn →
+              <a href="#categories" className="hover:text-[#C5A880] transition-colors">
+                Phân khúc bất động sản
               </a>
+            </li>
+            <li>
+              <a href="#projects" className="hover:text-[#C5A880] transition-colors">
+                Dự án nổi bật
+              </a>
+            </li>
+            <li>
+              <a href="#mortgage-calculator" className="hover:text-[#C5A880] transition-colors">
+                Công cụ tính tài chính
+              </a>
+            </li>
+            <li>
+              <a href="#faq" className="hover:text-[#C5A880] transition-colors">
+                Giải đáp pháp lý & đầu tư
+              </a>
+            </li>
+            <li>
+              <Link href="/blog" className="hover:text-[#C5A880] transition-colors">
+                Tin tức thị trường BĐS
+              </Link>
             </li>
           </ul>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/10 py-6 px-4 sm:px-8 lg:px-20 bg-[#03061f]">
-        <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-white/60">
-          <p>{settings?.copyright || '© 2026 Đông Hòa Property - Dong Hoa Group. All rights reserved.'}</p>
+      <div className="border-t border-white/5 py-6">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
+          <p>© {new Date().getFullYear()} Đông Hòa Property. Bản quyền thuộc về Đông Hòa Group.</p>
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-1.5 hover:text-[#c5a26c] transition-colors text-white/80"
+            className="flex items-center gap-1.5 text-white/70 hover:text-[#C5A880] transition-colors cursor-pointer"
           >
             <span>Về đầu trang</span>
             <ArrowUp className="w-3.5 h-3.5" />

@@ -101,7 +101,7 @@ export default function ClientHomePage({ initialContent }: { initialContent: Sit
   const settings = content.settings;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f4f1ea] selection:bg-[#c5a26c] selection:text-[#04092b]">
+    <div className="min-h-screen flex flex-col bg-[#060913] text-white selection:bg-[#C5A880] selection:text-[#060913]">
       {/* 1. HEADER NAVIGATION */}
       <Navbar settings={settings} onOpenInquiry={handleOpenInquiry} />
 

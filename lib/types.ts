@@ -226,10 +226,17 @@ export interface AboutBlock {
 export interface ProjectItem {
   id: string;
   name: string;
+  title?: string;
   developer?: string;
   area?: string;
   location?: string;
   propertyTypes?: string;
+  category?: string;
+  scale?: string;
+  description?: string;
+  price?: string;
+  handover?: string;
+  ownership?: string;
   image: string;
   featured?: boolean;
 }

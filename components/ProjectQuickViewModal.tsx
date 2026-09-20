@@ -9,7 +9,7 @@ interface ProjectQuickViewModalProps {
   project: ProjectItem | null;
   isOpen: boolean;
   onClose: () => void;
-  onOpenInquiry: (projectName: string) => void;
+  onOpenInquiry?: (projectName?: string) => void;
 }
 
 export default function ProjectQuickViewModal({
@@ -120,7 +120,7 @@ export default function ProjectQuickViewModal({
               type="button"
               onClick={() => {
                 onClose();
-                onOpenInquiry(project.name);
+                onOpenInquiry?.(project.name || project.title || '');
               }}
               className="w-full sm:w-auto px-5 py-2.5 bg-[#04092b] hover:bg-[#c5a26c] hover:text-[#04092b] text-white font-bold text-[12.5px] uppercase tracking-wider rounded-sm transition-all duration-300 shadow-md flex items-center justify-center gap-2 group cursor-pointer"
             >

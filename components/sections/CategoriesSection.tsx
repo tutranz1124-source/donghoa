@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Building2, Home, Waves, Landmark, ArrowUpRight } from 'lucide-react';
-import FlowReveal, { FlowStaggerGroup, FlowItem } from '@/components/animations/FlowReveal';
+import { motion } from 'framer-motion';
 
 interface CategoryItem {
   id: string;
@@ -22,7 +22,7 @@ const defaultCategories: CategoryItem[] = [
     title: 'Căn Hộ Hạng Sang',
     subtitle: 'Luxury Apartments & Sky Villas',
     sqm: '2.500.000 m² sàn',
-    count: '15+ Dự án chiến lược',
+    count: '15+ Dự án',
     description: 'Không gian sống tinh tế tại các toà tháp biểu tượng trung tâm với tiêu chuẩn bàn giao quốc tế 5 sao.',
     image: '/uploads/clean_project_thegio.png',
     icon: Building2,
@@ -32,18 +32,18 @@ const defaultCategories: CategoryItem[] = [
     title: 'Nhà Phố Thương Mại',
     subtitle: 'Commercial Shophouse & Townhouses',
     sqm: '1.200.000 m² sàn',
-    count: '8+ Khu đô thị kiểu mẫu',
+    count: '8+ Khu đô thị',
     description: 'Sở hữu mặt tiền kinh doanh đắc địa tại các trục đại lộ huyết mạch, biên độ gia tăng giá trị thương mại bền vững.',
     image: '/uploads/clean_project_lusso.png',
     icon: Home,
   },
   {
     id: 'biet-thu',
-    title: 'Biệt Thự Nghỉ Dưỡng Biển',
+    title: 'Biệt Thự Nghỉ Dưỡng',
     subtitle: 'Coastal & Golf Resort Villas',
     sqm: '1.800.000 m² sàn',
-    count: '5+ Quần thể đại đô thị',
-    description: 'Tổ hợp nghỉ dưỡng all-in-one ôm trọn vịnh biển nguyên sơ, sở hữu lâu dài và vận hành bởi thương hiệu toàn cầu.',
+    count: '5+ Quần thể',
+    description: 'Tổ hợp nghỉ dưỡng ôm trọn vịnh biển nguyên sơ, sở hữu lâu dài và vận hành bởi các thương hiệu toàn cầu.',
     image: '/uploads/clean_project_alora.png',
     icon: Waves,
   },
@@ -52,7 +52,7 @@ const defaultCategories: CategoryItem[] = [
     title: 'Dinh Thự Độc Bản',
     subtitle: 'Bespoke Waterfront Mansions',
     sqm: '850.000 m² cảnh quan',
-    count: '3+ Kiệt tác Haute Couture',
+    count: '3+ Kiệt tác',
     description: 'Biểu tượng truyền đời riêng tư tuyệt đối ven sông, kiến trúc may đo dành riêng cho giới thượng lưu tinh hoa.',
     image: '/uploads/clean_project_anara.png',
     icon: Landmark,
@@ -78,110 +78,99 @@ export default function CategoriesSection({ onSelectCategory, onOpenInquiry }: C
   return (
     <section
       id="categories"
-      className="w-full py-16 sm:py-20 lg:py-28 bg-[#04092b] text-white border-t border-b border-[#c5a26c]/20 relative overflow-hidden"
+      className="w-full py-24 sm:py-28 lg:py-36 bg-[#080C16] text-white relative overflow-hidden border-t border-white/5"
     >
-      {/* Subtle architectural background texture */}
-      <div className="absolute inset-0 bg-[radial-gradient(#c5a26c_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.04] pointer-events-none" />
+      {/* Background Ambience */}
+      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#C5A880]/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-20 relative z-10 space-y-12 sm:space-y-16">
-        {/* Header Block */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <FlowReveal direction="up" distance={30} className="space-y-3 sm:space-y-4 max-w-2xl">
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-[1.5px] bg-[#c5a26c]" />
-              <span className="text-[11px] sm:text-[12px] font-semibold text-[#c5a26c] uppercase tracking-[0.2em] font-accent">
-                GIỎ HÀNG ĐA DẠNG & ĐẶC QUYỀN
-              </span>
-            </div>
-            <h2 className="text-[26px] sm:text-[36px] lg:text-[42px] font-semibold leading-[1.2] text-white font-display">
-              Danh Mục Phân Khúc Bất Động Sản Trọng Điểm
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 relative z-10 space-y-16 lg:space-y-20">
+        {/* Header Block with Generous Whitespace */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 max-w-6xl">
+          <div className="space-y-4 max-w-2xl">
+            <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-[0.25em] font-sans block">
+              PHÂN KHÚC TRỌNG ĐIỂM
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-light text-white leading-tight tracking-tight">
+              Giỏ Hàng Bất Động Sản Cao Cấp
             </h2>
-            <p className="text-[13.5px] sm:text-[15px] text-white/70 font-light leading-relaxed">
-              Tuyển chọn các quỹ căn đắt giá nhất từ những chủ đầu tư uy tín, đảm bảo 100% tính pháp lý minh bạch và tiềm năng tích sản bền vững qua nhiều thế hệ.
+            <div className="w-12 h-0.5 bg-[#C5A880]" />
+            <p className="text-sm sm:text-base text-white/65 font-light leading-relaxed pt-1">
+              Tuyển chọn các quỹ căn đắt giá nhất từ những chủ đầu tư danh tiếng, đảm bảo 100% tính pháp lý minh bạch và tiềm năng tích sản bền vững qua nhiều thế hệ.
             </p>
-          </FlowReveal>
+          </div>
 
-          <FlowReveal direction="up" distance={20} delay={0.15} className="shrink-0">
+          <div className="shrink-0">
             <button
               type="button"
               onClick={() => {
-                if (onOpenInquiry) {
-                  onOpenInquiry('Tư vấn toàn bộ danh mục phân khúc bất động sản');
-                } else {
-                  const el = document.getElementById('contact');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }
+                if (onOpenInquiry) onOpenInquiry('Yêu cầu giỏ hàng tổng hợp các phân khúc');
               }}
-              className="w-full sm:w-auto px-5 sm:px-6 py-3 border border-white/30 hover:border-[#c5a26c] text-white hover:text-[#c5a26c] text-[12px] sm:text-[13px] font-semibold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 rounded-sm group cursor-pointer"
+              className="px-6 py-3 border border-white/20 hover:border-[#C5A880] text-white hover:text-[#C5A880] text-xs font-semibold tracking-[0.15em] uppercase transition-all duration-300 flex items-center gap-2 rounded-sm group cursor-pointer"
             >
-              <span>NHẬN TOÀN BỘ GIỎ HÀNG</span>
-              <ArrowUpRight className="w-4 h-4 text-[#c5a26c] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <span>Nhận Báo Cáo Phân Khúc</span>
+              <ArrowUpRight className="w-4 h-4 text-[#C5A880] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </button>
-          </FlowReveal>
+          </div>
         </div>
 
-        {/* 4 Cards Grid */}
-        <FlowStaggerGroup staggerDelay={0.12} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
-          {defaultCategories.map((item) => {
-            const Icon = item.icon;
+        {/* 4 Clean Editorial Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {defaultCategories.map((cat, idx) => {
+            const Icon = cat.icon;
             return (
-              <FlowItem key={item.id} distance={30}>
-                <div
-                  onClick={() => handleCategoryClick(item.title)}
-                  className="group relative bg-white/[0.03] border border-white/10 hover:border-[#c5a26c] transition-all duration-500 flex flex-col justify-between overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-[#c5a26c]/10 rounded-sm h-full"
-                >
-                  <div>
-                    {/* Thumbnail Image */}
-                    <div className="relative h-[200px] sm:h-[220px] w-full overflow-hidden">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110 brightness-90 group-hover:brightness-100"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#04092b] via-[#04092b]/30 to-transparent" />
-
-                      {/* Icon Badge */}
-                      <div className="absolute top-3 sm:top-4 left-3 sm:left-4 p-2 sm:p-2.5 bg-[#04092b]/80 backdrop-blur-md border border-white/20 rounded">
-                        <Icon className="w-5 h-5 text-[#c5a26c]" />
-                      </div>
-
-                      {/* SQM Metric Tag */}
-                      <div className="absolute bottom-3 right-3 sm:right-4 bg-[#c5a26c] text-[#04092b] font-semibold text-[10px] sm:text-[11px] uppercase tracking-wider px-2 sm:px-2.5 py-1">
-                        {item.sqm}
-                      </div>
+              <motion.div
+                key={cat.id}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                onClick={() => handleCategoryClick(cat.title)}
+                className="group relative bg-white/[0.02] border border-white/10 hover:border-[#C5A880]/60 transition-all duration-500 flex flex-col justify-between overflow-hidden cursor-pointer hover:shadow-2xl rounded-xl"
+              >
+                <div>
+                  {/* Image Frame */}
+                  <div className="relative h-[220px] w-full overflow-hidden bg-black/40">
+                    <Image
+                      src={cat.image}
+                      alt={cat.title}
+                      fill
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#080C16] via-transparent to-transparent" />
+                    
+                    <div className="absolute top-4 left-4 p-2.5 bg-black/60 backdrop-blur-md border border-white/15 rounded-lg">
+                      <Icon className="w-4 h-4 text-[#C5A880]" />
                     </div>
 
-                    {/* Content Details */}
-                    <div className="p-5 sm:p-6 space-y-2.5 sm:space-y-3">
-                      <span className="text-[10px] sm:text-[11px] text-[#c5a26c] uppercase tracking-widest block font-accent">
-                        {item.count}
-                      </span>
-                      <h3 className="text-[18px] sm:text-[20px] font-medium text-white group-hover:text-[#c5a26c] transition-colors font-display leading-snug">
-                        {item.title}
-                      </h3>
-                      <p className="text-[11px] sm:text-[12px] text-white/50 tracking-wide uppercase">
-                        {item.subtitle}
-                      </p>
-                      <p className="text-[12px] sm:text-[13px] text-white/70 font-light leading-relaxed pt-0.5 sm:pt-1">
-                        {item.description}
-                      </p>
+                    <div className="absolute bottom-3 right-4 text-[11px] font-mono text-[#C5A880] tracking-wider">
+                      {cat.count}
                     </div>
                   </div>
 
-                  {/* Card Action Link */}
-                  <div className="p-5 sm:p-6 pt-0 border-t border-white/5 mt-3 sm:mt-4 flex items-center justify-between text-[11px] sm:text-[12px] font-semibold text-white/90 group-hover:text-[#c5a26c] transition-colors uppercase tracking-wider">
-                    <span>XEM DỰ ÁN & BẢNG GIÁ</span>
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-[#c5a26c]" />
+                  {/* Card Content with Generous Padding */}
+                  <div className="p-6 space-y-3">
+                    <h3 className="text-xl font-serif text-white group-hover:text-[#C5A880] transition-colors">
+                      {cat.title}
+                    </h3>
+                    <p className="text-xs text-[#C5A880]/80 tracking-wide font-sans font-medium">
+                      {cat.subtitle}
+                    </p>
+                    <p className="text-xs text-white/60 font-light leading-relaxed pt-1">
+                      {cat.description}
+                    </p>
                   </div>
                 </div>
-              </FlowItem>
+
+                {/* Footer Action */}
+                <div className="px-6 pb-6 pt-2 flex items-center justify-between text-xs font-semibold text-white/80 group-hover:text-[#C5A880] transition-colors border-t border-white/5 uppercase tracking-wider">
+                  <span>Khám phá quỹ căn</span>
+                  <ArrowUpRight className="w-4 h-4 text-[#C5A880] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
+              </motion.div>
             );
           })}
-        </FlowStaggerGroup>
+        </div>
       </div>
     </section>
   );
 }
-
