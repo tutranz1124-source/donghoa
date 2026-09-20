@@ -9,8 +9,10 @@ import CategoriesSection from '@/components/sections/CategoriesSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import PrivateAccessSection from '@/components/sections/PrivateAccessSection';
 import MilestonesSection from '@/components/sections/MilestonesSection';
+import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import MortgageCalculatorSection from '@/components/sections/MortgageCalculatorSection';
 import BlogFeedSection from '@/components/sections/BlogFeedSection';
+import { FAQSection } from '@/components/sections/FAQSection';
 import QuoteContactSection from '@/components/sections/QuoteContactSection';
 import InquiryModal from '@/components/InquiryModal';
 import { SiteContentData, BlogPost } from '@/lib/types';
@@ -132,10 +134,16 @@ export default function ClientHomePage({ initialContent }: { initialContent: Sit
         {/* 8. DẤU ẤN & NĂNG LỰC DOANH NGHIỆP */}
         <MilestonesSection />
 
-        {/* 9. TIN TỨC & GÓC NHÌN THỊ TRƯỜNG */}
+        {/* 9. KHÁCH HÀNG & ĐỐI TÁC ĐỒNG HÀNH */}
+        <TestimonialsSection />
+
+        {/* 10. TIN TỨC & GÓC NHÌN THỊ TRƯỜNG */}
         <BlogFeedSection block={content.blogFeed} posts={posts} />
 
-        {/* 10. KẾT NỐI & TƯ VẤN TRỰC TIẾP */}
+        {/* 11. GIẢI ĐÁP PHÁP LÝ & ĐẦU TƯ BĐS */}
+        <FAQSection />
+
+        {/* 12. KẾT NỐI & TƯ VẤN TRỰC TIẾP */}
         <QuoteContactSection data={content.contact} />
       </main>
 
