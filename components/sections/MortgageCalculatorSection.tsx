@@ -1,188 +1,205 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { Calculator, ArrowRight, DollarSign, Calendar, Percent } from 'lucide-react';
+import { Calculator, ArrowRight, HelpCircle } from 'lucide-react';
 
 interface MortgageCalculatorSectionProps {
   onOpenInquiry?: (defaultMsg?: string) => void;
 }
 
 export default function MortgageCalculatorSection({ onOpenInquiry }: MortgageCalculatorSectionProps) {
-  const [propertyPrice, setPropertyPrice] = useState<number>(10000000000); // 10 Billion VND
+  // State for interactive calculation
+  const [propertyPrice, setPropertyPrice] = useState<number>(5000); // triệu VNĐ (5 Tỷ)
   const [downPaymentPercent, setDownPaymentPercent] = useState<number>(30); // 30%
-  const [loanTermYears, setLoanTermYears] = useState<number>(20); // 20 years
-  const [interestRate, setInterestRate] = useState<number>(7.5); // 7.5% / year
+  const [loanTermYears, setLoanTermYears] = useState<number>(20); // 20 năm
+  const [interestRate, setInterestRate] = useState<number>(8.5); // 8.5% / năm
 
-  // Calculations
-  const downPaymentAmount = useMemo(() => {
-    return (propertyPrice * downPaymentPercent) / 100;
-  }, [propertyPrice, downPaymentPercent]);
+  // Reactive Calculation Logic: Standard Annuity Formula
+  const calculation = useMemo(() => {
+    const downPaymentAmount = (propertyPrice * downPaymentPercent) / 100;
+    const loanAmount = propertyPrice - downPaymentAmount;
 
-  const loanAmount = useMemo(() => {
-    return propertyPrice - downPaymentAmount;
-  }, [propertyPrice, downPaymentAmount]);
+    const totalMonths = loanTermYears * 12;
+    const monthlyInterestRate = interestRate / 100 / 12;
 
-  const monthlyRepayment = useMemo(() => {
-    if (loanAmount <= 0) return 0;
-    const monthlyRate = interestRate / 100 / 12;
-    const numberOfMonths = loanTermYears * 12;
-    if (monthlyRate === 0) return loanAmount / numberOfMonths;
-    const factor = Math.pow(1 + monthlyRate, numberOfMonths);
-    return (loanAmount * (monthlyRate * factor)) / (factor - 1);
-  }, [loanAmount, interestRate, loanTermYears]);
-
-  const formatVND = (num: number) => {
-    if (num >= 1000000000) {
-      return `${(num / 1000000000).toFixed(1).replace('.0', '')} Tỷ VNĐ`;
+    let monthlyPayment = 0;
+    if (loanAmount > 0 && monthlyInterestRate > 0 && totalMonths > 0) {
+      monthlyPayment =
+        (loanAmount *
+          monthlyInterestRate *
+          Math.pow(1 + monthlyInterestRate, totalMonths)) /
+        (Math.pow(1 + monthlyInterestRate, totalMonths) - 1);
     }
-    return `${Math.round(num / 1000000)} Triệu VNĐ`;
+
+    const totalRepayment = monthlyPayment * totalMonths;
+    const totalInterest = totalRepayment - loanAmount;
+
+    return {
+      downPaymentAmount: Math.round(downPaymentAmount),
+      loanAmount: Math.round(loanAmount),
+      monthlyPayment: Math.round(monthlyPayment * 10) / 10,
+      totalInterest: Math.round(totalInterest),
+    };
+  }, [propertyPrice, downPaymentPercent, loanTermYears, interestRate]);
+
+  const formatBillion = (millionVal: number) => {
+    if (millionVal >= 1000) {
+      return `${(millionVal / 1000).toFixed(1).replace('.0', '')} Tỷ VNĐ`;
+    }
+    return `${millionVal} Triệu VNĐ`;
   };
 
   return (
-    <section id="mortgage-calculator" className="w-full py-24 sm:py-28 lg:py-36 bg-[#080C16] text-white border-t border-white/5 relative overflow-hidden">
-      {/* Soft Gold Blur Background */}
-      <div className="absolute top-1/2 left-1/3 w-[500px] h-[500px] bg-[#C5A880]/5 rounded-full blur-[150px] pointer-events-none" />
-
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 relative z-10">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          {/* Left Column: Heading & Description */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-5 space-y-6"
-          >
-            <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-[0.25em] font-sans block">
+    <section id="mortgage-calculator" className="py-20 sm:py-28 bg-white border-b border-warm-200">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
+        <div className="max-w-4xl mx-auto">
+          {/* Header */}
+          <div className="text-center space-y-3 mb-12 sm:mb-16">
+            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
               CÔNG CỤ TÀI CHÍNH
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-light text-white leading-tight tracking-tight">
-              Tính Toán Dòng Tiền & Lộ Trình Đầu Tư
+            <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-[1.2]">
+              Ước Tính Kế Hoạch Vay Mua Bất Động Sản
             </h2>
-            <div className="w-12 h-0.5 bg-[#C5A880]" />
-            <p className="text-sm sm:text-base text-white/65 font-light leading-relaxed">
-              Chủ động hoạch định vốn tự có, đòn bẩy tài chính và hạn mức trả góp hàng tháng với các gói ân hạn nợ gốc từ các ngân hàng đối tác liên kết của Đông Hòa Property.
+            <p className="text-sm text-charcoal-600 max-w-lg mx-auto font-normal leading-relaxed">
+              Công cụ hỗ trợ khách hàng dự toán dòng tiền trả hàng tháng và vốn tự có ban đầu.
             </p>
+          </div>
 
-            <div className="pt-2">
-              <button
-                type="button"
-                onClick={() =>
-                  onOpenInquiry?.(
-                    `Tư vấn phương án tài chính cho bất động sản giá trị ${formatVND(propertyPrice)}`
-                  )
-                }
-                className="px-6 py-3.5 bg-[#C5A880] hover:bg-white text-[#060913] font-semibold text-xs tracking-[0.15em] uppercase transition-all duration-300 shadow-xl rounded-sm flex items-center gap-2 group cursor-pointer"
-              >
-                <span>Nhận Tư Vấn Gói Vay 0%</span>
-                <ArrowRight className="w-4 h-4 text-[#060913] group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
-          </motion.div>
+          {/* Calculator Card Container */}
+          <div className="bg-warm-50 rounded-3xl border border-warm-200 p-6 sm:p-10 lg:p-12 shadow-warm-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              {/* Controls Column */}
+              <div className="lg:col-span-7 space-y-6">
+                {/* 1. Property Price Slider */}
+                <div className="space-y-2">
+                  <div className="flex justify-between text-xs sm:text-sm font-medium">
+                    <span className="text-charcoal-700">Giá trị bất động sản:</span>
+                    <span className="font-semibold text-charcoal text-sm">{formatBillion(propertyPrice)}</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="1500"
+                    max="50000"
+                    step="500"
+                    value={propertyPrice}
+                    onChange={(e) => setPropertyPrice(Number(e.target.value))}
+                    className="w-full h-2 bg-warm-200 rounded-lg appearance-none cursor-pointer accent-gold"
+                  />
+                  <div className="flex justify-between text-[11px] text-charcoal-muted">
+                    <span>1.5 Tỷ</span>
+                    <span>50 Tỷ VNĐ</span>
+                  </div>
+                </div>
 
-          {/* Right Column: Interactive Calculator Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-7 bg-white/[0.02] border border-white/10 p-8 sm:p-10 rounded-2xl shadow-2xl backdrop-blur-md space-y-8"
-          >
-            {/* Input 1: Property Value */}
-            <div className="space-y-3">
-              <div className="flex justify-between items-center text-xs sm:text-sm">
-                <span className="text-white/80 font-medium">Giá trị bất động sản</span>
-                <span className="text-lg font-serif text-[#C5A880] font-normal">
-                  {formatVND(propertyPrice)}
-                </span>
+                {/* 2. Down Payment Percentage */}
+                <div className="space-y-2">
+                  <div className="flex justify-between text-xs sm:text-sm font-medium">
+                    <span className="text-charcoal-700">Tỷ lệ vốn tự có:</span>
+                    <span className="font-semibold text-charcoal text-sm">
+                      {downPaymentPercent}% ({formatBillion(calculation.downPaymentAmount)})
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="20"
+                    max="80"
+                    step="5"
+                    value={downPaymentPercent}
+                    onChange={(e) => setDownPaymentPercent(Number(e.target.value))}
+                    className="w-full h-2 bg-warm-200 rounded-lg appearance-none cursor-pointer accent-gold"
+                  />
+                  <div className="flex justify-between text-[11px] text-charcoal-muted">
+                    <span>20%</span>
+                    <span>80%</span>
+                  </div>
+                </div>
+
+                {/* 3. Loan Term & Interest Rate Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-xs font-medium">
+                      <span className="text-charcoal-700">Thời hạn vay:</span>
+                      <span className="font-semibold text-charcoal">{loanTermYears} năm</span>
+                    </div>
+                    <select
+                      value={loanTermYears}
+                      onChange={(e) => setLoanTermYears(Number(e.target.value))}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-warm-300 text-xs font-medium text-charcoal focus:border-gold outline-none cursor-pointer"
+                    >
+                      <option value={5}>5 Năm (60 tháng)</option>
+                      <option value={10}>10 Năm (120 tháng)</option>
+                      <option value={15}>15 Năm (180 tháng)</option>
+                      <option value={20}>20 Năm (240 tháng)</option>
+                      <option value={25}>25 Năm (300 tháng)</option>
+                      <option value={30}>30 Năm (360 tháng)</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-xs font-medium">
+                      <span className="text-charcoal-700">Lãi suất dự kiến:</span>
+                      <span className="font-semibold text-charcoal">{interestRate}% / năm</span>
+                    </div>
+                    <select
+                      value={interestRate}
+                      onChange={(e) => setInterestRate(Number(e.target.value))}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-warm-300 text-xs font-medium text-charcoal focus:border-gold outline-none cursor-pointer"
+                    >
+                      <option value={7.0}>7.0% (Ưu đãi cố định)</option>
+                      <option value={8.0}>8.0% (Mức trung bình)</option>
+                      <option value={8.5}>8.5% (Tiêu chuẩn hiện hành)</option>
+                      <option value={9.5}>9.5% (Thả nổi)</option>
+                      <option value={10.5}>10.5% (Thả nổi dài hạn)</option>
+                    </select>
+                  </div>
+                </div>
               </div>
-              <input
-                type="range"
-                min={2000000000}
-                max={50000000000}
-                step={500000000}
-                value={propertyPrice}
-                onChange={(e) => setPropertyPrice(Number(e.target.value))}
-                className="w-full accent-[#C5A880] bg-white/10 h-1.5 rounded-lg cursor-pointer"
-              />
-              <div className="flex justify-between text-[11px] text-white/40">
-                <span>2 Tỷ</span>
-                <span>25 Tỷ</span>
-                <span>50 Tỷ</span>
-              </div>
-            </div>
 
-            {/* Input 2: Down Payment */}
-            <div className="space-y-3">
-              <div className="flex justify-between items-center text-xs sm:text-sm">
-                <span className="text-white/80 font-medium">Tỷ lệ vốn tự có (trả trước)</span>
-                <span className="text-sm font-serif text-[#C5A880]">
-                  {downPaymentPercent}% ({formatVND(downPaymentAmount)})
-                </span>
-              </div>
-              <input
-                type="range"
-                min={15}
-                max={70}
-                step={5}
-                value={downPaymentPercent}
-                onChange={(e) => setDownPaymentPercent(Number(e.target.value))}
-                className="w-full accent-[#C5A880] bg-white/10 h-1.5 rounded-lg cursor-pointer"
-              />
-            </div>
+              {/* Output Result Column */}
+              <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-2xl border border-warm-200 shadow-warm-sm space-y-6">
+                <div className="space-y-1">
+                  <span className="text-[11px] font-semibold text-gold uppercase tracking-wider block">
+                    ƯỚC TÍNH TRẢ HÀNG THÁNG
+                  </span>
+                  <div className="text-2xl sm:text-3xl font-serif font-semibold text-charcoal">
+                    {calculation.monthlyPayment.toFixed(1)} <span className="text-sm font-sans font-normal text-charcoal-muted">Triệu / tháng</span>
+                  </div>
+                </div>
 
-            {/* Input 3 & 4: Loan Term & Interest */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-xs text-white/70">Thời hạn vay</label>
-                <select
-                  value={loanTermYears}
-                  onChange={(e) => setLoanTermYears(Number(e.target.value))}
-                  className="w-full px-4 py-3 rounded-lg bg-[#0E1322] border border-white/10 text-white text-xs outline-none focus:border-[#C5A880]"
+                <div className="space-y-3 pt-3 border-t border-warm-100 text-xs">
+                  <div className="flex justify-between text-charcoal-600">
+                    <span>Vốn tự có ban đầu:</span>
+                    <span className="font-semibold text-charcoal">{formatBillion(calculation.downPaymentAmount)}</span>
+                  </div>
+                  <div className="flex justify-between text-charcoal-600">
+                    <span>Số tiền vay ngân hàng:</span>
+                    <span className="font-semibold text-charcoal">{formatBillion(calculation.loanAmount)}</span>
+                  </div>
+                  <div className="flex justify-between text-charcoal-600">
+                    <span>Thời hạn vay:</span>
+                    <span className="font-semibold text-charcoal">{loanTermYears * 12} tháng</span>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (onOpenInquiry) {
+                      onOpenInquiry('Tư vấn gói tài chính & hỗ trợ vay mua BĐS');
+                    } else {
+                      const el = document.getElementById('contact');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="w-full py-3 rounded-xl bg-charcoal hover:bg-gold text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-warm-sm"
                 >
-                  <option value={5}>5 Năm</option>
-                  <option value={10}>10 Năm</option>
-                  <option value={15}>15 Năm</option>
-                  <option value={20}>20 Năm</option>
-                  <option value={25}>25 Năm</option>
-                  <option value={30}>30 Năm</option>
-                  <option value={35}>35 Năm</option>
-                </select>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-xs text-white/70">Lãi suất dự kiến (% / năm)</label>
-                <input
-                  type="number"
-                  step="0.1"
-                  min="4"
-                  max="15"
-                  value={interestRate}
-                  onChange={(e) => setInterestRate(Number(e.target.value))}
-                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white text-xs outline-none focus:border-[#C5A880]"
-                />
+                  <span>Nhận bảng tính chi tiết</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
               </div>
             </div>
-
-            {/* Calculation Result Summary */}
-            <div className="p-6 rounded-xl bg-white/[0.03] border border-[#C5A880]/30 space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs text-white/50">Ước tính trả hàng tháng (Gốc + Lãi)</p>
-                  <p className="text-2xl sm:text-3xl font-serif text-[#C5A880] mt-1">
-                    {formatVND(monthlyRepayment)}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-xs text-white/50">Hạn mức ngân hàng giải ngân</p>
-                  <p className="text-sm font-semibold text-white mt-1">
-                    {formatVND(loanAmount)}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

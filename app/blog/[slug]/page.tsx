@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      images: [{ url: post.featuredImage || '/uploads/figma_styles_grid.png' }]
+      images: [{ url: post.featuredImage || '/uploads/clean_project_thegio.png' }]
     }
   };
 }
@@ -37,7 +37,7 @@ export default function BlogPostDetailPage({ params }: { params: { slug: string 
   return (
     <>
       <Navbar settings={content.settings} />
-      <main className="flex-1 pt-32 pb-24 px-6 sm:px-12 lg:px-24 bg-[#060913] text-white">
+      <main className="flex-1 pt-28 sm:pt-32 pb-24 px-6 sm:px-12 lg:px-20 bg-[#FAF8F5] text-charcoal">
         <BlogPostClient post={post} relatedPosts={relatedPosts} />
       </main>
       <Footer settings={content.settings} />

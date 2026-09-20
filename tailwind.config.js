@@ -8,32 +8,42 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        navy: {
-          DEFAULT: '#060913',
-          900: '#060913',
-          800: '#080C16',
-          700: '#0A0E1A',
-        },
-        gold: {
-          DEFAULT: '#C5A880',
-          light: '#D4B37F',
-          dark: '#B38F57',
+        warm: {
+          50: '#FAF8F5',
+          100: '#F5F2EB',
+          200: '#EBE6DC',
+          300: '#DDD6C9',
+          400: '#C7BDAA',
         },
         charcoal: {
-          DEFAULT: '#060913',
-          text: '#FFFFFF',
+          DEFAULT: '#161A22',
+          900: '#11141B',
+          800: '#161A22',
+          700: '#232936',
+          600: '#384152',
+          muted: '#687182',
+        },
+        gold: {
+          DEFAULT: '#B89358',
+          light: '#D4B37F',
+          dark: '#9A753C',
+        },
+        bronze: {
+          DEFAULT: '#B89358',
+          dark: '#8C6832',
         },
       },
       fontFamily: {
-        sans: ['var(--font-be-vietnam)', 'var(--font-montserrat)', 'sans-serif'],
+        sans: ['var(--font-be-vietnam)', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         serif: ['var(--font-playfair)', 'Georgia', 'serif'],
         display: ['var(--font-playfair)', 'Georgia', 'serif'],
-        accent: ['var(--font-be-vietnam)', 'var(--font-montserrat)', 'sans-serif'],
+        accent: ['var(--font-be-vietnam)', 'sans-serif'],
       },
       boxShadow: {
-        'luxury': '0 20px 40px -15px rgba(0, 0, 0, 0.4)',
-        'luxury-hover': '0 25px 50px -12px rgba(197, 168, 128, 0.2)',
-      }
+        'warm-sm': '0 2px 8px rgba(22, 26, 34, 0.04)',
+        'warm-md': '0 10px 30px rgba(22, 26, 34, 0.06)',
+        'warm-lg': '0 20px 40px rgba(22, 26, 34, 0.08)',
+      },
     },
   },
   plugins: [],

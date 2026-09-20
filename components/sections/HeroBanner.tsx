@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ArrowRight, ShieldCheck } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { HeroData } from '@/lib/types';
 
 interface HeroBannerProps {
@@ -14,32 +14,32 @@ interface HeroBannerProps {
 const defaultSlides = [
   {
     tag: 'ĐÔNG HÒA PROPERTY • PHÂN PHỐI CHIẾN LƯỢC',
-    title: 'Kiến Tạo Giá Trị — Nâng Tầm Chuẩn Sống',
-    subtitle: 'Đồng hành cùng quý khách hàng trên hành trình sở hữu bất động sản vị trí kim cương, pháp lý minh bạch và tiềm năng sinh lời bền vững.',
-    backgroundImage: '/uploads/clean_project_vingroup.png',
-    primaryButton: 'Khám phá giỏ hàng',
+    title: 'Kiến Tạo Chuẩn Sống — Tuyển Chọn Bất Động Sản Độc Bản',
+    subtitle: 'Đồng hành tư vấn chuyên sâu các dự án sở hữu vị trí chiến lược, quy hoạch chuẩn mực và thẩm định pháp lý minh bạch.',
+    backgroundImage: '/uploads/clean_project_thegio.png',
+    primaryButton: 'Khám phá dự án',
     primaryTarget: '#projects',
-    secondaryButton: 'Nhận bảng giá VIP',
-    secondaryTarget: '#private-access',
+    secondaryButton: 'Liên hệ tư vấn',
+    secondaryTarget: '#contact',
   },
   {
-    tag: 'QUỸ CĂN BIỂU TƯỢNG • TP. HỒ CHÍ MINH',
-    title: 'Tuyển Chọn Dự Án Hạng Sang Độc Bản',
-    subtitle: '100% dự án được thẩm định pháp lý chặt chẽ từ các chủ đầu tư danh tiếng: Vingroup, Gamuda Land, An Gia, Kita Group, KDI Holdings.',
-    backgroundImage: '/uploads/clean_project_thegio.png',
+    tag: 'QUỸ CĂN CHỌN LỌC • TP. HỒ CHÍ MINH & KHU VỰC TRỌNG ĐIỂM',
+    title: 'Danh Mục Căn Hộ & Biệt Thự Cao Cấp',
+    subtitle: 'Hợp tác phân phối chính thức từ các chủ đầu tư uy tín hàng đầu: Masterise Homes, Gamuda Land, Vingroup, Khang Điền.',
+    backgroundImage: '/uploads/clean_project_vingroup.png',
     primaryButton: 'Xem các phân khúc',
     primaryTarget: '#categories',
-    secondaryButton: 'Tính toán tài chính',
-    secondaryTarget: '#mortgage-calculator',
+    secondaryButton: 'Khám phá giỏ hàng',
+    secondaryTarget: '#projects',
   },
   {
-    tag: 'TƯ VẤN ĐẦU TƯ & TÀI CHÍNH BẤT ĐỘNG SẢN',
-    title: 'Dịch Vụ Tư Vấn Tận Tâm — Bảo Mật Tuyệt Đối',
-    subtitle: 'Hỗ trợ giải ngân ngân hàng linh hoạt, cập nhật tiến độ xây dựng liên tục và đồng hành bàn giao chuẩn mực.',
+    tag: 'TƯ VẤN GIẢI PHÁP ĐẦU TƯ BỀN VỮNG',
+    title: 'Tận Tâm Đồng Hành — Bảo Mật Tuyệt Đối',
+    subtitle: 'Cung cấp góc nhìn thị trường chuẩn xác, phân tích tiềm năng thực tế và hỗ trợ xuyên suốt quá trình giao dịch.',
     backgroundImage: '/uploads/clean_project_alora.png',
-    primaryButton: 'Đăng ký tư vấn 1-1',
+    primaryButton: 'Đăng ký tư vấn',
     primaryTarget: '#contact',
-    secondaryButton: 'Góc nhìn thị trường',
+    secondaryButton: 'Tin tức thị trường',
     secondaryTarget: '/blog',
   },
 ];
@@ -79,23 +79,23 @@ export default function HeroBanner({ data, onOpenInquiry }: HeroBannerProps) {
   };
 
   return (
-    <section className="relative w-full min-h-[640px] sm:min-h-[720px] lg:h-[840px] bg-[#060913] overflow-hidden flex items-center select-none pt-20">
-      {/* Background Images with Cinematic Slow Scale */}
+    <section className="relative w-full min-h-[620px] sm:min-h-[700px] lg:h-[820px] bg-warm-100 overflow-hidden flex items-center select-none pt-16 sm:pt-20">
+      {/* Background Architectural Visuals with Soft Warm Vignette */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {slides.map((s: any, idx: number) => {
           const isActive = currentSlide === idx;
-          const bgUrl = s.backgroundImage || '/uploads/clean_project_vingroup.png';
+          const bgUrl = s.backgroundImage || '/uploads/clean_project_thegio.png';
           return (
             <motion.div
               key={idx}
               initial={false}
               animate={{
                 opacity: isActive ? 1 : 0,
-                scale: isActive ? 1.03 : 1.08,
+                scale: isActive ? 1.02 : 1.06,
               }}
               transition={{
-                opacity: { duration: 1.4, ease: [0.25, 1, 0.5, 1] },
-                scale: { duration: 8, ease: 'easeOut' },
+                opacity: { duration: 1.2, ease: [0.25, 1, 0.5, 1] },
+                scale: { duration: 7, ease: 'easeOut' },
               }}
               className="absolute inset-0 will-change-transform"
             >
@@ -110,76 +110,81 @@ export default function HeroBanner({ data, onOpenInquiry }: HeroBannerProps) {
           );
         })}
 
-        {/* Deep Architectural Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#060913]/90 via-[#060913]/65 to-[#060913]/30 pointer-events-none z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-black/30 pointer-events-none z-10" />
+        {/* Soft, Warm Architectural Gradient Overlays (Never pitch black) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/30 pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-warm-50 via-transparent to-white/40 pointer-events-none z-10" />
       </div>
 
-      {/* Main Content Container with Generous Breathing Room */}
+      {/* Hero Content Container */}
       <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="relative z-20 max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 w-full flex flex-col justify-center h-full py-16"
+        className="relative z-20 max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 w-full flex flex-col justify-center h-full py-12"
       >
-        <div className="max-w-3xl space-y-6 sm:space-y-8">
+        <div className="max-w-2xl space-y-6">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-6"
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-5"
             >
-              {/* Tag / Eyebrow */}
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#C5A880]/30 text-[#C5A880] text-xs font-semibold tracking-[0.2em] uppercase font-sans">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880]" />
+              {/* Eyebrow Label */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-warm-300 shadow-warm-sm text-gold text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase font-sans">
                 <span>{currentItem.tag || 'ĐÔNG HÒA PROPERTY'}</span>
               </div>
 
               {/* Headline */}
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-light text-white leading-[1.15] tracking-tight">
-                {currentItem.title || currentItem.line1 || 'Kiến Tạo Giá Trị — Nâng Tầm Chuẩn Sống'}
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-normal text-charcoal leading-[1.14] tracking-tight">
+                {currentItem.title || currentItem.line1 || 'Kiến Tạo Chuẩn Sống — Tuyển Chọn Bất Động Sản Độc Bản'}
               </h1>
 
               {/* Subtitle */}
-              <p className="text-base sm:text-lg text-white/80 font-light leading-relaxed max-w-2xl">
+              <p className="text-base sm:text-[17px] text-charcoal-600 font-normal leading-relaxed max-w-xl">
                 {currentItem.subtitle || currentItem.description}
               </p>
 
               {/* Action Buttons */}
-              <div className="pt-4 flex flex-wrap items-center gap-4">
+              <div className="pt-3 flex flex-wrap items-center gap-3.5">
                 <button
                   type="button"
                   onClick={() => handleNav(currentItem.primaryTarget || '#projects')}
-                  className="px-7 py-3.5 rounded-sm bg-[#C5A880] hover:bg-white text-[#060913] font-semibold text-xs tracking-[0.15em] uppercase transition-all duration-300 shadow-xl flex items-center gap-2.5 group cursor-pointer"
+                  className="px-7 py-3.5 rounded-full bg-charcoal hover:bg-gold text-white font-medium text-xs tracking-[0.12em] uppercase transition-all duration-300 shadow-warm-sm flex items-center gap-2.5 group cursor-pointer active:scale-95"
                 >
                   <span>{currentItem.primaryButton || 'Khám phá dự án'}</span>
-                  <ArrowRight className="w-4 h-4 text-[#060913] group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
                 </button>
 
                 <button
                   type="button"
-                  onClick={() => handleNav(currentItem.secondaryTarget || '#private-access')}
-                  className="px-7 py-3.5 rounded-sm border border-white/30 hover:border-[#C5A880] text-white hover:text-[#C5A880] font-semibold text-xs tracking-[0.15em] uppercase transition-all duration-300 backdrop-blur-sm cursor-pointer"
+                  onClick={() => {
+                    if (onOpenInquiry) {
+                      onOpenInquiry();
+                    } else {
+                      handleNav(currentItem.secondaryTarget || '#contact');
+                    }
+                  }}
+                  className="px-7 py-3.5 rounded-full bg-white/90 hover:bg-white border border-warm-300 hover:border-gold text-charcoal hover:text-gold font-medium text-xs tracking-[0.12em] uppercase transition-all duration-300 shadow-warm-sm backdrop-blur-sm cursor-pointer"
                 >
-                  <span>{currentItem.secondaryButton || 'Nhận bảng giá VIP'}</span>
+                  <span>{currentItem.secondaryButton || 'Liên hệ tư vấn'}</span>
                 </button>
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Slide Indicators & Navigation Bar */}
-        <div className="mt-12 sm:mt-16 flex items-center justify-between pt-8 border-t border-white/10 max-w-3xl">
-          <div className="flex items-center gap-2.5">
+        {/* Slide Indicator Bar */}
+        <div className="mt-10 sm:mt-14 flex items-center justify-between pt-6 border-t border-warm-300/80 max-w-2xl">
+          <div className="flex items-center gap-2">
             {slides.map((_: any, idx: number) => (
               <button
                 key={idx}
                 onClick={() => setCurrentSlide(idx)}
                 aria-label={`Slide ${idx + 1}`}
                 className={`h-1.5 rounded-full transition-all duration-500 ${
-                  currentSlide === idx ? 'w-10 bg-[#C5A880]' : 'w-2 bg-white/30 hover:bg-white/60'
+                  currentSlide === idx ? 'w-9 bg-gold' : 'w-2 bg-charcoal/20 hover:bg-charcoal/40'
                 }`}
               />
             ))}
@@ -189,17 +194,17 @@ export default function HeroBanner({ data, onOpenInquiry }: HeroBannerProps) {
             <button
               onClick={prevSlide}
               aria-label="Previous slide"
-              className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:text-white hover:border-[#C5A880] hover:bg-white/5 transition-all"
+              className="w-8 h-8 rounded-full border border-warm-300 bg-white/80 flex items-center justify-center text-charcoal-700 hover:text-charcoal hover:border-gold transition-all shadow-warm-sm"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
-            <span className="text-xs font-mono text-white/50">
+            <span className="text-xs font-mono text-charcoal-muted">
               0{currentSlide + 1} / 0{slides.length}
             </span>
             <button
               onClick={nextSlide}
               aria-label="Next slide"
-              className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:text-white hover:border-[#C5A880] hover:bg-white/5 transition-all"
+              className="w-8 h-8 rounded-full border border-warm-300 bg-white/80 flex items-center justify-center text-charcoal-700 hover:text-charcoal hover:border-gold transition-all shadow-warm-sm"
             >
               <ChevronRight className="w-4 h-4" />
             </button>

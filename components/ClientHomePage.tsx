@@ -9,7 +9,6 @@ import CategoriesSection from '@/components/sections/CategoriesSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import PrivateAccessSection from '@/components/sections/PrivateAccessSection';
 import MilestonesSection from '@/components/sections/MilestonesSection';
-import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import MortgageCalculatorSection from '@/components/sections/MortgageCalculatorSection';
 import BlogFeedSection from '@/components/sections/BlogFeedSection';
 import { FAQSection } from '@/components/sections/FAQSection';
@@ -30,7 +29,7 @@ export default function ClientHomePage({ initialContent }: { initialContent: Sit
   };
 
   useEffect(() => {
-    // 1. Instant check from localStorage for immediate reflection when admin saves
+    // 1. Instant check from localStorage
     try {
       const stored = localStorage.getItem('donghoa_site_content');
       if (stored) {
@@ -39,9 +38,7 @@ export default function ClientHomePage({ initialContent }: { initialContent: Sit
           setContent(parsed);
         }
       }
-    } catch (e) {
-      // ignore
-    }
+    } catch (e) {}
 
     // 2. Fetch fresh content from API
     fetch('/api/content')
@@ -66,7 +63,7 @@ export default function ClientHomePage({ initialContent }: { initialContent: Sit
       })
       .catch(() => {});
 
-    // 4. Real-time BroadcastChannel sync across tabs/windows
+    // 4. Real-time BroadcastChannel sync
     let bc: BroadcastChannel | null = null;
     try {
       if (typeof BroadcastChannel !== 'undefined') {
@@ -79,7 +76,7 @@ export default function ClientHomePage({ initialContent }: { initialContent: Sit
       }
     } catch (e) {}
 
-    // 5. Storage event listener for multi-tab sync
+    // 5. Storage event listener
     const handleStorage = (ev: StorageEvent) => {
       if (ev.key === 'donghoa_site_content' && ev.newValue) {
         try {
@@ -101,53 +98,50 @@ export default function ClientHomePage({ initialContent }: { initialContent: Sit
   const settings = content.settings;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#060913] text-white selection:bg-[#C5A880] selection:text-[#060913]">
+    <div className="min-h-screen flex flex-col bg-[#FAF8F5] text-charcoal selection:bg-gold selection:text-white">
       {/* 1. HEADER NAVIGATION */}
       <Navbar settings={settings} onOpenInquiry={handleOpenInquiry} />
 
       <main className="flex-1">
         {/* 2. HERO BANNER */}
-        <HeroBanner data={content.hero} />
+        <HeroBanner data={content.hero} onOpenInquiry={handleOpenInquiry} />
 
-        {/* 3. VỀ CHÚNG TÔI & TẦM NHÌN SỨ MỆNH */}
+        {/* 3. VỀ CHÚNG TÔI & TRIẾT LÝ TƯ VẤN */}
         <PhilosophySection data={content.philosophy} />
 
-        {/* 4. GIỎ HÀNG PHÂN KHÚC TRỌNG ĐIỂM */}
+        {/* 4. PHÂN KHÚC BẤT ĐỘNG SẢN (EDITORIAL 01-04) */}
         <CategoriesSection
           onSelectCategory={(cat) => setSelectedCategory(cat)}
           onOpenInquiry={handleOpenInquiry}
         />
 
-        {/* 5. DANH MỤC DỰ ÁN NỔI BẬT */}
+        {/* 5. DANH MỤC DỰ ÁN TRỌNG ĐIỂM (HIERARCHY + REAL FILTER) */}
         <ProjectsSection
           block={content.projects}
           selectedCategory={selectedCategory}
           onOpenInquiry={handleOpenInquiry}
         />
 
-        {/* 6. ĐẶC QUYỀN GIỎ HÀNG NỘI BỘ & BẢNG GIÁ */}
+        {/* 6. PRIVATE PROPERTY ACCESS */}
         <PrivateAccessSection onOpenInquiry={handleOpenInquiry} />
 
-        {/* 7. CÔNG CỤ TÍNH TOÁN DÒNG TIỀN VÀ ĐẦU TƯ */}
+        {/* 7. CÔNG CỤ TÍNH TOÁN DÒNG TIỀN VAY */}
         <MortgageCalculatorSection onOpenInquiry={handleOpenInquiry} />
 
-        {/* 8. DẤU ẤN & NĂNG LỰC DOANH NGHIỆP */}
+        {/* 8. NĂNG LỰC & ĐỐI TÁC PHÁT TRIỂN */}
         <MilestonesSection />
 
-        {/* 9. KHÁCH HÀNG & ĐỐI TÁC ĐỒNG HÀNH */}
-        <TestimonialsSection />
-
-        {/* 10. TIN TỨC & GÓC NHÌN THỊ TRƯỜNG */}
+        {/* 9. TIN TỨC & GÓC NHÌN THỊ TRƯỜNG */}
         <BlogFeedSection block={content.blogFeed} posts={posts} />
 
-        {/* 11. GIẢI ĐÁP PHÁP LÝ & ĐẦU TƯ BĐS */}
+        {/* 10. HỎI ĐÁP QUY TRÌNH & PHÁP LÝ (3 CÂU HỎI) */}
         <FAQSection />
 
-        {/* 12. KẾT NỐI & TƯ VẤN TRỰC TIẾP */}
+        {/* 11. LIÊN HỆ CHUYÊN VIÊN TƯ VẤN */}
         <QuoteContactSection data={content.contact} />
       </main>
 
-      {/* 11. FOOTER */}
+      {/* 12. FOOTER */}
       <Footer settings={settings} />
 
       {/* GLOBAL INQUIRY MODAL */}

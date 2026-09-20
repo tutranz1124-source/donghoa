@@ -64,6 +64,9 @@ export interface ContactData {
   heading: string;
   quote: string;
   image: string;
+  phone?: string;
+  email?: string;
+  address?: string;
 }
 
 export interface StyleItemData {
@@ -228,6 +231,7 @@ export interface ProjectItem {
   name: string;
   title?: string;
   developer?: string;
+  investor?: string;
   area?: string;
   location?: string;
   propertyTypes?: string;
@@ -235,9 +239,11 @@ export interface ProjectItem {
   scale?: string;
   description?: string;
   price?: string;
+  priceRange?: string;
   handover?: string;
   ownership?: string;
   image: string;
+  imageUrl?: string;
   featured?: boolean;
 }
 

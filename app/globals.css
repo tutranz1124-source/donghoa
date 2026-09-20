@@ -3,62 +3,58 @@
 @tailwind utilities;
 
 :root {
-  --navy: #060913;
-  --gold: #C5A880;
+  --bg-primary: #FAF8F5;
+  --bg-secondary: #F5F2EB;
+  --bg-card: #FFFFFF;
+  --text-primary: #161A22;
+  --text-secondary: #687182;
+  --text-muted: #8E97A6;
+  --border-subtle: #E8E3DA;
+  --border-strong: #D5CDC0;
+  --gold: #B89358;
+  --gold-dark: #9A753C;
   --gold-light: #D4B37F;
-  --gold-dark: #B38F57;
-  --dark: #060913;
-  --charcoal: #060913;
-  --muted: #9CA3AF;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    color: #FFFFFF;
-    background-color: #060913;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   
   body {
-    background-color: #060913;
-    color: #FFFFFF;
+    background-color: #FAF8F5;
+    color: #161A22;
     overflow-x: hidden;
     font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
   h1, h2, h3, .font-serif, .font-display {
     font-family: var(--font-playfair), Georgia, serif;
+    letter-spacing: -0.015em;
   }
 }
 
-/* Custom scrollbar for luxury feel */
+/* Custom scrollbar for refined architectural feel */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #060913;
+  background: #FAF8F5;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C5A880;
-  border-radius: 4px;
+  background: #DDD6C9;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D4B37F;
+  background: #B89358;
 }
 
-.luxury-gradient {
-  background: linear-gradient(135deg, rgba(6,9,19,0.95) 0%, rgba(10,14,26,0.9) 100%);
-}
-
-.gold-gradient {
-  background: linear-gradient(135deg, #C5A880 0%, #E2D2BC 50%, #B38F57 100%);
-}
-
-.gold-text-gradient {
-  background: linear-gradient(135deg, #C5A880 0%, #FFFFFF 50%, #C5A880 100%);
+.gold-gradient-text {
+  background: linear-gradient(135deg, #B89358 0%, #161A22 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-

@@ -208,7 +208,7 @@ export default function AdminProjectsPage() {
     const q = searchQuery.toLowerCase();
     const matchesSearch =
       !q ||
-      p.name.toLowerCase().includes(q) ||
+      (p.name || p.title || '').toLowerCase().includes(q) ||
       (p.developer && p.developer.toLowerCase().includes(q)) ||
       (p.location && p.location.toLowerCase().includes(q)) ||
       (p.propertyTypes && p.propertyTypes.toLowerCase().includes(q));

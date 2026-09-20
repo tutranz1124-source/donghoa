@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Send, AlertCircle, Phone, Mail, MapPin } from 'lucide-react';
+import { PhoneCall, Mail, MapPin, CheckCircle2, ArrowRight } from 'lucide-react';
 import { ContactData } from '@/lib/types';
 
 interface QuoteContactSectionProps {
@@ -15,259 +13,244 @@ export default function QuoteContactSection({ data }: QuoteContactSectionProps) 
     fullName: '',
     phone: '',
     email: '',
-    propertyType: '',
-    area: '',
-    need: '',
+    budget: '3-5-ty',
+    propertyType: 'can-ho',
+    notes: '',
   });
-  const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const image = data?.image || '/uploads/clean_contact_photo.png';
-  const tag = data?.tag || 'KẾT NỐI TRỰC TIẾP';
-  const heading = data?.heading || 'Đăng Ký Tư Vấn & Nhận Thông Tin Dự Án';
-  const quote =
-    data?.quote ||
-    'Để lại thông tin, đội ngũ Chuyên viên Tư vấn Cấp cao của Đông Hòa Property sẽ phản hồi bảo mật và cung cấp tài liệu chi tiết trong vòng 15 phút.';
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.fullName.trim() || !formData.phone.trim()) {
-      setErrorMessage('Vui lòng điền họ tên và số điện thoại liên hệ.');
-      return;
-    }
-
-    setIsSubmitting(true);
+    setStatus('loading');
     setErrorMessage('');
 
     try {
-      const response = await fetch('/api/contact', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          phone: formData.phone,
+          email: formData.email,
+          budget: formData.budget,
+          serviceType: formData.propertyType,
+          note: formData.notes,
+          source: 'Trang chủ - Form Tư Vấn Bất Động Sản',
+        }),
       });
 
-      const resJson = await response.json();
-
-      if (!response.ok || resJson.error) {
-        throw new Error(resJson.error || 'Gửi yêu cầu không thành công');
+      const json = await res.json();
+      if (!res.ok) {
+        throw new Error(json.error || 'Có lỗi xảy ra, vui lòng thử lại.');
       }
 
-      setSubmitted(true);
+      setStatus('success');
     } catch (err: any) {
-      console.error('Contact submission error:', err);
-      setErrorMessage(
-        err.message || 'Đã có lỗi xảy ra. Quý khách vui lòng thử lại hoặc gọi trực tiếp hotline.'
-      );
-    } finally {
-      setIsSubmitting(false);
+      setStatus('error');
+      setErrorMessage(err.message || 'Không thể gửi biểu mẫu. Vui lòng liên hệ trực tiếp qua hotline.');
     }
   };
 
-  const handleReset = () => {
-    setFormData({
-      fullName: '',
-      phone: '',
-      email: '',
-      propertyType: '',
-      area: '',
-      need: '',
-    });
-    setSubmitted(false);
-    setErrorMessage('');
-  };
-
   return (
-    <section id="contact" className="w-full py-24 sm:py-28 lg:py-36 bg-[#060913] text-white border-t border-white/5 relative overflow-hidden">
-      {/* Background Subtle Ambience */}
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#C5A880]/5 rounded-full blur-[140px] pointer-events-none" />
-
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 relative z-10">
-        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          {/* LEFT SIDE: Architectural Visual + Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="w-full lg:col-span-5 space-y-8"
-          >
-            <div className="relative w-full aspect-[4/5] max-w-[500px] rounded-2xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl group mx-auto lg:mx-0">
-              <Image
-                src={image}
-                alt="Đông Hòa Property - Liên hệ tư vấn"
-                fill
-                className="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-transparent opacity-80" />
-            </div>
-
-            {/* Direct Contact Cards */}
-            <div className="space-y-3 pt-2">
-              <a
-                href="tel:0906499279"
-                className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-[#C5A880]/40 transition-all group"
-              >
-                <div className="w-10 h-10 rounded-lg bg-[#C5A880]/10 flex items-center justify-center text-[#C5A880] group-hover:bg-[#C5A880] group-hover:text-black transition-colors">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="text-xs text-white/50">Hotline 24/7</p>
-                  <p className="text-sm font-semibold text-white group-hover:text-[#C5A880] transition-colors">0906.499.279</p>
-                </div>
-              </a>
-
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                <div className="w-10 h-10 rounded-lg bg-[#C5A880]/10 flex items-center justify-center text-[#C5A880]">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="text-xs text-white/50">Trụ sở chính</p>
-                  <p className="text-xs text-white/80 font-light">113-115 Ung Văn Khiêm, Phường Thạnh Mỹ Tây, TP.HCM</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* RIGHT SIDE: Elegant Form Container */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="w-full lg:col-span-7 bg-white/[0.02] border border-white/10 rounded-2xl p-8 sm:p-12 backdrop-blur-md shadow-2xl"
-          >
-            <div className="space-y-4 mb-8">
-              <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-[0.25em] font-sans block">
-                {tag}
+    <section id="contact" className="py-20 sm:py-28 bg-white border-b border-warm-200">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* Left Column: Contact Details & Advisory Proposition */}
+          <div className="lg:col-span-5 space-y-8">
+            <div className="space-y-3">
+              <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
+                KẾT NỐI TƯ VẤN
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-light text-white leading-tight tracking-tight">
-                {heading}
+              <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-[1.2]">
+                Liên Hệ Chuyên Viên Tư Vấn
               </h2>
-              <div className="w-12 h-0.5 bg-[#C5A880]" />
-              <p className="text-xs sm:text-sm text-white/65 font-light leading-relaxed">
-                {quote}
+              <p className="text-sm sm:text-base text-charcoal-600 leading-relaxed font-normal pt-1">
+                Quý khách vui lòng để lại thông tin hoặc liên hệ trực tiếp văn phòng Đông Hòa Property để nhận hỗ trợ chọn căn và tư vấn phương án tài chính tối ưu.
               </p>
             </div>
 
-            <AnimatePresence mode="wait">
-              {submitted ? (
-                <motion.div
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className="p-8 text-center space-y-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30"
+            {/* Direct Contact Info */}
+            <div className="space-y-4 pt-2">
+              <a
+                href={`tel:${(data?.phone || '0906.499.279').replace(/\D/g, '')}`}
+                className="flex items-center gap-4 p-4 rounded-2xl bg-warm-50 border border-warm-200 hover:border-gold/50 transition-colors group"
+              >
+                <div className="w-11 h-11 rounded-full bg-white border border-warm-200 flex items-center justify-center text-gold group-hover:scale-110 transition-transform shadow-warm-sm">
+                  <PhoneCall className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-xs text-charcoal-muted block">Hotline tư vấn</span>
+                  <span className="text-base font-semibold text-charcoal font-mono">{data?.phone || '0906.499.279'}</span>
+                </div>
+              </a>
+
+              <a
+                href={`mailto:${data?.email || 'donghoaproperty@gmail.com'}`}
+                className="flex items-center gap-4 p-4 rounded-2xl bg-warm-50 border border-warm-200 hover:border-gold/50 transition-colors group"
+              >
+                <div className="w-11 h-11 rounded-full bg-white border border-warm-200 flex items-center justify-center text-gold group-hover:scale-110 transition-transform shadow-warm-sm">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-xs text-charcoal-muted block">Email liên hệ</span>
+                  <span className="text-sm font-medium text-charcoal">{data?.email || 'donghoaproperty@gmail.com'}</span>
+                </div>
+              </a>
+
+              <div className="flex items-start gap-4 p-4 rounded-2xl bg-warm-50 border border-warm-200">
+                <div className="w-11 h-11 rounded-full bg-white border border-warm-200 flex items-center justify-center text-gold shrink-0 shadow-warm-sm">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-xs text-charcoal-muted block">Địa chỉ văn phòng</span>
+                  <span className="text-xs sm:text-sm text-charcoal-700 leading-relaxed font-normal">
+                    {data?.address || 'TP. Hồ Chí Minh & các văn phòng đại diện dự án'}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Clean Form Container */}
+          <div className="lg:col-span-7 bg-warm-50 p-8 sm:p-10 rounded-3xl border border-warm-200 shadow-warm-sm">
+            {status === 'success' ? (
+              <div className="py-12 text-center space-y-4 animate-in fade-in duration-300">
+                <div className="w-14 h-14 rounded-full bg-white border border-warm-200 flex items-center justify-center mx-auto text-gold shadow-warm-sm">
+                  <CheckCircle2 className="w-8 h-8" />
+                </div>
+                <h3 className="text-2xl font-serif font-medium text-charcoal">Yêu Cầu Đã Được Tiếp Nhận</h3>
+                <p className="text-sm text-charcoal-600 max-w-md mx-auto leading-relaxed">
+                  Cảm ơn quý khách đã gửi thông tin. Chuyên viên tư vấn Đông Hòa Property sẽ chủ động liên hệ hỗ trợ trong thời gian sớm nhất.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStatus('idle');
+                    setFormData({
+                      fullName: '',
+                      phone: '',
+                      email: '',
+                      budget: '3-5-ty',
+                      propertyType: 'can-ho',
+                      notes: '',
+                    });
+                  }}
+                  className="px-6 py-2.5 rounded-full bg-charcoal text-white text-xs font-semibold uppercase tracking-wider hover:bg-gold transition-colors"
                 >
-                  <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
-                  <h3 className="text-xl font-serif text-white">Gửi Yêu Cầu Thành Công!</h3>
-                  <p className="text-xs text-white/70 max-w-md mx-auto font-light leading-relaxed">
-                    Cảm ơn quý khách. Chuyên viên tư vấn của Đông Hòa Property sẽ liên hệ lại qua số điện thoại <strong>{formData.phone}</strong> trong vòng 15 phút.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={handleReset}
-                    className="mt-4 px-6 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-semibold uppercase tracking-wider transition-all"
-                  >
-                    Gửi yêu cầu khác
-                  </button>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {errorMessage && (
-                    <div className="p-3.5 rounded-lg bg-red-500/10 border border-red-500/30 flex items-center gap-2 text-xs text-red-300">
-                      <AlertCircle className="w-4 h-4 shrink-0" />
-                      <span>{errorMessage}</span>
-                    </div>
-                  )}
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-white/80">Họ và tên *</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="Nguyễn Văn A"
-                        value={formData.fullName}
-                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-[#C5A880] focus:bg-white/10 text-white placeholder-white/30 text-sm transition-all outline-none"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-white/80">Số điện thoại *</label>
-                      <input
-                        type="tel"
-                        required
-                        placeholder="0901 234 567"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-[#C5A880] focus:bg-white/10 text-white placeholder-white/30 text-sm transition-all outline-none"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-white/80">Email liên hệ</label>
-                      <input
-                        type="email"
-                        placeholder="example@gmail.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-[#C5A880] focus:bg-white/10 text-white placeholder-white/30 text-sm transition-all outline-none"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-white/80">Phân khúc quan tâm</label>
-                      <select
-                        value={formData.propertyType}
-                        onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg bg-[#0E1322] border border-white/10 focus:border-[#C5A880] text-white text-sm transition-all outline-none"
-                      >
-                        <option value="">-- Chọn phân khúc --</option>
-                        <option value="Căn hộ hạng sang">Căn hộ hạng sang</option>
-                        <option value="Nhà phố thương mại">Nhà phố thương mại / Shophouse</option>
-                        <option value="Biệt thự nghỉ dưỡng">Biệt thự nghỉ dưỡng biển</option>
-                        <option value="Dinh thự độc bản">Dinh thự ven sông độc bản</option>
-                        <option value="Suất ngoại giao">Suất ngoại giao nội bộ</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-white/80">Nhu cầu tư vấn cụ thể</label>
-                    <textarea
-                      rows={3}
-                      placeholder="Quý khách vui lòng để lại yêu cầu cụ thể (ngân sách dự kiến, vị trí mong muốn, kế hoạch đầu tư...)"
-                      value={formData.need}
-                      onChange={(e) => setFormData({ ...formData, need: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-[#C5A880] focus:bg-white/10 text-white placeholder-white/30 text-sm transition-all outline-none resize-none"
+                  Gửi yêu cầu khác
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-charcoal uppercase tracking-wider mb-1.5">
+                      Họ và tên *
+                    </label>
+                    <input
+                      type="text"
+                      name="fullName"
+                      required
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      placeholder="Nguyễn Văn A"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-warm-300 focus:border-gold text-sm text-charcoal outline-none transition-all"
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full py-4 rounded-lg bg-[#C5A880] hover:bg-white text-[#060913] font-semibold text-xs tracking-[0.15em] uppercase transition-all duration-300 shadow-xl flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-                  >
-                    {isSubmitting ? (
-                      <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        <span>GỬI YÊU CẦU TƯ VẤN NGAY</span>
-                      </>
-                    )}
-                  </button>
-                </form>
-              )}
-            </AnimatePresence>
-          </motion.div>
+                  <div>
+                    <label className="block text-xs font-semibold text-charcoal uppercase tracking-wider mb-1.5">
+                      Số điện thoại *
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      required
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="0901 234 567"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-warm-300 focus:border-gold text-sm text-charcoal outline-none transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-charcoal uppercase tracking-wider mb-1.5">
+                      Phân khúc quan tâm
+                    </label>
+                    <select
+                      name="propertyType"
+                      value={formData.propertyType}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-warm-300 focus:border-gold text-sm text-charcoal outline-none transition-all cursor-pointer"
+                    >
+                      <option value="can-ho">Căn hộ & Penthouse</option>
+                      <option value="biet-thu">Biệt thự & Nhà phố</option>
+                      <option value="nghi-duong">Bất động sản nghỉ dưỡng</option>
+                      <option value="thuong-mai">Shophouse & Thương mại</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-charcoal uppercase tracking-wider mb-1.5">
+                      Ngân sách dự kiến
+                    </label>
+                    <select
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-warm-300 focus:border-gold text-sm text-charcoal outline-none transition-all cursor-pointer"
+                    >
+                      <option value="duoi-3-ty">Dưới 3 Tỷ VNĐ</option>
+                      <option value="3-5-ty">Từ 3 – 5 Tỷ VNĐ</option>
+                      <option value="5-10-ty">Từ 5 – 10 Tỷ VNĐ</option>
+                      <option value="tren-10-ty">Trên 10 Tỷ VNĐ</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-charcoal uppercase tracking-wider mb-1.5">
+                    Nhu cầu chi tiết (Tùy chọn)
+                  </label>
+                  <textarea
+                    name="notes"
+                    rows={3}
+                    value={formData.notes}
+                    onChange={handleChange}
+                    placeholder="Quý khách có thể ghi rõ dự án quan tâm hoặc yêu cầu đặc thù về số phòng ngủ, hướng nhà..."
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-warm-300 focus:border-gold text-sm text-charcoal outline-none transition-all resize-none"
+                  />
+                </div>
+
+                {errorMessage && (
+                  <div className="p-3 bg-red-50 text-red-700 text-xs rounded-lg border border-red-200">
+                    {errorMessage}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="w-full py-4 rounded-xl bg-charcoal hover:bg-gold text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-warm-sm cursor-pointer disabled:opacity-50"
+                >
+                  <span>{status === 'loading' ? 'Đang gửi yêu cầu...' : 'Gửi yêu cầu tư vấn'}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
+                <p className="text-[11.5px] text-charcoal-muted text-center pt-1">
+                  Đông Hòa Property cam kết bảo mật tuyệt đối thông tin khách hàng.
+                </p>
+              </form>
+            )}
+          </div>
         </div>
       </div>
     </section>

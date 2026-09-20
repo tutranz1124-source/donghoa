@@ -1,179 +1,316 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { MapPin, Eye, ArrowRight, Building, Sparkles } from 'lucide-react';
 import { ProjectsBlock, ProjectItem } from '@/lib/types';
-import { ArrowRight, MapPin, Building, Star, Eye } from 'lucide-react';
-import ProjectQuickViewModal from '@/components/ProjectQuickViewModal';
+import ProjectQuickViewModal from '../ProjectQuickViewModal';
 
 interface ProjectsSectionProps {
   block?: ProjectsBlock;
   selectedCategory?: string;
-  onOpenInquiry?: (projectName?: string) => void;
+  onOpenInquiry?: (defaultMsg?: string) => void;
 }
 
-export default function ProjectsSection({ block, selectedCategory, onOpenInquiry }: ProjectsSectionProps) {
-  const items = block?.items || [];
-  const [filter, setFilter] = useState<'all' | 'featured' | 'hcm' | 'coastal'>('all');
-  const [selectedPreviewProject, setSelectedPreviewProject] = useState<ProjectItem | null>(null);
+const DEFAULT_PROJECTS: ProjectItem[] = [
+  {
+    id: 'p-the-gio',
+    name: 'The Gio Riverside',
+    title: 'The Gio Riverside',
+    category: 'can-ho',
+    location: 'TP. Dĩ An, Bình Dương (Liền kề TP. Thủ Đức)',
+    investor: 'An Gia Group',
+    developer: 'An Gia Group',
+    priceRange: 'Từ 1.8 Tỷ / Căn',
+    price: 'Từ 1.8 Tỷ / Căn',
+    area: '45m² - 115m²',
+    featured: true,
+    scale: '2 Tháp • 40 Tầng • 3.000 Căn Hộ & Penthouse',
+    description: 'Tổ hợp căn hộ ven sông với tầm nhìn ôm trọn sông Đồng Nai. Thiết kế kiến trúc tối ưu không gian mở cùng hơn 30 tiện ích nội khu chuẩn nghỉ dưỡng.',
+    image: '/uploads/clean_project_thegio.png',
+    imageUrl: '/uploads/clean_project_thegio.png',
+  },
+  {
+    id: 'p-grand-marina',
+    name: 'Grand Marina Saigon',
+    title: 'Grand Marina Saigon',
+    category: 'can-ho',
+    location: 'Quận 1, TP. Hồ Chí Minh',
+    investor: 'Masterise Homes',
+    developer: 'Masterise Homes',
+    priceRange: 'Liên hệ tư vấn',
+    price: 'Liên hệ tư vấn',
+    area: '52m² - 250m²',
+    scale: '8 Tháp căn hộ hàng hiệu Marriott & JW Marriott',
+    description: 'Dự án bất động sản hàng hiệu quy mô bậc nhất thế giới mang thương hiệu Marriott International bên bờ sông Sài Gòn lịch sử.',
+    image: '/uploads/clean_project_vingroup.png',
+    imageUrl: '/uploads/clean_project_vingroup.png',
+  },
+  {
+    id: 'p-alora-villas',
+    name: 'The Global City',
+    title: 'The Global City',
+    category: 'biet-thu',
+    location: 'Phường An Phú, TP. Thủ Đức',
+    investor: 'Masterise Homes (Foster + Partners)',
+    developer: 'Masterise Homes (Foster + Partners)',
+    priceRange: 'Từ 36 Tỷ / Căn',
+    price: 'Từ 36 Tỷ / Căn',
+    area: '95m² - 220m²',
+    scale: '117.4 ha • Nhà phố SOHO & Biệt thự',
+    description: 'Khu đô thị phức hợp chuẩn quốc tế được quy hoạch bởi Foster + Partners, biểu tượng trung tâm mới của TP. Hồ Chí Minh.',
+    image: '/uploads/clean_project_alora.png',
+    imageUrl: '/uploads/clean_project_alora.png',
+  },
+  {
+    id: 'p-gamuda-celadon',
+    name: 'Elysian Gamuda Land',
+    title: 'Elysian Gamuda Land',
+    category: 'can-ho',
+    location: 'Đường Lò Lu, TP. Thủ Đức',
+    investor: 'Gamuda Land',
+    developer: 'Gamuda Land',
+    priceRange: 'Từ 3.2 Tỷ / Căn',
+    price: 'Từ 3.2 Tỷ / Căn',
+    area: '48m² - 105m²',
+    scale: '4 Block • 1.398 Căn Hộ Xanh Biophilic',
+    description: 'Dự án căn hộ áp dụng triết lý thiết kế Biophilic đưa thiên nhiên vào từng không gian sống với 40+ tiện ích sinh thái.',
+    image: '/uploads/clean_project_gamuda.png',
+    imageUrl: '/uploads/clean_project_gamuda.png',
+  },
+  {
+    id: 'p-vega-city',
+    name: 'Gran Meliá Nha Trang',
+    title: 'Gran Meliá Nha Trang',
+    category: 'nghi-duong',
+    location: 'Bãi Tiên, TP. Nha Trang',
+    investor: 'KDI Holdings',
+    developer: 'KDI Holdings',
+    priceRange: 'Liên hệ tư vấn',
+    price: 'Liên hệ tư vấn',
+    area: '350m² - 900m²',
+    scale: 'Dinh thự biển siêu sang vận hành bởi Gran Meliá',
+    description: 'Bộ sưu tập dinh thự biển thượng lưu đầu tiên tại Đông Nam Á mang thương hiệu xa xỉ nhất của tập đoàn khách sạn Meliá.',
+    image: '/uploads/clean_project_thegio.png',
+    imageUrl: '/uploads/clean_project_thegio.png',
+  },
+];
 
-  // Sync external category filter if passed
+export default function ProjectsSection({
+  block,
+  selectedCategory: initialCategory,
+  onOpenInquiry,
+}: ProjectsSectionProps) {
+  const [activeFilter, setActiveFilter] = useState<string>(initialCategory || 'all');
+  const [modalProject, setModalProject] = useState<ProjectItem | null>(null);
+
+  // Sync with prop when selected from category section
   React.useEffect(() => {
-    if (selectedCategory) {
-      const lower = selectedCategory.toLowerCase();
-      if (lower.includes('căn hộ')) setFilter('all');
-      else if (lower.includes('nhà phố')) setFilter('hcm');
-      else if (lower.includes('biệt thự') || lower.includes('dinh thự')) setFilter('coastal');
+    if (initialCategory) {
+      setActiveFilter(initialCategory);
     }
-  }, [selectedCategory]);
+  }, [initialCategory]);
 
-  const filteredItems = items.filter((item) => {
-    if (filter === 'featured') return item.featured;
-    if (filter === 'hcm') return item.location?.toLowerCase().includes('hồ chí minh') || item.location?.toLowerCase().includes('thủ đức');
-    if (filter === 'coastal') return item.location?.toLowerCase().includes('nha trang') || item.location?.toLowerCase().includes('quy nhơn') || item.location?.toLowerCase().includes('ninh thuận') || item.location?.toLowerCase().includes('cần giờ');
-    return true;
-  });
+  const rawProjects = block?.items && block.items.length > 0 ? block.items : DEFAULT_PROJECTS;
 
-  const displayList = filteredItems.length > 0 ? filteredItems : items;
+  const filterTabs = [
+    { label: 'Tất Cả Dự Án', value: 'all' },
+    { label: 'Căn Hộ & Penthouse', value: 'can-ho' },
+    { label: 'Biệt Thự & Nhà Phố', value: 'biet-thu' },
+    { label: 'Nghỉ Dưỡng', value: 'nghi-duong' },
+  ];
+
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === 'all') return rawProjects;
+    return rawProjects.filter((p) => p.category === activeFilter);
+  }, [rawProjects, activeFilter]);
+
+  // Visual Hierarchy: 1 Featured Lead + Supporting Projects
+  const featuredProject = filteredProjects.find((p) => p.featured) || filteredProjects[0];
+  const supportingProjects = filteredProjects.filter((p) => p.id !== featuredProject?.id);
 
   return (
-    <section id="projects" className="w-full py-24 sm:py-28 lg:py-36 px-6 sm:px-12 lg:px-24 bg-[#0A0E1A] text-white border-t border-white/5 relative">
-      <div className="max-w-[1440px] mx-auto space-y-16 lg:space-y-20">
-        {/* Section Header with Spacious Filter */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-10">
-          <div className="space-y-4 max-w-2xl">
-            <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-[0.25em] font-sans block">
-              {block?.badge || 'DANH MỤC DỰ ÁN TIÊU BIỂU'}
+    <section id="projects" className="py-20 sm:py-28 bg-white border-b border-warm-200">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6">
+          <div className="space-y-3">
+            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
+              DANH MỤC DỰ ÁN
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-light text-white leading-tight tracking-tight">
-              {block?.title || 'Dự Án Bất Động Sản Nổi Bật'}
+            <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-[1.2]">
+              Dự Án Trọng Điểm Đang Phân Phối
             </h2>
-            <div className="w-12 h-0.5 bg-[#C5A880]" />
-            <p className="text-sm sm:text-base text-white/65 font-light leading-relaxed pt-1">
-              Tuyển tập những dự án bất động sản cao cấp hàng đầu với vị trí chiến lược, kiến trúc ấn tượng và giá trị gia tăng bền vững.
-            </p>
           </div>
 
-          {/* Minimalist Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2 bg-white/[0.03] p-1.5 rounded-xl border border-white/10 self-start md:self-auto">
-            {[
-              { key: 'all', label: 'Tất cả dự án' },
-              { key: 'featured', label: 'Nổi bật' },
-              { key: 'hcm', label: 'TP. Hồ Chí Minh' },
-              { key: 'coastal', label: 'Nghỉ dưỡng biển' },
-            ].map((tab) => {
-              const active = filter === tab.key;
-              return (
-                <button
-                  key={tab.key}
-                  onClick={() => setFilter(tab.key as any)}
-                  className={`px-4 py-2 rounded-lg text-xs font-medium transition-all ${
-                    active ? 'bg-[#C5A880] text-[#060913] font-semibold shadow-md' : 'text-white/60 hover:text-white hover:bg-white/5'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              );
-            })}
+          {/* Interactive Filter Bar */}
+          <div className="flex flex-wrap items-center gap-2 p-1.5 bg-warm-100 rounded-full border border-warm-200">
+            {filterTabs.map((tab) => (
+              <button
+                key={tab.value}
+                onClick={() => setActiveFilter(tab.value)}
+                className={`px-4 py-2 rounded-full text-xs font-medium transition-all duration-200 ${
+                  activeFilter === tab.value
+                    ? 'bg-charcoal text-white shadow-warm-sm'
+                    : 'text-charcoal-700 hover:text-charcoal hover:bg-white/60'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* 3-Column Architectural Project Cards Grid with Large Breathing Space */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-          {displayList.map((project, idx) => (
-            <motion.div
-              key={project.id || idx}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="bg-white/[0.02] border border-white/10 hover:border-[#C5A880]/50 transition-all duration-300 rounded-2xl flex flex-col justify-between overflow-hidden group cursor-pointer shadow-xl hover:shadow-2xl backdrop-blur-sm"
-              onClick={() => setSelectedPreviewProject(project)}
-            >
-              <div>
-                {/* Image Showcase */}
-                <div className="relative w-full aspect-[16/10] overflow-hidden bg-black/50">
-                  <Image
-                    src={project.image || '/uploads/vinhomes-can-gio.png'}
-                    alt={project.title || project.name || 'Dự án Đông Hòa Property'}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E1A] via-transparent to-transparent opacity-80" />
+        {/* 1. HERO FEATURED PROJECT (Full Width Showcase with Hierarchy) */}
+        {featuredProject && (
+          <div className="mb-12 bg-warm-50 rounded-3xl border border-warm-200 overflow-hidden shadow-warm-sm hover:shadow-warm-md transition-all duration-300">
+            <div className="grid grid-cols-1 lg:grid-cols-12">
+              <div className="lg:col-span-7 relative h-72 sm:h-96 lg:h-[460px] overflow-hidden group">
+                <Image
+                  src={featuredProject.imageUrl || featuredProject.image || '/uploads/clean_project_thegio.png'}
+                  alt={featuredProject.title || featuredProject.name || 'Dự án'}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4 px-3.5 py-1.5 bg-white/95 backdrop-blur-md rounded-full text-[11px] font-semibold uppercase tracking-wider text-gold shadow-warm-sm border border-warm-200">
+                  Dự Án Tâm Điểm
+                </div>
+              </div>
 
-                  <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
-                    {project.featured && (
-                      <span className="bg-[#C5A880] text-[#060913] font-bold text-[10px] px-3 py-1 rounded-full flex items-center gap-1 shadow-md uppercase tracking-wider">
-                        <Star className="w-3 h-3 fill-[#060913]" /> Nổi bật
-                      </span>
-                    )}
-                    {(project.category || project.propertyTypes) && (
-                      <span className="bg-black/60 backdrop-blur-md text-white/90 text-[10px] px-3 py-1 rounded-full border border-white/15">
-                        {project.category || project.propertyTypes}
-                      </span>
-                    )}
+              <div className="lg:col-span-5 p-8 sm:p-10 flex flex-col justify-between space-y-6">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 text-xs text-charcoal-muted">
+                    <Building className="w-3.5 h-3.5 text-gold" />
+                    <span>Chủ đầu tư: {featuredProject.investor}</span>
                   </div>
 
-                  {/* Quick View Button */}
-                  <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <h3 className="text-2xl sm:text-3xl font-serif font-medium text-charcoal leading-snug">
+                    {featuredProject.title}
+                  </h3>
+
+                  <div className="flex items-center gap-2 text-[13.5px] text-charcoal-600">
+                    <MapPin className="w-4 h-4 text-gold shrink-0" />
+                    <span className="line-clamp-1">{featuredProject.location}</span>
+                  </div>
+
+                  <p className="text-sm text-charcoal-600 leading-relaxed line-clamp-3">
+                    {featuredProject.description}
+                  </p>
+
+                  <div className="pt-2 grid grid-cols-2 gap-4 border-t border-warm-200 text-xs">
+                    <div>
+                      <span className="text-charcoal-muted block">Mức giá tham khảo</span>
+                      <span className="font-semibold text-charcoal text-sm mt-0.5 block">{featuredProject.priceRange}</span>
+                    </div>
+                    <div>
+                      <span className="text-charcoal-muted block">Quy mô / Diện tích</span>
+                      <span className="font-semibold text-charcoal text-sm mt-0.5 block">{featuredProject.area}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 pt-4">
+                  <button
+                    type="button"
+                    onClick={() => setModalProject(featuredProject)}
+                    className="flex-1 py-3 rounded-full bg-white hover:bg-warm-100 border border-warm-300 text-charcoal text-xs font-medium uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-warm-sm"
+                  >
+                    <Eye className="w-4 h-4 text-gold" />
+                    <span>Xem chi tiết</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (onOpenInquiry) {
+                        onOpenInquiry(featuredProject.title);
+                      } else {
+                        const el = document.getElementById('contact');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                    className="flex-1 py-3 rounded-full bg-charcoal hover:bg-gold text-white text-xs font-medium uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-warm-sm"
+                  >
+                    <span>Nhận thông tin</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 2. SUPPORTING PROJECTS GRID */}
+        {supportingProjects.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {supportingProjects.map((project) => (
+              <div
+                key={project.id}
+                className="group bg-warm-50 rounded-2xl border border-warm-200 hover:border-gold/60 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-warm-sm hover:shadow-warm-md"
+              >
+                <div className="relative h-60 w-full overflow-hidden bg-warm-100">
+                  <Image
+                    src={project.imageUrl || project.image || '/uploads/clean_project_thegio.png'}
+                    alt={project.title || project.name || 'Dự án'}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3 right-3 px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[11px] font-medium text-charcoal-700 border border-warm-200">
+                    {project.investor || project.developer || 'Chủ đầu tư uy tín'}
+                  </div>
+                </div>
+
+                <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
+                  <div className="space-y-2">
+                    <h4 className="text-xl font-serif font-medium text-charcoal group-hover:text-gold transition-colors">
+                      {project.title}
+                    </h4>
+
+                    <div className="flex items-center gap-1.5 text-xs text-charcoal-600">
+                      <MapPin className="w-3.5 h-3.5 text-gold shrink-0" />
+                      <span className="line-clamp-1">{project.location}</span>
+                    </div>
+
+                    <p className="text-[13px] text-charcoal-600 line-clamp-2 leading-relaxed pt-1">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-warm-200 flex items-center justify-between">
+                    <div>
+                      <span className="text-[11px] text-charcoal-muted block">Mức giá dự kiến</span>
+                      <span className="text-xs font-semibold text-charcoal">{project.priceRange}</span>
+                    </div>
+
                     <button
                       type="button"
-                      className="px-3.5 py-1.5 rounded-full bg-white/90 text-black text-xs font-semibold flex items-center gap-1.5 shadow-lg"
+                      onClick={() => setModalProject(project)}
+                      className="px-4 py-2 rounded-full bg-white hover:bg-charcoal hover:text-white text-charcoal text-xs font-medium transition-colors border border-warm-300 shadow-warm-sm"
                     >
-                      <Eye className="w-3.5 h-3.5" /> Xem nhanh
+                      Chi tiết →
                     </button>
                   </div>
                 </div>
-
-                {/* Card Information */}
-                <div className="p-7 space-y-4">
-                  <h3 className="text-2xl font-serif text-white group-hover:text-[#C5A880] transition-colors leading-snug">
-                    {project.title || project.name}
-                  </h3>
-
-                  <div className="space-y-2 text-xs text-white/60 font-light">
-                    {project.location && (
-                      <div className="flex items-center gap-2">
-                        <MapPin className="w-3.5 h-3.5 text-[#C5A880] shrink-0" />
-                        <span className="line-clamp-1">{project.location}</span>
-                      </div>
-                    )}
-                    {project.scale && (
-                      <div className="flex items-center gap-2">
-                        <Building className="w-3.5 h-3.5 text-[#C5A880] shrink-0" />
-                        <span className="line-clamp-1">{project.scale}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {project.description && (
-                    <p className="text-xs text-white/50 line-clamp-2 leading-relaxed font-light pt-1">
-                      {project.description}
-                    </p>
-                  )}
-                </div>
               </div>
-
-              {/* Action Bar */}
-              <div className="px-7 py-5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-white/80 group-hover:text-[#C5A880] transition-colors uppercase tracking-wider">
-                <span>Nhận Tài Liệu Dự Án</span>
-                <ArrowRight className="w-4 h-4 text-[#C5A880] group-hover:translate-x-1 transition-transform" />
-              </div>
-            </motion.div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Interactive Quick View Modal */}
-      {selectedPreviewProject && (
-        <ProjectQuickViewModal
-          project={selectedPreviewProject}
-          isOpen={!!selectedPreviewProject}
-          onClose={() => setSelectedPreviewProject(null)}
-          onOpenInquiry={onOpenInquiry}
-        />
-      )}
+      {/* QUICK VIEW MODAL */}
+      <ProjectQuickViewModal
+        project={modalProject}
+        onClose={() => setModalProject(null)}
+        onInquire={(projTitle) => {
+          setModalProject(null);
+          if (onOpenInquiry) {
+            onOpenInquiry(projTitle);
+          } else {
+            const el = document.getElementById('contact');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+      />
     </section>
   );
 }

@@ -1,107 +1,129 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { ArrowRight, Clock, Tag } from 'lucide-react';
 import { BlogPost, BlogFeedBlock } from '@/lib/types';
-import { Calendar, Clock, ArrowRight } from 'lucide-react';
 
 interface BlogFeedSectionProps {
   block?: BlogFeedBlock;
   posts?: BlogPost[];
 }
 
-export default function BlogFeedSection({ block, posts }: BlogFeedSectionProps) {
-  const displayPosts = (posts || []).filter((p) => p.status === 'published').slice(0, block?.maxPosts || 3);
+const DEFAULT_POSTS: BlogPost[] = [
+  {
+    id: 'post-1',
+    title: 'Xu Hướng Bất Động Sản Ven Sông & Không Gian Sống Xanh 2026',
+    slug: 'xu-huong-bat-dong-san-ven-song-2026',
+    category: 'Phân Tích Thị Trường',
+    excerpt: 'Đánh giá tiềm năng gia tăng giá trị của các dự án ven sông tại TP. Hồ Chí Minh và khu đô thị vệ tinh trong chu kỳ mới.',
+    content: 'Đánh giá chi tiết về xu hướng bất động sản ven sông...',
+    author: 'Đông Hòa Research',
+    tags: ['Thị trường 2026', 'Ven sông', 'Quy hoạch'],
+    featuredImage: '/uploads/clean_project_thegio.png',
+    publishedAt: '2026-03-15',
+    readingTime: '5 phút đọc',
+    status: 'published',
+  },
+  {
+    id: 'post-2',
+    title: 'Những Lưu Ý Pháp Lý Then Chốt Khi Mua Căn Hộ Hình Thành Trong Tương Lai',
+    slug: 'luu-y-phap-ly-can-ho-hinh-thanh-trong-tuong-lai',
+    category: 'Cẩm Nang Pháp Lý',
+    excerpt: 'Rà soát giấy phép xây dựng, điều kiện bán hàng và cam kết bảo lãnh ngân hàng giúp người mua đảm bảo an toàn quyền lợi.',
+    content: 'Hướng dẫn các bước rà soát pháp lý dự án...',
+    author: 'Chuyên Viên Pháp Lý',
+    tags: ['Pháp lý', 'Căn hộ', 'Thủ tục'],
+    featuredImage: '/uploads/clean_project_vingroup.png',
+    publishedAt: '2026-03-10',
+    readingTime: '6 phút đọc',
+    status: 'published',
+  },
+  {
+    id: 'post-3',
+    title: 'Kinh Nghiệm Hoạch Định Tài Chính Khi Đầu Tư Nhà Phố Thương Mại',
+    slug: 'hoach-dinh-tai-chinh-nha-pho-thuong-mai',
+    category: 'Chiến Lược Đầu Tư',
+    excerpt: 'Cách tính toán tỷ suất sinh lời cho thuê thực tế và cân đối tỷ lệ đòn bẩy vay vốn an toàn.',
+    content: 'Phân tích dòng tiền và đòn bẩy tài chính...',
+    author: 'Ban Tư Vấn Đầu Tư',
+    tags: ['Đầu tư', 'Tài chính', 'Shophouse'],
+    featuredImage: '/uploads/clean_project_alora.png',
+    publishedAt: '2026-03-05',
+    readingTime: '4 phút đọc',
+    status: 'published',
+  },
+];
 
-  if (displayPosts.length === 0) return null;
+export default function BlogFeedSection({ block, posts }: BlogFeedSectionProps) {
+  const displayPosts = posts && posts.length > 0 ? posts.slice(0, 3) : DEFAULT_POSTS;
 
   return (
-    <section id="blog-feed" className="w-full py-24 sm:py-28 lg:py-36 px-6 sm:px-12 lg:px-24 bg-[#080C16] text-white border-t border-white/5 relative">
-      <div className="max-w-[1440px] mx-auto space-y-16 lg:space-y-20">
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-8 border-b border-white/10 pb-10">
-          <div className="space-y-4 max-w-2xl">
-            <span className="text-xs font-semibold text-[#C5A880] uppercase tracking-[0.25em] font-sans block">
-              {block?.badge || 'TIN TỨC & GÓC NHÌN CHUYÊN GIA'}
+    <section id="blog" className="py-20 sm:py-28 bg-white border-b border-warm-200">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
+          <div className="space-y-3">
+            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
+              GÓC NHÌN CHUYÊN GIA
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-light text-white leading-tight tracking-tight">
-              {block?.title || 'Xu Hướng Bất Động Sản & Thị Trường'}
+            <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-[1.2]">
+              Tin Tức & Phân Tích Thị Trường
             </h2>
-            <div className="w-12 h-0.5 bg-[#C5A880]" />
-            <p className="text-sm sm:text-base text-white/65 font-light leading-relaxed pt-1">
-              {block?.subtitle ||
-                'Chia sẻ diễn biến thị trường, phân tích đầu tư bất động sản và cẩm nang kiến tạo danh mục tài sản sinh lời bền vững.'}
-            </p>
           </div>
 
           <Link
-            href={block?.buttonUrl || '/blog'}
-            className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase text-white hover:text-[#C5A880] transition-colors self-start sm:self-auto border border-white/20 hover:border-[#C5A880] px-5 py-3 rounded-sm"
+            href="/blog"
+            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-charcoal hover:text-gold transition-colors group"
           >
-            <span>{block?.buttonLabel || 'XEM TẤT CẢ BÀI VIẾT'}</span>
-            <ArrowRight className="w-4 h-4 text-[#C5A880]" />
+            <span>Xem tất cả bài viết</span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
 
-        {/* 3-Column Blog Cards Grid with Large Breathing Space */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-          {displayPosts.map((post, idx) => (
-            <motion.article
-              key={post.id || idx}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="bg-white/[0.02] border border-white/10 hover:border-[#C5A880]/50 transition-all duration-300 rounded-2xl flex flex-col justify-between overflow-hidden group shadow-xl hover:shadow-2xl"
+        {/* Articles Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {displayPosts.map((post) => (
+            <Link
+              key={post.id}
+              href={`/blog/${post.slug}`}
+              className="group flex flex-col justify-between bg-warm-50 rounded-2xl overflow-hidden border border-warm-200 hover:border-gold/60 transition-all duration-300 shadow-warm-sm hover:shadow-warm-md"
             >
-              <div>
-                {/* Image */}
-                <div className="relative w-full aspect-[16/10] overflow-hidden bg-black/50">
-                  <Image
-                    src={post.featuredImage || '/uploads/figma_styles_grid.png'}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-85 group-hover:opacity-100"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080C16] via-transparent to-transparent opacity-80" />
-                  <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full border border-white/15">
-                    {post.category}
-                  </div>
+              <div className="relative h-56 w-full overflow-hidden bg-warm-100">
+                <Image
+                  src={post.featuredImage || '/uploads/clean_project_thegio.png'}
+                  alt={post.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-3 left-3 px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[10.5px] font-semibold uppercase tracking-wider text-gold border border-warm-200">
+                  {post.category || 'Tin tức'}
                 </div>
+              </div>
 
-                {/* Content */}
-                <div className="p-7 space-y-3">
-                  <div className="flex items-center gap-4 text-xs text-white/50">
-                    <span className="flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-[#C5A880]" />
-                      {post.publishedAt}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-[#C5A880]" />
-                      {post.readingTime}
-                    </span>
+              <div className="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-xs text-charcoal-muted">
+                    <Clock className="w-3.5 h-3.5" />
+                    <span>{post.readingTime || '5 phút đọc'}</span>
                   </div>
 
-                  <Link href={`/blog/${post.slug}`}>
-                    <h3 className="text-xl font-serif text-white group-hover:text-[#C5A880] transition-colors leading-snug line-clamp-2">
-                      {post.title}
-                    </h3>
-                  </Link>
+                  <h3 className="text-lg font-serif font-medium text-charcoal group-hover:text-gold transition-colors leading-snug line-clamp-2">
+                    {post.title}
+                  </h3>
 
-                  <p className="text-xs text-white/55 line-clamp-3 leading-relaxed font-light pt-1">
+                  <p className="text-[13px] text-charcoal-600 line-clamp-2 leading-relaxed font-normal">
                     {post.excerpt}
                   </p>
                 </div>
-              </div>
 
-              <div className="px-7 py-5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-white/80 group-hover:text-[#C5A880] transition-colors uppercase tracking-wider">
-                <span>Đọc chi tiết</span>
-                <ArrowRight className="w-4 h-4 text-[#C5A880] group-hover:translate-x-1 transition-transform" />
+                <div className="pt-4 border-t border-warm-200 flex items-center justify-between text-xs font-semibold text-charcoal group-hover:text-gold transition-colors">
+                  <span>Đọc bài viết</span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                </div>
               </div>
-            </motion.article>
+            </Link>
           ))}
         </div>
       </div>
