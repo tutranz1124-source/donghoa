@@ -96,6 +96,18 @@ export default function ClientHomePage({ initialContent }: { initialContent: Sit
   }, []);
 
   const settings = content.settings;
+  const enabled = settings?.theme?.enabledSections || {
+    hero: true,
+    philosophy: true,
+    categories: true,
+    projects: true,
+    privateAccess: true,
+    mortgage: true,
+    milestones: true,
+    blogFeed: true,
+    faq: true,
+    contact: true,
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF8F5] text-charcoal selection:bg-gold selection:text-white">
@@ -104,41 +116,62 @@ export default function ClientHomePage({ initialContent }: { initialContent: Sit
 
       <main className="flex-1">
         {/* 2. HERO BANNER */}
-        <HeroBanner data={content.hero} onOpenInquiry={handleOpenInquiry} />
+        {enabled.hero !== false && (
+          <HeroBanner data={content.hero} onOpenInquiry={handleOpenInquiry} />
+        )}
 
         {/* 3. VỀ CHÚNG TÔI & TRIẾT LÝ TƯ VẤN */}
-        <PhilosophySection data={content.philosophy} />
+        {enabled.philosophy !== false && (
+          <PhilosophySection data={content.philosophy} />
+        )}
 
         {/* 4. PHÂN KHÚC BẤT ĐỘNG SẢN (EDITORIAL 01-04) */}
-        <CategoriesSection
-          onSelectCategory={(cat) => setSelectedCategory(cat)}
-          onOpenInquiry={handleOpenInquiry}
-        />
+        {enabled.categories !== false && (
+          <CategoriesSection
+            data={content.categories}
+            onSelectCategory={(cat) => setSelectedCategory(cat)}
+            onOpenInquiry={handleOpenInquiry}
+          />
+        )}
 
         {/* 5. DANH MỤC DỰ ÁN TRỌNG ĐIỂM (HIERARCHY + REAL FILTER) */}
-        <ProjectsSection
-          block={content.projects}
-          selectedCategory={selectedCategory}
-          onOpenInquiry={handleOpenInquiry}
-        />
+        {enabled.projects !== false && (
+          <ProjectsSection
+            block={content.projects}
+            selectedCategory={selectedCategory}
+            onOpenInquiry={handleOpenInquiry}
+          />
+        )}
 
         {/* 6. PRIVATE PROPERTY ACCESS */}
-        <PrivateAccessSection onOpenInquiry={handleOpenInquiry} />
+        {enabled.privateAccess !== false && (
+          <PrivateAccessSection data={content.privateAccess} onOpenInquiry={handleOpenInquiry} />
+        )}
 
         {/* 7. CÔNG CỤ TÍNH TOÁN DÒNG TIỀN VAY */}
-        <MortgageCalculatorSection onOpenInquiry={handleOpenInquiry} />
+        {enabled.mortgage !== false && (
+          <MortgageCalculatorSection data={content.mortgage} onOpenInquiry={handleOpenInquiry} />
+        )}
 
         {/* 8. NĂNG LỰC & ĐỐI TÁC PHÁT TRIỂN */}
-        <MilestonesSection />
+        {enabled.milestones !== false && (
+          <MilestonesSection data={content.milestones} />
+        )}
 
         {/* 9. TIN TỨC & GÓC NHÌN THỊ TRƯỜNG */}
-        <BlogFeedSection block={content.blogFeed} posts={posts} />
+        {enabled.blogFeed !== false && (
+          <BlogFeedSection block={content.blogFeed} posts={posts} />
+        )}
 
         {/* 10. HỎI ĐÁP QUY TRÌNH & PHÁP LÝ (3 CÂU HỎI) */}
-        <FAQSection />
+        {enabled.faq !== false && (
+          <FAQSection data={content.faq} />
+        )}
 
         {/* 11. LIÊN HỆ CHUYÊN VIÊN TƯ VẤN */}
-        <QuoteContactSection data={content.contact} />
+        {enabled.contact !== false && (
+          <QuoteContactSection data={content.contact} />
+        )}
       </main>
 
       {/* 12. FOOTER */}

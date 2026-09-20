@@ -58,7 +58,9 @@ import {
   Settings,
   ListTree,
   ChevronRight,
-  ArrowLeft
+  ArrowLeft,
+  ShieldCheck,
+  Calculator
 } from 'lucide-react';
 import { BlogPost, MediaItem } from '@/lib/types';
 
@@ -87,223 +89,118 @@ interface BlogTemplate {
 
 const BLOG_TEMPLATES: BlogTemplate[] = [
   {
-    id: 'tpl-style-showcase',
-    name: 'Phân Tích Phong Cách Thiết Kế',
-    badge: 'Phong cách',
-    icon: Home,
-    category: 'Phong cách thiết kế',
-    description: 'Mẫu phân tích chuyên sâu một phong cách nội thất (Modern, Japandi, Luxury, Indochine) với bảng màu, vật liệu và ứng dụng thực tế.',
-    defaultTitle: 'Khám Phá Phong Cách Thiết Kế Nội Thất Hiện Đại & Tối Giản (Modern Minimalist)',
-    defaultExcerpt: 'Vẻ đẹp tinh tế đến từ sự tinh giản, đường nét khúc chiết và nghệ thuật sắp đặt ánh sáng tạo nên không gian sống thanh lịch vượt thời gian.',
-    defaultImage: '/uploads/figma_styles_grid.png',
-    defaultTags: ['Phong cách thiết kế', 'Modern Minimalist', 'Đông Hòa Design', 'Nội thất sang trọng'],
-    readingTime: '5 phút đọc',
-    content: `## 1. Triết Lý Cốt Lõi Của Phong Cách
-
-Trong kiến trúc nội thất đương đại, phong cách không chỉ là việc sắp xếp đồ đạc mà là sự kiến tạo cảm xúc và trải nghiệm sống. Triết lý cốt lõi tập trung vào việc **giảm thiểu sự rườm rà** để tôn vinh vẻ đẹp tự nhiên của vật liệu, hình khối và ánh sáng.
-
-> "Sự hoàn hảo đạt được không phải khi không còn gì để thêm vào, mà là khi không còn gì để lược bỏ bớt." — *KTS. Đông Hòa Design*
-
----
-
-## 2. Các Đặc Trưng Nổi Bật
-
-- **Bảng màu chủ đạo:** Tông màu trung tính thanh lịch (Beige, Trắng kem, Xám xi măng) kết hợp các điểm nhấn gỗ trầm ấm và kim loại vàng ánh kim.
-- **Đường nét & Hình khối:** Ưu tiên các khối kỷ hà dứt khoát, đường cong mềm mại ở các góc cạnh để tạo cảm giác thư thái, an yên.
-- **Ánh sáng tự nhiên:** Tối đa hóa cửa kính chạm trần và hệ rèm vải voan lọc sáng mềm mại, giúp không gian luôn tràn ngập sinh khí.
-
----
-
-## 3. Lựa Chọn Vật Liệu Cao Cấp
-
-1. **Gỗ tự nhiên & Veneer cao cấp:** Giữ trọn vân gỗ mộc mạc, hoàn thiện sơn phủ mờ tự nhiên chống ẩm.
-2. **Đá tự nhiên & Kim loại:** Đá Marble/Granite vân mây kết hợp chi tiết nẹp inox mạ PVD tinh xảo.
-3. **Vải dệt & Da thuộc:** Vải Bouclé xù mềm mịn hoặc da bò Ý mang lại cảm giác chạm êm ái tối đa.
-
----
-
-## 4. Ứng Dụng Vào Không Gian Thực Tế
-
-### Phòng Khách (Living Room)
-Trung tâm của ngôi nhà với bộ sofa cong nguyên khối, bàn trà đôi mặt đá và vách ốp nan gỗ kết hợp đèn hắt gián tiếp tạo chiều sâu thị giác.
-
-### Phòng Ngủ Master (Master Bedroom)
-Đề cao sự riêng tư và tái tạo năng lượng. Hệ tủ áo cánh kính lùa hiện đại, giường ngủ bọc đệm êm ái cùng hệ thống chiếu sáng thông minh điều chỉnh theo nhịp sinh học.
-
----
-
-## 5. Lời Khuyên Từ Kiến Trúc Sư Đông Hòa
-
-Khi bắt đầu thiết kế không gian cho gia đình mình, hãy bắt đầu từ **thói quen sinh hoạt thực tế** thay vì chỉ chạy theo xu hướng ngắn hạn. Đội ngũ KTS Đông Hòa luôn sẵn sàng lắng nghe và đồng hành để hiện thực hóa ngôi nhà mơ ước của bạn.`
-  },
-  {
-    id: 'tpl-construction-guide',
-    name: 'Cẩm Nang & Kinh Nghiệm Thi Công',
-    badge: 'Kinh nghiệm',
-    icon: Hammer,
-    category: 'Kinh nghiệm thi công',
-    description: 'Hướng dẫn quy trình thi công trọn gói từ bản vẽ đến thực tế, các sai lầm cần tránh và giải pháp tối ưu chi phí tại xưởng.',
-    defaultTitle: 'Cẩm Nang Thi Công Nội Thất Trọn Gói: Từ Bản Vẽ 3D Đến Hiện Thực Không Lỗi',
-    defaultExcerpt: 'Bật mí quy trình chuẩn 5 bước giúp gia chủ kiểm soát tiến độ, bảo đảm chất lượng hoàn thiện 100% khớp bản vẽ và tiết kiệm đến 20% chi phí trung gian.',
-    defaultImage: '/uploads/figma_philosophy.png',
-    defaultTags: ['Kinh nghiệm thi công', 'Quy trình chuẩn', 'Xưởng sản xuất trực tiếp', 'Đông Hòa Design'],
-    readingTime: '6 phút đọc',
-    content: `## 1. Thách Thức Thường Gặp Khi Thi Công Nội Thất
-
-Rất nhiều gia chủ gặp phải tình trạng bản vẽ 3D lung linh nhưng khi bàn giao thực tế lại sai lệch màu sắc, phụ kiện ọp ẹp hoặc phát sinh chi phí ngoài tầm kiểm soát. Nguyên nhân chính là do thiếu sự đồng bộ giữa khâu thiết kế và xưởng sản xuất trực tiếp.
-
-> Cam kết của Đông Hòa Design: **100% bản vẽ chuẩn thực tế, không thiết kế "ảo", sản xuất trực tiếp tại xưởng với quy chuẩn kiểm định nghiêm ngặt.**
-
----
-
-## 2. Quy Trình Thi Công Chuẩn 5 Bước Tại Đông Hòa
-
-1. **Khảo sát hiện trạng & Đo đạc Laser 3D:** Ghi nhận chính xác từng milimet cốt tường, sàn, hệ thống điện nước ngầm.
-2. **Thiết kế kỹ thuật chi tiết (2D & 3D):** Bóc tách vật liệu rõ ràng từng mã ván, thương hiệu phụ kiện (Blum, Hafele).
-3. **Gia công sản xuất tại Xưởng Đông Hòa:** Ứng dụng máy cắt CNC tự động và máy dán cạnh tự động PUR không đường line.
-4. **Lắp đặt hoàn thiện tại công trình:** Đội ngũ thợ tay nghề cao thi công nhanh gọn, bọc lót bảo vệ sàn và tường cẩn thận.
-5. **Nghiệm thu chi tiết & Bàn giao:** Vệ sinh công nghiệp sạch sẽ, bàn giao hồ sơ bảo hành 2 năm và bảo trì trọn đời.
-
----
-
-## 3. 4 Sai Lầm Phổ Biến Cần Tránh
-
-- **Không chốt trước phương án công năng ổ cắm & công tắc điện:** Dẫn đến việc đục phá tường sau khi đã sơn bả.
-- **Tiết kiệm sai chỗ với phụ kiện bản lề, ray trượt:** Phụ kiện kém chất lượng sẽ rỉ sét và xệ cánh chỉ sau 6 tháng sử dụng.
-- **Chọn vật liệu không phù hợp khí hậu nóng ẩm:** Khu vực bếp và toilet cần sử dụng cốt gỗ chống ẩm MDF/HDF lõi xanh hoặc nhựa Picomat.
-- **Thuê đơn vị trung gian không có xưởng sản xuất:** Chi phí đội lên 15 - 30% và khó kiểm soát bảo hành dài lâu.
-
----
-
-## 4. Tối Ưu Chi Phí Nhờ Xưởng Sản Xuất Trực Tiếp
-
-Nhờ sở hữu hệ thống xưởng mộc quy mô lớn với máy móc hiện đại, Đông Hòa Design trực tiếp sản xuất mọi sản phẩm đo ni đóng giày theo từng căn hộ, loại bỏ hoàn toàn chi phí hoa hồng trung gian, mang lại mức giá gốc tốt nhất cho quý khách hàng.`
-  },
-  {
-    id: 'tpl-office-workspace',
-    name: 'Nội Thất Văn Phòng & Thương Mại',
-    badge: 'Văn phòng',
+    id: 'tpl-market-analysis',
+    name: 'Phân Tích & Dự Báo Thị Trường BĐS',
+    badge: 'Thị trường',
     icon: Building2,
-    category: 'Không gian làm việc',
-    description: 'Mẫu bài viết chuyên về kiến tạo không gian làm việc truyền cảm hứng, tối ưu hiệu suất nhân sự và định hình văn hóa doanh nghiệp.',
-    defaultTitle: 'Xu Hướng Thiết Kế Nội Thất Văn Phòng Hiện Đại Nâng Cao Hiệu Suất Làm Việc',
-    defaultExcerpt: 'Văn phòng hiện đại không chỉ là nơi làm việc đơn thuần mà là không gian truyền cảm hứng sáng tạo, thể hiện đẳng cấp thương hiệu và thu hút nhân tài.',
-    defaultImage: '/uploads/office_hero_main.png',
-    defaultTags: ['Nội thất văn phòng', 'Không gian làm việc', 'Office Design', 'Đông Hòa Design'],
-    readingTime: '4 phút đọc',
-    content: `## 1. Xu Hướng Chuyển Dịch Trong Thiết Kế Văn Phòng
-
-Môi trường công sở hiện đại đang chuyển mình mạnh mẽ từ các cụm bàn làm việc cứng nhắc sang mô hình **Không gian làm việc linh hoạt (Agile Workspace)**. Mục tiêu hàng đầu là nâng cao sức khỏe tinh thần, khuyến khích sự tương tác và thúc đẩy hiệu suất sáng tạo vượt bậc.
-
----
-
-## 2. Phân Khu Chức Năng Khoa Học
-
-### 1. Khu Làm Việc Mở (Open Collaborative Area)
-Module bàn làm việc thông minh tích hợp ray luồn dây điện âm, ghế công thái học Ergonomic và vách ngăn nỉ cách âm di động.
-
-### 2. Phòng Họp & Phòng Giám Đốc Sang Trọng (Executive Suite)
-Bàn họp mặt đá cao cấp tích hợp hệ thống họp trực tuyến hiện đại, vách kính cách âm 2 lớp đảm bảo tuyệt đối tính bảo mật.
-
-### 3. Khu Nghỉ Ngơi & Pantry Thư Giãn (Pantry & Lounge)
-Góc cafe ấm cúng với quầy bar nhỏ, cây xanh thanh lọc không khí giúp nhân viên nạp lại năng lượng sau những giờ làm việc tập trung cao độ.
-
----
-
-## 3. Tích Hợp Nhận Diện Thương Hiệu Vào Không Gian
-
-- **Màu sắc chủ đạo:** Đồng bộ chuẩn xác theo bộ nhận diện thương hiệu (Brand Guidelines) của công ty.
-- **Khu vực lễ tân & Sảnh chờ:** Điểm chạm đầu tiên tạo ấn tượng chuyên nghiệp với đối tác và khách hàng thông qua vách logo phát sáng và vật liệu sang trọng.
-
----
-
-## 4. Dịch Vụ Thiết Kế & Thi Công Văn Phòng Trọn Gói
-
-Đông Hòa Design cung cấp giải pháp trọn gói từ tư vấn layout mặt bằng, thiết kế 3D, thi công nội thất đến hệ thống M&E (Điện, mạng, điều hòa), đảm bảo tiến độ bàn giao nhanh chóng để doanh nghiệp đi vào vận hành đúng kế hoạch.`
-  },
-  {
-    id: 'tpl-materials-guide',
-    name: 'Cẩm Nang Vật Liệu Cao Cấp',
-    badge: 'Vật liệu',
-    icon: Layers,
-    category: 'Vật liệu & Sản xuất',
-    description: 'Chuyên khảo sâu về các dòng vật liệu nội thất cao cấp: Gỗ óc chó, đá tự nhiên, kim loại mạ PVD và da thuộc.',
-    defaultTitle: 'Bí Quyết Chọn Vật Liệu Cao Cấp Kiến Tạo Đẳng Cấp Không Gian Sống',
-    defaultExcerpt: 'Tìm hiểu chi tiết về các loại vật liệu thượng hạng được ưa chuộng trong thiết kế nội thất biệt thự và penthouse sang trọng.',
-    defaultImage: '/uploads/figma_luxury_bed.png',
-    defaultTags: ['Vật liệu cao cấp', 'Gỗ óc chó', 'Đá tự nhiên', 'Bespoke Furniture'],
+    category: 'Phân Tích Thị Trường',
+    description: 'Mẫu phân tích chuyên sâu diễn biến cung cầu, mặt bằng giá bán và tiềm năng sinh lời của các khu vực trọng điểm.',
+    defaultTitle: 'Xu Hướng Bất Động Sản Ven Sông & Không Gian Sống Xanh 2026',
+    defaultExcerpt: 'Đánh giá tiềm năng gia tăng giá trị của các dự án ven sông tại TP. Hồ Chí Minh và khu đô thị vệ tinh trong chu kỳ mới.',
+    defaultImage: '/uploads/the-gio-riverside.png',
+    defaultTags: ['Thị trường 2026', 'Ven sông', 'Quy hoạch', 'Đông Hòa Property'],
     readingTime: '5 phút đọc',
-    content: `## 1. Giá Trị Của Vật Liệu Tự Nhiên Trong Kiến Trúc Sang Trọng
+    content: `## 1. Bức Tranh Toàn Cảnh Thị Trường Bất Động Sản
 
-Vật liệu cao cấp không chỉ thể hiện gu thẩm mỹ tinh tế của gia chủ mà còn sở hữu độ bền bỉ cùng thời gian. Càng sử dụng lâu, vật liệu tự nhiên càng toát lên vẻ đẹp trầm ấm và giá trị độc bản.
+Chu kỳ mới của thị trường bất động sản ghi nhận sự chuyển dịch mạnh mẽ hướng tới các sản phẩm sở hữu **giá trị thực**, pháp lý hoàn thiện và không gian sống sinh thái ven sông.
 
----
-
-## 2. Các Dòng Vật Liệu Được Ưa Chuộng Nhất
-
-### Gỗ Óc Chó Bắc Mỹ (Walnut Wood)
-- **Đặc tính:** Màu nâu hạt dẻ ấm áp, hệ vân gỗ cuộn xoáy uốn lượn mềm mại như những dòng sông.
-- **Ứng dụng:** Bàn ăn nguyên tấm, giường ngủ master, sofa bọc da cao cấp.
-
-### Đá Tự Nhiên Xuyên Sáng (Onyx & Patagonia Marble)
-- **Đặc tính:** Độ cứng cao, vân đá tự nhiên độc nhất vô nhị, khả năng xuyên sáng huyền ảo khi kết hợp đèn LED.
-- **Ứng dụng:** Đảo bếp, vách tivi phòng khách, bàn trà điểm nhấn.
-
-### Kim Loại Mạ PVD & Kính Cường Lực
-- **Đặc tính:** Công nghệ mạ PVD chống oxy hóa tuyệt đối, chống trầy xước, ánh kim bóng gương hoặc xước mờ sang trọng.
-- **Ứng dụng:** Chân bàn ghế, nẹp vách trang trí, khung cánh tủ áo cao cấp.
+> "Bất động sản ven sông luôn duy trì mức thặng dư giá trị từ 15% - 30% so với khu vực lân cận nhờ cảnh quan độc bản và vi khí hậu trong lành." — *Đông Hòa Research*
 
 ---
 
-## 3. Cách Bảo Dưỡng Và Giữ Gìn Độ Bền Đẹp
+## 2. Các Động Lực Tăng Trưởng Trọng Tâm
 
-- Tránh tiếp xúc trực tiếp ánh nắng gắt chiếu lâu ngày lên bề mặt gỗ tự nhiên.
-- Sử dụng dung dịch vệ sinh chuyên dụng có độ pH trung tính cho bề mặt đá và da.
-- Lau sạch nước đọng ngay sau khi sử dụng để bề mặt luôn sáng bóng như mới.`
+- **Hạ tầng giao thông liên kết vùng:** Các tuyến vành đai và cầu kết nối rút ngắn thời gian di chuyển về trung tâm.
+- **Tiêu chuẩn sống xanh & sức khỏe:** Người mua nhà ngày càng ưu tiên mật độ cây xanh, mặt nước và hệ tiện ích chăm sóc sức khỏe.
+- **Sự chọn lọc của dòng tiền:** Nhà đầu tư tập trung vào các chủ đầu tư uy tín có tiềm lực tài chính vững mạnh.
+
+---
+
+## 3. Khuyến Nghị Chiến Lược Đầu Tư
+
+1. **Khảo sát kỹ quy hoạch 1/500 và tiến độ thi công thực tế.**
+2. **Cân đối tỷ lệ đòn bẩy tài chính an toàn dưới 50% giá trị tài sản.**
+3. **Ưu tiên các dự án có đơn vị quản lý vận hành chuẩn quốc tế để tối ưu giá trị cho thuê.**`
   },
   {
-    id: 'tpl-case-study',
-    name: 'Dự Án Bàn Giao Thực Tế (Case Study)',
-    badge: 'Dự án thực tế',
-    icon: Award,
-    category: 'Kinh nghiệm thi công',
-    description: 'Mẫu báo cáo bàn giao dự án hoàn thiện thực tế, câu chuyện biến đổi không gian và phản hồi từ gia chủ.',
-    defaultTitle: 'Bàn Giao Dự Án: Biến Đổi Không Gian Căn Hộ Penthouse 180m2 Sang Trọng',
-    defaultExcerpt: 'Khám phá hành trình 45 ngày thi công hoàn thiện căn hộ cao cấp với toàn bộ nội thất may đo độc bản sản xuất tại xưởng Đông Hòa Design.',
-    defaultImage: '/uploads/figma_modern_minimalist.png',
-    defaultTags: ['Dự án thực tế', 'Bàn giao căn hộ', 'Nội thất may đo', 'Khách hàng Đông Hòa'],
+    id: 'tpl-legal-guide',
+    name: 'Cẩm Nang Pháp Lý & Thẩm Định Dự Án',
+    badge: 'Pháp lý',
+    icon: ShieldCheck,
+    category: 'Cẩm Nang Pháp Lý',
+    description: 'Hướng dẫn các bước rà soát pháp lý dự án, giấy phép xây dựng, điều kiện bán hàng và bảo lãnh ngân hàng.',
+    defaultTitle: 'Những Lưu Ý Pháp Lý Then Chốt Khi Mua Căn Hộ Hình Thành Trong Tương Lai',
+    defaultExcerpt: 'Rà soát giấy phép xây dựng, điều kiện bán hàng và cam kết bảo lãnh ngân hàng giúp người mua đảm bảo an toàn quyền lợi.',
+    defaultImage: '/uploads/vinhomes-can-gio.png',
+    defaultTags: ['Pháp lý', 'Căn hộ', 'Thủ tục', 'Đông Hòa Property'],
+    readingTime: '6 phút đọc',
+    content: `## 1. Tầm Quan Trọng Của Việc Thẩm Định Pháp Lý
+
+Trong các giao dịch bất động sản hình thành trong tương lai, việc nắm rõ hồ sơ pháp lý giúp người mua phòng tránh tối đa các rủi ro chậm tiến độ hoặc vướng mắc thủ tục cấp sổ hồng.
+
+> Cam kết của Đông Hòa Property: **100% dự án được phân phối đều trải qua quy trình thẩm định độc lập nghiêm ngặt trước khi giới thiệu đến khách hàng.**
+
+---
+
+## 2. Bộ Hồ Sơ Pháp Lý Chuẩn Cần Kiểm Tra
+
+1. **Quyết định phê duyệt quy hoạch chi tiết 1/500.**
+2. **Giấy phép xây dựng được cấp bởi cơ quan có thẩm quyền.**
+3. **Văn bản thông báo đủ điều kiện bán nhà ở hình thành trong tương lai của Sở Xây Dựng.**
+4. **Chứng thư bảo lãnh nghĩa vụ tài chính từ ngân hàng thương mại.**
+
+---
+
+## 3. Lời Khuyên Từ Chuyên Viên Pháp Lý
+
+Khách hàng nên đọc kỹ các điều khoản về tiến độ thanh toán, thời hạn bàn giao dự kiến và mức phạt vi phạm hợp đồng trước khi đặt cọc.`
+  },
+  {
+    id: 'tpl-financial-planning',
+    name: 'Hoạch Định Tài Chính & Dòng Tiền Vay',
+    badge: 'Tài chính',
+    icon: Calculator,
+    category: 'Chiến Lược Đầu Tư',
+    description: 'Cách tính toán dòng tiền trả góp, cân đối vốn tự có và tận dụng các gói ân hạn nợ gốc từ ngân hàng.',
+    defaultTitle: 'Kinh Nghiệm Hoạch Định Tài Chính Khi Đầu Tư Nhà Phố & Shophouse',
+    defaultExcerpt: 'Cách tính toán tỷ suất sinh lời cho thuê thực tế và cân đối tỷ lệ đòn bẩy vay vốn an toàn.',
+    defaultImage: '/uploads/lusso-saigon.png',
+    defaultTags: ['Đầu tư', 'Tài chính', 'Shophouse', 'Đông Hòa Property'],
     readingTime: '4 phút đọc',
-    content: `## 1. Thông Tin Tổng Quan Dự Án
+    content: `## 1. Nguyên Tắc Cân Đối Dòng Tiền An Toàn
 
-- **Tên dự án:** Căn hộ Penthouse Sky Villa
-- **Diện tích:** 180m² (3 Phòng ngủ, 1 Khách - Bếp mở)
-- **Phong cách:** Modern Luxury & Contemporary
-- **Thời gian thi công:** 45 ngày hoàn thiện trọn gói
-- **Đơn vị thiết kế & thi công:** Đông Hòa Design
+Đầu tư bất động sản thương mại đòi hỏi nhà đầu tư phải tính toán kỹ lưỡng giữa dòng tiền trả nợ ngân hàng và nguồn thu từ khai thác cho thuê.
 
 ---
 
-## 2. Thách Thức Ban Đầu & Giải Pháp Kiến Trúc
+## 2. Công Thức Dự Toán Tỷ Suất Sinh Lời
 
-### Thách thức hiện trạng:
-Căn hộ bàn giao thô có hệ cột chịu lực lớn ngay giữa phòng khách, trần thấp và bố cục phòng bếp bị tối.
+- **Tỷ suất cho thuê ròng (Net Rental Yield):** (Tổng tiền thuê hàng năm - Chi phí vận hành) / Tổng giá trị đầu tư.
+- **Tỷ lệ thanh toán an toàn:** Dòng tiền trả góp hàng tháng không nên vượt quá 40% tổng thu nhập khả dụng của gia đình.`
+  },
+  {
+    id: 'tpl-penthouse-lifestyle',
+    name: 'Không Gian Sống Đẳng Cấp & Penthouse',
+    badge: 'Phong cách sống',
+    icon: Award,
+    category: 'Phong Cách Sống',
+    description: 'Mẫu bài viết phân tích tiêu chuẩn sống thượng lưu, không gian penthouse và căn hộ hạng sang có tầm nhìn độc bản.',
+    defaultTitle: 'Tiêu Chuẩn Không Gian Sống Thượng Lưu Tại Các Căn Hộ Penthouse & Sky Villa',
+    defaultExcerpt: 'Khám phá các tiêu chuẩn kiến trúc, tiện ích đặc quyền và giá trị sưu tầm của dòng bất động sản Sky Villa tại trung tâm đô thị.',
+    defaultImage: '/uploads/the-gio-riverside.png',
+    defaultTags: ['Penthouse', 'Sky Villa', 'Bất động sản hạng sang', 'Đông Hòa Property'],
+    readingTime: '5 phút đọc',
+    content: `## 1. Định Nghĩa Không Gian Sống Độc Bản
 
-### Giải pháp từ KTS Đông Hòa:
-1. **Xóa mờ hệ cột:** Ốp gương xám khói và vách gỗ nan cong biến chiếc cột thô thành điểm nhấn nghệ thuật trung tâm.
-2. **Mở rộng không gian phòng khách - bếp:** Đập thông tường ngăn, thay bằng đảo bếp kết hợp bàn ăn 8 chỗ thông minh.
-3. **Hệ thống ánh sáng gián tiếp:** Giấu đèn LED âm trần tạo cảm giác trần cao thoáng và sang trọng hơn.
+Penthouse và Sky Villa không đơn thuần là một bất động sản giá trị cao mà là biểu tượng khẳng định vị thế và phong cách sống của chủ nhân.
 
 ---
 
-## 3. Đánh Giá & Cảm Nhận Của Gia Chủ
+## 2. 3 Yếu Tố Tạo Nên Giá Trị Sưu Tầm
 
-> "Gia đình tôi thực sự bất ngờ khi nhận bàn giao nhà. Từng đường chỉ nẹp, cánh tủ lùa êm ru và chất liệu gỗ thực tế còn đẹp hơn cả ảnh 3D. Cảm ơn đội ngũ KTS và thợ thi công của Đông Hòa Design đã làm việc rất tận tâm và đúng hẹn!" — *Anh Hoàng & Chị Mai (Chủ nhân căn hộ)*
-
----
-
-## 4. Liên Hệ Khảo Sát & Nhận Báo Giá Dự Án
-
-Quý khách hàng đang chuẩn bị nhận nhà hoặc có nhu cầu cải tạo không gian sống, hãy liên hệ ngay với Đông Hòa Design qua Hotline: **0906.499.279** để được tư vấn thiết kế và báo giá chi tiết trực tiếp từ xưởng sản xuất.`
+1. **Tầm nhìn không giới hạn (Panoramic River View):** Ôm trọn cảnh quan thành phố và sông nước thoáng đãng.
+2. **Tiện ích và dịch vụ đặc quyền riêng tư:** Sảnh thang máy riêng, bãi đỗ xe định danh và hồ bơi vô cực trên cao.
+3. **Diện tích lớn linh hoạt may đo không gian:** Cho phép gia chủ tự do thiết kế phòng tranh, hầm rượu hoặc thư viện riêng.`
   }
 ];
 
@@ -512,12 +409,12 @@ export default function AdminBlogListPage() {
                 slug: '',
                 excerpt: '',
                 content: '',
-                featuredImage: '/uploads/figma_styles_grid.png',
-                thumbnailImage: '/uploads/figma_styles_grid.png',
-                author: 'KTS. Lê Đông Hòa',
-                authorRole: 'Giám đốc Thiết kế',
-                category: 'Phong cách thiết kế',
-                tags: ['Nội thất', 'Thiết kế', 'Đông Hòa Design'],
+                featuredImage: '/uploads/the-gio-riverside.png',
+                thumbnailImage: '/uploads/the-gio-riverside.png',
+                author: 'Đông Hòa Research',
+                authorRole: 'Ban Phân Tích Thị Trường',
+                category: 'Phân Tích Thị Trường',
+                tags: ['Bất động sản', 'Thị trường 2026', 'Đông Hòa Property'],
                 status: 'published',
                 publishedAt: new Date().toISOString().split('T')[0],
                 readingTime: '5 phút đọc',

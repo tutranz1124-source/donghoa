@@ -3,16 +3,32 @@
 import React, { useState, useMemo } from 'react';
 import { Calculator, ArrowRight, HelpCircle } from 'lucide-react';
 
+import { MortgageData } from '@/lib/types';
+
 interface MortgageCalculatorSectionProps {
+  data?: MortgageData;
   onOpenInquiry?: (defaultMsg?: string) => void;
 }
 
-export default function MortgageCalculatorSection({ onOpenInquiry }: MortgageCalculatorSectionProps) {
+export default function MortgageCalculatorSection({ data, onOpenInquiry }: MortgageCalculatorSectionProps) {
   // State for interactive calculation
-  const [propertyPrice, setPropertyPrice] = useState<number>(5000); // triệu VNĐ (5 Tỷ)
-  const [downPaymentPercent, setDownPaymentPercent] = useState<number>(30); // 30%
-  const [loanTermYears, setLoanTermYears] = useState<number>(20); // 20 năm
-  const [interestRate, setInterestRate] = useState<number>(8.5); // 8.5% / năm
+  const [propertyPrice, setPropertyPrice] = useState<number>(data?.defaultPrice || 5000); // triệu VNĐ (5 Tỷ)
+  const [downPaymentPercent, setDownPaymentPercent] = useState<number>(data?.defaultDownPaymentPercent || 30); // 30%
+  const [loanTermYears, setLoanTermYears] = useState<number>(data?.defaultTermYears || 20); // 20 năm
+  const [interestRate, setInterestRate] = useState<number>(data?.defaultInterestRate || 8.5); // 8.5% / năm
+
+  React.useEffect(() => {
+    if (data?.defaultPrice) setPropertyPrice(data.defaultPrice);
+    if (data?.defaultDownPaymentPercent) setDownPaymentPercent(data.defaultDownPaymentPercent);
+    if (data?.defaultTermYears) setLoanTermYears(data.defaultTermYears);
+    if (data?.defaultInterestRate) setInterestRate(data.defaultInterestRate);
+  }, [data]);
+
+  const tag = data?.tag || 'CÔNG CỤ TÀI CHÍNH';
+  const heading = data?.heading || 'Ước Tính Kế Hoạch Vay Mua Bất Động Sản';
+  const description =
+    data?.description ||
+    'Công cụ hỗ trợ khách hàng dự toán dòng tiền trả hàng tháng và vốn tự có ban đầu.';
 
   // Reactive Calculation Logic: Standard Annuity Formula
   const calculation = useMemo(() => {
@@ -56,13 +72,13 @@ export default function MortgageCalculatorSection({ onOpenInquiry }: MortgageCal
           {/* Header */}
           <div className="text-center space-y-3 mb-12 sm:mb-16">
             <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
-              CÔNG CỤ TÀI CHÍNH
+              {tag}
             </span>
             <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-[1.2]">
-              Ước Tính Kế Hoạch Vay Mua Bất Động Sản
+              {heading}
             </h2>
             <p className="text-sm text-charcoal-600 max-w-lg mx-auto font-normal leading-relaxed">
-              Công cụ hỗ trợ khách hàng dự toán dòng tiền trả hàng tháng và vốn tự có ban đầu.
+              {description}
             </p>
           </div>
 

@@ -3,23 +3,36 @@
 import React, { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 
-export function FAQSection() {
+import { FAQData } from '@/lib/types';
+
+interface FAQSectionProps {
+  data?: FAQData;
+}
+
+const DEFAULT_FAQS = [
+  {
+    q: 'Đông Hòa Property thẩm định pháp lý dự án như thế nào trước khi phân phối?',
+    a: 'Mọi dự án trong danh mục phân phối đều được chúng tôi rà soát kỹ lưỡng các điều kiện pháp lý cần thiết: Quyết định phê duyệt quy hoạch 1/500, Giấy phép xây dựng, Giấy chứng nhận quyền sử dụng đất và Chứng thư bảo lãnh nghĩa vụ tài chính của ngân hàng trước khi tư vấn cho khách hàng.',
+  },
+  {
+    q: 'Quy trình tư vấn và hỗ trợ giao dịch tại Đông Hòa Property gồm những bước nào?',
+    a: 'Quy trình gồm 4 giai đoạn chuẩn mực: (1) Lắng nghe nhu cầu & tư vấn phân khúc phù hợp, (2) Khảo sát thực tế dự án & phân tích quy hoạch, (3) Hoạch định phương án tài chính & thủ tục pháp lý, (4) Đồng hành ký kết hợp đồng và nghiệm thu nhận nhà.',
+  },
+  {
+    q: 'Khách hàng có phải trả thêm bất kỳ khoản phí tư vấn nào cho Đông Hòa Property không?',
+    a: 'Hoàn toàn không. Toàn bộ dịch vụ tư vấn chọn căn, hỗ trợ thủ tục hồ sơ vay ngân hàng và kiểm tra pháp lý tại Đông Hòa Property đều được cung cấp miễn phí cho khách hàng theo chính sách từ các chủ đầu tư đối tác.',
+  },
+];
+
+export function FAQSection({ data }: FAQSectionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const faqs = [
-    {
-      q: 'Đông Hòa Property thẩm định pháp lý dự án như thế nào trước khi phân phối?',
-      a: 'Mọi dự án trong danh mục phân phối đều được chúng tôi rà soát kỹ lưỡng các điều kiện pháp lý cần thiết: Quyết định phê duyệt quy hoạch 1/500, Giấy phép xây dựng, Giấy chứng nhận quyền sử dụng đất và Chứng thư bảo lãnh nghĩa vụ tài chính của ngân hàng trước khi tư vấn cho khách hàng.',
-    },
-    {
-      q: 'Quy trình tư vấn và hỗ trợ giao dịch tại Đông Hòa Property gồm những bước nào?',
-      a: 'Quy trình gồm 4 giai đoạn chuẩn mực: (1) Lắng nghe nhu cầu & tư vấn phân khúc phù hợp, (2) Khảo sát thực tế dự án & phân tích quy hoạch, (3) Hoạch định phương án tài chính & thủ tục pháp lý, (4) Đồng hành ký kết hợp đồng và nghiệm thu nhận nhà.',
-    },
-    {
-      q: 'Khách hàng có phải trả thêm bất kỳ khoản phí tư vấn nào cho Đông Hòa Property không?',
-      a: 'Hoàn toàn không. Toàn bộ dịch vụ tư vấn chọn căn, hỗ trợ thủ tục hồ sơ vay ngân hàng và kiểm tra pháp lý tại Đông Hòa Property đều được cung cấp miễn phí cho khách hàng theo chính sách từ các chủ đầu tư đối tác.',
-    },
-  ];
+  const faqs = data?.faqs && data.faqs.length > 0 ? data.faqs : DEFAULT_FAQS;
+  const tag = data?.tag || 'HỎI ĐÁP & TƯ VẤN';
+  const heading = data?.heading || 'Câu Hỏi Thường Gặp';
+  const description =
+    data?.description ||
+    'Giải đáp các thắc mắc trọng tâm về quy trình làm việc và thẩm định bất động sản.';
 
   const toggle = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
@@ -32,13 +45,13 @@ export function FAQSection() {
           {/* Header */}
           <div className="text-center space-y-3 mb-12 sm:mb-14">
             <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
-              HỎI ĐÁP & TƯ VẤN
+              {tag}
             </span>
             <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-[1.2]">
-              Câu Hỏi Thường Gặp
+              {heading}
             </h2>
             <p className="text-sm text-charcoal-600 font-normal leading-relaxed">
-              Giải đáp các thắc mắc trọng tâm về quy trình làm việc và thẩm định bất động sản.
+              {description}
             </p>
           </div>
 

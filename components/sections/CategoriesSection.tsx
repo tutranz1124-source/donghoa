@@ -4,12 +4,15 @@ import React from 'react';
 import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 
+import { CategoriesData, CategoryItem } from '@/lib/types';
+
 interface CategoriesSectionProps {
+  data?: CategoriesData;
   onSelectCategory?: (category: string) => void;
   onOpenInquiry?: (defaultMsg?: string) => void;
 }
 
-const categories = [
+const DEFAULT_CATEGORIES: CategoryItem[] = [
   {
     index: '01',
     categoryKey: 'can-ho',
@@ -34,7 +37,7 @@ const categories = [
     title: 'Bất Động Sản Nghỉ Dưỡng',
     subtitle: 'COASTAL RETREATS',
     desc: 'Biệt thự ven biển và quần thể nghỉ dưỡng tiêu chuẩn 5 sao, kết hợp tối ưu vận hành.',
-    image: '/uploads/alora-nhatrang.png',
+    image: '/uploads/la-tien-villa.png',
     featured: false,
   },
   {
@@ -48,7 +51,7 @@ const categories = [
   },
 ];
 
-export default function CategoriesSection({ onSelectCategory }: CategoriesSectionProps) {
+export default function CategoriesSection({ data, onSelectCategory }: CategoriesSectionProps) {
   const handleClick = (categoryKey: string) => {
     if (onSelectCategory) {
       onSelectCategory(categoryKey);
@@ -59,8 +62,15 @@ export default function CategoriesSection({ onSelectCategory }: CategoriesSectio
     }
   };
 
-  const primaryCategory = categories[0];
-  const secondaryCategories = categories.slice(1);
+  const items = data?.items && data.items.length > 0 ? data.items : DEFAULT_CATEGORIES;
+  const tag = data?.tag || 'DANH MỤC PHÂN KHÚC';
+  const heading = data?.heading || 'Phân Khúc Bất Động Sản Chọn Lọc';
+  const description =
+    data?.description ||
+    'Các danh mục bất động sản được thẩm định kỹ lưỡng về vị trí quy hoạch, tính thanh khoản và tiềm năng tăng trưởng bền vững.';
+
+  const primaryCategory = items[0] || DEFAULT_CATEGORIES[0];
+  const secondaryCategories = items.slice(1);
 
   return (
     <section id="categories" className="py-20 sm:py-28 bg-gradient-to-b from-white via-warm-100/50 to-warm-100 border-b border-warm-200">
@@ -69,14 +79,14 @@ export default function CategoriesSection({ onSelectCategory }: CategoriesSectio
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div className="space-y-3 max-w-xl">
             <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
-              DANH MỤC PHÂN KHÚC
+              {tag}
             </span>
             <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-[1.2] tracking-tight">
-              Phân Khúc Bất Động Sản Chọn Lọc
+              {heading}
             </h2>
           </div>
           <p className="text-sm text-charcoal-600 max-w-md font-normal leading-relaxed">
-            Các danh mục bất động sản được thẩm định kỹ lưỡng về vị trí quy hoạch, tính thanh khoản và tiềm năng tăng trưởng bền vững.
+            {description}
           </p>
         </div>
 

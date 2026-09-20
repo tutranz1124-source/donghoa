@@ -13,6 +13,26 @@ export interface FooterColumn {
   links: FooterLinkItem[];
 }
 
+export interface ThemeSettings {
+  accentColor?: string; // e.g. '#C5A26C'
+  headingColor?: string; // e.g. '#04092B'
+  bodyColor?: string; // e.g. '#5F6361'
+  headerMode?: 'dark' | 'light';
+  fontSizeScale?: 'compact' | 'standard' | 'relaxed';
+  enabledSections?: {
+    hero?: boolean;
+    philosophy?: boolean;
+    categories?: boolean;
+    projects?: boolean;
+    privateAccess?: boolean;
+    mortgage?: boolean;
+    milestones?: boolean;
+    blogFeed?: boolean;
+    faq?: boolean;
+    contact?: boolean;
+  };
+}
+
 export interface SiteSettings {
   siteName: string;
   brandName: string;
@@ -23,9 +43,15 @@ export interface SiteSettings {
   email: string;
   address: string;
   website: string;
+  zaloUrl?: string;
+  facebookUrl?: string;
+  youtubeUrl?: string;
+  linkedinUrl?: string;
+  businessLicense?: string;
   navLinks: NavLinkItem[];
   footerLinks?: FooterColumn[];
   copyright: string;
+  theme?: ThemeSettings;
 }
 
 export interface HeroSlide {
@@ -39,11 +65,78 @@ export interface HeroSlide {
   buttonTarget: string;
   secondaryText: string;
   secondaryTarget: string;
+  textColor?: string;
+  tagColor?: string;
+  overlayDarkness?: number; // 0 to 100
 }
 
 export interface HeroData {
   backgroundImage: string;
   slides: HeroSlide[];
+  titleFontSize?: 'standard' | 'large' | 'extralarge';
+  accentColor?: string;
+}
+
+export interface CategoryItem {
+  index: string;
+  categoryKey: string;
+  title: string;
+  subtitle: string;
+  desc: string;
+  image: string;
+  featured?: boolean;
+}
+
+export interface CategoriesData {
+  tag?: string;
+  heading?: string;
+  description?: string;
+  items?: CategoryItem[];
+}
+
+export interface PrivateAccessData {
+  tag?: string;
+  heading?: string;
+  description?: string;
+  buttonText?: string;
+  badgeNote?: string;
+}
+
+export interface MortgageData {
+  tag?: string;
+  heading?: string;
+  description?: string;
+  defaultPrice?: number; // in millions VNĐ
+  defaultDownPaymentPercent?: number;
+  defaultTermYears?: number;
+  defaultInterestRate?: number;
+}
+
+export interface CredentialItem {
+  title: string;
+  desc: string;
+  iconName?: string;
+}
+
+export interface MilestonesData {
+  tag?: string;
+  heading?: string;
+  description?: string;
+  credentials?: CredentialItem[];
+  partners?: string[];
+}
+
+export interface FAQItem {
+  id?: string;
+  q: string;
+  a: string;
+}
+
+export interface FAQData {
+  tag?: string;
+  heading?: string;
+  description?: string;
+  faqs?: FAQItem[];
 }
 
 export interface PhilosophyFeature {
@@ -161,14 +254,19 @@ export interface SiteContentData {
   settings: SiteSettings;
   hero: HeroData;
   philosophy: PhilosophyData;
+  categories?: CategoriesData;
+  projects?: ProjectsBlock;
+  privateAccess?: PrivateAccessData;
+  mortgage?: MortgageData;
+  milestones?: MilestonesData;
+  blogFeed?: BlogFeedBlock;
+  faq?: FAQData;
   contact: ContactData;
-  stylesOverview: StylesOverviewData;
-  office: OfficeData;
+  stylesOverview?: StylesOverviewData;
+  office?: OfficeData;
   stages?: Record<string, StyleStageConfig>;
   about?: AboutBlock;
-  projects?: ProjectsBlock;
   consultation?: ConsultationBlock;
-  blogFeed?: BlogFeedBlock;
   styles?: DesignStyleItem[];
 }
 

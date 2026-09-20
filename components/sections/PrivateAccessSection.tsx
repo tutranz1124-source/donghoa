@@ -3,11 +3,14 @@
 import React, { useState } from 'react';
 import { ShieldCheck, ArrowRight, CheckCircle2 } from 'lucide-react';
 
+import { PrivateAccessData } from '@/lib/types';
+
 interface PrivateAccessSectionProps {
+  data?: PrivateAccessData;
   onOpenInquiry?: (defaultMsg?: string) => void;
 }
 
-export default function PrivateAccessSection({ onOpenInquiry }: PrivateAccessSectionProps) {
+export default function PrivateAccessSection({ data, onOpenInquiry }: PrivateAccessSectionProps) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -15,6 +18,14 @@ export default function PrivateAccessSection({ onOpenInquiry }: PrivateAccessSec
     phone: '',
     preference: 'can-ho',
   });
+
+  const tag = data?.tag || 'PRIVATE PROPERTY ACCESS';
+  const heading = data?.heading || 'Nhận Thông Tin Danh Mục Dự Án Mới';
+  const description =
+    data?.description ||
+    'Đăng ký để nhận danh mục dự án chọn lọc, cập nhật tiến độ xây dựng và phân tích quy hoạch chuyên sâu từ chuyên viên tư vấn.';
+  const buttonText = data?.buttonText || 'Nhận thông tin dự án';
+  const badgeNote = data?.badgeNote || 'Bảo mật thông tin khách hàng tuyệt đối.';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,18 +58,18 @@ export default function PrivateAccessSection({ onOpenInquiry }: PrivateAccessSec
             {/* Left Column: Understated Editorial Pitch */}
             <div className="lg:col-span-6 space-y-4">
               <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
-                PRIVATE PROPERTY ACCESS
+                {tag}
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-normal text-charcoal leading-[1.2]">
-                Nhận Thông Tin Danh Mục Dự Án Mới
+                {heading}
               </h2>
               <p className="text-sm sm:text-[15px] text-charcoal-600 leading-relaxed font-normal">
-                Đăng ký để nhận danh mục dự án chọn lọc, cập nhật tiến độ xây dựng và phân tích quy hoạch chuyên sâu từ chuyên viên tư vấn.
+                {description}
               </p>
 
               <div className="pt-2 flex items-center gap-2 text-xs text-charcoal-muted">
                 <ShieldCheck className="w-4 h-4 text-gold" />
-                <span>Bảo mật thông tin khách hàng tuyệt đối.</span>
+                <span>{badgeNote}</span>
               </div>
             </div>
 

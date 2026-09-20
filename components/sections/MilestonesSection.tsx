@@ -3,33 +3,54 @@
 import React from 'react';
 import { ShieldCheck, Award, Building2, Handshake } from 'lucide-react';
 
-export default function MilestonesSection() {
-  const partners = [
-    'Masterise Homes',
-    'Gamuda Land',
-    'Vingroup',
-    'Khang Điền',
-    'An Gia Group',
-    'KDI Holdings',
-  ];
+import { MilestonesData } from '@/lib/types';
 
-  const credentials = [
-    {
-      icon: Handshake,
-      title: 'Hợp Tác Phân Phối Chiến Lược',
-      desc: 'Đồng hành phân phối chính thức các dự án quy mô chuẩn mực từ các tập đoàn phát triển bất động sản uy tín.',
-    },
-    {
-      icon: ShieldCheck,
-      title: 'Thẩm Định Độc Lập & Chặt Chẽ',
-      desc: 'Đội ngũ chuyên viên pháp lý và tài chính rà soát minh bạch hồ sơ trước khi giới thiệu đến nhà đầu tư.',
-    },
-    {
-      icon: Award,
-      title: 'Đồng Hành Trọn Chu Kỳ Giao Dịch',
-      desc: 'Hỗ trợ khách hàng từ giải pháp tài chính, thủ tục ký kết đến nghiệm thu bàn giao và chuyển nhượng/cho thuê.',
-    },
-  ];
+interface MilestonesSectionProps {
+  data?: MilestonesData;
+}
+
+const DEFAULT_PARTNERS = [
+  'Masterise Homes',
+  'Gamuda Land',
+  'Vingroup',
+  'Khang Điền',
+  'An Gia Group',
+  'KDI Holdings',
+];
+
+const DEFAULT_CREDENTIALS = [
+  {
+    icon: Handshake,
+    title: 'Hợp Tác Phân Phối Chiến Lược',
+    desc: 'Đồng hành phân phối chính thức các dự án quy mô chuẩn mực từ các tập đoàn phát triển bất động sản uy tín.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Thẩm Định Độc Lập & Chặt Chẽ',
+    desc: 'Đội ngũ chuyên viên pháp lý và tài chính rà soát minh bạch hồ sơ trước khi giới thiệu đến nhà đầu tư.',
+  },
+  {
+    icon: Award,
+    title: 'Đồng Hành Trọn Chu Kỳ Giao Dịch',
+    desc: 'Hỗ trợ khách hàng từ giải pháp tài chính, thủ tục ký kết đến nghiệm thu bàn giao và chuyển nhượng/cho thuê.',
+  },
+];
+
+export default function MilestonesSection({ data }: MilestonesSectionProps) {
+  const partners = data?.partners && data.partners.length > 0 ? data.partners : DEFAULT_PARTNERS;
+  const tag = data?.tag || 'NĂNG LỰC & ĐỐI TÁC';
+  const heading = data?.heading || 'Đối Tác Phát Triển & Năng Lực Tư Vấn';
+  const description =
+    data?.description ||
+    'Hợp tác chọn lọc cùng các chủ đầu tư hàng đầu, mang đến nguồn sản phẩm chất lượng và giá trị thực.';
+
+  const credentials = data?.credentials && data.credentials.length > 0
+    ? data.credentials.map((c, idx) => ({
+        icon: idx === 0 ? Handshake : idx === 1 ? ShieldCheck : Award,
+        title: c.title,
+        desc: c.desc,
+      }))
+    : DEFAULT_CREDENTIALS;
 
   return (
     <section className="py-20 sm:py-28 bg-warm-50 border-b border-warm-200">

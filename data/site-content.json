@@ -9,18 +9,23 @@
     "email": "info@donghoagroup.vn",
     "address": "113-115 Ung Văn Khiêm, Phường Thạnh Mỹ Tây, TP Hồ Chí Minh, Việt Nam",
     "website": "www.DongHoaGroup.vn",
+    "zaloUrl": "https://zalo.me/0906499279",
+    "facebookUrl": "https://facebook.com",
+    "youtubeUrl": "https://youtube.com",
+    "linkedinUrl": "https://linkedin.com",
+    "businessLicense": "GPKD số 0315891234 cấp bởi Sở KH&ĐT TP. Hồ Chí Minh",
     "navLinks": [
       {
         "label": "Dự án",
         "url": "#projects"
       },
       {
-        "label": "Phong cách thiết kế",
-        "url": "#styles"
+        "label": "Phân khúc BĐS",
+        "url": "#categories"
       },
       {
-        "label": "Không gian văn phòng",
-        "url": "#office"
+        "label": "Tính vay mua nhà",
+        "url": "#mortgage-calculator"
       },
       {
         "label": "Về chúng tôi",
@@ -35,7 +40,26 @@
         "url": "#contact"
       }
     ],
-    "copyright": "© 2026 Đông Hòa Property - Dong Hoa Group. All rights reserved."
+    "copyright": "© 2026 Đông Hòa Property - Dong Hoa Group. All rights reserved.",
+    "theme": {
+      "accentColor": "#C5A26C",
+      "headingColor": "#04092B",
+      "bodyColor": "#5F6361",
+      "headerMode": "dark",
+      "fontSizeScale": "standard",
+      "enabledSections": {
+        "hero": true,
+        "philosophy": true,
+        "categories": true,
+        "projects": true,
+        "privateAccess": true,
+        "mortgage": true,
+        "milestones": true,
+        "blogFeed": true,
+        "faq": true,
+        "contact": true
+      }
+    }
   },
   "hero": {
     "backgroundImage": "/uploads/hero_slide_1.png",
@@ -189,6 +213,111 @@
         "propertyTypes": "Căn hộ cao cấp & Shophouse",
         "image": "/uploads/happy-one-central.png",
         "featured": false
+      }
+    ]
+  },
+  "categories": {
+    "tag": "DANH MỤC PHÂN KHÚC",
+    "heading": "Phân Khúc Bất Động Sản Chọn Lọc",
+    "description": "Các danh mục bất động sản được thẩm định kỹ lưỡng về vị trí quy hoạch, tính thanh khoản và tiềm năng tăng trưởng bền vững.",
+    "items": [
+      {
+        "index": "01",
+        "categoryKey": "can-ho",
+        "title": "Căn Hộ Hạng Sang & Penthouse",
+        "subtitle": "APARTMENTS & PENTHOUSES",
+        "desc": "Không gian sống trên cao tại các vị trí trung tâm, tầm nhìn toàn cảnh ôm trọn thành phố cùng hệ tiện ích đặc quyền chuẩn mực quốc tế.",
+        "image": "/uploads/the-gio-riverside.png",
+        "featured": true
+      },
+      {
+        "index": "02",
+        "categoryKey": "biet-thu",
+        "title": "Biệt Thự & Nhà Phố Đô Thị",
+        "subtitle": "VILLAS & TOWNHOMES",
+        "desc": "Khu compound khép kín, an ninh đa lớp, cảnh quan sinh thái và cộng đồng cư dân tinh hoa.",
+        "image": "/uploads/vinhomes-can-gio.png",
+        "featured": false
+      },
+      {
+        "index": "03",
+        "categoryKey": "nghi-duong",
+        "title": "Bất Động Sản Nghỉ Dưỡng",
+        "subtitle": "COASTAL RETREATS",
+        "desc": "Biệt thự ven biển và quần thể nghỉ dưỡng tiêu chuẩn 5 sao, kết hợp tối ưu vận hành.",
+        "image": "/uploads/la-tien-villa.png",
+        "featured": false
+      },
+      {
+        "index": "04",
+        "categoryKey": "thuong-mai",
+        "title": "Shophouse & Thương Mại",
+        "subtitle": "COMMERCIAL",
+        "desc": "Vị trí mặt tiền các trục đại lộ huyết mạch, đón đầu lưu lượng kinh doanh sầm uất.",
+        "image": "/uploads/happy-one-central.png",
+        "featured": false
+      }
+    ]
+  },
+  "privateAccess": {
+    "tag": "PRIVATE PROPERTY ACCESS",
+    "heading": "Nhận Thông Tin Danh Mục Dự Án Mới",
+    "description": "Đăng ký để nhận danh mục dự án chọn lọc, cập nhật tiến độ xây dựng và phân tích quy hoạch chuyên sâu từ chuyên viên tư vấn.",
+    "buttonText": "Nhận thông tin dự án",
+    "badgeNote": "Bảo mật thông tin khách hàng tuyệt đối."
+  },
+  "mortgage": {
+    "tag": "CÔNG CỤ TÀI CHÍNH",
+    "heading": "Ước Tính Kế Hoạch Vay Mua Bất Động Sản",
+    "description": "Công cụ hỗ trợ khách hàng dự toán dòng tiền trả hàng tháng và vốn tự có ban đầu.",
+    "defaultPrice": 5000,
+    "defaultDownPaymentPercent": 30,
+    "defaultTermYears": 20,
+    "defaultInterestRate": 8.5
+  },
+  "milestones": {
+    "tag": "NĂNG LỰC & ĐỐI TÁC",
+    "heading": "Đối Tác Phát Triển & Năng Lực Tư Vấn",
+    "description": "Hợp tác chọn lọc cùng các chủ đầu tư hàng đầu, mang đến nguồn sản phẩm chất lượng và giá trị thực.",
+    "credentials": [
+      {
+        "title": "Hợp Tác Phân Phối Chiến Lược",
+        "desc": "Đồng hành phân phối chính thức các dự án quy mô chuẩn mực từ các tập đoàn phát triển bất động sản uy tín."
+      },
+      {
+        "title": "Thẩm Định Độc Lập & Chặt Chẽ",
+        "desc": "Đội ngũ chuyên viên pháp lý và tài chính rà soát minh bạch hồ sơ trước khi giới thiệu đến nhà đầu tư."
+      },
+      {
+        "title": "Đồng Hành Trọn Chu Kỳ Giao Dịch",
+        "desc": "Hỗ trợ khách hàng từ giải pháp tài chính, thủ tục ký kết đến nghiệm thu bàn giao và chuyển nhượng/cho thuê."
+      }
+    ],
+    "partners": [
+      "Masterise Homes",
+      "Gamuda Land",
+      "Vingroup",
+      "Khang Điền",
+      "An Gia Group",
+      "KDI Holdings"
+    ]
+  },
+  "faq": {
+    "tag": "HỎI ĐÁP & TƯ VẤN",
+    "heading": "Câu Hỏi Thường Gặp",
+    "description": "Giải đáp các thắc mắc trọng tâm về quy trình làm việc và thẩm định bất động sản.",
+    "faqs": [
+      {
+        "q": "Đông Hòa Property thẩm định pháp lý dự án như thế nào trước khi phân phối?",
+        "a": "Mọi dự án trong danh mục phân phối đều được chúng tôi rà soát kỹ lưỡng các điều kiện pháp lý cần thiết: Quyết định phê duyệt quy hoạch 1/500, Giấy phép xây dựng, Giấy chứng nhận quyền sử dụng đất và Chứng thư bảo lãnh nghĩa vụ tài chính của ngân hàng trước khi tư vấn cho khách hàng."
+      },
+      {
+        "q": "Quy trình tư vấn và hỗ trợ giao dịch tại Đông Hòa Property gồm những bước nào?",
+        "a": "Quy trình gồm 4 giai đoạn chuẩn mực: (1) Lắng nghe nhu cầu & tư vấn phân khúc phù hợp, (2) Khảo sát thực tế dự án & phân tích quy hoạch, (3) Hoạch định phương án tài chính & thủ tục pháp lý, (4) Đồng hành ký kết hợp đồng và nghiệm thu nhận nhà."
+      },
+      {
+        "q": "Khách hàng có phải trả thêm bất kỳ khoản phí tư vấn nào cho Đông Hòa Property không?",
+        "a": "Hoàn toàn không. Toàn bộ dịch vụ tư vấn chọn căn, hỗ trợ thủ tục hồ sơ vay ngân hàng và kiểm tra pháp lý tại Đông Hòa Property đều được cung cấp miễn phí cho khách hàng theo chính sách từ các chủ đầu tư đối tác."
       }
     ]
   },
