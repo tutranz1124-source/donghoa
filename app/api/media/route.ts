@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { getMediaLibrary, saveMediaLibrary } from '@/lib/storage';
 import { verifyAdminSession } from '@/lib/auth';
+import { commitFileToGitHub, isGitHubSyncConfigured } from '@/lib/github-sync';
 
 export const dynamic = 'force-dynamic';
 
@@ -33,7 +34,12 @@ export async function POST(request: Request) {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    fs.writeFileSync(filePath, buffer);
+
+    try {
+      fs.writeFileSync(filePath, buffer);
+    } catch (e) {
+      console.warn('Could not write directly to local disk (likely serverless):', e);
+    }
 
     const mediaItem = {
       id: `med-${Date.now()}`,
@@ -50,6 +56,25 @@ export async function POST(request: Request) {
     const mediaList = getMediaLibrary();
     mediaList.unshift(mediaItem);
     saveMediaLibrary(mediaList);
+
+    // Auto commit uploaded image & media list to GitHub
+    if (isGitHubSyncConfigured()) {
+      try {
+        await commitFileToGitHub({
+          filePath: `public/uploads/${fileName}`,
+          content: buffer,
+          commitMessage: `cms(media): upload image "${fileName}"`,
+          isBase64: true
+        });
+        await commitFileToGitHub({
+          filePath: 'data/media.json',
+          content: JSON.stringify(mediaList, null, 2),
+          commitMessage: `cms(media): update media library index`
+        });
+      } catch (gitErr) {
+        console.warn('[GitHub Sync] Could not auto-commit uploaded media:', gitErr);
+      }
+    }
 
     return NextResponse.json(mediaItem);
   } catch (err) {
@@ -81,5 +106,18 @@ export async function DELETE(request: Request) {
 
   const updated = mediaList.filter((m) => m.id !== id);
   saveMediaLibrary(updated);
+
+  if (isGitHubSyncConfigured()) {
+    try {
+      await commitFileToGitHub({
+        filePath: 'data/media.json',
+        content: JSON.stringify(updated, null, 2),
+        commitMessage: `cms(media): remove image "${item?.fileName || id}"`
+      });
+    } catch (gitErr) {
+      console.warn('[GitHub Sync] Could not auto-commit media delete:', gitErr);
+    }
+  }
+
   return NextResponse.json({ success: true });
 }

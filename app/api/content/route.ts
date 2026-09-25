@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { getSiteContent, saveSiteContent } from '@/lib/storage';
 import { verifyAdminSession, verifyEditorSession, getSessionUser } from '@/lib/auth';
+import { commitFileToGitHub, isGitHubSyncConfigured } from '@/lib/github-sync';
 
 export const dynamic = 'force-dynamic';
 
@@ -36,7 +37,23 @@ export async function PUT(request: Request) {
     if (!data || typeof data !== 'object') {
       return NextResponse.json({ error: 'Dữ liệu không hợp lệ.' }, { status: 400 });
     }
+
     const saved = saveSiteContent(data);
+
+    // Auto commit to GitHub repository
+    let gitSyncResult: any = { configured: false };
+    if (isGitHubSyncConfigured()) {
+      try {
+        const commitRes = await commitFileToGitHub({
+          filePath: 'data/site-content.json',
+          content: JSON.stringify(data, null, 2),
+          commitMessage: `cms(content): update landing page & site settings [${new Date().toISOString().substring(0, 16)}]`
+        });
+        gitSyncResult = { configured: true, ...commitRes };
+      } catch (gitErr) {
+        console.warn('[GitHub Sync] Could not auto-commit site content:', gitErr);
+      }
+    }
 
     try {
       revalidatePath('/', 'layout');
@@ -50,7 +67,8 @@ export async function PUT(request: Request) {
       success: true,
       message: 'Đã lưu toàn bộ cấu hình trang chủ thành công!',
       content: data,
-      savedToDisk: saved
+      savedToDisk: saved,
+      gitSync: gitSyncResult
     });
   } catch (err: any) {
     return NextResponse.json({ error: `Lỗi khi lưu dữ liệu: ${err?.message || 'Không xác định'}` }, { status: 500 });
