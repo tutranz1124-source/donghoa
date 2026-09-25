@@ -2,7 +2,8 @@
 
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
-import { MapPin, Eye, ArrowRight, Building } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, Eye, ArrowRight, Building, Sparkles } from 'lucide-react';
 import { ProjectsBlock, ProjectItem } from '@/lib/types';
 import ProjectQuickViewModal from '../ProjectQuickViewModal';
 
@@ -31,6 +32,23 @@ const DEFAULT_PROJECTS: ProjectItem[] = [
     imageUrl: '/uploads/the-gio-riverside.png',
   },
   {
+    id: 'p-vinhomes-can-gio',
+    name: 'Vinhomes Cần Giờ',
+    title: 'Vinhomes Cần Giờ',
+    category: 'biet-thu',
+    location: 'Cần Giờ, TP. Hồ Chí Minh',
+    investor: 'Vingroup',
+    developer: 'Vingroup',
+    priceRange: 'Từ 15 Tỷ / Căn',
+    price: 'Từ 15 Tỷ / Căn',
+    area: '150m² - 450m²',
+    featured: true,
+    scale: 'Đại đô thị sinh thái 2.870 ha',
+    description: 'Siêu đô thị lấn biển tiên phong tại Việt Nam, sở hữu hệ sinh thái rừng ngập mặn Cần Giờ và hạ tầng giao thông kết nối cầu Cần Giờ.',
+    image: '/uploads/vinhomes-can-gio.png',
+    imageUrl: '/uploads/vinhomes-can-gio.png',
+  },
+  {
     id: 'p-grand-marina',
     name: 'Grand Marina Saigon',
     title: 'Grand Marina Saigon',
@@ -41,13 +59,14 @@ const DEFAULT_PROJECTS: ProjectItem[] = [
     priceRange: 'Liên hệ tư vấn',
     price: 'Liên hệ tư vấn',
     area: '52m² - 250m²',
+    featured: true,
     scale: '8 Tháp căn hộ hàng hiệu Marriott & JW Marriott',
     description: 'Dự án bất động sản hàng hiệu quy mô bậc nhất thế giới mang thương hiệu Marriott International bên bờ sông Sài Gòn lịch sử.',
-    image: '/uploads/vinhomes-can-gio.png',
-    imageUrl: '/uploads/vinhomes-can-gio.png',
+    image: '/uploads/lusso-saigon.png',
+    imageUrl: '/uploads/lusso-saigon.png',
   },
   {
-    id: 'p-alora-villas',
+    id: 'p-global-city',
     name: 'The Global City',
     title: 'The Global City',
     category: 'biet-thu',
@@ -59,11 +78,11 @@ const DEFAULT_PROJECTS: ProjectItem[] = [
     area: '95m² - 220m²',
     scale: '117.4 ha • Nhà phố SOHO & Biệt thự',
     description: 'Khu đô thị phức hợp chuẩn quốc tế được quy hoạch bởi Foster + Partners, biểu tượng trung tâm mới của TP. Hồ Chí Minh.',
-    image: '/uploads/lusso-saigon.png',
-    imageUrl: '/uploads/lusso-saigon.png',
+    image: '/uploads/kieu-by-kita.png',
+    imageUrl: '/uploads/kieu-by-kita.png',
   },
   {
-    id: 'p-gamuda-celadon',
+    id: 'p-elysian',
     name: 'Elysian Gamuda Land',
     title: 'Elysian Gamuda Land',
     category: 'can-ho',
@@ -79,7 +98,7 @@ const DEFAULT_PROJECTS: ProjectItem[] = [
     imageUrl: '/uploads/happy-one-central.png',
   },
   {
-    id: 'p-vega-city',
+    id: 'p-gran-melia',
     name: 'Gran Meliá Nha Trang',
     title: 'Gran Meliá Nha Trang',
     category: 'nghi-duong',
@@ -91,8 +110,8 @@ const DEFAULT_PROJECTS: ProjectItem[] = [
     area: '350m² - 900m²',
     scale: 'Dinh thự biển siêu sang vận hành bởi Gran Meliá',
     description: 'Bộ sưu tập dinh thự biển thượng lưu đầu tiên tại Đông Nam Á mang thương hiệu xa xỉ nhất của tập đoàn khách sạn Meliá.',
-    image: '/uploads/la-tien-villa.png',
-    imageUrl: '/uploads/la-tien-villa.png',
+    image: '/uploads/alora-nhatrang.png',
+    imageUrl: '/uploads/alora-nhatrang.png',
   },
 ];
 
@@ -114,9 +133,9 @@ export default function ProjectsSection({
 
   const filterTabs = [
     { label: 'Tất Cả Dự Án', value: 'all' },
-    { label: 'Căn Hộ & Penthouse', value: 'can-ho' },
-    { label: 'Biệt Thự & Nhà Phố', value: 'biet-thu' },
-    { label: 'Nghỉ Dưỡng', value: 'nghi-duong' },
+    { label: '01 / Căn Hộ Hạng Sang', value: 'can-ho' },
+    { label: '02 / Biệt Thự & Nhà Phố', value: 'biet-thu' },
+    { label: '03 / BĐS Nghỉ Dưỡng', value: 'nghi-duong' },
   ];
 
   const filteredProjects = useMemo(() => {
@@ -128,62 +147,83 @@ export default function ProjectsSection({
   const supportingProjects = filteredProjects.filter((p) => p.id !== featuredProject?.id);
 
   return (
-    <section id="projects" className="py-20 sm:py-28 bg-white border-b border-warm-200">
+    <section id="projects" className="py-20 sm:py-28 bg-white border-b border-warm-200 scroll-mt-20">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6">
+        {/* Section Header with Motion */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6"
+        >
           <div className="space-y-3">
-            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
-              DANH MỤC DỰ ÁN
+            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-gold" />
+              <span>{block?.badge || 'DANH MỤC DỰ ÁN'}</span>
             </span>
             <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-[1.2] tracking-tight">
-              Dự Án Trọng Điểm Đang Phân Phối
+              {block?.title || 'Dự Án Trọng Điểm Đang Phân Phối'}
             </h2>
           </div>
 
           {/* Interactive Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-warm-100 rounded-full border border-warm-300">
+          <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-warm-100/80 backdrop-blur-sm rounded-full border border-warm-300 shadow-inner">
             {filterTabs.map((tab) => (
               <button
                 key={tab.value}
                 onClick={() => setActiveFilter(tab.value)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
+                className={`relative px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 ${
                   activeFilter === tab.value
-                    ? 'bg-charcoal text-white shadow-warm-sm'
+                    ? 'text-white shadow-warm-sm'
                     : 'text-charcoal-700 hover:text-charcoal hover:bg-white/80'
                 }`}
               >
-                {tab.label}
+                {activeFilter === tab.value && (
+                  <motion.div
+                    layoutId="activeFilterPill"
+                    className="absolute inset-0 bg-charcoal rounded-full z-0"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{tab.label}</span>
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* 1. HERO FEATURED PROJECT (Dominant 65/35 Asymmetric Split) */}
         {featuredProject && (
-          <div className="mb-12 bg-gradient-to-br from-warm-50 to-warm-100 rounded-3xl border border-warm-300 overflow-hidden shadow-warm-md hover:shadow-warm-lg transition-all duration-300">
+          <motion.div
+            layout
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-12 bg-gradient-to-br from-warm-50 to-warm-100 rounded-3xl border border-warm-300 overflow-hidden shadow-warm-md hover:shadow-warm-lg transition-all duration-300 group"
+          >
             <div className="grid grid-cols-1 lg:grid-cols-12">
-              <div className="lg:col-span-7 relative h-72 sm:h-96 lg:h-[480px] overflow-hidden group bg-warm-200">
+              <div className="lg:col-span-7 relative h-72 sm:h-96 lg:h-[480px] overflow-hidden bg-warm-200">
                 <Image
                   src={featuredProject.imageUrl || featuredProject.image || '/uploads/the-gio-riverside.png'}
                   alt={featuredProject.title || featuredProject.name || 'Dự án'}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute top-4 left-4 px-3.5 py-1.5 bg-white/95 backdrop-blur-md rounded-full text-[11px] font-semibold uppercase tracking-wider text-gold shadow-warm-sm border border-warm-200">
-                  Dự Án Tâm Điểm
+                <div className="absolute top-4 left-4 px-3.5 py-1.5 bg-white/95 backdrop-blur-md rounded-full text-[11px] font-semibold uppercase tracking-wider text-gold shadow-warm-sm border border-warm-200 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
+                  <span>Dự Án Tâm Điểm</span>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/40 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/50 via-transparent to-transparent pointer-events-none" />
               </div>
 
               <div className="lg:col-span-5 p-8 sm:p-10 flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-xs text-charcoal-muted">
                     <Building className="w-3.5 h-3.5 text-gold" />
-                    <span>Chủ đầu tư: {featuredProject.investor || featuredProject.developer}</span>
+                    <span>Chủ đầu tư: <strong>{featuredProject.investor || featuredProject.developer}</strong></span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-serif font-medium text-charcoal leading-snug">
+                  <h3 className="text-2xl sm:text-3xl font-serif font-medium text-charcoal leading-snug group-hover:text-gold transition-colors">
                     {featuredProject.title || featuredProject.name}
                   </h3>
 
@@ -196,14 +236,14 @@ export default function ProjectsSection({
                     {featuredProject.description}
                   </p>
 
-                  <div className="pt-2 grid grid-cols-2 gap-4 border-t border-warm-200 text-xs">
+                  <div className="pt-3 grid grid-cols-2 gap-4 border-t border-warm-200 text-xs">
                     <div>
                       <span className="text-charcoal-muted block">Mức giá tham khảo</span>
-                      <span className="font-semibold text-charcoal text-sm mt-0.5 block">{featuredProject.priceRange || featuredProject.price}</span>
+                      <span className="font-semibold text-charcoal text-sm mt-0.5 block">{featuredProject.priceRange || featuredProject.price || 'Liên hệ tư vấn'}</span>
                     </div>
                     <div>
                       <span className="text-charcoal-muted block">Quy mô / Diện tích</span>
-                      <span className="font-semibold text-charcoal text-sm mt-0.5 block">{featuredProject.area}</span>
+                      <span className="font-semibold text-charcoal text-sm mt-0.5 block">{featuredProject.scale || featuredProject.area || 'Đang cập nhật'}</span>
                     </div>
                   </div>
                 </div>
@@ -212,7 +252,7 @@ export default function ProjectsSection({
                   <button
                     type="button"
                     onClick={() => setModalProject(featuredProject)}
-                    className="flex-1 py-3.5 rounded-full bg-white hover:bg-warm-100 border border-warm-300 text-charcoal text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-warm-sm"
+                    className="flex-1 py-3.5 rounded-full bg-white hover:bg-warm-100 border border-warm-300 text-charcoal text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-warm-sm hover:scale-[1.02] active:scale-[0.98]"
                   >
                     <Eye className="w-4 h-4 text-gold" />
                     <span>Xem chi tiết</span>
@@ -228,7 +268,7 @@ export default function ProjectsSection({
                         if (el) el.scrollIntoView({ behavior: 'smooth' });
                       }
                     }}
-                    className="flex-1 py-3.5 rounded-full bg-charcoal hover:bg-gold text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-warm-sm"
+                    className="flex-1 py-3.5 rounded-full bg-charcoal hover:bg-gold hover:text-charcoal text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-warm-sm hover:scale-[1.02] active:scale-[0.98]"
                   >
                     <span>Nhận thông tin</span>
                     <ArrowRight className="w-4 h-4" />
@@ -236,23 +276,28 @@ export default function ProjectsSection({
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
 
-        {/* 2. SUPPORTING PROJECTS GRID */}
-        {supportingProjects.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {supportingProjects.map((project) => (
-              <div
+        {/* 2. SUPPORTING PROJECTS GRID WITH ANIMATED PRESENCE */}
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <AnimatePresence mode="popLayout">
+            {supportingProjects.map((project, idx) => (
+              <motion.div
                 key={project.id}
-                className="group bg-warm-50/70 hover:bg-warm-50 rounded-3xl border border-warm-300 hover:border-gold/60 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-warm-sm hover:shadow-warm-md"
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                className="group bg-warm-50/70 hover:bg-white rounded-3xl border border-warm-300 hover:border-gold/60 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-warm-sm hover:shadow-warm-md hover:-translate-y-1"
               >
                 <div className="relative h-60 w-full overflow-hidden bg-warm-200">
                   <Image
                     src={project.imageUrl || project.image || '/uploads/the-gio-riverside.png'}
                     alt={project.title || project.name || 'Dự án'}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
                   <div className="absolute top-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-md rounded-full text-[11px] font-medium text-charcoal border border-warm-200 shadow-warm-sm">
                     {project.investor || project.developer || 'Chủ đầu tư uy tín'}
@@ -278,22 +323,44 @@ export default function ProjectsSection({
                   <div className="pt-4 border-t border-warm-200 flex items-center justify-between">
                     <div>
                       <span className="text-[11px] text-charcoal-muted block">Mức giá dự kiến</span>
-                      <span className="text-xs font-semibold text-charcoal">{project.priceRange || project.price}</span>
+                      <span className="font-semibold text-charcoal text-sm mt-0.5 block">{project.priceRange || project.price || 'Liên hệ'}</span>
                     </div>
+                    <div className="text-right">
+                      <span className="text-[11px] text-charcoal-muted block">Quy mô</span>
+                      <span className="font-semibold text-charcoal text-sm mt-0.5 block">{project.scale || project.area || 'Tiêu chuẩn'}</span>
+                    </div>
+                  </div>
 
+                  <div className="pt-2 flex items-center gap-2">
                     <button
                       type="button"
                       onClick={() => setModalProject(project)}
-                      className="px-4 py-2 rounded-full bg-white hover:bg-charcoal hover:text-white text-charcoal text-xs font-semibold transition-colors border border-warm-300 shadow-warm-sm"
+                      className="flex-1 py-2.5 rounded-full bg-white hover:bg-warm-100 border border-warm-300 text-charcoal text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors shadow-2xs"
                     >
-                      Chi tiết →
+                      <Eye className="w-3.5 h-3.5 text-gold" />
+                      <span>Xem nhanh</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (onOpenInquiry) {
+                          onOpenInquiry(project.title || project.name);
+                        } else {
+                          const el = document.getElementById('contact');
+                          if (el) el.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                      className="flex-1 py-2.5 rounded-full bg-charcoal hover:bg-gold hover:text-charcoal text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors shadow-2xs"
+                    >
+                      <span>Tư vấn</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        )}
+          </AnimatePresence>
+        </motion.div>
       </div>
 
       {/* QUICK VIEW MODAL */}

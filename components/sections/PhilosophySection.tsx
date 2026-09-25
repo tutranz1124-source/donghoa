@@ -2,7 +2,8 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ShieldCheck, Compass, Users } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ShieldCheck, Compass, Users, Sparkles } from 'lucide-react';
 import { PhilosophyData } from '@/lib/types';
 
 interface PhilosophySectionProps {
@@ -29,15 +30,22 @@ export default function PhilosophySection({ data }: PhilosophySectionProps) {
   ];
 
   return (
-    <section id="philosophy" className="py-20 sm:py-28 lg:py-32 bg-gradient-to-b from-warm-50 via-warm-100/60 to-white border-b border-warm-200">
+    <section id="philosophy" className="py-20 sm:py-28 lg:py-32 bg-gradient-to-b from-warm-50 via-warm-100/60 to-white border-b border-warm-200 scroll-mt-20">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
         {/* Asymmetric 45/55 Proportions */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: 5 Cols Text with Optimal Reading Measure */}
-          <div className="lg:col-span-5 space-y-8">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 space-y-8"
+          >
             <div className="space-y-3.5">
-              <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
-                {data?.tag || 'VỀ ĐÔNG HÒA PROPERTY'}
+              <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-gold" />
+                <span>{data?.tag || 'VỀ ĐÔNG HÒA PROPERTY'}</span>
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-serif font-normal text-charcoal leading-[1.2] tracking-tight">
                 {data?.heading || 'Chuẩn Mực Tư Vấn Bất Động Sản Bền Vững'}
@@ -52,44 +60,63 @@ export default function PhilosophySection({ data }: PhilosophySectionProps) {
             {/* Core Advisory Pillars */}
             <div className="space-y-5 pt-2">
               {pillars.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-white border border-warm-300 shadow-warm-sm flex items-center justify-center shrink-0 mt-0.5">
-                    <item.icon className="w-4.5 h-4.5 text-gold" />
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.1 }}
+                  className="flex items-start gap-4 group"
+                >
+                  <div className="w-10 h-10 rounded-2xl bg-white border border-warm-300 shadow-warm-sm flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[#04092b] group-hover:text-gold transition-colors">
+                    <item.icon className="w-4.5 h-4.5 text-gold transition-colors" />
                   </div>
                   <div className="space-y-1">
-                    <h3 className="text-[15.5px] font-semibold text-charcoal">{item.title}</h3>
+                    <h3 className="text-[15.5px] font-semibold text-charcoal group-hover:text-gold transition-colors">{item.title}</h3>
                     <p className="text-[13.5px] text-charcoal-600 leading-relaxed">{item.desc}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: 7 Cols Visual Showcase (Dominant Image Weight) */}
-          <div className="lg:col-span-7">
-            <div className="relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7"
+          >
+            <div className="relative group">
               <div className="relative h-[420px] sm:h-[500px] lg:h-[560px] rounded-3xl overflow-hidden shadow-warm-md border border-warm-300 bg-warm-200">
                 <Image
                   src="/uploads/figma_philosophy_photo.png"
                   alt="Đông Hòa Property Architecture"
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-103 transition-transform duration-700 ease-out"
                 />
                 {/* Subtle soft architectural vignette for depth */}
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/40 via-transparent to-transparent pointer-events-none" />
               </div>
 
               {/* Discreet Quote Box */}
-              <div className="absolute -bottom-6 -left-4 sm:-bottom-8 sm:-left-8 bg-white/95 backdrop-blur-md p-6 sm:p-7 rounded-2xl border border-warm-300 shadow-warm-md max-w-xs sm:max-w-sm">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="absolute -bottom-6 -left-4 sm:-bottom-8 sm:-left-8 bg-white/95 backdrop-blur-md p-6 sm:p-7 rounded-2xl border border-warm-300 shadow-warm-md max-w-xs sm:max-w-sm"
+              >
                 <p className="text-xs sm:text-[13px] font-serif italic text-charcoal-700 leading-relaxed mb-2">
                   &ldquo;Chất lượng của một bất động sản không chỉ đo bằng quy mô, mà bằng giá trị sống và sự an tâm tạo dựng theo năm tháng.&rdquo;
                 </p>
                 <span className="text-[11px] font-semibold text-gold uppercase tracking-wider block font-sans">
                   — Ban Điều Hành Đông Hòa Property
                 </span>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
