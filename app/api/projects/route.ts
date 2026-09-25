@@ -1,13 +1,29 @@
 import { NextResponse } from 'next/server';
-import { getProjects, saveProjects, saveProjectItem, deleteProjectItem } from '@/lib/storage';
+import { getProjects, saveProjects, saveProjectItem, deleteProjectItem, getSiteContent } from '@/lib/storage';
 import { verifyAdminSession, verifyEditorSession } from '@/lib/auth';
 import { ProjectItem } from '@/lib/types';
+import { commitFileToGitHub, isGitHubSyncConfigured } from '@/lib/github-sync';
 
 export const dynamic = 'force-dynamic';
+
+async function autoCommitProjects(action: string, projectName?: string) {
+  if (!isGitHubSyncConfigured()) return;
+  try {
+    const siteContent = getSiteContent();
+    await commitFileToGitHub({
+      filePath: 'data/site-content.json',
+      content: JSON.stringify(siteContent, null, 2),
+      commitMessage: `cms(projects): ${action} ${projectName ? `"${projectName}"` : ''} [${new Date().toISOString().substring(0, 16)}]`
+    });
+  } catch (err) {
+    console.warn('[GitHub Sync] Failed to auto-commit projects:', err);
+  }
+}
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const featuredOnly = searchParams.get('featured') === 'true';
+  const category = searchParams.get('category')?.toLowerCase();
   const search = searchParams.get('search')?.toLowerCase();
 
   let list = getProjects();
@@ -16,13 +32,20 @@ export async function GET(request: Request) {
     list = list.filter((p) => p.featured);
   }
 
+  if (category && category !== 'all') {
+    list = list.filter((p) => p.category?.toLowerCase() === category);
+  }
+
   if (search) {
     list = list.filter(
       (p) =>
-        p.name.toLowerCase().includes(search) ||
+        (p.name && p.name.toLowerCase().includes(search)) ||
+        (p.title && p.title.toLowerCase().includes(search)) ||
         (p.developer && p.developer.toLowerCase().includes(search)) ||
+        (p.investor && p.investor.toLowerCase().includes(search)) ||
         (p.location && p.location.toLowerCase().includes(search)) ||
-        (p.propertyTypes && p.propertyTypes.toLowerCase().includes(search))
+        (p.propertyTypes && p.propertyTypes.toLowerCase().includes(search)) ||
+        (p.category && p.category.toLowerCase().includes(search))
     );
   }
 
@@ -41,7 +64,8 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { name, developer, location, area, propertyTypes, image, featured } = body;
+    const name = body.name || body.title;
+    const image = body.image || body.imageUrl;
 
     if (!name || !image) {
       return NextResponse.json({ error: 'Vui lòng nhập Tên dự án và chọn Hình ảnh đại diện.' }, { status: 400 });
@@ -50,15 +74,26 @@ export async function POST(request: Request) {
     const newProject: ProjectItem = {
       id: body.id || `proj-${Date.now()}`,
       name: name.trim(),
-      developer: developer?.trim() || '',
-      location: location?.trim() || '',
-      area: area?.trim() || '',
-      propertyTypes: propertyTypes?.trim() || '',
+      title: body.title?.trim() || name.trim(),
+      category: body.category?.trim() || 'can-ho',
+      developer: body.developer?.trim() || body.investor?.trim() || '',
+      investor: body.investor?.trim() || body.developer?.trim() || '',
+      location: body.location?.trim() || '',
+      area: body.area?.trim() || '',
+      scale: body.scale?.trim() || '',
+      priceRange: body.priceRange?.trim() || body.price?.trim() || 'Liên hệ tư vấn',
+      price: body.price?.trim() || body.priceRange?.trim() || 'Liên hệ tư vấn',
+      propertyTypes: body.propertyTypes?.trim() || '',
+      description: body.description?.trim() || '',
       image: image.trim(),
-      featured: typeof featured === 'boolean' ? featured : false
+      imageUrl: image.trim(),
+      featured: typeof body.featured === 'boolean' ? body.featured : false,
+      handover: body.handover?.trim() || '',
+      ownership: body.ownership?.trim() || 'Sổ hồng lâu dài'
     };
 
     saveProjectItem(newProject);
+    await autoCommitProjects('create project', newProject.name);
 
     return NextResponse.json({
       success: true,
@@ -78,7 +113,9 @@ export async function PUT(request: Request) {
 
   try {
     const body = await request.json();
-    const { id, name, developer, location, area, propertyTypes, image, featured } = body;
+    const { id } = body;
+    const name = body.name || body.title;
+    const image = body.image || body.imageUrl;
 
     if (!id || !name || !image) {
       return NextResponse.json({ error: 'Thiếu ID, Tên dự án hoặc Hình ảnh.' }, { status: 400 });
@@ -87,15 +124,26 @@ export async function PUT(request: Request) {
     const updated: ProjectItem = {
       id,
       name: name.trim(),
-      developer: developer?.trim() || '',
-      location: location?.trim() || '',
-      area: area?.trim() || '',
-      propertyTypes: propertyTypes?.trim() || '',
+      title: body.title?.trim() || name.trim(),
+      category: body.category?.trim() || 'can-ho',
+      developer: body.developer?.trim() || body.investor?.trim() || '',
+      investor: body.investor?.trim() || body.developer?.trim() || '',
+      location: body.location?.trim() || '',
+      area: body.area?.trim() || '',
+      scale: body.scale?.trim() || '',
+      priceRange: body.priceRange?.trim() || body.price?.trim() || 'Liên hệ tư vấn',
+      price: body.price?.trim() || body.priceRange?.trim() || 'Liên hệ tư vấn',
+      propertyTypes: body.propertyTypes?.trim() || '',
+      description: body.description?.trim() || '',
       image: image.trim(),
-      featured: typeof featured === 'boolean' ? featured : false
+      imageUrl: image.trim(),
+      featured: typeof body.featured === 'boolean' ? body.featured : false,
+      handover: body.handover?.trim() || '',
+      ownership: body.ownership?.trim() || 'Sổ hồng lâu dài'
     };
 
     saveProjectItem(updated);
+    await autoCommitProjects('update project', updated.name);
 
     return NextResponse.json({
       success: true,
@@ -122,6 +170,7 @@ export async function PATCH(request: Request) {
     }
 
     saveProjects(items, { badge, title });
+    await autoCommitProjects('reorder projects list');
 
     return NextResponse.json({
       success: true,
@@ -146,11 +195,15 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ error: 'Thiếu mã dự án (id).' }, { status: 400 });
   }
 
+  const projects = getProjects();
+  const target = projects.find((p) => p.id === id);
   const deleted = deleteProjectItem(id);
+
   if (!deleted) {
     return NextResponse.json({ error: 'Không tìm thấy dự án để xóa.' }, { status: 404 });
   }
 
+  await autoCommitProjects('delete project', target?.name || id);
+
   return NextResponse.json({ success: true, message: 'Đã xóa dự án thành công.' });
 }
-

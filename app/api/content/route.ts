@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { getSiteContent, saveSiteContent } from '@/lib/storage';
 import { verifyAdminSession, verifyEditorSession, getSessionUser } from '@/lib/auth';
-import { commitFileToGitHub, isGitHubSyncConfigured } from '@/lib/github-sync';
 
 export const dynamic = 'force-dynamic';
 
@@ -39,17 +38,6 @@ export async function PUT(request: Request) {
     }
     const saved = saveSiteContent(data);
 
-    // Auto-commit directly to GitHub source code if configured
-    let gitSyncStatus = { synced: false, error: undefined as string | undefined };
-    if (isGitHubSyncConfigured()) {
-      const gitRes = await commitFileToGitHub({
-        filePath: 'data/site-content.json',
-        content: JSON.stringify(data, null, 2),
-        commitMessage: `cms(content): update site content from admin portal [${new Date().toISOString().substring(0, 16)}]`
-      });
-      gitSyncStatus = { synced: gitRes.success, error: gitRes.error };
-    }
-
     try {
       revalidatePath('/', 'layout');
       revalidatePath('/blog', 'layout');
@@ -62,8 +50,7 @@ export async function PUT(request: Request) {
       success: true,
       message: 'Đã lưu toàn bộ cấu hình trang chủ thành công!',
       content: data,
-      savedToDisk: saved,
-      gitSync: gitSyncStatus
+      savedToDisk: saved
     });
   } catch (err: any) {
     return NextResponse.json({ error: `Lỗi khi lưu dữ liệu: ${err?.message || 'Không xác định'}` }, { status: 500 });

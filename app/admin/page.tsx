@@ -60,13 +60,18 @@ export default function AdminDashboardPage() {
   const featuredProjectsCount = projects.filter((p) => p.featured).length;
 
   const sectionsStatus = [
-    { name: '1. Banner & Tagline Hero', tab: 'hero', icon: Sparkles, desc: 'Slideshow bất động sản & thông điệp' },
-    { name: '2. Danh Mục Dự Án Tiêu Biểu', tab: 'projects', icon: Building2, desc: '9 Dự án cao cấp & Bộ lọc' },
-    { name: '3. Canva Studio (4 Phong Cách)', tab: 'canva', icon: Layers, desc: 'Modern, Cozy, Luxury, Heritage' },
-    { name: '4. Tầm Nhìn & Sứ Mệnh', tab: 'philosophy', icon: Compass, desc: '3 Trụ cột cốt lõi thương hiệu' },
-    { name: '5. Tư Vấn & Nhận Thông Tin', tab: 'contact', icon: PhoneCall, desc: 'Form tiếp nhận khách hàng & Hotline' },
-    { name: '6. Không Gian Văn Phòng', tab: 'office', icon: Briefcase, desc: 'Showroom, văn phòng & Bảng màu' },
-    { name: '7. Thương Hiệu & Footer', tab: 'settings', icon: Building, desc: 'Logo, Hotline, Địa chỉ & Pháp lý' },
+    { name: '1. Banner Hero Bất Động Sản', tab: 'hero', icon: Sparkles, desc: 'Slideshow bất động sản, thông điệp & CTA' },
+    { name: '2. Về Chúng Tôi & Triết Lý', tab: 'philosophy', icon: Compass, desc: 'Tầm nhìn, năng lực & 3 trụ cột cốt lõi' },
+    { name: '3. Phân Khúc Bất Động Sản', tab: 'categories', icon: Layers, desc: '01 Căn Hộ, 02 Biệt Thự, 03 Nghỉ Dưỡng, 04 Thương Mại' },
+    { name: '4. Danh Mục Dự Án Trọng Điểm', tab: 'projects', icon: Building2, desc: 'Dự án phân phối chiến lược & Bộ lọc' },
+    { name: '5. Đặc Quyền Private Access', tab: 'private_access', icon: ShieldCheck, desc: 'Đặc quyền tư vấn & danh mục dự án mới' },
+    { name: '6. Tính Toán Dòng Tiền Vay Mua', tab: 'mortgage', icon: Zap, desc: 'Ước tính hạn mức vay & dòng tiền trả hàng tháng' },
+    { name: '7. Năng Lực & Đối Tác Phát Triển', tab: 'milestones', icon: Sparkles, desc: 'Chủ đầu tư Masterise, Vingroup, Gamuda, An Gia...' },
+    { name: '8. Tin Tức & Góc Nhìn Thị Trường', tab: 'blog_feed', icon: FileText, desc: 'Blog phân tích đầu tư, pháp lý & quy hoạch' },
+    { name: '9. Hỏi Đáp & Thẩm Định Pháp Lý', tab: 'faq', icon: BookOpen, desc: 'Quy trình tư vấn độc lập & giải đáp thắc mắc' },
+    { name: '10. Liên Hệ Chuyên Viên & Hotline', tab: 'contact', icon: PhoneCall, desc: 'Hotline, trụ sở văn phòng & form tiếp nhận' },
+    { name: '11. Bố Cục & Tùy Biến Giao Diện', tab: 'layout_theme', icon: Palette, desc: 'Bật/tắt section, màu sắc chủ đạo & font chữ' },
+    { name: '12. Cài Đặt Hệ Thống & Menu', tab: 'site_settings', icon: Building, desc: 'Logo, Hotline, Địa chỉ, Menu & SEO' },
   ];
 
   return (

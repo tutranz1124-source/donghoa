@@ -91,7 +91,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const navItems = isAdmin
     ? [
         { label: 'Tổng quan', href: '/admin', icon: LayoutDashboard },
-        { label: 'Trang chủ & Canvas', href: '/admin/pages', icon: Layers },
+        { label: 'Trang Chủ & Giao Diện', href: '/admin/pages', icon: Layers },
         { label: 'Bất động sản & Dự án', href: '/admin/projects', icon: Sparkles },
         { label: 'Khách hàng & CRM', href: '/admin/inquiries', icon: Users },
         { label: 'Bài viết Blog', href: '/admin/blog', icon: FileText },

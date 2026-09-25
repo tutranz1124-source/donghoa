@@ -3,7 +3,7 @@
     "siteName": "Đông Hòa Property",
     "brandName": "ĐÔNG HÒA PROPERTY",
     "siteTagline": "Bất Động Sản Cao Cấp & Kiến Tạo Không Gian Sống",
-    "siteDescription": "Đông Hòa Property cung cấp danh mục bất động sản chọn lọc cùng giải pháp thiết kế - thi công không gian sống chuẩn mực và đẳng cấp.",
+    "siteDescription": "Đông Hòa Property cung cấp danh mục bất động sản chọn lọc cùng giải pháp tư vấn đầu tư và thẩm định pháp lý minh bạch hàng đầu.",
     "logo": "/uploads/logo-dong-hoa-property.png",
     "hotline": "0906.499.279",
     "email": "info@donghoagroup.vn",
@@ -107,112 +107,12 @@
         "description": "Vị trí đắc địa, tiềm năng tăng trưởng vượt trội và pháp lý minh bạch 100%."
       },
       {
-        "title": "Tư vấn đầu tư & Thiết kế độc bản",
+        "title": "Tư vấn đầu tư & Thẩm định chuyên sâu",
         "description": "Giải pháp toàn diện từ chọn bất động sản đến thiết kế không gian theo gu thẩm mỹ cá nhân."
       },
       {
         "title": "Dịch vụ tận tâm trọn gói",
-        "description": "Đồng hành xuyên suốt từ thủ tục pháp lý, nhận bàn giao đến hoàn thiện nội thất trọn gói."
-      }
-    ]
-  },
-  "projects": {
-    "id": "block-projects",
-    "type": "projects",
-    "enabled": true,
-    "order": 4,
-    "badge": "DANH MỤC DỰ ÁN TIÊU BIỂU",
-    "title": "DỰ ÁN BẤT ĐỘNG SẢN & KHÔNG GIAN NỔI BẬT",
-    "items": [
-      {
-        "id": "proj-1",
-        "name": "Vinhomes Cần Giờ",
-        "developer": "Vingroup",
-        "location": "Cần Giờ, TP. Hồ Chí Minh",
-        "area": "Đại đô thị sinh thái 2.870 ha",
-        "propertyTypes": "Biệt thự biển & Shophouse",
-        "image": "/uploads/vinhomes-can-gio.png",
-        "featured": true
-      },
-      {
-        "id": "proj-2",
-        "name": "The Gió Riverside",
-        "developer": "An Gia Group",
-        "location": "TP. Dĩ An, liền kề TP. Thủ Đức",
-        "area": "Quy mô 3.000 căn hộ cao cấp",
-        "propertyTypes": "Căn hộ view sông & Penhouse",
-        "image": "/uploads/the-gio-riverside.png",
-        "featured": true
-      },
-      {
-        "id": "proj-3",
-        "name": "Lusso Saigon",
-        "developer": "Masterise Homes",
-        "location": "Quận 1, TP. Hồ Chí Minh",
-        "area": "Phân khúc Ultra-Luxury",
-        "propertyTypes": "Căn hộ hàng hiệu & Duplex",
-        "image": "/uploads/lusso-saigon.png",
-        "featured": true
-      },
-      {
-        "id": "proj-4",
-        "name": "Alora Nha Trang",
-        "developer": "KDI Holdings",
-        "location": "Bãi Tiên, TP. Nha Trang",
-        "area": "Tổ hợp nghỉ dưỡng 5 sao",
-        "propertyTypes": "Căn hộ biển & Sky Villa",
-        "image": "/uploads/alora-nhatrang.png",
-        "featured": true
-      },
-      {
-        "id": "proj-5",
-        "name": "Kiều by KITA",
-        "developer": "KITA Group",
-        "location": "Quận 5, TP. Hồ Chí Minh",
-        "area": "Căn hộ cao cấp trung tâm",
-        "propertyTypes": "Căn hộ thương mại & Penthouse",
-        "image": "/uploads/kieu-by-kita.png",
-        "featured": false
-      },
-      {
-        "id": "proj-6",
-        "name": "Q-Terra Quy Nhơn",
-        "developer": "Hưng Thịnh Corp",
-        "location": "TP. Quy Nhơn, Bình Định",
-        "area": "Khu đô thị biển kiểu mẫu",
-        "propertyTypes": "Shophouse & Biệt thự đồi",
-        "image": "/uploads/q-terra-quynhon.png",
-        "featured": false
-      },
-      {
-        "id": "proj-7",
-        "name": "Anara Bình Tiên",
-        "developer": "Trung Nam Group",
-        "location": "Bình Tiên, Ninh Thuận",
-        "area": "Sân Golf 18 lỗ & Biệt thự",
-        "propertyTypes": "Biệt thự Golf & Beach Villa",
-        "image": "/uploads/anara-binh-tien.png",
-        "featured": false
-      },
-      {
-        "id": "proj-8",
-        "name": "La Tiên Villa",
-        "developer": "Nam Long",
-        "location": "Thủ Đức, TP. Hồ Chí Minh",
-        "area": "Khu biệt thự Compound khép kín",
-        "propertyTypes": "Biệt thự đơn lập cao cấp",
-        "image": "/uploads/la-tien-villa.png",
-        "featured": false
-      },
-      {
-        "id": "proj-9",
-        "name": "Happy One Central",
-        "developer": "Vạn Xuân Group",
-        "location": "TP. Thủ Dầu Một, Bình Dương",
-        "area": "Căn hộ công nghệ 4.0",
-        "propertyTypes": "Căn hộ cao cấp & Shophouse",
-        "image": "/uploads/happy-one-central.png",
-        "featured": false
+        "description": "Đồng hành xuyên suốt từ thủ tục pháp lý, nhận bàn giao đến hỗ trợ cho thuê và chuyển nhượng."
       }
     ]
   },
@@ -255,6 +155,160 @@
         "subtitle": "COMMERCIAL",
         "desc": "Vị trí mặt tiền các trục đại lộ huyết mạch, đón đầu lưu lượng kinh doanh sầm uất.",
         "image": "/uploads/happy-one-central.png",
+        "featured": false
+      }
+    ]
+  },
+  "projects": {
+    "id": "block-projects",
+    "type": "projects",
+    "enabled": true,
+    "order": 4,
+    "badge": "DANH MỤC DỰ ÁN TIÊU BIỂU",
+    "title": "DỰ ÁN BẤT ĐỘNG SẢN & KHÔNG GIAN NỔI BẬT",
+    "items": [
+      {
+        "id": "proj-1",
+        "name": "The Gió Riverside",
+        "title": "The Gió Riverside",
+        "category": "can-ho",
+        "developer": "An Gia Group",
+        "investor": "An Gia Group",
+        "location": "TP. Dĩ An, liền kề TP. Thủ Đức",
+        "area": "45m² - 115m²",
+        "scale": "2 Tháp • 40 Tầng • 3.000 Căn",
+        "priceRange": "Từ 1.8 Tỷ / Căn",
+        "price": "Từ 1.8 Tỷ / Căn",
+        "propertyTypes": "Căn hộ view sông & Penthouse",
+        "description": "Tổ hợp căn hộ ven sông với tầm nhìn ôm trọn sông Đồng Nai. Thiết kế kiến trúc tối ưu không gian mở cùng hơn 30 tiện ích nội khu chuẩn nghỉ dưỡng.",
+        "image": "/uploads/the-gio-riverside.png",
+        "imageUrl": "/uploads/the-gio-riverside.png",
+        "featured": true
+      },
+      {
+        "id": "proj-2",
+        "name": "Vinhomes Cần Giờ",
+        "title": "Vinhomes Cần Giờ",
+        "category": "biet-thu",
+        "developer": "Vingroup",
+        "investor": "Vingroup",
+        "location": "Cần Giờ, TP. Hồ Chí Minh",
+        "area": "150m² - 450m²",
+        "scale": "Đại đô thị sinh thái 2.870 ha",
+        "priceRange": "Từ 15 Tỷ / Căn",
+        "price": "Từ 15 Tỷ / Căn",
+        "propertyTypes": "Biệt thự biển & Shophouse",
+        "description": "Siêu đô thị lấn biển tiên phong tại Việt Nam, sở hữu hệ sinh thái rừng ngập mặn Cần Giờ và hạ tầng giao thông kết nối cầu Cần Giờ.",
+        "image": "/uploads/vinhomes-can-gio.png",
+        "imageUrl": "/uploads/vinhomes-can-gio.png",
+        "featured": true
+      },
+      {
+        "id": "proj-3",
+        "name": "Grand Marina Saigon",
+        "title": "Grand Marina Saigon",
+        "category": "can-ho",
+        "developer": "Masterise Homes",
+        "investor": "Masterise Homes",
+        "location": "Quận 1, TP. Hồ Chí Minh",
+        "area": "52m² - 250m²",
+        "scale": "8 Tháp căn hộ hàng hiệu Marriott",
+        "priceRange": "Liên hệ tư vấn",
+        "price": "Liên hệ tư vấn",
+        "propertyTypes": "Căn hộ hàng hiệu & Duplex",
+        "description": "Dự án bất động sản hàng hiệu quy mô bậc nhất thế giới mang thương hiệu Marriott International bên bờ sông Sài Gòn lịch sử.",
+        "image": "/uploads/lusso-saigon.png",
+        "imageUrl": "/uploads/lusso-saigon.png",
+        "featured": true
+      },
+      {
+        "id": "proj-4",
+        "name": "Gran Meliá Nha Trang",
+        "title": "Gran Meliá Nha Trang",
+        "category": "nghi-duong",
+        "developer": "KDI Holdings",
+        "investor": "KDI Holdings",
+        "location": "Bãi Tiên, TP. Nha Trang",
+        "area": "350m² - 900m²",
+        "scale": "Dinh thự biển vận hành bởi Gran Meliá",
+        "priceRange": "Liên hệ tư vấn",
+        "price": "Liên hệ tư vấn",
+        "propertyTypes": "Căn hộ biển & Sky Villa",
+        "description": "Bộ sưu tập dinh thự biển thượng lưu đầu tiên tại Đông Nam Á mang thương hiệu xa xỉ nhất của tập đoàn khách sạn Meliá.",
+        "image": "/uploads/alora-nhatrang.png",
+        "imageUrl": "/uploads/alora-nhatrang.png",
+        "featured": true
+      },
+      {
+        "id": "proj-5",
+        "name": "The Global City",
+        "title": "The Global City",
+        "category": "biet-thu",
+        "developer": "Masterise Homes (Foster + Partners)",
+        "investor": "Masterise Homes",
+        "location": "Phường An Phú, TP. Thủ Đức",
+        "area": "95m² - 220m²",
+        "scale": "117.4 ha • Nhà phố SOHO & Biệt thự",
+        "priceRange": "Từ 36 Tỷ / Căn",
+        "price": "Từ 36 Tỷ / Căn",
+        "propertyTypes": "Nhà phố thương mại & Biệt thự",
+        "description": "Khu đô thị phức hợp chuẩn quốc tế được quy hoạch bởi Foster + Partners, biểu tượng trung tâm mới của TP. Hồ Chí Minh.",
+        "image": "/uploads/kieu-by-kita.png",
+        "imageUrl": "/uploads/kieu-by-kita.png",
+        "featured": false
+      },
+      {
+        "id": "proj-6",
+        "name": "Elysian Gamuda Land",
+        "title": "Elysian Gamuda Land",
+        "category": "can-ho",
+        "developer": "Gamuda Land",
+        "investor": "Gamuda Land",
+        "location": "Đường Lò Lu, TP. Thủ Đức",
+        "area": "48m² - 105m²",
+        "scale": "4 Block • 1.398 Căn Hộ Xanh",
+        "priceRange": "Từ 3.2 Tỷ / Căn",
+        "price": "Từ 3.2 Tỷ / Căn",
+        "propertyTypes": "Căn hộ sinh thái Biophilic",
+        "description": "Dự án căn hộ áp dụng triết lý thiết kế Biophilic đưa thiên nhiên vào từng không gian sống với 40+ tiện ích sinh thái.",
+        "image": "/uploads/happy-one-central.png",
+        "imageUrl": "/uploads/happy-one-central.png",
+        "featured": false
+      },
+      {
+        "id": "proj-7",
+        "name": "Anara Bình Tiên",
+        "title": "Anara Bình Tiên",
+        "category": "nghi-duong",
+        "developer": "Trung Nam Group",
+        "investor": "Trung Nam Group",
+        "location": "Bình Tiên, Ninh Thuận",
+        "area": "250m² - 600m²",
+        "scale": "Sân Golf 18 lỗ & Dinh thự biển",
+        "priceRange": "Từ 18 Tỷ / Căn",
+        "price": "Từ 18 Tỷ / Căn",
+        "propertyTypes": "Biệt thự Golf & Beach Villa",
+        "description": "Tổ hợp nghỉ dưỡng đỉnh cao ôm trọn cung đường biển nguyên sơ, liền kề Vườn Quốc gia Núi Chúa và vịnh Vĩnh Hy.",
+        "image": "/uploads/anara-binh-tien.png",
+        "imageUrl": "/uploads/anara-binh-tien.png",
+        "featured": false
+      },
+      {
+        "id": "proj-8",
+        "name": "La Tiên Villa",
+        "title": "La Tiên Villa",
+        "category": "biet-thu",
+        "developer": "Nam Long",
+        "investor": "Nam Long",
+        "location": "Thủ Đức, TP. Hồ Chí Minh",
+        "area": "200m² - 450m²",
+        "scale": "Khu biệt thự Compound khép kín",
+        "priceRange": "Từ 25 Tỷ / Căn",
+        "price": "Từ 25 Tỷ / Căn",
+        "propertyTypes": "Biệt thự đơn lập cao cấp",
+        "description": "Quần thể biệt thự giới hạn dành cho cộng đồng cư dân tinh hoa với chuẩn an ninh đa lớp và công viên ven sông thoáng mát.",
+        "image": "/uploads/la-tien-villa.png",
+        "imageUrl": "/uploads/la-tien-villa.png",
         "featured": false
       }
     ]
@@ -338,772 +392,5 @@
     "heading": "KẾT NỐI CÙNG\nĐÔNG HÒA PROPERTY",
     "quote": "Để lại thông tin, đội ngũ Chuyên viên Đông Hòa Property sẽ liên hệ tư vấn trực tiếp và gửi thông tin chi tiết trong vòng 15 phút.",
     "image": "/uploads/the-gio-riverside.png"
-  },
-  "stylesOverview": {
-    "tag": "CÁC SẢN PHẨM ĐẶC BIỆT",
-    "heading": "PHONG CÁCH THIẾT KẾ",
-    "description": "Dù theo đuổi nét tối giản hiện đại hay vẻ đẹp sang trọng cổ điển, không gian sống luôn cần phản ánh đúng thần thái của người sở hữu. Đó chính là chìa khóa tạo nên sự khác biệt và giá trị bền vững cho mỗi công trình.",
-    "styles": [
-      {
-        "id": "modern",
-        "name": "Modern & Minimalist",
-        "subtitle": "LESS IS MORE",
-        "description": "Phương châm \"Less is more\". Đẩy cao sự tinh giản trong nội thất, chỉ giữ lại những gì thực sự cần thiết. Màu sắc dịu nhẹ (trắng, kem, xám), không gian mở và ngập tràn ánh sáng tự nhiên.",
-        "cardImage": "/uploads/figma_modern_minimalist.png",
-        "showcaseImage": "/uploads/figma_modern_minimalist.png",
-        "anchor": "#modern-section"
-      },
-      {
-        "id": "cozy",
-        "name": "Cozy & Warm",
-        "subtitle": "JAPANDI & NORDIC",
-        "description": "Sự kết hợp hoàn hảo giữa nét tinh tế, gọn gàng của Nhật Bản và sự ấm áp, mộc mạc của Bắc Âu. Dùng nhiều chất liệu gỗ sáng màu, mây, tre, vải thô và gam màu earthy (màu đất, kem, xanh lá nhạt).",
-        "cardImage": "/uploads/the-gio-riverside.png",
-        "showcaseImage": "/uploads/the-gio-riverside.png",
-        "anchor": "#cozy-section"
-      },
-      {
-        "id": "luxury",
-        "name": "Luxury & Classic",
-        "subtitle": "ĐẲNG CẤP THƯỢNG LƯU",
-        "description": "Đẩy tính xa hoa và sang trọng lên mức tối đa. Sử dụng các vật liệu siêu cao cấp (gỗ tự nhiên quý, đá xuyên sáng, kim loại mạ vàng, đồ thửa riêng - bespoke) với mức độ hoàn thiện tỉ mỉ.",
-        "cardImage": "/uploads/figma_luxury_classic.png",
-        "showcaseImage": "/uploads/figma_luxury_classic.png",
-        "anchor": "#luxury-section"
-      },
-      {
-        "id": "heritage",
-        "name": "Heritage & Retro",
-        "subtitle": "HOÀI NIỆM & CÔNG NGHIỆP",
-        "description": "Gợi nhớ về thập niên 50 – 80. Kết hợp giữa những món đồ cũ kỹ/kỷ niệm với những gam màu vui tươi, phá cách (vàng mustard, xanh teal, cam đất). Mô phỏng lại các nhà xưởng cũ. Điểm nhấn là tường gạch trần, sàn bê tông mài, trần để lộ ống kỹ thuật, kết hợp khung sắt đen và gỗ thô tối màu.",
-        "cardImage": "/uploads/figma_heritage_vignette.png",
-        "showcaseImage": "/uploads/figma_heritage_vignette.png",
-        "anchor": "#heritage-section"
-      }
-    ]
-  },
-  "office": {
-    "tag": "CÁC SẢN PHẨM ĐẶC BIỆT",
-    "headingLine1": "NỘI THẤT",
-    "headingLine2": "VĂN PHÒNG",
-    "description": "Thiết kế nội thất văn phòng không chỉ là việc tạo ra một nơi làm việc thẩm mỹ và tối ưu công năng, mà còn là giải pháp kiến tạo không gian truyền cảm hứng, nâng cao hiệu suất và thể hiện trọn vẹn nét văn hóa doanh nghiệp.",
-    "heroImage": "/uploads/office_hero_main.png",
-    "colorSwatches": [
-      {
-        "color": "#04092b",
-        "label": "Deep Navy"
-      },
-      {
-        "color": "#c5a26c",
-        "label": "Warm Gold"
-      },
-      {
-        "color": "#8c7b6c",
-        "label": "Earthy Stone"
-      },
-      {
-        "color": "#3d4a41",
-        "label": "Forest Sage"
-      }
-    ],
-    "galleryCards": [
-      {
-        "id": 1,
-        "image": "/uploads/office_card_1.png",
-        "alt": "Không gian làm việc văn phòng hiện đại"
-      },
-      {
-        "id": 2,
-        "image": "/uploads/office_card_2.png",
-        "alt": "Khu vực làm việc cá nhân & tiếp khách"
-      },
-      {
-        "id": 3,
-        "image": "/uploads/office_card_3.png",
-        "alt": "Module bàn làm việc linh hoạt"
-      }
-    ]
-  },
-  "stages": {
-    "modern": {
-      "styleId": "modern",
-      "title": "MODERN &\nMINIMALIST",
-      "description": "Phương châm \"Less is more\". Đề cao sự tinh giản trong nội thất, chỉ giữ lại những gì thực sự cần thiết. Màu sắc dịu nhẹ (trắng, kem, xám), không gian mở và ngập tràn ánh sáng tự nhiên.",
-      "finalImage": "/uploads/figma_modern_minimalist.png",
-      "swatches": [
-        "#2F3E46",
-        "#8EA5B3",
-        "#C7B299",
-        "#ABA29B",
-        "#D5D8D6"
-      ],
-      "items": [
-        {
-          "id": "modern_pendant",
-          "name": "Đèn thả trần (Pendant Lamp)",
-          "image": "/uploads/figma_modern_pendant.png",
-          "position": {
-            "top": "0%",
-            "left": "73.1%",
-            "width": "15.5%",
-            "height": "29.3%",
-            "zIndex": 15
-          },
-          "animation": {
-            "direction": "drop-top",
-            "offsetY": -80,
-            "delay": 0.1,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "modern_bed",
-          "name": "Giường ngủ Master Hiện đại (Bed)",
-          "image": "/uploads/figma_modern_bed.png",
-          "position": {
-            "top": "28.7%",
-            "left": "44.0%",
-            "width": "55.6%",
-            "height": "37.9%",
-            "zIndex": 10
-          },
-          "animation": {
-            "direction": "slide-right",
-            "offsetX": 80,
-            "delay": 0.15,
-            "duration": 0.9
-          }
-        },
-        {
-          "id": "modern_arc_lamp",
-          "name": "Đèn cây uốn cong (Arc Floor Lamp)",
-          "image": "/uploads/figma_modern_arc_lamp.png",
-          "position": {
-            "top": "29.3%",
-            "left": "22.6%",
-            "width": "15.9%",
-            "height": "29.3%",
-            "zIndex": 12
-          },
-          "animation": {
-            "direction": "slide-left",
-            "offsetX": -60,
-            "delay": 0.2,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "modern_sofa",
-          "name": "Sofa Bouclé Trắng Dài (Curved Sofa)",
-          "image": "/uploads/figma_modern_sofa.png",
-          "position": {
-            "top": "69.5%",
-            "left": "5.3%",
-            "width": "66.3%",
-            "height": "19.1%",
-            "zIndex": 10
-          },
-          "animation": {
-            "direction": "float-bottom",
-            "offsetY": 70,
-            "delay": 0.25,
-            "duration": 0.9
-          }
-        },
-        {
-          "id": "modern_armchair",
-          "name": "Ghế đơn Gỗ Tự nhiên (Wood Armchair)",
-          "image": "/uploads/figma_modern_armchair.png",
-          "position": {
-            "top": "70.1%",
-            "left": "78.6%",
-            "width": "16.8%",
-            "height": "21.8%",
-            "zIndex": 12
-          },
-          "animation": {
-            "direction": "slide-right",
-            "offsetX": 60,
-            "delay": 0.3,
-            "duration": 0.85
-          }
-        }
-      ],
-      "mobileItems": [
-        {
-          "id": "modern_pendant",
-          "name": "Đèn thả trần hiện đại (Pendant)",
-          "image": "/uploads/figma_modern_pendant.png",
-          "position": {
-            "top": "0%",
-            "left": "77%",
-            "width": "15%",
-            "height": "26%",
-            "zIndex": 10
-          },
-          "animation": {
-            "direction": "drop-top",
-            "offsetY": -30,
-            "delay": 0.1,
-            "duration": 0.8
-          }
-        },
-        {
-          "id": "modern_bed",
-          "name": "Giường ngủ Master Hiện đại (Bed)",
-          "image": "/uploads/figma_modern_bed.png",
-          "position": {
-            "top": "16%",
-            "left": "38%",
-            "width": "60%",
-            "height": "46%",
-            "zIndex": 10
-          },
-          "animation": {
-            "direction": "slide-right",
-            "offsetX": 40,
-            "delay": 0.15,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "modern_arc_lamp",
-          "name": "Đèn cây vòm hiện đại (Arc Lamp)",
-          "image": "/uploads/figma_modern_arc_lamp.png",
-          "position": {
-            "top": "16%",
-            "left": "16%",
-            "width": "22%",
-            "height": "40%",
-            "zIndex": 12
-          },
-          "animation": {
-            "direction": "slide-left",
-            "offsetX": -30,
-            "delay": 0.2,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "modern_sofa",
-          "name": "Sofa Bouclé Trắng Dài (Sofa)",
-          "image": "/uploads/figma_modern_sofa.png",
-          "position": {
-            "top": "58%",
-            "left": "2%",
-            "width": "68%",
-            "height": "36%",
-            "zIndex": 10
-          },
-          "animation": {
-            "direction": "float-bottom",
-            "offsetY": 40,
-            "delay": 0.25,
-            "duration": 0.9
-          }
-        },
-        {
-          "id": "modern_armchair",
-          "name": "Ghế đơn Gỗ Tự nhiên (Armchair)",
-          "image": "/uploads/figma_modern_armchair.png",
-          "position": {
-            "top": "65%",
-            "left": "76%",
-            "width": "18%",
-            "height": "28%",
-            "zIndex": 12
-          },
-          "animation": {
-            "direction": "slide-right",
-            "offsetX": 30,
-            "delay": 0.3,
-            "duration": 0.85
-          }
-        }
-      ]
-    },
-    "cozy": {
-      "styleId": "cozy",
-      "title": "COZY & WARM",
-      "description": "Sự kết hợp hoàn hảo giữa nét tinh tế, gọn gàng của Nhật Bản và sự ấm áp, mộc mạc của Bắc Âu. Dùng nhiều chất liệu gỗ sáng màu, mây, tre, vải thô và gam màu earthy (màu đất, kem, xanh lá nhạt).",
-      "finalImage": "/uploads/figma_cozy_warm.png",
-      "swatches": [
-        "#301A0C",
-        "#7C6146",
-        "#503723",
-        "#C7BAA7",
-        "#A38E71"
-      ],
-      "items": [
-        {
-          "id": "cozy_slat_panel",
-          "name": "Vách nan gỗ tự nhiên (Slat Panel)",
-          "image": "/uploads/clean_cozy_slat_panel.png",
-          "position": {
-            "top": "0%",
-            "left": "20.7%",
-            "width": "16.7%",
-            "height": "56.0%",
-            "zIndex": 1
-          },
-          "animation": {
-            "direction": "drop-top",
-            "offsetY": -40,
-            "delay": 0.1,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "cozy_sofa_lamp",
-          "name": "Ghế thư giãn Bouclé & Đèn sàn (Sofa & Floor Lamp)",
-          "image": "/uploads/clean_cozy_sofa_lamp.png",
-          "position": {
-            "top": "14.0%",
-            "left": "8.4%",
-            "width": "50.1%",
-            "height": "77.4%",
-            "zIndex": 10
-          },
-          "animation": {
-            "direction": "slide-left",
-            "offsetX": -50,
-            "delay": 0.2,
-            "duration": 0.9
-          }
-        },
-        {
-          "id": "cozy_tables",
-          "name": "Bàn trà đôi gỗ trụ tròn (Nesting Tables)",
-          "image": "/uploads/clean_cozy_tables.png",
-          "position": {
-            "top": "62.2%",
-            "left": "67.3%",
-            "width": "27.5%",
-            "height": "32.7%",
-            "zIndex": 15
-          },
-          "animation": {
-            "direction": "slide-right",
-            "offsetX": 60,
-            "delay": 0.25,
-            "duration": 0.85
-          }
-        }
-      ],
-      "mobileItems": [
-        {
-          "id": "cozy_slat_panel",
-          "name": "Vách nan gỗ tự nhiên (Slat Panel)",
-          "image": "/uploads/clean_cozy_slat_panel.png",
-          "position": {
-            "top": "0%",
-            "left": "18%",
-            "width": "20%",
-            "height": "70%",
-            "zIndex": 1
-          },
-          "animation": {
-            "direction": "drop-top",
-            "offsetY": -30,
-            "delay": 0.1,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "cozy_sofa_lamp",
-          "name": "Ghế thư giãn Bouclé & Đèn sàn",
-          "image": "/uploads/clean_cozy_sofa_lamp.png",
-          "position": {
-            "top": "13%",
-            "left": "5%",
-            "width": "64%",
-            "height": "82%",
-            "zIndex": 10
-          },
-          "animation": {
-            "direction": "slide-left",
-            "offsetX": -40,
-            "delay": 0.15,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "cozy_tables",
-          "name": "Bàn trà đôi gỗ trụ tròn (Tables)",
-          "image": "/uploads/clean_cozy_tables.png",
-          "position": {
-            "top": "47%",
-            "left": "61%",
-            "width": "35%",
-            "height": "48%",
-            "zIndex": 20
-          },
-          "animation": {
-            "direction": "slide-right",
-            "offsetX": 40,
-            "delay": 0.2,
-            "duration": 0.85
-          }
-        }
-      ]
-    },
-    "luxury": {
-      "styleId": "luxury",
-      "title": "LUXURY & CLASSIC",
-      "description": "Đầy tính xa hoa và sang trọng lên mức tối đa. Sử dụng các vật liệu siêu cao cấp (gỗ tự nhiên quý, đá xuyên sáng, kim loại mạ vàng, đồ thửa riêng - bespoke) với mức độ hoàn thiện tỉ mỉ.",
-      "finalImage": "/uploads/figma_luxury_classic.png",
-      "items": [
-        {
-          "id": "luxury_bed",
-          "name": "Giường ngủ Bọc nệm Sang trọng (Luxury Bed)",
-          "image": "/uploads/figma_luxury_bed.png",
-          "position": {
-            "top": "34.8%",
-            "left": "7.1%",
-            "width": "52.1%",
-            "height": "54.7%",
-            "zIndex": 10
-          },
-          "animation": {
-            "direction": "slide-left",
-            "offsetX": -80,
-            "delay": 0.15,
-            "duration": 0.9
-          }
-        },
-        {
-          "id": "luxury_palm_lamp",
-          "name": "Đèn cây Lá cọ Mạ vàng (Golden Palm Lamp)",
-          "image": "/uploads/figma_luxury_palm_lamp.png",
-          "position": {
-            "top": "30.1%",
-            "left": "45.1%",
-            "width": "13.4%",
-            "height": "46.1%",
-            "zIndex": 12
-          },
-          "animation": {
-            "direction": "fade-scale",
-            "offsetY": 60,
-            "delay": 0.2,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "luxury_swatch_1",
-          "name": "Mẫu vật liệu Gỗ lượn sóng (Fluted Wood)",
-          "image": "/uploads/figma_luxury_swatch_1.png",
-          "position": {
-            "top": "30.5%",
-            "left": "75.0%",
-            "width": "15.0%",
-            "height": "17.3%",
-            "zIndex": 14
-          },
-          "animation": {
-            "direction": "slide-right",
-            "offsetX": 60,
-            "delay": 0.25,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "luxury_swatch_2",
-          "name": "Mẫu vật liệu Gỗ xương cá (Chevron Wood)",
-          "image": "/uploads/figma_luxury_swatch_2.png",
-          "position": {
-            "top": "48.5%",
-            "left": "75.0%",
-            "width": "15.0%",
-            "height": "17.5%",
-            "zIndex": 14
-          },
-          "animation": {
-            "direction": "slide-right",
-            "offsetX": 60,
-            "delay": 0.3,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "luxury_vases",
-          "name": "Bộ bình gốm & thủy tinh nghệ thuật (Luxury Vases)",
-          "image": "/uploads/figma_luxury_vases.png",
-          "position": {
-            "top": "62.4%",
-            "left": "80.1%",
-            "width": "8.0%",
-            "height": "27.4%",
-            "zIndex": 16
-          },
-          "animation": {
-            "direction": "float-bottom",
-            "offsetY": 60,
-            "delay": 0.35,
-            "duration": 0.85
-          }
-        }
-      ],
-      "mobileItems": [
-        {
-          "id": "luxury_bed",
-          "name": "Giường ngủ Bọc nệm Sang trọng",
-          "image": "/uploads/figma_luxury_bed.png",
-          "position": {
-            "top": "18%",
-            "left": "3%",
-            "width": "54%",
-            "height": "78%",
-            "zIndex": 10
-          },
-          "animation": {
-            "direction": "slide-left",
-            "offsetX": -40,
-            "delay": 0.1,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "luxury_palm_lamp",
-          "name": "Đèn cây Lá cọ Mạ vàng",
-          "image": "/uploads/figma_luxury_palm_lamp.png",
-          "position": {
-            "top": "16%",
-            "left": "44%",
-            "width": "18%",
-            "height": "72%",
-            "zIndex": 12
-          },
-          "animation": {
-            "direction": "drop-top",
-            "offsetY": -30,
-            "delay": 0.15,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "luxury_swatch_1",
-          "name": "Mẫu vật liệu Gỗ lượn sóng",
-          "image": "/uploads/figma_luxury_swatch_1.png",
-          "position": {
-            "top": "6%",
-            "left": "72%",
-            "width": "24%",
-            "height": "26%",
-            "zIndex": 10
-          },
-          "animation": {
-            "direction": "slide-right",
-            "offsetX": 30,
-            "delay": 0.2,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "luxury_swatch_2",
-          "name": "Mẫu vật liệu Gỗ xương cá",
-          "image": "/uploads/figma_luxury_swatch_2.png",
-          "position": {
-            "top": "35%",
-            "left": "72%",
-            "width": "24%",
-            "height": "24%",
-            "zIndex": 10
-          },
-          "animation": {
-            "direction": "slide-right",
-            "offsetX": 30,
-            "delay": 0.25,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "luxury_vases",
-          "name": "Bộ bình gốm & thủy tinh",
-          "image": "/uploads/figma_luxury_vases.png",
-          "position": {
-            "top": "61%",
-            "left": "76%",
-            "width": "18%",
-            "height": "35%",
-            "zIndex": 20
-          },
-          "animation": {
-            "direction": "float-bottom",
-            "offsetY": 30,
-            "delay": 0.3,
-            "duration": 0.85
-          }
-        }
-      ]
-    },
-    "heritage": {
-      "styleId": "heritage",
-      "title": "HERITAGE &\nRETRO",
-      "description": "Gợi nhớ về thập niên 50 – 80. Kết hợp giữa những món đồ cũ kỹ/kỷ niệm với những gam màu vui tươi, phá cách (vàng mustard, xanh teal, cam đất). Mô phỏng lại các nhà xưởng cũ. Điểm nhấn là tường gạch trần, sàn bê tông mài, trần để lộ ống kỹ thuật, kết hợp khung sắt đen và gỗ thô tối màu.",
-      "finalImage": "/uploads/figma_heritage_retro.png",
-      "swatchesTable": [
-        "#301B17",
-        "#5C2D25",
-        "#E5A566",
-        "#B7532A",
-        "#7A221E"
-      ],
-      "swatchesChair": [
-        "#0D4B75",
-        "#007A87",
-        "#88B8A6",
-        "#F5B17B",
-        "#F15A24"
-      ],
-      "items": [
-        {
-          "id": "heritage_chandelier",
-          "name": "Đèn chùm Cổ điển Đồng (Chandelier)",
-          "image": "/uploads/figma_heritage_chandelier.png",
-          "position": {
-            "top": "4.0%",
-            "left": "17.0%",
-            "width": "14.0%",
-            "height": "27.5%",
-            "zIndex": 15
-          },
-          "animation": {
-            "direction": "drop-top",
-            "offsetY": -70,
-            "delay": 0.1,
-            "duration": 0.9
-          }
-        },
-        {
-          "id": "heritage_vignette",
-          "name": "Góc tranh ảnh & Đèn bàn Retro (Vintage Vignette)",
-          "image": "/uploads/figma_heritage_vignette.png",
-          "position": {
-            "top": "36.5%",
-            "left": "4.3%",
-            "width": "36.5%",
-            "height": "57.5%",
-            "zIndex": 10
-          },
-          "animation": {
-            "direction": "slide-left",
-            "offsetX": -70,
-            "delay": 0.15,
-            "duration": 0.9
-          }
-        },
-        {
-          "id": "heritage_table",
-          "name": "Bàn tròn Gỗ chạm khắc Cổ (Antique Table)",
-          "image": "/uploads/figma_heritage_table.png",
-          "position": {
-            "top": "57.5%",
-            "left": "51.0%",
-            "width": "16.5%",
-            "height": "29.0%",
-            "zIndex": 12
-          },
-          "animation": {
-            "direction": "fade-scale",
-            "offsetY": 60,
-            "delay": 0.2,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "heritage_armchair",
-          "name": "Ghế bành Bọc nỉ Retro (Vintage Armchair)",
-          "image": "/uploads/figma_heritage_armchair.png",
-          "position": {
-            "top": "50.0%",
-            "left": "74.5%",
-            "width": "18.0%",
-            "height": "36.5%",
-            "zIndex": 14
-          },
-          "animation": {
-            "direction": "slide-right",
-            "offsetX": 70,
-            "delay": 0.25,
-            "duration": 0.85
-          }
-        }
-      ],
-      "mobileItems": [
-        {
-          "id": "heritage_chandelier",
-          "name": "Đèn chùm Cổ điển Đồng",
-          "image": "/uploads/figma_heritage_chandelier.png",
-          "position": {
-            "top": "3.6%",
-            "left": "17.2%",
-            "width": "14.1%",
-            "height": "27.6%",
-            "zIndex": 15
-          },
-          "animation": {
-            "direction": "drop-top",
-            "offsetY": -40,
-            "delay": 0.1,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "heritage_vignette",
-          "name": "Góc tranh ảnh & Đèn bàn Retro",
-          "image": "/uploads/figma_heritage_vignette.png",
-          "position": {
-            "top": "36.1%",
-            "left": "3.9%",
-            "width": "37.8%",
-            "height": "57.4%",
-            "zIndex": 10
-          },
-          "animation": {
-            "direction": "slide-left",
-            "offsetX": -50,
-            "delay": 0.15,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "heritage_table",
-          "name": "Bàn tròn Gỗ chạm khắc Cổ",
-          "image": "/uploads/figma_heritage_table.png",
-          "position": {
-            "top": "57.6%",
-            "left": "51.5%",
-            "width": "16.5%",
-            "height": "28.6%",
-            "zIndex": 12
-          },
-          "animation": {
-            "direction": "fade-scale",
-            "offsetY": 40,
-            "delay": 0.2,
-            "duration": 0.85
-          }
-        },
-        {
-          "id": "heritage_armchair",
-          "name": "Ghế bành Bọc nỉ Retro",
-          "image": "/uploads/figma_heritage_armchair.png",
-          "position": {
-            "top": "49.9%",
-            "left": "75.1%",
-            "width": "18.1%",
-            "height": "35.9%",
-            "zIndex": 14
-          },
-          "animation": {
-            "direction": "slide-right",
-            "offsetX": 50,
-            "delay": 0.25,
-            "duration": 0.85
-          }
-        }
-      ]
-    }
   }
 }

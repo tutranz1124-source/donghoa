@@ -3,7 +3,6 @@ import {
   getGitHubConfig,
   isGitHubSyncConfigured,
   syncAllDataToGitHub,
-  commitFileToGitHub,
   exportDataBundle
 } from '@/lib/github-sync';
 import {
@@ -82,10 +81,14 @@ export async function POST(request: Request) {
 
     // 2. Action: Manual Sync to GitHub
     if (!isGitHubSyncConfigured()) {
-      return NextResponse.json({
-        success: false,
-        error: 'Chưa cấu hình GITHUB_TOKEN trên Vercel/Environment. Vui lòng thêm biến môi trường GITHUB_TOKEN để tự động đẩy commit lên GitHub.'
-      }, { status: 400 });
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            'Chưa cấu hình GITHUB_TOKEN trên Vercel/Environment. Vui lòng thêm biến môi trường GITHUB_TOKEN để tự động đẩy commit lên GitHub.'
+        },
+        { status: 400 }
+      );
     }
 
     const syncResult = await syncAllDataToGitHub(body.message);
@@ -98,9 +101,12 @@ export async function POST(request: Request) {
         : 'Có lỗi trong quá trình đồng bộ một số file lên GitHub.'
     });
   } catch (err: any) {
-    return NextResponse.json({
-      success: false,
-      error: err?.message || 'Lỗi xử lý yêu cầu đồng bộ'
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: err?.message || 'Lỗi xử lý yêu cầu đồng bộ'
+      },
+      { status: 500 }
+    );
   }
 }

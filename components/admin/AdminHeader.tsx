@@ -30,7 +30,7 @@ export default function AdminHeader({ user }: AdminHeaderProps) {
       case '/admin':
         return { title: 'Tổng quan', shortTitle: 'Tổng quan', icon: LayoutDashboard, category: 'Dashboard' };
       case '/admin/pages':
-        return { title: 'Trang chủ & Canvas', shortTitle: 'Trang chủ', icon: Layers, category: 'Page Builder' };
+        return { title: 'Trang Chủ & Giao Diện', shortTitle: 'Trang chủ', icon: Layers, category: 'Page Builder' };
       case '/admin/blog':
         return { title: 'Bài viết Blog', shortTitle: 'Bài viết', icon: FileText, category: 'Blog CMS' };
       case '/admin/media':

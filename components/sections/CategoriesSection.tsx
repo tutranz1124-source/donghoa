@@ -102,7 +102,6 @@ export default function CategoriesSection({ data, onSelectCategory }: Categories
                 src={primaryCategory.image}
                 alt={primaryCategory.title}
                 fill
-                sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute top-4 left-4 px-3.5 py-1.5 bg-white/95 backdrop-blur-md rounded-full text-xs font-mono font-semibold text-charcoal border border-warm-200 shadow-warm-sm">
@@ -147,7 +146,6 @@ export default function CategoriesSection({ data, onSelectCategory }: Categories
                     src={item.image}
                     alt={item.title}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 224px"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3 px-2.5 py-1 bg-white/95 backdrop-blur-md rounded-full text-[11px] font-mono font-semibold text-charcoal border border-warm-200">
