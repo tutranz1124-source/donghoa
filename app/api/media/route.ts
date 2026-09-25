@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { getMediaLibrary, saveMediaLibrary } from '@/lib/storage';
 import { verifyAdminSession } from '@/lib/auth';
+import { commitFileToGitHub, isGitHubSyncConfigured } from '@/lib/github-sync';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,7 +25,9 @@ export async function POST(request: Request) {
 
     const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
     if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true });
+      try {
+        fs.mkdirSync(uploadsDir, { recursive: true });
+      } catch (e) {}
     }
 
     const sanitizedName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
@@ -33,7 +36,12 @@ export async function POST(request: Request) {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    fs.writeFileSync(filePath, buffer);
+
+    try {
+      fs.writeFileSync(filePath, buffer);
+    } catch (writeErr) {
+      console.warn('Local disk write skipped in serverless environment:', writeErr);
+    }
 
     const mediaItem = {
       id: `med-${Date.now()}`,
@@ -50,6 +58,28 @@ export async function POST(request: Request) {
     const mediaList = getMediaLibrary();
     mediaList.unshift(mediaItem);
     saveMediaLibrary(mediaList);
+
+    // Auto-commit image file & media index to GitHub
+    if (isGitHubSyncConfigured()) {
+      try {
+        // 1. Commit the actual image file to repo
+        await commitFileToGitHub({
+          filePath: `public/uploads/${fileName}`,
+          content: buffer,
+          commitMessage: `cms(media): upload asset ${fileName}`,
+          isBase64: false
+        });
+
+        // 2. Commit updated media catalog
+        await commitFileToGitHub({
+          filePath: 'data/media.json',
+          content: JSON.stringify(mediaList, null, 2),
+          commitMessage: `cms(media): update media index`
+        });
+      } catch (gitErr) {
+        console.warn('[GitHub Sync] Failed to commit uploaded media to GitHub:', gitErr);
+      }
+    }
 
     return NextResponse.json(mediaItem);
   } catch (err) {

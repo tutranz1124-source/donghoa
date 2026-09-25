@@ -34,7 +34,11 @@ import {
   Check,
   Globe,
   Sliders,
-  Type
+  Type,
+  GitBranch,
+  RefreshCw,
+  Download,
+  UploadCloud
 } from 'lucide-react';
 import {
   SiteContentData,
@@ -69,7 +73,8 @@ type SectionTab =
   | 'blog_feed'
   | 'faq'
   | 'contact'
-  | 'site_settings';
+  | 'site_settings'
+  | 'git_sync';
 
 export default function AdminPageEditor() {
   const [data, setData] = useState<SiteContentData | null>(null);
@@ -79,6 +84,8 @@ export default function AdminPageEditor() {
   const [previewDevice, setPreviewDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [syncingGit, setSyncingGit] = useState(false);
+  const [gitStatus, setGitStatus] = useState<any>(null);
 
   // Media Picker State
   const [mediaPickerOpen, setMediaPickerOpen] = useState(false);
@@ -89,22 +96,27 @@ export default function AdminPageEditor() {
 
   const { showToast } = useToast();
 
-  // Load Content & Media
+  // Load Content, Media & Git Status
   const loadData = async () => {
     setLoading(true);
     try {
-      const [contentRes, mediaRes] = await Promise.all([
+      const [contentRes, mediaRes, syncRes] = await Promise.all([
         fetch('/api/content'),
-        fetch('/api/media')
+        fetch('/api/media'),
+        fetch('/api/sync').catch(() => null)
       ]);
       const contentJson = await contentRes.json();
       const mediaJson = await mediaRes.json();
+      const syncJson = syncRes ? await syncRes.json().catch(() => null) : null;
 
       if (contentJson && typeof contentJson === 'object') {
         setData(contentJson);
       }
       if (Array.isArray(mediaJson)) {
         setMediaList(mediaJson);
+      }
+      if (syncJson) {
+        setGitStatus(syncJson);
       }
     } catch (err: any) {
       showToast('Lỗi khi tải dữ liệu', err.message || 'Không thể kết nối API', 'error');
@@ -129,6 +141,7 @@ export default function AdminPageEditor() {
       });
 
       if (!res.ok) throw new Error('Lỗi máy chủ khi lưu');
+      const resJson = await res.json().catch(() => ({}));
 
       // Update localStorage & BroadcastChannel
       try {
@@ -140,11 +153,76 @@ export default function AdminPageEditor() {
         }
       } catch (e) {}
 
-      showToast('Đã lưu thành công!', 'Dữ liệu trang web đã được cập nhật đồng bộ.', 'success');
+      if (resJson.gitSync?.synced) {
+        showToast('Đã lưu & commit vào Source Code GitHub!', 'Dữ liệu đã được ghi vĩnh viễn vào repository.', 'success');
+      } else {
+        showToast('Đã lưu thành công!', 'Dữ liệu trang web đã được cập nhật đồng bộ.', 'success');
+      }
     } catch (err: any) {
       showToast('Lỗi khi lưu dữ liệu', err.message, 'error');
     } finally {
       setSaving(false);
+    }
+  };
+
+  // Manual Git Sync
+  const handleManualGitSync = async () => {
+    setSyncingGit(true);
+    try {
+      const res = await fetch('/api/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: 'cms(manual-sync): admin triggered full repository sync' })
+      });
+      const json = await res.json();
+      if (json.success) {
+        showToast('Đồng bộ GitHub thành công!', 'Toàn bộ dữ liệu đã được commit vào branch main.', 'success');
+        loadData();
+      } else {
+        showToast('Đồng bộ thất bại', json.error || 'Vui lòng kiểm tra GITHUB_TOKEN', 'error');
+      }
+    } catch (e: any) {
+      showToast('Lỗi kết nối', e.message, 'error');
+    } finally {
+      setSyncingGit(false);
+    }
+  };
+
+  // Export Full JSON Backup
+  const handleExportBackup = () => {
+    window.open('/api/sync?action=export', '_blank');
+  };
+
+  // Import JSON Backup
+  const handleImportBackup = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const text = await file.text();
+      const parsed = JSON.parse(text);
+      if (!parsed || typeof parsed !== 'object') {
+        showToast('File không hợp lệ', 'File sao lưu phải đúng định dạng JSON', 'error');
+        return;
+      }
+
+      setLoading(true);
+      const res = await fetch('/api/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'import', data: parsed })
+      });
+      const json = await res.json();
+      if (json.success) {
+        showToast('Khôi phục thành công!', 'Dữ liệu đã được tải vào hệ thống.', 'success');
+        loadData();
+      } else {
+        showToast('Khôi phục thất bại', json.error, 'error');
+      }
+    } catch (e: any) {
+      showToast('Lỗi đọc file', e.message, 'error');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -275,7 +353,8 @@ export default function AdminPageEditor() {
     { id: 'blog_feed', label: 'Tin Tức & Blog', icon: MessageSquare },
     { id: 'faq', label: 'Hỏi Đáp Pháp Lý', icon: HelpCircle },
     { id: 'contact', label: 'Liên Hệ Tư Vấn', icon: PhoneCall },
-    { id: 'site_settings', label: 'Cài Đặt & Menu', icon: Settings }
+    { id: 'site_settings', label: 'Cài Đặt & Menu', icon: Settings },
+    { id: 'git_sync', label: 'Đồng Bộ Git & Backup', icon: GitBranch }
   ];
 
   return (
@@ -2026,6 +2105,130 @@ export default function AdminPageEditor() {
                       )}
                     </div>
                   ))}
+                </div>
+              </div>
+            )}
+
+            {/* TAB: GIT SYNC & BACKUP */}
+            {activeTab === 'git_sync' && (
+              <div className="bg-white rounded-3xl border border-[#E5E0D5] p-6 sm:p-8 space-y-8 shadow-sm">
+                <div className="border-b border-[#E5E0D5] pb-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div>
+                    <h3 className="font-serif font-medium text-lg text-charcoal flex items-center gap-2">
+                      <GitBranch className="w-5 h-5 text-gold" />
+                      <span>Đồng Bộ Source Code & Bản Sao Lưu</span>
+                    </h3>
+                    <p className="text-xs text-charcoal-600 mt-1">
+                      Bảo toàn dữ liệu vĩnh viễn: Tự động commit các thay đổi vào GitHub repository để không bị mất khi deploy code mới.
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span
+                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold border ${
+                        gitStatus?.hasToken
+                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                          : 'bg-amber-50 text-amber-700 border-amber-200'
+                      }`}
+                    >
+                      <span
+                        className={`w-2 h-2 rounded-full ${
+                          gitStatus?.hasToken ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'
+                        }`}
+                      />
+                      <span>{gitStatus?.hasToken ? 'GitHub API Sẵn Sàng' : 'Chưa cấu hình GITHUB_TOKEN'}</span>
+                    </span>
+                  </div>
+                </div>
+
+                {/* 1. GITHUB SYNC CARD */}
+                <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E5E0D5] space-y-5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="text-sm font-semibold text-charcoal flex items-center gap-2">
+                        <RefreshCw className="w-4 h-4 text-gold" />
+                        <span>Đồng Bộ Trực Tiếp Vào GitHub Repository</span>
+                      </h4>
+                      <p className="text-xs text-charcoal-600 mt-0.5">
+                        Repository đích: <code className="font-mono bg-white px-2 py-0.5 rounded border border-[#E5E0D5] text-charcoal font-semibold">{gitStatus?.repo || 'tutranz1124-source/donghoa'}</code> (Branch: <code className="font-mono bg-white px-2 py-0.5 rounded border border-[#E5E0D5] text-charcoal font-semibold">{gitStatus?.branch || 'main'}</code>)
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleManualGitSync}
+                      disabled={syncingGit}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-charcoal hover:bg-charcoal/90 text-white font-semibold text-xs transition-colors shadow-sm cursor-pointer disabled:opacity-50"
+                    >
+                      <RefreshCw className={`w-4 h-4 ${syncingGit ? 'animate-spin text-gold' : 'text-gold'}`} />
+                      <span>{syncingGit ? 'Đang đồng bộ...' : 'Đồng Bộ Lên GitHub Ngay'}</span>
+                    </button>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-white border border-[#E5E0D5] text-xs text-charcoal-700 space-y-2">
+                    <p className="font-semibold text-charcoal flex items-center gap-1.5 text-emerald-700">
+                      <CheckCircle2 className="w-4 h-4" />
+                      <span>Cơ chế tự động đã được kích hoạt:</span>
+                    </p>
+                    <p className="leading-relaxed">
+                      Mỗi khi bạn bấm <strong>Lưu Thay Đổi</strong> ở bất kỳ mục nào (Nội dung, Hình ảnh, Bài viết Blog, Dự án), hệ thống sẽ tự động gửi commit trực tiếp vào file <code className="font-mono bg-[#FAF8F5] px-1 py-0.5 rounded">data/site-content.json</code> trên branch <code className="font-mono bg-[#FAF8F5] px-1 py-0.5 rounded">main</code> của GitHub.
+                    </p>
+                  </div>
+                </div>
+
+                {/* 2. BACKUP & RESTORE CARD */}
+                <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E5E0D5] space-y-5">
+                  <h4 className="text-sm font-semibold text-charcoal flex items-center gap-2">
+                    <Download className="w-4 h-4 text-gold" />
+                    <span>Sao Lưu & Khôi Phục Dữ Liệu Offline (JSON Snapshot)</span>
+                  </h4>
+                  <p className="text-xs text-charcoal-600">
+                    Tải về toàn bộ cơ sở dữ liệu hiện tại (nội dung trang, danh sách bài viết blog, media catalog) về máy tính cá nhân để lưu trữ dự phòng.
+                  </p>
+
+                  <div className="flex flex-wrap items-center gap-3 pt-1">
+                    <button
+                      type="button"
+                      onClick={handleExportBackup}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-warm-100 text-charcoal font-semibold text-xs border border-[#E5E0D5] transition-colors shadow-xs cursor-pointer"
+                    >
+                      <Download className="w-3.5 h-3.5 text-gold" />
+                      <span>Tải Bản Sao Lưu (Export JSON)</span>
+                    </button>
+
+                    <label className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-warm-100 text-charcoal font-semibold text-xs border border-[#E5E0D5] transition-colors shadow-xs cursor-pointer">
+                      <UploadCloud className="w-3.5 h-3.5 text-gold" />
+                      <span>Khôi Phục Từ File Sao Lưu (Import JSON)</span>
+                      <input
+                        type="file"
+                        accept=".json"
+                        onChange={handleImportBackup}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+                </div>
+
+                {/* 3. DEVELOPER WORKFLOW TIPS */}
+                <div className="p-5 rounded-2xl bg-[#0B0F19] text-white border border-white/10 space-y-3 text-xs">
+                  <h5 className="font-semibold text-gold uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Quy Trình Chuẩn Khi Bạn Cập Nhật Patch Code Mới</span>
+                  </h5>
+                  <ol className="list-decimal list-inside space-y-1.5 text-white/80 leading-relaxed">
+                    <li>
+                      Ở máy tính của bạn, mở terminal và gõ <code className="font-mono text-gold bg-white/10 px-1.5 py-0.5 rounded">git pull origin main</code> để kéo toàn bộ nội dung mới nhất mà Admin đã sửa trên live về máy.
+                    </li>
+                    <li>
+                      Tiến hành viết thêm code hoặc sửa tính năng mới theo ý muốn.
+                    </li>
+                    <li>
+                      Gõ <code className="font-mono text-gold bg-white/10 px-1.5 py-0.5 rounded">git add . && git commit -m &quot;feat: your patch&quot; && git push origin main</code>.
+                    </li>
+                    <li>
+                      Vercel sẽ tự động deploy bản code mới mà <strong>toàn bộ dữ liệu Admin đã sửa trước đó không bao giờ bị mất</strong>!
+                    </li>
+                  </ol>
                 </div>
               </div>
             )}

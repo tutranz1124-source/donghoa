@@ -168,6 +168,7 @@ export default function ProjectsSection({
                   src={featuredProject.imageUrl || featuredProject.image || '/uploads/the-gio-riverside.png'}
                   alt={featuredProject.title || featuredProject.name || 'Dự án'}
                   fill
+                  sizes="(max-width: 1024px) 100vw, 58vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute top-4 left-4 px-3.5 py-1.5 bg-white/95 backdrop-blur-md rounded-full text-[11px] font-semibold uppercase tracking-wider text-gold shadow-warm-sm border border-warm-200">
@@ -252,6 +253,7 @@ export default function ProjectsSection({
                     src={project.imageUrl || project.image || '/uploads/the-gio-riverside.png'}
                     alt={project.title || project.name || 'Dự án'}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-md rounded-full text-[11px] font-medium text-charcoal border border-warm-200 shadow-warm-sm">

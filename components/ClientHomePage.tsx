@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroBanner from '@/components/sections/HeroBanner';
@@ -8,13 +9,29 @@ import PhilosophySection from '@/components/sections/PhilosophySection';
 import CategoriesSection from '@/components/sections/CategoriesSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import PrivateAccessSection from '@/components/sections/PrivateAccessSection';
-import MilestonesSection from '@/components/sections/MilestonesSection';
-import MortgageCalculatorSection from '@/components/sections/MortgageCalculatorSection';
 import BlogFeedSection from '@/components/sections/BlogFeedSection';
-import { FAQSection } from '@/components/sections/FAQSection';
 import QuoteContactSection from '@/components/sections/QuoteContactSection';
-import InquiryModal from '@/components/InquiryModal';
 import { SiteContentData, BlogPost } from '@/lib/types';
+
+// Dynamic imports for below-the-fold heavy components (bandwidth & JS bundle optimization)
+const MortgageCalculatorSection = dynamic(() => import('@/components/sections/MortgageCalculatorSection'), {
+  ssr: true,
+  loading: () => <div className="py-12" />
+});
+
+const MilestonesSection = dynamic(() => import('@/components/sections/MilestonesSection'), {
+  ssr: true,
+  loading: () => <div className="py-12" />
+});
+
+const FAQSection = dynamic(() => import('@/components/sections/FAQSection').then((mod) => mod.FAQSection), {
+  ssr: true,
+  loading: () => <div className="py-12" />
+});
+
+const InquiryModal = dynamic(() => import('@/components/InquiryModal'), {
+  ssr: false
+});
 
 export default function ClientHomePage({ initialContent }: { initialContent: SiteContentData }) {
   const [content, setContent] = useState<SiteContentData>(initialContent);
