@@ -8,12 +8,14 @@ import HeroBanner from '@/components/sections/HeroBanner';
 import PhilosophySection from '@/components/sections/PhilosophySection';
 import CategoriesSection from '@/components/sections/CategoriesSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
-import PrivateAccessSection from '@/components/sections/PrivateAccessSection';
-import BlogFeedSection from '@/components/sections/BlogFeedSection';
-import QuoteContactSection from '@/components/sections/QuoteContactSection';
 import { SiteContentData, BlogPost } from '@/lib/types';
 
 // Dynamic imports for below-the-fold heavy components (bandwidth & JS bundle optimization)
+const PrivateAccessSection = dynamic(() => import('@/components/sections/PrivateAccessSection'), {
+  ssr: true,
+  loading: () => <div className="py-12" />
+});
+
 const MortgageCalculatorSection = dynamic(() => import('@/components/sections/MortgageCalculatorSection'), {
   ssr: true,
   loading: () => <div className="py-12" />
@@ -24,7 +26,17 @@ const MilestonesSection = dynamic(() => import('@/components/sections/Milestones
   loading: () => <div className="py-12" />
 });
 
+const BlogFeedSection = dynamic(() => import('@/components/sections/BlogFeedSection'), {
+  ssr: true,
+  loading: () => <div className="py-12" />
+});
+
 const FAQSection = dynamic(() => import('@/components/sections/FAQSection').then((mod) => mod.FAQSection), {
+  ssr: true,
+  loading: () => <div className="py-12" />
+});
+
+const QuoteContactSection = dynamic(() => import('@/components/sections/QuoteContactSection'), {
   ssr: true,
   loading: () => <div className="py-12" />
 });
