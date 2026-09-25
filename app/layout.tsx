@@ -32,7 +32,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://donghoa-property-one.vercel.app'),
+  metadataBase: new URL('https://donghoaproperty.vn'),
   title: 'Đông Hòa Property | Bất Động Sản Cao Cấp & Kiến Tạo Không Gian Sống',
   description: 'Đông Hòa Property - Đơn vị tư vấn bất động sản cao cấp chọn lọc và cung cấp giải pháp thiết kế, thi công không gian sống chuẩn mực, độc bản.',
   keywords: ['Đông Hòa Property', 'Bất động sản cao cấp', 'Dự án căn hộ hạng sang', 'Biệt thự nghỉ dưỡng', 'Phân phối bất động sản'],
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Đông Hòa Property | Bất Động Sản Cao Cấp & Kiến Tạo Không Gian Sống',
     description: 'Đông Hòa Property - Đơn vị tư vấn bất động sản cao cấp chọn lọc và cung cấp giải pháp thiết kế, thi công không gian sống chuẩn mực, độc bản.',
-    url: 'https://donghoa-property-one.vercel.app',
+    url: 'https://donghoaproperty.vn',
     siteName: 'Đông Hòa Property',
     images: [
       {
