@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle } from 'lucide-react';
-
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, Sparkles } from 'lucide-react';
 import { FAQData } from '@/lib/types';
 
 interface FAQSectionProps {
@@ -39,54 +39,95 @@ export function FAQSection({ data }: FAQSectionProps) {
   };
 
   return (
-    <section id="faq" className="py-20 sm:py-28 bg-warm-50 border-b border-warm-200">
+    <section id="faq" className="py-20 sm:py-28 bg-warm-50 border-b border-warm-200 scroll-mt-20">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <div className="text-center space-y-3 mb-12 sm:mb-14">
-            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
-              {tag}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center space-y-3 mb-12 sm:mb-14"
+          >
+            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-gold" />
+              <span>{tag}</span>
             </span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-[1.2]">
+            <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-tight">
               {heading}
             </h2>
             <p className="text-sm text-charcoal-600 font-normal leading-relaxed">
               {description}
             </p>
-          </div>
+          </motion.div>
 
-          {/* 3 Core Editorial FAQs */}
+          {/* Core Editorial FAQs with Framer Motion Accordion */}
           <div className="space-y-4">
             {faqs.map((faq, idx) => {
               const isOpen = openIndex === idx;
               return (
-                <div
+                <motion.div
                   key={idx}
-                  className="bg-white rounded-2xl border border-warm-200 overflow-hidden shadow-warm-sm transition-colors"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.08 }}
+                  className={`bg-white rounded-2xl border transition-all duration-300 overflow-hidden ${
+                    isOpen
+                      ? 'border-gold/50 shadow-warm-md ring-1 ring-gold/20'
+                      : 'border-warm-200 shadow-warm-sm hover:border-warm-300'
+                  }`}
                 >
                   <button
                     type="button"
                     onClick={() => toggle(idx)}
-                    className="w-full p-6 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-warm-50/50 transition-colors"
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${idx}`}
+                    className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-warm-50/40 transition-colors"
                   >
                     <span className="font-serif font-medium text-charcoal text-base sm:text-[17px] leading-snug">
                       {faq.q}
                     </span>
                     <div
-                      className={`w-8 h-8 rounded-full bg-warm-100 flex items-center justify-center shrink-0 transition-transform duration-200 ${
-                        isOpen ? 'rotate-180 bg-gold text-white' : 'text-charcoal-700'
+                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
+                        isOpen ? 'rotate-180 bg-charcoal text-white' : 'bg-warm-100 text-charcoal-700'
                       }`}
                     >
-                      <ChevronDown className="w-4 h-4" />
+                      <ChevronDown className="w-4 h-4 transition-transform duration-300" />
                     </div>
                   </button>
 
-                  {isOpen && (
-                    <div className="px-6 pb-6 pt-1 text-sm sm:text-[15px] text-charcoal-600 leading-relaxed border-t border-warm-100 animate-in fade-in duration-200 font-normal">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        id={`faq-answer-${idx}`}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{
+                          height: 'auto',
+                          opacity: 1,
+                          transition: {
+                            height: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+                            opacity: { duration: 0.25, delay: 0.1 },
+                          },
+                        }}
+                        exit={{
+                          height: 0,
+                          opacity: 0,
+                          transition: {
+                            height: { duration: 0.25, ease: [0.16, 1, 0.3, 1] },
+                            opacity: { duration: 0.15 },
+                          },
+                        }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-5 sm:px-6 pb-6 pt-1 text-sm sm:text-[15px] text-charcoal-600 leading-relaxed border-t border-warm-100 font-normal">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
               );
             })}
           </div>
@@ -95,3 +136,4 @@ export function FAQSection({ data }: FAQSectionProps) {
     </section>
   );
 }
+

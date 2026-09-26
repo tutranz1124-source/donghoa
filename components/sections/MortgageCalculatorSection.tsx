@@ -1,14 +1,22 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Calculator, ArrowRight, HelpCircle } from 'lucide-react';
-
+import { motion } from 'framer-motion';
+import { Calculator, ArrowRight, Sparkles, Percent, DollarSign, Clock, HelpCircle } from 'lucide-react';
 import { MortgageData } from '@/lib/types';
 
 interface MortgageCalculatorSectionProps {
   data?: MortgageData;
   onOpenInquiry?: (defaultMsg?: string) => void;
 }
+
+const PRICE_PRESETS = [
+  { label: '2 Tỷ', value: 2000 },
+  { label: '3.5 Tỷ', value: 3500 },
+  { label: '5 Tỷ', value: 5000 },
+  { label: '10 Tỷ', value: 10000 },
+  { label: '20 Tỷ', value: 20000 },
+];
 
 export default function MortgageCalculatorSection({ data, onOpenInquiry }: MortgageCalculatorSectionProps) {
   // State for interactive calculation
@@ -66,33 +74,67 @@ export default function MortgageCalculatorSection({ data, onOpenInquiry }: Mortg
   };
 
   return (
-    <section id="mortgage-calculator" className="py-20 sm:py-28 bg-gradient-to-b from-white via-warm-50/80 to-warm-100/50 border-b border-warm-200">
+    <section id="mortgage-calculator" className="py-20 sm:py-28 bg-gradient-to-b from-white via-warm-50/80 to-warm-100/50 border-b border-warm-200 scroll-mt-20">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <div className="text-center space-y-3 mb-12 sm:mb-16">
-            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans block">
-              {tag}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center space-y-3 mb-12 sm:mb-16"
+          >
+            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-gold" />
+              <span>{tag}</span>
             </span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-[1.2]">
+            <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-tight">
               {heading}
             </h2>
             <p className="text-sm text-charcoal-600 max-w-lg mx-auto font-normal leading-relaxed">
               {description}
             </p>
-          </div>
+          </motion.div>
 
           {/* Calculator Card Container */}
-          <div className="bg-warm-50 rounded-3xl border border-warm-200 p-6 sm:p-10 lg:p-12 shadow-warm-sm">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-warm-50 rounded-3xl border border-warm-300 p-6 sm:p-10 lg:p-12 shadow-warm-md"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
               {/* Controls Column */}
               <div className="lg:col-span-7 space-y-6">
-                {/* 1. Property Price Slider */}
-                <div className="space-y-2">
-                  <div className="flex justify-between text-xs sm:text-sm font-medium">
+                {/* 1. Property Price with Presets */}
+                <div className="space-y-2.5">
+                  <div className="flex justify-between items-center text-xs sm:text-sm font-medium">
                     <span className="text-charcoal-700">Giá trị bất động sản:</span>
-                    <span className="font-semibold text-charcoal text-sm">{formatBillion(propertyPrice)}</span>
+                    <span className="font-semibold text-charcoal text-base text-gold font-serif">
+                      {formatBillion(propertyPrice)}
+                    </span>
                   </div>
+
+                  {/* Quick Preset Chips */}
+                  <div className="flex flex-wrap gap-1.5 pb-1">
+                    {PRICE_PRESETS.map((preset) => (
+                      <button
+                        key={preset.value}
+                        type="button"
+                        onClick={() => setPropertyPrice(preset.value)}
+                        className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+                          propertyPrice === preset.value
+                            ? 'bg-charcoal text-white shadow-sm'
+                            : 'bg-white border border-warm-300 text-charcoal-700 hover:border-gold hover:text-charcoal'
+                        }`}
+                      >
+                        {preset.label}
+                      </button>
+                    ))}
+                  </div>
+
                   <input
                     type="range"
                     min="1500"
@@ -109,8 +151,8 @@ export default function MortgageCalculatorSection({ data, onOpenInquiry }: Mortg
                 </div>
 
                 {/* 2. Down Payment Percentage */}
-                <div className="space-y-2">
-                  <div className="flex justify-between text-xs sm:text-sm font-medium">
+                <div className="space-y-2.5">
+                  <div className="flex justify-between items-center text-xs sm:text-sm font-medium">
                     <span className="text-charcoal-700">Tỷ lệ vốn tự có:</span>
                     <span className="font-semibold text-charcoal text-sm">
                       {downPaymentPercent}% ({formatBillion(calculation.downPaymentAmount)})
@@ -131,8 +173,32 @@ export default function MortgageCalculatorSection({ data, onOpenInquiry }: Mortg
                   </div>
                 </div>
 
+                {/* Visual Allocation Distribution Bar */}
+                <div className="space-y-2 bg-white p-4 rounded-2xl border border-warm-200">
+                  <div className="flex justify-between text-xs text-charcoal-600 font-medium">
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-gold inline-block" />
+                      <span>Vốn tự có ({downPaymentPercent}%)</span>
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-charcoal inline-block" />
+                      <span>Vốn vay ({100 - downPaymentPercent}%)</span>
+                    </span>
+                  </div>
+                  <div className="w-full h-3 rounded-full bg-warm-200 overflow-hidden flex">
+                    <div
+                      style={{ width: `${downPaymentPercent}%` }}
+                      className="bg-gold transition-all duration-300"
+                    />
+                    <div
+                      style={{ width: `${100 - downPaymentPercent}%` }}
+                      className="bg-charcoal transition-all duration-300"
+                    />
+                  </div>
+                </div>
+
                 {/* 3. Loan Term & Interest Rate Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs font-medium">
                       <span className="text-charcoal-700">Thời hạn vay:</span>
@@ -162,24 +228,25 @@ export default function MortgageCalculatorSection({ data, onOpenInquiry }: Mortg
                       onChange={(e) => setInterestRate(Number(e.target.value))}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-warm-300 text-xs font-medium text-charcoal focus:border-gold outline-none cursor-pointer"
                     >
-                      <option value={7.0}>7.0% (Ưu đãi cố định)</option>
-                      <option value={8.0}>8.0% (Mức trung bình)</option>
+                      <option value={6.5}>6.5% (Gói ưu đãi 12T đầu)</option>
+                      <option value={7.5}>7.5% (Cố định 2 năm)</option>
                       <option value={8.5}>8.5% (Tiêu chuẩn hiện hành)</option>
-                      <option value={9.5}>9.5% (Thả nổi)</option>
-                      <option value={10.5}>10.5% (Thả nổi dài hạn)</option>
+                      <option value={9.5}>9.5% (Lãi suất thả nổi)</option>
+                      <option value={10.5}>10.5% (Thả nổi biên độ cao)</option>
                     </select>
                   </div>
                 </div>
               </div>
 
               {/* Output Result Column */}
-              <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-2xl border border-warm-200 shadow-warm-sm space-y-6">
+              <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-2xl border border-warm-200 shadow-warm-md space-y-6">
                 <div className="space-y-1">
                   <span className="text-[11px] font-semibold text-gold uppercase tracking-wider block">
                     ƯỚC TÍNH TRẢ HÀNG THÁNG
                   </span>
-                  <div className="text-2xl sm:text-3xl font-serif font-semibold text-charcoal">
-                    {calculation.monthlyPayment.toFixed(1)} <span className="text-sm font-sans font-normal text-charcoal-muted">Triệu / tháng</span>
+                  <div className="text-3xl sm:text-4xl font-serif font-semibold text-charcoal leading-none">
+                    {calculation.monthlyPayment.toFixed(1)}{' '}
+                    <span className="text-sm font-sans font-normal text-charcoal-muted">Triệu / tháng</span>
                   </div>
                 </div>
 
@@ -196,28 +263,33 @@ export default function MortgageCalculatorSection({ data, onOpenInquiry }: Mortg
                     <span>Thời hạn vay:</span>
                     <span className="font-semibold text-charcoal">{loanTermYears * 12} tháng</span>
                   </div>
+                  <div className="flex justify-between text-charcoal-600">
+                    <span>Lãi suất tính toán:</span>
+                    <span className="font-semibold text-charcoal">{interestRate}% / năm</span>
+                  </div>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => {
                     if (onOpenInquiry) {
-                      onOpenInquiry('Tư vấn gói tài chính & hỗ trợ vay mua BĐS');
+                      onOpenInquiry(`Tư vấn phương án vay mua BĐS (${formatBillion(propertyPrice)}, vay ${formatBillion(calculation.loanAmount)})`);
                     } else {
                       const el = document.getElementById('contact');
                       if (el) el.scrollIntoView({ behavior: 'smooth' });
                     }
                   }}
-                  className="w-full py-3 rounded-xl bg-charcoal hover:bg-gold text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-warm-sm"
+                  className="w-full py-3.5 px-6 rounded-xl bg-charcoal hover:bg-gold text-white hover:text-charcoal text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-md group cursor-pointer"
                 >
-                  <span>Nhận bảng tính chi tiết</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>Nhận Bảng Tính Vay Chi Tiết</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 }
+

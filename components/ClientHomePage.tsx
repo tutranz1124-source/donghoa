@@ -45,6 +45,10 @@ const InquiryModal = dynamic(() => import('@/components/InquiryModal'), {
   ssr: false
 });
 
+const MobileStickyCTA = dynamic(() => import('@/components/MobileStickyCTA'), {
+  ssr: false
+});
+
 export default function ClientHomePage({ initialContent }: { initialContent: SiteContentData }) {
   const [content, setContent] = useState<SiteContentData>(initialContent);
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -215,6 +219,13 @@ export default function ClientHomePage({ initialContent }: { initialContent: Sit
         }}
         defaultProject={selectedProject}
         hotline={settings?.hotline || '0906.499.279'}
+      />
+
+      {/* MOBILE STICKY CTA ACTION BAR */}
+      <MobileStickyCTA
+        hotline={settings?.hotline || '0906.499.279'}
+        zaloUrl={settings?.zaloUrl || 'https://zalo.me/0906499279'}
+        onOpenInquiry={handleOpenInquiry}
       />
     </div>
   );
