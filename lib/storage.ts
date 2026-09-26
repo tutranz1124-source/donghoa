@@ -45,8 +45,8 @@ const DEFAULT_PROJECTS: ProjectsBlock = {
   type: 'projects',
   enabled: true,
   order: 4,
-  badge: 'DANH MỤC DỰ ÁN TIÊU BIỂU',
-  title: 'DỰ ÁN BẤT ĐỘNG SẢN & KHÔNG GIAN NỔI BẬT',
+  badge: 'DANH MỤC DỰ ÁN',
+  title: 'Dự Án Nổi Bật',
   items: [
     {
       id: 'proj-1',

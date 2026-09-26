@@ -132,8 +132,8 @@ export default function ProjectsSection({
   const rawProjects = block?.items && block.items.length > 0 ? block.items : DEFAULT_PROJECTS;
 
   const filterTabs = [
-    { label: 'Tất Cả Dự Án', value: 'all' },
-    { label: '01 / Căn Hộ Hạng Sang', value: 'can-ho' },
+    { label: 'Tất Cả', value: 'all' },
+    { label: '01 / Căn Hộ', value: 'can-ho' },
     { label: '02 / Biệt Thự & Nhà Phố', value: 'biet-thu' },
     { label: '03 / BĐS Nghỉ Dưỡng', value: 'nghi-duong' },
   ];
@@ -155,40 +155,42 @@ export default function ProjectsSection({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6"
+          className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 sm:mb-12 gap-5"
         >
-          <div className="space-y-3">
+          <div className="space-y-2 min-w-0">
             <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gold font-sans flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-gold" />
+              <Sparkles className="w-3.5 h-3.5 text-gold shrink-0" />
               <span>{block?.badge || 'DANH MỤC DỰ ÁN'}</span>
             </span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-normal text-charcoal leading-[1.2] tracking-tight">
-              {block?.title || 'Dự Án Trọng Điểm Đang Phân Phối'}
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-normal text-charcoal leading-tight tracking-tight">
+              {block?.title || 'Dự Án Nổi Bật'}
             </h2>
           </div>
 
-          {/* Interactive Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-warm-100/80 backdrop-blur-sm rounded-full border border-warm-300 shadow-inner">
-            {filterTabs.map((tab) => (
-              <button
-                key={tab.value}
-                onClick={() => setActiveFilter(tab.value)}
-                className={`relative px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 ${
-                  activeFilter === tab.value
-                    ? 'text-white shadow-warm-sm'
-                    : 'text-charcoal-700 hover:text-charcoal hover:bg-white/80'
-                }`}
-              >
-                {activeFilter === tab.value && (
-                  <motion.div
-                    layoutId="activeFilterPill"
-                    className="absolute inset-0 bg-charcoal rounded-full z-0"
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{tab.label}</span>
-              </button>
-            ))}
+          {/* Interactive Filter Tabs - Always 1 Line */}
+          <div className="shrink-0 max-w-full overflow-x-auto no-scrollbar pb-1 lg:pb-0">
+            <div className="inline-flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 bg-warm-100/90 backdrop-blur-sm rounded-full border border-warm-300 shadow-inner flex-nowrap whitespace-nowrap">
+              {filterTabs.map((tab) => (
+                <button
+                  key={tab.value}
+                  onClick={() => setActiveFilter(tab.value)}
+                  className={`relative px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-all duration-300 ${
+                    activeFilter === tab.value
+                      ? 'text-white shadow-warm-sm'
+                      : 'text-charcoal-700 hover:text-charcoal hover:bg-white/80'
+                  }`}
+                >
+                  {activeFilter === tab.value && (
+                    <motion.div
+                      layoutId="activeFilterPill"
+                      className="absolute inset-0 bg-charcoal rounded-full z-0"
+                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10 whitespace-nowrap">{tab.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </motion.div>
 
