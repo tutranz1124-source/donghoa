@@ -6,7 +6,7 @@ import { InquiryStatus } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
 
-const TARGET_EMAIL = process.env.CONTACT_EMAIL || 'info@donghoagroup.vn';
+const TARGET_EMAIL = process.env.CONTACT_EMAIL || 'donghoaproperty@gmail.com';
 
 async function sendViaFormSubmit(data: {
   fullName: string;

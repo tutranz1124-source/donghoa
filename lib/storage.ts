@@ -272,9 +272,9 @@ const DEFAULT_SITE_CONTENT: SiteContentData = {
     siteDescription: 'Đông Hòa Property cung cấp danh mục bất động sản chọn lọc cùng giải pháp thiết kế - thi công không gian sống chuẩn mực và đẳng cấp.',
     logo: '/uploads/logo-dong-hoa-property.png',
     hotline: '0906.499.279',
-    email: 'info@donghoagroup.vn',
+    email: 'donghoaproperty@gmail.com',
     address: '113-115 Ung Văn Khiêm, Phường Thạnh Mỹ Tây, TP Hồ Chí Minh, Việt Nam',
-    website: 'www.DongHoaGroup.vn',
+    website: 'donghoaproperty.vn',
     zaloUrl: 'https://zalo.me/0906499279',
     facebookUrl: 'https://facebook.com',
     youtubeUrl: 'https://youtube.com',
@@ -288,7 +288,7 @@ const DEFAULT_SITE_CONTENT: SiteContentData = {
       { label: 'Tin tức', url: '/blog' },
       { label: 'Liên hệ', url: '#contact' }
     ],
-    copyright: '© 2026 Đông Hòa Property - Dong Hoa Group. All rights reserved.',
+    copyright: '© 2026 Đông Hòa Property. All rights reserved.',
     theme: {
       accentColor: '#C5A26C',
       headingColor: '#04092B',
@@ -843,7 +843,7 @@ export function saveInquiry(inquiry: Partial<CustomerInquiry> & { fullName: stri
     area: inquiry.area?.trim() || '',
     need: inquiry.need?.trim() || '',
     projectName: inquiry.projectName?.trim() || '',
-    targetEmail: inquiry.targetEmail || 'info@donghoagroup.vn',
+    targetEmail: inquiry.targetEmail || 'donghoaproperty@gmail.com',
     status: inquiry.status || 'new',
     notes: inquiry.notes || [],
     createdAt: inquiry.createdAt || new Date().toISOString()

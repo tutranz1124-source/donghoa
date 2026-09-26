@@ -101,8 +101,8 @@ export default function ConsultationSection({ block }: ConsultationSectionProps)
               <Mail className="w-5 h-5 text-[#c5a26c] shrink-0 mt-0.5" />
               <div>
                 <span className="block text-[11px] font-semibold uppercase text-[#6e706a]">Email hỗ trợ</span>
-                <a href="mailto:info@donghoagroup.vn" className="text-[14px] font-medium text-[#04092b] hover:text-[#c5a26c]">
-                  info@donghoagroup.vn
+                <a href="mailto:donghoaproperty@gmail.com" className="text-[14px] font-medium text-[#04092b] hover:text-[#c5a26c]">
+                  donghoaproperty@gmail.com
                 </a>
               </div>
             </div>
