@@ -23,7 +23,7 @@ export default function Footer({ settings }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-16">
           {/* Brand Column - White Logo Pops Clearly */}
           <div className="lg:col-span-4 space-y-5">
-            <div className="relative h-[46px] w-[190px]">
+            <div className="relative h-[54px] w-[74px] sm:h-[62px] sm:w-[84px]">
               <Image
                 src={settings?.logo || '/uploads/logo-dong-hoa-property.png'}
                 alt={settings?.siteName || 'Đông Hòa Property'}

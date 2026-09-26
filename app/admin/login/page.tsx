@@ -60,17 +60,19 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md bg-white p-5 sm:p-8 shadow-2xl rounded-3xl border border-[#c5a26c]/40 relative z-10 space-y-6">
         {/* Brand Header */}
         <div className="text-center space-y-3">
-          <div className="relative h-14 w-44 mx-auto">
-            <Image
-              src="/uploads/logo-dong-hoa-property.png"
-              alt="Đông Hòa Design"
-              fill
-              className="object-contain"
-              priority
-            />
+          <div className="relative h-16 w-24 mx-auto p-2 rounded-2xl bg-[#04092b] border border-[#c5a26c]/30 shadow-md flex items-center justify-center">
+            <div className="relative w-full h-full">
+              <Image
+                src="/uploads/logo-dong-hoa-property.png"
+                alt="Đông Hòa Property"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
           </div>
           <div className="space-y-1">
-            <span className="text-[11px] font-bold tracking-widest text-[#a70c0c] uppercase font-accent">
+            <span className="text-[11px] font-bold tracking-widest text-[#c5a26c] uppercase font-accent">
               HỆ THỐNG QUẢN TRỊ CMS
             </span>
             <h1 className="text-[24px] font-bold text-[#04092b] font-display">

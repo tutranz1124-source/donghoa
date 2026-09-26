@@ -94,7 +94,7 @@ export default function Navbar({ settings, onOpenInquiry }: NavbarProps) {
       <div className="w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between">
         {/* Brand Logo - Crisp on Dark Luxury Header */}
         <Link href="/" className="relative flex items-center group shrink-0">
-          <div className="relative h-[40px] w-[160px] sm:h-[46px] sm:w-[185px] lg:h-[48px] lg:w-[200px] transition-transform duration-300 group-hover:scale-105">
+          <div className="relative h-[44px] w-[60px] sm:h-[50px] sm:w-[68px] lg:h-[56px] lg:w-[76px] transition-transform duration-300 group-hover:scale-105">
             <Image
               src={settings?.logo || '/uploads/logo-dong-hoa-property.png'}
               alt={settings?.siteName || 'Đông Hòa Property'}
